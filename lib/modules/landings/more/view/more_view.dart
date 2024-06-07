@@ -5,59 +5,116 @@ import 'package:legend_cinema/widgets/text_widget.dart';
 class MoreView extends StatelessWidget {
   const MoreView({super.key});
 
+  void _showLanguageDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Select Language'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTileItem(
+                icon: Icons.flag,
+                title: 'Khmer',
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              ListTileItem(
+                icon: Icons.flaky,
+                title: 'English',
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              ListTileItem(
+                icon: Icons.flashlight_off,
+                title: 'Chinese',
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Cancel'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
+    return SingleChildScrollView(
       child: Padding(
-        padding: EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8.0),
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              TextWidget('Purchase',),
-              ListTileItem(
+              const TextWidget('Purchase',),
+              const ListTileItem(
                 title: 'Purchase',
                 icon: Icons.currency_pound,
+                trailing: true,
               ),
-              TextWidget('Languages'),
+              const TextWidget('Languages'),
               ListTileItem(
                 title: 'English',
                 icon: Icons.language,
+                trailing: true,
+                onTap: () => _showLanguageDialog(context),
               ),
-              TextWidget('Account'),
-              ListTileItem(
+              const TextWidget('Account'),
+              const ListTileItem(
                 title: 'Change password',
                 icon: Icons.password,
+                trailing: true,
               ),
-              TextWidget("What's new ?"),
-              ListTileItem(
+              const TextWidget("What's new ?"),
+              const ListTileItem(
                 title: 'News Activity',
                 icon: Icons.local_activity,
+                trailing: true,
               ),
-              TextWidget('Notifications'),
-              ListTileItem(
+              const TextWidget('Notifications'),
+              const ListTileItem(
                 title: 'Notifications',
                 icon: Icons.notifications,
+                trailing: true,
               ),
-              TextWidget('About us'),
-              ListTileItem(
+              const TextWidget('About us'),
+              const ListTileItem(
                 title: 'About us',
                 icon: Icons.info_outline_rounded,
+                trailing: true,
               ),
-              ListTileItem(
+              const ListTileItem(
                 title: 'Contact us',
                 icon: Icons.call,
+                trailing: true,
               ),
-              ListTileItem(
+              const ListTileItem(
                 title: 'Privacy Policy',
                 icon: Icons.policy,
+                trailing: true,
               ),
-              ListTileItem(
+              const ListTileItem(
                 title: 'Team and Conditions',
                 icon: Icons.person_2,
+                trailing: true,
               ),
-              ListTileItem(
+              const ListTileItem(
                 title: 'Logout',
                 icon: Icons.logout,
+                trailing: true,
               ),
             ],
           ),

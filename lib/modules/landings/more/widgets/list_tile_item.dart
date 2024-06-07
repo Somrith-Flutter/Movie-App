@@ -5,17 +5,22 @@ class ListTileItem extends StatelessWidget {
     super.key,
     this.title,
     this.icon,
+    this.onTap,
+    this.trailing = false,
   });
 
   final String? title;
   final IconData? icon;
+  final VoidCallback? onTap;
+  final bool trailing;
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
       leading: Icon(icon),
       title: Text(title!),
-      onTap: () => {},
-      trailing: const Icon(Icons.chevron_right),
+      onTap: onTap,
+      trailing: trailing ? const Icon(Icons.chevron_right) : const Text(''),
     );
   }
 }
