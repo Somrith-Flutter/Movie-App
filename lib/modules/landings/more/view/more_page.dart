@@ -12,8 +12,9 @@ class MorePage extends StatelessWidget {
     return GetBuilder<MoreController>(
       init: MoreController(repository: MoreRepository()),
       initState: (_) => Get.find<MoreController>().onInit(),
-      builder: (_) => const Scaffold(
-        body: MoreView(),
+      builder: (_) => Scaffold(
+        appBar: AppBar(toolbarHeight: 0),
+        body: const MoreView(),
       ),
     );
   }
