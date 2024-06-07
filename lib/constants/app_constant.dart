@@ -27,7 +27,9 @@ class AppConstant{
 
   // Defualt local languages.
   static const List<Locale> localLanguages = [
-    Locale('en', 'US'),  Locale('km', 'KH'),
+    Locale('en', 'US'),  
+    Locale('km', 'KH'), 
+    Locale('zh', 'CN'),
   ];
 
   // English language
@@ -37,6 +39,12 @@ class AppConstant{
   // khmer language 
   static const String km = 'km';
   static const String kh = 'KH';
+
+  //Chinese language
+  static const String zh = 'zh';
+  static const String cn = 'CN'; // Simplified Chinese (China)
+  // static const String tw = 'TW'; // Traditional Chinese (Taiwan)
+  // static const String hk = 'HK'; // Traditional Chinese (Hong Kong)
   
   static const List<LocalizationsDelegate<dynamic>> delegate = [
     S.delegate,
