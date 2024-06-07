@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:legend_cinema/config/app_controller.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
-import 'package:legend_cinema/modules/landings/home/view/home_page.dart';
+import 'package:legend_cinema/modules/landings/offers/view/offers_page.dart';
 
 class LegendCinemaApp extends StatelessWidget {
   const LegendCinemaApp({super.key});
@@ -18,7 +18,7 @@ class LegendCinemaApp extends StatelessWidget {
       initialBinding: AppController(),
       supportedLocales: AppConstant.localLanguages,
       localizationsDelegates: AppConstant.delegate,
-      home: const HomePage(),
+      home: const OffersPage(),
     );
   }
 }

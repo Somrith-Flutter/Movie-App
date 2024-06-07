@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class MoreView extends StatelessWidget {
-  const MoreView({super.key});
+class OffersView extends StatelessWidget {
+  const OffersView({super.key});
 
   @override
   Widget build(BuildContext context) {
