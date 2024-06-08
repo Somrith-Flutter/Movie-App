@@ -170,6 +170,16 @@ class S {
     );
   }
 
+  /// `Chinese`
+  String get chinese {
+    return Intl.message(
+      'Chinese',
+      name: 'chinese',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Yes`
   String get btn_yes {
     return Intl.message(
@@ -210,10 +220,10 @@ class S {
     );
   }
 
-  /// `Register`
+  /// `Signup`
   String get register {
     return Intl.message(
-      'Register',
+      'Signup',
       name: 'register',
       desc: '',
       args: [],
@@ -230,11 +240,11 @@ class S {
     );
   }
 
-  /// `About`
-  String get about {
+  /// `About us`
+  String get about_us {
     return Intl.message(
-      'About',
-      name: 'about',
+      'About us',
+      name: 'about_us',
       desc: '',
       args: [],
     );
@@ -380,6 +390,46 @@ class S {
     );
   }
 
+  /// `Cinema`
+  String get cinema {
+    return Intl.message(
+      'Cinema',
+      name: 'cinema',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Offers`
+  String get offer {
+    return Intl.message(
+      'Offers',
+      name: 'offer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `F&B`
+  String get fb {
+    return Intl.message(
+      'F&B',
+      name: 'fb',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `More`
+  String get more {
+    return Intl.message(
+      'More',
+      name: 'more',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Hello`
   String get hello {
     return Intl.message(
@@ -445,6 +495,86 @@ class S {
     return Intl.message(
       'Address',
       name: 'address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contact us`
+  String get contact_us {
+    return Intl.message(
+      'Contact us',
+      name: 'contact_us',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Privacy Policy`
+  String get privacy_policy {
+    return Intl.message(
+      'Privacy Policy',
+      name: 'privacy_policy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `News & Activity`
+  String get news_activity {
+    return Intl.message(
+      'News & Activity',
+      name: 'news_activity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Term & Conditions`
+  String get term_condition {
+    return Intl.message(
+      'Term & Conditions',
+      name: 'term_condition',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What's new?`
+  String get what_new {
+    return Intl.message(
+      'What\'s new?',
+      name: 'what_new',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Learn More`
+  String get learn_more {
+    return Intl.message(
+      'Learn More',
+      name: 'learn_more',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Legend Membership`
+  String get lengend_membership {
+    return Intl.message(
+      'Legend Membership',
+      name: 'lengend_membership',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Getting many benifit from our membership card.Take one now at your nearby Legend Cinema!`
+  String get dis_legend_membership {
+    return Intl.message(
+      'Getting many benifit from our membership card.Take one now at your nearby Legend Cinema!',
+      name: 'dis_legend_membership',
       desc: '',
       args: [],
     );

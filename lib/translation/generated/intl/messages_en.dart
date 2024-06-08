@@ -22,7 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "about": MessageLookupByLibrary.simpleMessage("About"),
+        "about_us": MessageLookupByLibrary.simpleMessage("About us"),
         "address": MessageLookupByLibrary.simpleMessage("Address"),
         "btn_no": MessageLookupByLibrary.simpleMessage("No"),
         "btn_yes": MessageLookupByLibrary.simpleMessage("Yes"),
@@ -30,41 +30,59 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Change Password"),
         "change_profile_photo":
             MessageLookupByLibrary.simpleMessage("Change Profile Photo"),
+        "chinese": MessageLookupByLibrary.simpleMessage("Chinese"),
+        "cinema": MessageLookupByLibrary.simpleMessage("Cinema"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+        "contact_us": MessageLookupByLibrary.simpleMessage("Contact us"),
         "dark": MessageLookupByLibrary.simpleMessage("Dark"),
         "delivery": MessageLookupByLibrary.simpleMessage("Delivery"),
+        "dis_legend_membership": MessageLookupByLibrary.simpleMessage(
+            "Getting many benifit from our membership card.Take one now at your nearby Legend Cinema!"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "english": MessageLookupByLibrary.simpleMessage("English"),
         "favorite": MessageLookupByLibrary.simpleMessage("Favorite"),
+        "fb": MessageLookupByLibrary.simpleMessage("F&B"),
         "general": MessageLookupByLibrary.simpleMessage("General"),
         "hello": MessageLookupByLibrary.simpleMessage("Hello"),
         "help": MessageLookupByLibrary.simpleMessage("Help"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "khmer": MessageLookupByLibrary.simpleMessage("Khmer"),
         "language": MessageLookupByLibrary.simpleMessage("Languages"),
+        "learn_more": MessageLookupByLibrary.simpleMessage("Learn More"),
+        "lengend_membership":
+            MessageLookupByLibrary.simpleMessage("Legend Membership"),
         "light": MessageLookupByLibrary.simpleMessage("Light"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "logout": MessageLookupByLibrary.simpleMessage("Log out"),
+        "more": MessageLookupByLibrary.simpleMessage("More"),
         "msg_confirm_logout":
             MessageLookupByLibrary.simpleMessage("Do you want to logout?"),
         "my_cart": MessageLookupByLibrary.simpleMessage("My Cart"),
         "new_": MessageLookupByLibrary.simpleMessage("New"),
+        "news_activity":
+            MessageLookupByLibrary.simpleMessage("News & Activity"),
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
+        "offer": MessageLookupByLibrary.simpleMessage("Offers"),
         "old": MessageLookupByLibrary.simpleMessage("Old"),
         "order": MessageLookupByLibrary.simpleMessage("Order"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "personal_info":
             MessageLookupByLibrary.simpleMessage("Personal Information"),
         "phone_number": MessageLookupByLibrary.simpleMessage("Phone Number"),
+        "privacy_policy":
+            MessageLookupByLibrary.simpleMessage("Privacy Policy"),
         "product": MessageLookupByLibrary.simpleMessage("Product"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
-        "register": MessageLookupByLibrary.simpleMessage("Register"),
+        "register": MessageLookupByLibrary.simpleMessage("Signup"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "setting": MessageLookupByLibrary.simpleMessage("Settings"),
         "spacing": MessageLookupByLibrary.simpleMessage(" "),
         "system": MessageLookupByLibrary.simpleMessage("System"),
+        "term_condition":
+            MessageLookupByLibrary.simpleMessage("Term & Conditions"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "username": MessageLookupByLibrary.simpleMessage("Username"),
-        "version": MessageLookupByLibrary.simpleMessage("Version")
+        "version": MessageLookupByLibrary.simpleMessage("Version"),
+        "what_new": MessageLookupByLibrary.simpleMessage("What\'s new?")
       };
 }

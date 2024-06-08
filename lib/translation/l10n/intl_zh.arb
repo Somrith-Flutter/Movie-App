@@ -1,4 +1,24 @@
 {
-    "@@locale": "zh",
-    "hello": "你好"
+    "home": "你好",
+    "offer": "优惠",
+    "cinema": "电影",
+    "fb": "餐饮",
+    "more": "更多的",
+    "chinese": "中国人",
+    "english": "英语",
+    "khmer": "高棉语",
+    "address": "地址",
+    "about_us": "关于我们",
+    "contact_us": "联系我们",
+    "notification": "通知",
+    "privacy_policy": "隐私和政策",
+    "news_activity": "新闻和活动",
+    "term_condition": "条款和条件",
+    "register": "报名",
+    "login": "登录",
+    "what_new": "什么是新的",
+    "learn_more": "了解更多",
+    "lengend_membership": "Legend 会员资格",
+    "dis_legend_membership": "从我们的会员卡中获得诸多优惠。立即前往您附近的 Legend Cinema 购买一张吧！",
+    "language": "语言"
 }

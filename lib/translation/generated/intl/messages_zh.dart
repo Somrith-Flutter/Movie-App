@@ -21,6 +21,30 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'zh';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) =>
-      <String, Function>{"hello": MessageLookupByLibrary.simpleMessage("你好")};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "about_us": MessageLookupByLibrary.simpleMessage("关于我们"),
+        "address": MessageLookupByLibrary.simpleMessage("地址"),
+        "chinese": MessageLookupByLibrary.simpleMessage("中国人"),
+        "cinema": MessageLookupByLibrary.simpleMessage("电影"),
+        "contact_us": MessageLookupByLibrary.simpleMessage("联系我们"),
+        "dis_legend_membership": MessageLookupByLibrary.simpleMessage(
+            "从我们的会员卡中获得诸多优惠。立即前往您附近的 Legend Cinema 购买一张吧！"),
+        "english": MessageLookupByLibrary.simpleMessage("英语"),
+        "fb": MessageLookupByLibrary.simpleMessage("餐饮"),
+        "home": MessageLookupByLibrary.simpleMessage("你好"),
+        "khmer": MessageLookupByLibrary.simpleMessage("高棉语"),
+        "language": MessageLookupByLibrary.simpleMessage("语言"),
+        "learn_more": MessageLookupByLibrary.simpleMessage("了解更多"),
+        "lengend_membership":
+            MessageLookupByLibrary.simpleMessage("Legend 会员资格"),
+        "login": MessageLookupByLibrary.simpleMessage("登录"),
+        "more": MessageLookupByLibrary.simpleMessage("更多的"),
+        "news_activity": MessageLookupByLibrary.simpleMessage("新闻和活动"),
+        "notification": MessageLookupByLibrary.simpleMessage("通知"),
+        "offer": MessageLookupByLibrary.simpleMessage("优惠"),
+        "privacy_policy": MessageLookupByLibrary.simpleMessage("隐私和政策"),
+        "register": MessageLookupByLibrary.simpleMessage("报名"),
+        "term_condition": MessageLookupByLibrary.simpleMessage("条款和条件"),
+        "what_new": MessageLookupByLibrary.simpleMessage("什么是新的")
+      };
 }
