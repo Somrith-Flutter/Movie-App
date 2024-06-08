@@ -16,11 +16,13 @@ class ListTileItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: Icon(icon),
-      title: Text(title!),
-      onTap: onTap,
-      trailing: trailing ? const Icon(Icons.chevron_right) : const Text(''),
+    return Card(
+      child: ListTile(
+        leading: Icon(icon),
+        title: Text(title!),
+        onTap: onTap,
+        trailing: trailing ? const Icon(Icons.chevron_right) : const Text(''),
+      ),
     );
   }
 }

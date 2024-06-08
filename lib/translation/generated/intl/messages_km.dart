@@ -38,7 +38,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "dark": MessageLookupByLibrary.simpleMessage("ងងឹត"),
         "delivery":
             MessageLookupByLibrary.simpleMessage("សំរាប់​ការ​ដឹកជញ្ជូន"),
-        "dis_legend_membership": MessageLookupByLibrary.simpleMessage(""),
+        "dis_legend_membership": MessageLookupByLibrary.simpleMessage(
+            "ទទួលបានអត្ថប្រយោជន៍ជាច្រើនពីកាតសមាជិករបស់យើង។ ទទួលយកអីឡូវនេះ នៅទីតាំងក្បែរលោកអ្នក"),
         "email": MessageLookupByLibrary.simpleMessage("អីម៉ែល"),
         "english": MessageLookupByLibrary.simpleMessage("អង់គ្លេស"),
         "favorite": MessageLookupByLibrary.simpleMessage("ចូលចិត្ត"),
