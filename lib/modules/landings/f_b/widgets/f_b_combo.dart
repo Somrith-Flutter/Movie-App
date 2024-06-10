@@ -1,10 +1,13 @@
 import 'dart:ui';
-import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:legend_cinema/modules/landings/f_b/controller/card_controller.dart';
+import 'package:legend_cinema/constants/asset_path.dart';
+import 'package:legend_cinema/modules/landings/f_b/controller/f_b_controller.dart';
 import 'package:legend_cinema/modules/landings/f_b/model/card_model.dart';
-import 'package:legend_cinema/modules/landings/f_b/widgets/back_widget.dart';
+import 'package:legend_cinema/modules/landings/f_b/repository/f_b_repository.dart';
+import 'package:legend_cinema/widgets/animated_flipcounter_box.dart';
+import 'package:legend_cinema/translation/generated/l10n.dart';
+import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
 class FAndBCombo extends StatefulWidget {
@@ -15,52 +18,53 @@ class FAndBCombo extends StatefulWidget {
 }
 
 class _FAndBComboState extends State<FAndBCombo> {
-  var cartController = Get.put(CartController());
+  var cartController = Get.put(FBController(repository: FBRepository()));
 
   @override
   Widget build(BuildContext context) {
     final List<Product> products = [
       Product(
         title: 'Combo 1',
-        price: 5.00,
-        imageUrl: 'assets/images/f&b.jpeg', // Replace with actual image URLs
+        price: 5.0,
+        imageUrl: 'assets/images/f&b.jpeg',
       ),
       Product(
         title: 'Combo 2',
         price: 4.50,
-        imageUrl: 'assets/images/f&b.jpeg', // Replace with actual image URLs
+        imageUrl: 'assets/images/f&b.jpeg',
       ),
       Product(
         title: 'Combo 3',
         price: 4.80,
-        imageUrl: 'assets/images/f&b.jpeg', // Replace with actual image URLs
+        imageUrl: 'assets/images/f&b.jpeg',
       ),
       Product(
         title: 'Combo 4',
         price: 5.50,
-        imageUrl: 'assets/images/f&b.jpeg', // Replace with actual image URLs
+        imageUrl: 'assets/images/f&b.jpeg',
       ),
       Product(
         title: 'Combo 5',
         price: 5.50,
-        imageUrl: 'assets/images/f&b.jpeg', // Replace with actual image URLs
+        imageUrl: 'assets/images/f&b.jpeg',
       ),
       Product(
         title: 'Combo 6',
         price: 6.50,
-        imageUrl: 'assets/images/f&b.jpeg', // Replace with actual image URLs
+        imageUrl: 'assets/images/f&b.jpeg',
       ),
       Product(
         title: 'Combo 7',
-        price: 8.00,
-        imageUrl: 'assets/images/f&b.jpeg', // Replace with actual image URLs
+        price: 8.0,
+        imageUrl: 'assets/images/f&b.jpeg',
       ),
       Product(
         title: 'Combo 8',
-        price: 7.00,
-        imageUrl: 'assets/images/f&b.jpeg', // Replace with actual image URLs
+        price: 7.0,
+        imageUrl: 'assets/images/f&b.jpeg',
       ),
     ];
+
 
     return Stack(
       children: [
@@ -82,7 +86,7 @@ class _FAndBComboState extends State<FAndBCombo> {
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             leading: const BackWidgetScreen(),
-            title: const TextWidget("F&B", size: 20, bold: true),
+            title: TextWidget(S.of(context).fb, size: 20, bold: true),
             centerTitle: true,
             flexibleSpace: Container(
               decoration: const BoxDecoration(
@@ -94,7 +98,7 @@ class _FAndBComboState extends State<FAndBCombo> {
               ),
             ),
           ),
-          body: GetBuilder<CartController>(builder: (logic) {
+          body: GetBuilder<FBController>(builder: (logic) {
             return Column(
               children: [
                 Expanded(
@@ -104,7 +108,7 @@ class _FAndBComboState extends State<FAndBCombo> {
                     children: [
                       Stack(
                         children: [
-                          Image.asset("assets/images/f&b.jpeg"),
+                          Image.asset(AssetPath.fbhero),
                           Positioned(
                             top: 16,
                             left: 16,
@@ -131,7 +135,7 @@ class _FAndBComboState extends State<FAndBCombo> {
                                     children: [
                                       TextWidget(
                                         "Legend Premium Exchange Square",
-                                        size: 18,
+                                        size: 16,
                                       ),
                                       Icon(
                                         Icons.arrow_drop_down_circle_outlined,
@@ -197,6 +201,7 @@ class _FAndBComboState extends State<FAndBCombo> {
                                               mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                               children: [
+                                                Text(cartController.formattedTotalPrice),
                                                 TextWidget(
                                                   product.title,
                                                   size: 17,
@@ -321,12 +326,11 @@ class _FAndBComboState extends State<FAndBCombo> {
                                 children: [
                                   const TextWidget(
                                       "Summary", size: 16, bold: true),
-                                  AnimatedFlipCounter(
-                                    duration: Duration(milliseconds: 500),
-                                    value: double.parse(cartController.totalPrice.toStringAsFixed(2)), // Ensure value is a double
-                                    textStyle: TextStyle(fontSize: 18),
+                                  MyAnimatedFlipCounter(
+                                    duration: const Duration(milliseconds: 500),
+                                    value: double.parse(cartController.formattedTotalPrice),
+                                    textStyle: const TextStyle(fontSize: 18),
                                     prefix: '\$',
-                                    decimalSeparator: ".",
                                   ),
                                 ],
                               ),
@@ -374,7 +378,6 @@ Future _buildBottomSheet(BuildContext context) {
                   ),
                   GestureDetector(
                     onTap: () => Navigator.pop(context),
-                    // Close the bottom sheet on tap
                     child: Container(
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
@@ -413,7 +416,7 @@ Future _buildBottomSheet(BuildContext context) {
                             const Icon(Icons.location_on, color: Colors.red),
                             const SizedBox(width: 8),
                             TextWidget(cinemaList[index]["title"] ?? "",
-                                size: 19, bold: true),
+                                size: 16, bold: true),
                           ],
                         ),
                         Divider(
