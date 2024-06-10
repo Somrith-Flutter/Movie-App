@@ -2,9 +2,9 @@ import 'dart:ui';
 import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:legend_cinema/modules/landings/f&b/controller/cart_controller.dart';
-import 'package:legend_cinema/modules/landings/f&b/model/cart_model.dart';
-import 'package:legend_cinema/modules/landings/f&b/widgets/back_widget.dart';
+import 'package:legend_cinema/modules/landings/f_b/controller/card_controller.dart';
+import 'package:legend_cinema/modules/landings/f_b/model/card_model.dart';
+import 'package:legend_cinema/modules/landings/f_b/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
 class FAndBCombo extends StatefulWidget {

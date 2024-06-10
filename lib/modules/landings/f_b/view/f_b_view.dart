@@ -1,30 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:legend_cinema/config/routes/app_route.dart';
-import 'package:legend_cinema/modules/landings/f&b/widgets/f&b_combo.dart';
+import 'package:legend_cinema/constants/asset_path.dart';
+import 'package:legend_cinema/modules/landings/f_b/widgets/f_b_combo.dart';
+import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'dart:ui';
-
 import 'package:legend_cinema/widgets/text_widget.dart';
 
 class FBView extends StatelessWidget {
-  const FBView({Key? key});
+  const FBView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Image.asset("assets/images/f&b.jpeg",width: double.infinity,height: double.infinity,fit: BoxFit.cover,),
+        Image.asset(AssetPath.fbhero,width: double.infinity,height: double.infinity,fit: BoxFit.cover,),
         BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20), // Adjust the sigma values for more or less blur
+          filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
           child: Container(
-            color: Colors.black.withOpacity(0.5), // Adjust the opacity as needed
+            color: Colors.black.withOpacity(0.5), 
             width: double.infinity,
             height: double.infinity,
           ),
         ),
         Scaffold(
-          backgroundColor: Colors.transparent, // Set Scaffold background color to transparent
+          backgroundColor: Colors.transparent, 
           appBar: AppBar(
-            title: const TextWidget("F&B", size: 20, bold: true),
+            title: TextWidget(S.of(context).fb, size: 20, bold: true),
             flexibleSpace: Container(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
@@ -38,11 +39,11 @@ class FBView extends StatelessWidget {
           body: ListView(
             physics: const BouncingScrollPhysics(),
             children: [
-              Image.asset("assets/images/f&b.jpeg"),
-              const Padding(
-                padding: EdgeInsets.only(top: 8, right: 12, left: 12),
+              Image.asset(AssetPath.fbhero),
+              Padding(
+                padding: const EdgeInsets.only(top: 8, right: 12, left: 12),
                 child: TextWidget(
-                  "Choose Cinema",
+                  S.of(context).choose_cinema,
                   size: 20,
                   bold: true,
                 ),
@@ -83,16 +84,16 @@ class FBView extends StatelessWidget {
                                           borderRadius: BorderRadius.circular(5),
                                           image: const DecorationImage(
                                             image: AssetImage(
-                                              "assets/images/f&b.jpeg",
+                                              AssetPath.cinema1,
                                             ),
                                             fit: BoxFit.cover,
                                           )),
                                     ),
                                   ),
                                   const SizedBox(width: 5),
-                                  const Expanded(
+                                  Expanded(
                                     child: TextWidget(
-                                      "Hello",
+                                      S.of(context).hello,
                                       size: 17,
                                       bold: true,
                                       overflow: TextOverflow.ellipsis,

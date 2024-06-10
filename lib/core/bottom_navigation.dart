@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:legend_cinema/modules/landings/cinema/view/cinema_page.dart';
-import 'package:legend_cinema/modules/landings/f&b/view/f&b_page.dart';
+import 'package:legend_cinema/modules/landings/f_b/view/f_b_page.dart';
 import 'package:legend_cinema/modules/landings/home/view/home_page.dart';
 import 'package:legend_cinema/modules/landings/more/view/more_page.dart';
 import 'package:legend_cinema/modules/landings/offers/view/offers_page.dart';
