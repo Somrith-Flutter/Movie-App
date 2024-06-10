@@ -31,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "change_profile_photo":
             MessageLookupByLibrary.simpleMessage("ប្តូររូបភាពតំណាង"),
         "chinese": MessageLookupByLibrary.simpleMessage("ចិន"),
+        "choose_cinema": MessageLookupByLibrary.simpleMessage("ជ្រើសរើសរោងកុន"),
         "cinema": MessageLookupByLibrary.simpleMessage("ទីតាំង"),
         "confirm": MessageLookupByLibrary.simpleMessage("បញ្ជាក់"),
         "contact_us":
@@ -71,6 +72,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "personal_info":
             MessageLookupByLibrary.simpleMessage("ព័ឥមានផ្ទាល់ខ្លួន"),
         "phone_number": MessageLookupByLibrary.simpleMessage("លេខទំនាក់ទំនង"),
+        "premium_benifit":
+            MessageLookupByLibrary.simpleMessage("អត្ថប្រយោជន៍ពិសេស"),
         "privacy_policy":
             MessageLookupByLibrary.simpleMessage("គោលការណ៍ភាពឯកជន"),
         "product": MessageLookupByLibrary.simpleMessage("ផលិផល"),
@@ -84,6 +87,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "theme": MessageLookupByLibrary.simpleMessage("ទម្រង់កម្មវិធី"),
         "username": MessageLookupByLibrary.simpleMessage("ឈ្មោះរបស់អ្នក"),
         "version": MessageLookupByLibrary.simpleMessage("ជំនាន់"),
-        "what_new": MessageLookupByLibrary.simpleMessage("តើមានអ្វីថ្មី?")
+        "what_new": MessageLookupByLibrary.simpleMessage("តើមានអ្វីថ្មី?"),
+        "what_we_offer":
+            MessageLookupByLibrary.simpleMessage("អ្វីដែលយើងផ្តល់ជូន")
       };
 }

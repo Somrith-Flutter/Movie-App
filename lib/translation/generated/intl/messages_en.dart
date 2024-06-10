@@ -31,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "change_profile_photo":
             MessageLookupByLibrary.simpleMessage("Change Profile Photo"),
         "chinese": MessageLookupByLibrary.simpleMessage("Chinese"),
+        "choose_cinema": MessageLookupByLibrary.simpleMessage("Choose Cinema"),
         "cinema": MessageLookupByLibrary.simpleMessage("Cinema"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "contact_us": MessageLookupByLibrary.simpleMessage("Contact us"),
@@ -69,6 +70,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "personal_info":
             MessageLookupByLibrary.simpleMessage("Personal Information"),
         "phone_number": MessageLookupByLibrary.simpleMessage("Phone Number"),
+        "premium_benifit":
+            MessageLookupByLibrary.simpleMessage("Premium Benifits"),
         "privacy_policy":
             MessageLookupByLibrary.simpleMessage("Privacy Policy"),
         "product": MessageLookupByLibrary.simpleMessage("Product"),
@@ -83,6 +86,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "username": MessageLookupByLibrary.simpleMessage("Username"),
         "version": MessageLookupByLibrary.simpleMessage("Version"),
-        "what_new": MessageLookupByLibrary.simpleMessage("What\'s new?")
+        "what_new": MessageLookupByLibrary.simpleMessage("What\'s new?"),
+        "what_we_offer":
+            MessageLookupByLibrary.simpleMessage("What\'s we offer")
       };
 }

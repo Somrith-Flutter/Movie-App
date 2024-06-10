@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
+import 'package:legend_cinema/translation/generated/l10n.dart';
+import 'package:legend_cinema/widgets/text_widget.dart';
 import 'offers_detail.dart';
 
 List<String> image = [
-  AssetPath.Cinema2,
-  AssetPath.Cinema6,
-  AssetPath.Cinema4,
-  AssetPath.Cinema5,
-  AssetPath.Cinema7,
+  AssetPath.cinema2,
+  AssetPath.cinema6,
+  AssetPath.cinema4,
+  AssetPath.cinema5,
+  AssetPath.cinema7,
 ];
 
 List<String> imageCard = [
-  AssetPath.CinemaCard1,
-  AssetPath.Cinema6,
-  AssetPath.Cinema7,
+  AssetPath.cinemaCard1,
+  AssetPath.cinema6,
+  AssetPath.cinema7,
 ];
 
 List<String> titles = [
@@ -32,7 +34,7 @@ class OffersView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.redAccent,
-        title: const Text("Offers"),
+        title: Text(S.of(context).offer),
       ),
       backgroundColor: Colors.black87,
       body: SingleChildScrollView(
@@ -45,19 +47,16 @@ class OffersView extends StatelessWidget {
               SizedBox(
                 height: 220,
                 child: Image.asset(
-                  'assets/images/cinema1.jpeg',
+                  AssetPath.cinema1,
                   fit: BoxFit.fill,
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text(
-                  'What we offer',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextWidget(
+                  S.of(context).what_we_offer,
+                  size: 18,
+                  bold: true,
                 ),
               ),
               ListView.builder(
@@ -94,7 +93,7 @@ class OffersView extends StatelessWidget {
                               child: Image.asset(
                                 image[index],
                                 fit: BoxFit.fill,
-                                height: 200, // Adjust height to fit properly
+                                height: 200,
                               ),
                             ),
                             ListTile(
@@ -112,14 +111,12 @@ class OffersView extends StatelessWidget {
                   );
                 },
               ),
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text(
-                  "Premium Benefits",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextWidget(
+                  S.of(context).premium_benifit,
+                  size: 18,
+                  bold: true,
                 ),
               ),
               InkWell(
@@ -128,8 +125,8 @@ class OffersView extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => DetailScreen(
-                        imagePath: imageCard[0], // Example: passing the first image
-                        title: "Premium Benefits",
+                        imagePath: imageCard[0],
+                        title: S.of(context).premium_benifit,
                       ),
                     ),
                   );

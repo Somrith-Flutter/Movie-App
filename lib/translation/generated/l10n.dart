@@ -579,6 +579,36 @@ class S {
       args: [],
     );
   }
+
+  /// `What's we offer`
+  String get what_we_offer {
+    return Intl.message(
+      'What\'s we offer',
+      name: 'what_we_offer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Premium Benifits`
+  String get premium_benifit {
+    return Intl.message(
+      'Premium Benifits',
+      name: 'premium_benifit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose Cinema`
+  String get choose_cinema {
+    return Intl.message(
+      'Choose Cinema',
+      name: 'choose_cinema',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

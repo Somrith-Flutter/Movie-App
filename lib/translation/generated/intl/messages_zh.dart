@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "about_us": MessageLookupByLibrary.simpleMessage("关于我们"),
         "address": MessageLookupByLibrary.simpleMessage("地址"),
         "chinese": MessageLookupByLibrary.simpleMessage("中国人"),
+        "choose_cinema": MessageLookupByLibrary.simpleMessage("选择电影院"),
         "cinema": MessageLookupByLibrary.simpleMessage("电影"),
         "contact_us": MessageLookupByLibrary.simpleMessage("联系我们"),
         "dis_legend_membership": MessageLookupByLibrary.simpleMessage(
@@ -42,9 +43,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "news_activity": MessageLookupByLibrary.simpleMessage("新闻和活动"),
         "notification": MessageLookupByLibrary.simpleMessage("通知"),
         "offer": MessageLookupByLibrary.simpleMessage("优惠"),
+        "premium_benifit": MessageLookupByLibrary.simpleMessage("高级福利"),
         "privacy_policy": MessageLookupByLibrary.simpleMessage("隐私和政策"),
         "register": MessageLookupByLibrary.simpleMessage("报名"),
         "term_condition": MessageLookupByLibrary.simpleMessage("条款和条件"),
-        "what_new": MessageLookupByLibrary.simpleMessage("什么是新的")
+        "what_new": MessageLookupByLibrary.simpleMessage("什么是新的"),
+        "what_we_offer": MessageLookupByLibrary.simpleMessage("我们提供什么")
       };
 }
