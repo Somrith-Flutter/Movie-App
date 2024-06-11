@@ -21,52 +21,23 @@ class FAndBCombo extends StatefulWidget {
 
 class _FAndBComboState extends State<FAndBCombo> {
   var cartController = Get.put(FBController(repository: FBRepository()));
+  String selectedCinema = "Legend Premium Exchange Square";
+
+  final Map<String, List<CartModel>> cartItemsByCinema = {
+    "Legend Premium Exchange Square": [
+      CartModel(title: 'Combo 1', price: 5.0, imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(title: 'Combo 2', price: 4.50, imageUrl: 'assets/images/f&b.jpeg'),
+    ],
+    "Legend Eden Garden": [
+      CartModel(title: 'Combo 3', price: 4.80, imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(title: 'Combo 4', price: 5.50, imageUrl: 'assets/images/f&b.jpeg'),
+    ],
+  };
+
+  List<CartModel> get cartItems => cartItemsByCinema[selectedCinema] ?? [];
 
   @override
   Widget build(BuildContext context) {
-    final List<CartModel> cartItem = [
-      CartModel(
-        title: 'Combo 1',
-        price: 5.0,
-        imageUrl: 'assets/images/f&b.jpeg',
-      ),
-      CartModel(
-        title: 'Combo 2',
-        price: 4.50,
-        imageUrl: 'assets/images/f&b.jpeg',
-      ),
-      CartModel(
-        title: 'Combo 3',
-        price: 4.80,
-        imageUrl: 'assets/images/f&b.jpeg',
-      ),
-      CartModel(
-        title: 'Combo 4',
-        price: 5.50,
-        imageUrl: 'assets/images/f&b.jpeg',
-      ),
-      CartModel(
-        title: 'Combo 5',
-        price: 5.50,
-        imageUrl: 'assets/images/f&b.jpeg',
-      ),
-      CartModel(
-        title: 'Combo 6',
-        price: 6.50,
-        imageUrl: 'assets/images/f&b.jpeg',
-      ),
-      CartModel(
-        title: 'Combo 7',
-        price: 8.0,
-        imageUrl: 'assets/images/f&b.jpeg',
-      ),
-      CartModel(
-        title: 'Combo 8',
-        price: 7.0,
-        imageUrl: 'assets/images/f&b.jpeg',
-      ),
-    ];
-
     return Stack(
       children: [
         Image.asset(
@@ -125,17 +96,16 @@ class _FAndBComboState extends State<FAndBCombo> {
                                   color: Colors.black54.withOpacity(0.3),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
-                                child: const Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 20),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 20),
                                   child: Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       TextWidget(
-                                        "Legend Premium Exchange Square",
+                                        selectedCinema,
                                         size: 16,
                                       ),
-                                      Icon(
+                                      const Icon(
                                         Icons.arrow_drop_down_circle_outlined,
                                       ),
                                     ],
@@ -150,12 +120,11 @@ class _FAndBComboState extends State<FAndBCombo> {
                       ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: cartItem.length,
+                        itemCount: cartItems.length,
                         itemBuilder: (context, index) {
-                          var product = cartItem[index];
+                          var product = cartItems[index];
                           return Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 8),
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                             child: SizedBox(
                               height: 130,
                               child: Card(
@@ -163,15 +132,13 @@ class _FAndBComboState extends State<FAndBCombo> {
                                 elevation: 2,
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.white.withOpacity(0.8)),
+                                    border: Border.all(color: Colors.white.withOpacity(0.8)),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 3),
                                     child: Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         Padding(
                                           padding: const EdgeInsets.all(8.0),
@@ -179,11 +146,9 @@ class _FAndBComboState extends State<FAndBCombo> {
                                             width: 100,
                                             height: 100,
                                             decoration: BoxDecoration(
-                                              borderRadius:
-                                              BorderRadius.circular(5),
+                                              borderRadius: BorderRadius.circular(5),
                                               image: DecorationImage(
-                                                image:
-                                                AssetImage(product.imageUrl),
+                                                image: AssetImage(product.imageUrl),
                                                 fit: BoxFit.cover,
                                               ),
                                             ),
@@ -194,10 +159,8 @@ class _FAndBComboState extends State<FAndBCombo> {
                                           child: Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             child: Column(
-                                              crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
                                                 TextWidget(
                                                   product.title,
@@ -219,14 +182,9 @@ class _FAndBComboState extends State<FAndBCombo> {
                                           alignment: Alignment.bottomRight,
                                           child: Row(
                                             children: [
-                                              if (logic.getProductQuantity(
-                                                  product) >
-                                                  0)
+                                              if (logic.getProductQuantity(product) > 0)
                                                 Container(
-                                                  margin: const EdgeInsets
-                                                      .symmetric(
-                                                      horizontal: 8,
-                                                      vertical: 8),
+                                                  margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                                                   decoration: BoxDecoration(
                                                     shape: BoxShape.circle,
                                                     color: Colors.red[600],
@@ -241,19 +199,14 @@ class _FAndBComboState extends State<FAndBCombo> {
                                                     ),
                                                   ),
                                                 ),
-                                              if (logic.getProductQuantity(
-                                                  product) >
-                                                  0)
+                                              if (logic.getProductQuantity(product) > 0)
                                                 TextWidget(
                                                   "${logic.getProductQuantity(product)}",
                                                   size: 20,
                                                   bold: true,
                                                 ),
                                               Container(
-                                                margin:
-                                                const EdgeInsets.symmetric(
-                                                    horizontal: 8,
-                                                    vertical: 8),
+                                                margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                                                 decoration: BoxDecoration(
                                                   shape: BoxShape.circle,
                                                   color: Colors.red[600],
@@ -298,8 +251,7 @@ class _FAndBComboState extends State<FAndBCombo> {
                               Container(
                                 width: 70,
                                 decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Colors.white, width: 3),
+                                  border: Border.all(color: Colors.white, width: 3),
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                                 child: TextWidget(
@@ -327,7 +279,7 @@ class _FAndBComboState extends State<FAndBCombo> {
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              var selectedItems = cartItem.where((product) => logic.getProductQuantity(product) > 0).map((product) {
+                              var selectedItems = cartItems.where((product) => logic.getProductQuantity(product) > 0).map((product) {
                                 product.quantity = logic.getProductQuantity(product);
                                 return product;
                               }).toList();
@@ -336,8 +288,7 @@ class _FAndBComboState extends State<FAndBCombo> {
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.red,
                             ),
-                            child: const TextWidget("Continue",
-                                size: 16, bold: true),
+                            child: const TextWidget("Continue", size: 16, bold: true),
                           ),
                         ],
                       ),
@@ -351,82 +302,91 @@ class _FAndBComboState extends State<FAndBCombo> {
       ],
     );
   }
-}
 
-Future _buildBottomSheet(BuildContext context) {
-  return showModalBottomSheet(
-    context: context,
-    builder: (context) {
-      return SizedBox(
-        height: 500,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const TextWidget(
-                    "Cinema",
-                    size: 19,
-                    bold: true,
-                  ),
-                  GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: Container(
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                            color: Colors.white.withOpacity(0.3), width: 2),
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(
-                        Icons.close,
-                        size: 20,
-                      ),
+  Future _buildBottomSheet(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return SizedBox(
+          height: 500,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const TextWidget(
+                      "Cinema",
+                      size: 19,
+                      bold: true,
                     ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Divider(
-                color: Colors.white.withOpacity(0.3),
-                height: 2,
-              ),
-            ),
-            const SizedBox(height: 25),
-            Expanded(
-              child: ListView.builder(
-                itemCount: cinemaList.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    height: 60,
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            const Icon(Icons.location_on, color: Colors.red),
-                            const SizedBox(width: 8),
-                            TextWidget(cinemaList[index]["title"] ?? "",
-                                size: 16, bold: true),
-                          ],
+                    GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: Container(
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white.withOpacity(0.3), width: 2),
+                          shape: BoxShape.circle,
                         ),
-                        Divider(
-                            color: Colors.white.withOpacity(0.3), height: 0.5),
-                      ],
+                        child: const Icon(
+                          Icons.close,
+                          size: 20,
+                        ),
+                      ),
                     ),
-                  );
-                },
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
-      );
-    },
-  );
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Divider(
+                  color: Colors.white.withOpacity(0.3),
+                  height: 2,
+                ),
+              ),
+              const SizedBox(height: 25),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: cinemaList.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      height: 60,
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Column(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                selectedCinema = cinemaList[index]["title"] ?? "";
+                              });
+                              Navigator.pop(context);
+                            },
+                            child: Row(
+                              children: [
+                                const Icon(Icons.location_on, color: Colors.red),
+                                const SizedBox(width: 8),
+                                TextWidget(
+                                  cinemaList[index]["title"] ?? "",
+                                  size: 16,
+                                  bold: true,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Divider(color: Colors.white.withOpacity(0.3), height: 0.5),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 }
 
 List<Map<String, String>> cinemaList = [
