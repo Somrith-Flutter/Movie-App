@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:legend_cinema/config/themes/app_color.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
@@ -11,20 +10,30 @@ List<String> image = [
   AssetPath.cinema4,
   AssetPath.cinema5,
   AssetPath.cinema7,
-];
-
-List<String> imageCard = [
   AssetPath.cinemaCard1,
-  AssetPath.cinema6,
-  AssetPath.cinema7,
+  AssetPath.cinema8,
 ];
 
 List<String> titles = [
-  'Special Offer 1',
-  'Special Offer 2',
-  'Special Offer 3',
-  'Special Offer 4',
-  'Special Offer 5',
+  'Donate 0.50 to child for every purchase of a Hope Combo',
+  'My Boo is now playing at Legend Cinema.',
+  'Special Combo Set',
+  'Happy Anniversary 13Year',
+  'Bad Boys: Ride or Die',
+  'Special price for students and senior citizen. Applicable on week days, weekends and public Holiday',
+  'Celebrate Coca-Cola Day with us!',
+];
+
+List<String> titless = [
+  'Discount 10% Concession',
+  'Discount 10% Ticket',
+  'Buy 1 get 1 Every Tuesday',
+];
+
+List<String> subtitless = [
+  '10% discount on concession',
+  '10% discount on ticket',
+  'Buy one get one tickets free!',
 ];
 
 class OffersView extends StatelessWidget {
@@ -37,14 +46,14 @@ class OffersView extends StatelessWidget {
         centerTitle: false,
         title: Text(S.of(context).offer),
         flexibleSpace: Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: AppColor.appbarColor,
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
-              ),
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.red, Colors.black],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
             ),
+          ),
+        ),
       ),
       backgroundColor: Colors.black87,
       body: SingleChildScrollView(
@@ -129,43 +138,58 @@ class OffersView extends StatelessWidget {
                   bold: true,
                 ),
               ),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => DetailScreen(
-                        imagePath: imageCard[0],
-                        title: S.of(context).premium_benifit,
-                      ),
-                    ),
-                  );
-                },
-                child: SizedBox(
-                  height: 180,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: imageCard.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          child: Card(
-                            child: SizedBox(
-                              width: 280,
-                              child: Image.asset(
-                                imageCard[index],
-                                fit: BoxFit.fill,
+              SizedBox(
+                height: 320,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: titless.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Card(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5.0),
+                                color: Colors.red.shade900,
+                              ),
+                              child: SizedBox(
+                                height: 180,
+                                width: 320,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        titless[index],
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Text(
+                                        subtitless[index],
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      );
-                    },
-                  ),
+                        ],
+                      ),
+                    );
+                  },
                 ),
               ),
             ],
