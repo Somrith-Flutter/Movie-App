@@ -1,3 +1,5 @@
+import 'package:legend_cinema/translation/generated/l10n.dart';
+
 class AssetPath{
   static const String flagkhmer = 'assets/flages/flag_khmer.png';
   static const String flagEngland = 'assets/flages/flag_england.png';
