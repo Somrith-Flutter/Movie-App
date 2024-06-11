@@ -1,29 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
-import 'package:legend_cinema/modules/landings/offers/view/offers_detail.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
+import 'package:legend_cinema/widgets/movie_details_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 List<String> image = [
-  AssetPath.cinema2,
-  AssetPath.cinema6,
-  AssetPath.cinema4,
-  AssetPath.cinema5,
-  AssetPath.cinema7,
-];
-
-List<String> imageCard = [
-  AssetPath.cinemaCard1,
-  AssetPath.cinema6,
-  AssetPath.cinema7,
+  AssetPath.news2,
+  AssetPath.news3,
+  AssetPath.news4,
+  AssetPath.news5,
+  AssetPath.news6,
+  AssetPath.news7,
+  AssetPath.news8
 ];
 
 List<String> titles = [
-  'Special Offer 1',
-  'Special Offer 2',
-  'Special Offer 3',
-  'Special Offer 4',
-  'Special Offer 5',
+  'The Successor Conserve, Create & Innovate',
+  "Expirence Luxury Cinrma with Legend Cinmna's Diamond Class Ticket Pakage",
+  'Include in Culinary Excellence with Legend Cinema Catering Service!',
+  'Legend Cinema Indroduces the First Ever Dining Cinema Experience in Cambodia',
+  'Celebrating a 12 Years of Legend Cinema: A Business Success Story in the Cambodian',
+  "(COCA-COLA) Cambodia Berverage Company and Legend Cinema",
+  "Legend Cinema & Smart Continue Partnership for There more years across."
 ];
 class NewsAndActivityView extends StatelessWidget {
   const NewsAndActivityView({super.key});
@@ -56,7 +55,7 @@ class NewsAndActivityView extends StatelessWidget {
               SizedBox(
                 height: 220,
                 child: Image.asset(
-                  AssetPath.cinema1,
+                  AssetPath.news1,
                   fit: BoxFit.fill,
                 ),
               ),
@@ -73,18 +72,13 @@ class NewsAndActivityView extends StatelessWidget {
                 shrinkWrap: true,
                 itemCount: image.length,
                 itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DetailScreen(
-                            imagePath: image[index],
-                            title: titles[index],
-                          ),
-                        ),
-                      );
-                    },
+                  return GestureDetector(
+                    onTap: () => AppRoute().pushReplacement(context, MovieDetailsWidget(
+                        image: image[index],
+                        title: titles[index],
+                        description: titles[index],
+                      ),
+                    ),
                     child: Card(
                       margin: const EdgeInsets.all(8.0),
                       child: Container(

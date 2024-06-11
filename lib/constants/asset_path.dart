@@ -15,4 +15,12 @@ class AssetPath{
   static const String cinemaCard1 = 'assets/images/cinema_card.jpeg';
   static const String fbhero = 'assets/images/f&b.jpeg';
 
+  static const String news1 = 'assets/images/news1.jpg';
+  static const String news2 = 'assets/images/news2.jpg';
+  static const String news3 = 'assets/images/news3.jpg';
+  static const String news4 = 'assets/images/news4.jpg';
+  static const String news5 = 'assets/images/news5.jpg';
+  static const String news6 = 'assets/images/news6.jpg';
+  static const String news7 = 'assets/images/news7.jpg';
+  static const String news8 = 'assets/images/news8.jpg';
 }
