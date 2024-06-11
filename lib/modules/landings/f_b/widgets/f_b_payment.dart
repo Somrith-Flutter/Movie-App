@@ -143,7 +143,7 @@ class _FBPaymentState extends State<FBPayment> {
                                           bold: true,
                                           color: Colors.grey,
                                         ),
-                                        TextWidget("Available", color: Colors.grey),
+                                        TextWidget("Available", color: Colors.grey, size: 12,),
                                       ],
                                     ),
                                     const Spacer(),
@@ -165,6 +165,7 @@ class _FBPaymentState extends State<FBPayment> {
                                   height: 3,
                                 ),
                                 Row(
+                                  mainAxisSize: MainAxisSize.min,
                                   children: [
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(5),
@@ -175,7 +176,7 @@ class _FBPaymentState extends State<FBPayment> {
                                         height: 30,
                                       ),
                                     ),
-                                    const SizedBox(width: 10),
+                                    const SizedBox(width: 5),
                                     const Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
@@ -185,8 +186,11 @@ class _FBPaymentState extends State<FBPayment> {
                                           bold: true,
                                           color: Colors.grey,
                                         ),
-                                        TextWidget("Scan to pay with any baking app",
-                                            color: Colors.grey),
+                                        TextWidget(
+                                          "Scan to pay with any baking app",
+                                          size: 12,
+                                          color: Colors.grey
+                                        ),
                                       ],
                                     ),
                                     const Spacer(),
@@ -225,7 +229,7 @@ class _FBPaymentState extends State<FBPayment> {
                                           bold: true,
                                           color: Colors.grey,
                                         ),
-                                        TextWidget("Available", color: Colors.grey),
+                                        TextWidget("Available", color: Colors.grey, size: 12,),
                                       ],
                                     ),
                                     const Spacer(),
