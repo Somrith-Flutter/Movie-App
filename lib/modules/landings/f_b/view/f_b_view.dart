@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:legend_cinema/config/routes/app_route.dart';
+import 'package:legend_cinema/config/themes/app_color.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/modules/landings/f_b/widgets/f_b_combo.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
@@ -31,7 +32,7 @@ class FBView extends StatelessWidget {
         BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
           child: Container(
-            color: Colors.black.withOpacity(0.5), 
+            color: AppColor.primaryColor.withOpacity(0.5), 
             width: double.infinity,
             height: double.infinity,
           ),
@@ -43,7 +44,7 @@ class FBView extends StatelessWidget {
             flexibleSpace: Container(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Colors.red, Colors.black],
+                  colors: AppColor.appbarColor,
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),

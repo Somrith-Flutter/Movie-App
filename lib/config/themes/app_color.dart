@@ -1,0 +1,43 @@
+import 'package:flutter/material.dart';
+
+class AppColor{
+  static const primaryColor = Colors.black;
+  static const cardColor = Colors.red;
+  static const appbarColor = [Colors.red, Colors.black];
+  static const primaryHex = 'FF3B8FCD';
+  static const secondary = Color.fromRGBO(255, 184, 0, 1);
+  static const buttonLight = Color.fromRGBO(232, 233, 243, 1);
+  static const buttonDark = Color.fromRGBO(37, 48, 63, 1);
+  static const stepInactive = Color.fromRGBO(179, 179, 179, 1);
+  static const highlight = Color.fromRGBO(59, 143, 205, 1);
+  static const success = Color.fromRGBO(2, 200, 132, 1);
+  static const danger = Color.fromRGBO(236, 102, 102, 1);
+  static const info = Colors.blue;
+  static const warning = Colors.amber;
+  static const active = Color.fromRGBO(2, 200, 132, 1);
+  static const inactive = Color.fromRGBO(236, 102, 102, 1);
+  static const chart2 = secondary;
+  static const chart3 = Color.fromRGBO(236, 102, 102, 1);
+  static const chart4 = Color.fromRGBO(2, 200, 132, 1);
+  static const chart5 = Color.fromRGBO(209, 172, 50, 1);
+  static const chart6 = Color.fromRGBO(108, 99, 255, 1);
+  static const chart7 = Colors.lime;
+  static const chart8 = Colors.pink;
+  static const chart9 = Colors.brown;
+  static const chart10 = Colors.lightGreen;
+  static const chart11 = Colors.deepPurple;
+  static const chart12 = Colors.indigo;
+  static const black = Color.fromRGBO(27, 33, 44, 1);
+  static const white = Colors.white;
+  static const lightGrey = Color.fromRGBO(242, 242, 242, 1);
+  static const textLight = Color.fromARGB(255, 140, 140, 140);
+  static const textDark = Color.fromRGBO(27, 33, 44, 1);
+  static const background = Color.fromRGBO(234, 241, 244, 1);
+  static const backgroundDark = Color.fromRGBO(27, 33, 44, 1);
+  static const backgroundLight = Colors.white;
+  static const card = Colors.white;
+  static const cardDark = Color.fromRGBO(37, 48, 63, 1);
+  static const divider = Colors.grey;
+  static const dividerDark = Colors.white60;
+  static const radioDisable = Color.fromARGB(255, 206, 206, 206);
+}

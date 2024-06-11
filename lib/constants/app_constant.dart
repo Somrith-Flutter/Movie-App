@@ -52,4 +52,6 @@ class AppConstant{
     GlobalWidgetsLocalizations.delegate,
   ];
 
+  static const String defaultFont = 'Siemreap';
+
 }
