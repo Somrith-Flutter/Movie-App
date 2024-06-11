@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:legend_cinema/constants/app_constant.dart';
 
@@ -7,6 +8,10 @@ class RestApiService {
   Future<String> get(String endpoint) async {
     final response = await http.get(Uri.parse('${AppConstant.baseIosUrl}/$endpoint'));
     return _processResponse(response);
+  }
+
+  Future<String> getAssetData(String endpoint) async {
+    return await rootBundle.loadString(endpoint);
   }
 
   Future<String> post(String endpoint, Map<String, dynamic> data) async {

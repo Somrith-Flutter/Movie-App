@@ -1,0 +1,64 @@
+{
+    "location":[
+        {
+            "id": "1",
+            "name": "Legend Eden Garden",
+            "image": "assets/images/cinema1.jpeg"
+        },
+        {
+            "id": "2",
+            "name": "Legend Toul Kork",
+            "image": "assets/images/cinema1.jpeg"
+        },
+        {
+            "id": "3",
+            "name": "Legend Premium Exchange Square",
+            "image": "assets/images/cinema1.jpeg"
+        },
+        {
+            "id": "4",
+            "name": "Legend Olympia",
+            "image": "assets/images/cinema1.jpeg"
+        },
+        {
+            "id": "5",
+            "name": "Legend SenSok",
+            "image": "assets/images/cinema1.jpeg"
+        },
+        {
+            "id": "6",
+            "name": "Legend Noro Mall",
+            "image": "assets/images/cinema1.jpeg"
+        },
+        {
+            "id": "7",
+            "name": "Legend Midtown Mall",
+            "image": "assets/images/cinema1.jpeg"
+        },
+        {
+            "id": "8",
+            "name": "Legend Meanchey",
+            "image": "assets/images/cinema1.jpeg"
+        },
+        {
+            "id": "9",
+            "name": "Legend Cinema 271 Mega Mall",
+            "image": "assets/images/cinema1.jpeg"
+        },
+        {
+            "id": "10",
+            "name": "Legend K Mall",
+            "image": "assets/images/cinema1.jpeg"
+        },
+        {
+            "id": "11",
+            "name": "Legend Cinema Sihanoukville",
+            "image": "assets/images/cinema1.jpeg"
+        },
+        {
+            "id": "12",
+            "name": "Legend Siem Reap",
+            "image": "assets/images/cinema1.jpeg"
+        }
+    ]
+}

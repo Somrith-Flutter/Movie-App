@@ -30,38 +30,6 @@ class _FAndBComboState extends State<FAndBCombo> {
           title: 'Combo 1',
           price: 5.0,
           imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 2',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 3',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 4',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 5',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 6',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 7',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 8',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
     ],
     "Legend Toul Kork": [
       CartModel(
@@ -70,33 +38,6 @@ class _FAndBComboState extends State<FAndBCombo> {
           imageUrl: 'assets/images/f&b.jpeg'),
       CartModel(
           title: 'Combo 2',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 3',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 4',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 5',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 6',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 7',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 8',
           price: 4.50,
           imageUrl: 'assets/images/f&b.jpeg'
       ),
@@ -115,29 +56,6 @@ class _FAndBComboState extends State<FAndBCombo> {
           title: 'Combo 3',
           price: 5.0,
           imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 4',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 5',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 6',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 7',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 8',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
     ],
     "Legend Olympia": [
       CartModel(
@@ -155,24 +73,6 @@ class _FAndBComboState extends State<FAndBCombo> {
           imageUrl: 'assets/images/f&b.jpeg'),
       CartModel(
           title: 'Combo 4',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 5',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 6',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 7',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 8',
           price: 4.50,
           imageUrl: 'assets/images/f&b.jpeg'
       ),
@@ -200,20 +100,6 @@ class _FAndBComboState extends State<FAndBCombo> {
           title: 'Combo 5',
           price: 5.0,
           imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 6',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 7',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 8',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
     ],
     "Legend  Noro Mall": [
       CartModel(
@@ -240,15 +126,6 @@ class _FAndBComboState extends State<FAndBCombo> {
           imageUrl: 'assets/images/f&b.jpeg'),
       CartModel(
           title: 'Combo 6',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 7',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 8',
           price: 4.50,
           imageUrl: 'assets/images/f&b.jpeg'
       ),
@@ -285,11 +162,6 @@ class _FAndBComboState extends State<FAndBCombo> {
           title: 'Combo 7',
           price: 5.0,
           imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 8',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
     ],
     "Legend Meanchey": [
       CartModel(

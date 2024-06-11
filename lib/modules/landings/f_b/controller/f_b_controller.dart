@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:legend_cinema/modules/landings/f_b/model/card_model.dart';
+import 'package:legend_cinema/modules/landings/f_b/model/location_model.dart';
 import 'package:legend_cinema/modules/landings/f_b/repository/f_b_repository.dart';
 
 class FBController extends GetxController{
@@ -45,4 +47,27 @@ class FBController extends GetxController{
   });
 
   String get formattedTotalPrice => NumberFormat('#,##0.00').format(totalPrice);
+
+  var location = <LocationModel>[].obs;
+  var isLoading = true.obs;
+  var errorMessage = ''.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    getlocations();
+  }
+
+  Future<void> getlocations() async {
+    try {
+      isLoading(true);
+      var locations = await repository.getLocationList();
+      location.value = locations;
+      debugPrint('$locations');
+    } catch (e) {
+      errorMessage.value = e.toString();
+    } finally {
+      isLoading(false);
+    }
+  }
 }
