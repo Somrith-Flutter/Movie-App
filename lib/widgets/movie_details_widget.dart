@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:legend_cinema/config/themes/app_color.dart';
+import 'package:legend_cinema/widgets/no_image_avalible.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
 class MovieDetailsWidget extends StatelessWidget {
@@ -43,12 +45,11 @@ class MovieDetailsWidget extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Image.network(
-                  image ?? '',
-                  fit: BoxFit.fill,
-                  height: 250,
-                  width: double.infinity,
-                ),
+                child: CachedNetworkImage(
+                  imageUrl: image!,
+                  fit: BoxFit.cover,
+                  errorWidget: (context, url, error) => const NoImageAvailable(),
+                )
               ),
             ),
             const Gap(8),

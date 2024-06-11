@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:legend_cinema/config/routes/app_route.dart';
@@ -91,8 +92,8 @@ class NewsAndActivityView extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: item.imageUrl != null
-                                      ? Image.network(
-                                          item.imageUrl!,
+                                      ? CachedNetworkImage(
+                                          imageUrl: item.imageUrl!,
                                           fit: BoxFit.fill,
                                           height: 200,
                                         )

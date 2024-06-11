@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';

@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about_us": MessageLookupByLibrary.simpleMessage("អំពីពួកយើង"),
         "address": MessageLookupByLibrary.simpleMessage("អាស័យ​ដ្ឋាន"),
+        "allow": MessageLookupByLibrary.simpleMessage("អនុញ្ញាតិ"),
         "btn_no": MessageLookupByLibrary.simpleMessage("ទេ"),
         "btn_yes": MessageLookupByLibrary.simpleMessage("បាទ/ចាស"),
         "change_password":

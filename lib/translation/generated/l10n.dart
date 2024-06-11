@@ -609,6 +609,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Allow`
+  String get allow {
+    return Intl.message(
+      'Allow',
+      name: 'allow',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

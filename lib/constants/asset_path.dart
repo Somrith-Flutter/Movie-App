@@ -21,4 +21,6 @@ class AssetPath{
   static const String news6 = 'assets/images/news6.jpg';
   static const String news7 = 'assets/images/news7.jpg';
   static const String news8 = 'assets/images/news8.jpg';
+
+  static const String noImage = 'assets/icons/no_image.png';
 }
