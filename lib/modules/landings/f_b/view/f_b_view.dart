@@ -40,6 +40,7 @@ class FBView extends StatelessWidget {
         Scaffold(
           backgroundColor: Colors.transparent, 
           appBar: AppBar(
+            centerTitle: false,
             title: TextWidget(S.of(context).fb, size: 20, bold: true),
             flexibleSpace: Container(
               decoration: const BoxDecoration(

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AppColor{
   static const primaryColor = Colors.black;
   static const cardColor = Colors.red;
-  static const appbarColor = [Colors.red, Colors.black];
+  static const appbarColor = [Color.fromRGBO(184, 10, 10, 1), Colors.black];
   static const primaryHex = 'FF3B8FCD';
   static const secondary = Color.fromRGBO(255, 184, 0, 1);
   static const buttonLight = Color.fromRGBO(232, 233, 243, 1);

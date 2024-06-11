@@ -34,11 +34,11 @@ class _BottomNavigationState extends State<BottomNavigation> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _buildNavItem(0, Icons.home, S.of(context).home),
-            _buildNavItem(1, Icons.local_offer, S.of(context).offer),
+            _buildNavItem(0, Icons.home_outlined, S.of(context).home),
+            _buildNavItem(1, Icons.local_offer_outlined, S.of(context).offer),
             _buildNavItem(2, Icons.location_pin, S.of(context).cinema),
-            _buildNavItem(3, Icons.food_bank, S.of(context).fb),
-            _buildNavItem(4, Icons.more_horiz, S.of(context).more)
+            _buildNavItem(3, Icons.food_bank_outlined, S.of(context).fb),
+            _buildNavItem(4, Icons.crop, S.of(context).more)
           ],
         ),
       ),
