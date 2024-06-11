@@ -11,6 +11,20 @@ class FBView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Map<String, String>> cinemaList = [
+      {"title": "Legend Eden Garden"},
+      {"title": "Legend Toul Kork"},
+      {"title": "Legend Premium Exchange Square"},
+      {"title": "Legend Olympia"},
+      {"title": "Legend SenSok"},
+      {"title": "Legend Noro Mall"},
+      {"title": "Legend Midtown Mall"},
+      {"title": "Legend Meanchey"},
+      {"title": "Legend Cinema 271 Mega Mall"},
+      {"title": "Legend K Mall"},
+      {"title": "Legend Cinema Sihanoukville"},
+      {"title": "Legend Siem Reap"},
+    ];
     return Stack(
       children: [
         Image.asset(AssetPath.fbhero,width: double.infinity,height: double.infinity,fit: BoxFit.cover,),
@@ -51,8 +65,9 @@ class FBView extends StatelessWidget {
               ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: 10,
+                itemCount: cinemaList.length,
                 itemBuilder: (context, index) {
+                  var data = cinemaList[index];
                   return Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 12, vertical: 8),
@@ -68,7 +83,7 @@ class FBView extends StatelessWidget {
                           child: Container(
                             decoration: BoxDecoration(
                                 border: Border.all(
-                                    color: Colors.white.withOpacity(0.3)),
+                                    color: Colors.white.withOpacity(0.8)),
                                 borderRadius: BorderRadius.circular(10)),
                             child: Padding(
                               padding: const EdgeInsets.only(left: 3),
@@ -92,12 +107,8 @@ class FBView extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 5),
                                   Expanded(
-                                    child: TextWidget(
-                                      S.of(context).hello,
-                                      size: 17,
-                                      bold: true,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
+                                    child: TextWidget(data["title"],
+                                        size: 16, bold: true,overflow: TextOverflow.ellipsis,),
                                   ),
                                   const Padding(
                                     padding: EdgeInsets.only(right: 12.0),

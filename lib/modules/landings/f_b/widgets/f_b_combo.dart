@@ -1,10 +1,12 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/modules/landings/f_b/controller/f_b_controller.dart';
 import 'package:legend_cinema/modules/landings/f_b/model/card_model.dart';
 import 'package:legend_cinema/modules/landings/f_b/repository/f_b_repository.dart';
+import 'package:legend_cinema/modules/landings/f_b/widgets/f_b_cart_detail.dart';
 import 'package:legend_cinema/widgets/animated_flipcounter_box.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
@@ -22,49 +24,48 @@ class _FAndBComboState extends State<FAndBCombo> {
 
   @override
   Widget build(BuildContext context) {
-    final List<Product> products = [
-      Product(
+    final List<CartModel> cartItem = [
+      CartModel(
         title: 'Combo 1',
         price: 5.0,
         imageUrl: 'assets/images/f&b.jpeg',
       ),
-      Product(
+      CartModel(
         title: 'Combo 2',
         price: 4.50,
         imageUrl: 'assets/images/f&b.jpeg',
       ),
-      Product(
+      CartModel(
         title: 'Combo 3',
         price: 4.80,
         imageUrl: 'assets/images/f&b.jpeg',
       ),
-      Product(
+      CartModel(
         title: 'Combo 4',
         price: 5.50,
         imageUrl: 'assets/images/f&b.jpeg',
       ),
-      Product(
+      CartModel(
         title: 'Combo 5',
         price: 5.50,
         imageUrl: 'assets/images/f&b.jpeg',
       ),
-      Product(
+      CartModel(
         title: 'Combo 6',
         price: 6.50,
         imageUrl: 'assets/images/f&b.jpeg',
       ),
-      Product(
+      CartModel(
         title: 'Combo 7',
         price: 8.0,
         imageUrl: 'assets/images/f&b.jpeg',
       ),
-      Product(
+      CartModel(
         title: 'Combo 8',
         price: 7.0,
         imageUrl: 'assets/images/f&b.jpeg',
       ),
     ];
-
 
     return Stack(
       children: [
@@ -118,10 +119,7 @@ class _FAndBComboState extends State<FAndBCombo> {
                                 _buildBottomSheet(context);
                               },
                               child: Container(
-                                width: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .width,
+                                width: MediaQuery.of(context).size.width,
                                 height: 50,
                                 decoration: BoxDecoration(
                                   color: Colors.black54.withOpacity(0.3),
@@ -152,9 +150,9 @@ class _FAndBComboState extends State<FAndBCombo> {
                       ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: products.length,
+                        itemCount: cartItem.length,
                         itemBuilder: (context, index) {
-                          var product = products[index];
+                          var product = cartItem[index];
                           return Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 12, vertical: 8),
@@ -166,7 +164,7 @@ class _FAndBComboState extends State<FAndBCombo> {
                                 child: Container(
                                   decoration: BoxDecoration(
                                     border: Border.all(
-                                        color: Colors.white.withOpacity(0.3)),
+                                        color: Colors.white.withOpacity(0.8)),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   child: Padding(
@@ -201,13 +199,11 @@ class _FAndBComboState extends State<FAndBCombo> {
                                               mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                               children: [
-                                                Text(cartController.formattedTotalPrice),
                                                 TextWidget(
                                                   product.title,
                                                   size: 17,
                                                   bold: true,
-                                                  overflow: TextOverflow
-                                                      .ellipsis,
+                                                  overflow: TextOverflow.ellipsis,
                                                 ),
                                                 TextWidget(
                                                   "\$${product.price}",
@@ -223,8 +219,7 @@ class _FAndBComboState extends State<FAndBCombo> {
                                           alignment: Alignment.bottomRight,
                                           child: Row(
                                             children: [
-                                              if (logic
-                                                  .getProductQuantity(
+                                              if (logic.getProductQuantity(
                                                   product) >
                                                   0)
                                                 Container(
@@ -238,8 +233,7 @@ class _FAndBComboState extends State<FAndBCombo> {
                                                   ),
                                                   child: GestureDetector(
                                                     onTap: () {
-                                                      logic
-                                                          .removeItem(product);
+                                                      logic.removeItem(product);
                                                     },
                                                     child: const Icon(
                                                       Icons.remove,
@@ -247,14 +241,11 @@ class _FAndBComboState extends State<FAndBCombo> {
                                                     ),
                                                   ),
                                                 ),
-                                              if (logic
-                                                  .getProductQuantity(
+                                              if (logic.getProductQuantity(
                                                   product) >
                                                   0)
                                                 TextWidget(
-                                                  "${logic
-                                                      .getProductQuantity(
-                                                      product)}",
+                                                  "${logic.getProductQuantity(product)}",
                                                   size: 20,
                                                   bold: true,
                                                 ),
@@ -269,8 +260,8 @@ class _FAndBComboState extends State<FAndBCombo> {
                                                 ),
                                                 child: GestureDetector(
                                                   onTap: () {
-                                                    logic
-                                                        .addItem(product);
+                                                    Future.delayed(const Duration(seconds: 2));
+                                                    logic.addItem(product);
                                                   },
                                                   child: const Icon(
                                                     Icons.add,
@@ -307,8 +298,7 @@ class _FAndBComboState extends State<FAndBCombo> {
                               Container(
                                 width: 70,
                                 decoration: BoxDecoration(
-                                  border:
-                                  Border.all(
+                                  border: Border.all(
                                       color: Colors.white, width: 3),
                                   borderRadius: BorderRadius.circular(5),
                                 ),
@@ -324,8 +314,7 @@ class _FAndBComboState extends State<FAndBCombo> {
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const TextWidget(
-                                      "Summary", size: 16, bold: true),
+                                  const TextWidget("Summary", size: 16, bold: true),
                                   MyAnimatedFlipCounter(
                                     duration: const Duration(milliseconds: 500),
                                     value: double.parse(cartController.formattedTotalPrice),
@@ -337,7 +326,13 @@ class _FAndBComboState extends State<FAndBCombo> {
                             ],
                           ),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              var selectedItems = cartItem.where((product) => logic.getProductQuantity(product) > 0).map((product) {
+                                product.quantity = logic.getProductQuantity(product);
+                                return product;
+                              }).toList();
+                              AppRoute.route.push(context, FBCartDetail(selectedItems: selectedItems));
+                            },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.red,
                             ),

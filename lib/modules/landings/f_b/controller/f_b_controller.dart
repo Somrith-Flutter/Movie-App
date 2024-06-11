@@ -7,9 +7,9 @@ class FBController extends GetxController{
   FBController({required this.repository});
   final FBRepository repository;
 
-  final Map<Product, int> cartItems = {};
+  final Map<CartModel, int> cartItems = {};
 
-  void addItem(Product product) {
+  void addItem(CartModel product) {
     if (cartItems.containsKey(product)) {
       cartItems[product] = cartItems[product]! + 1;
       update();
@@ -19,7 +19,7 @@ class FBController extends GetxController{
     }
   }
 
-  void removeItem(Product product) {
+  void removeItem(CartModel product) {
     if (cartItems.containsKey(product) && cartItems[product]! > 1) {
       cartItems[product] = cartItems[product]! - 1;
       update();
@@ -29,7 +29,7 @@ class FBController extends GetxController{
     }
   }
 
-  int getProductQuantity(Product product) {
+  int getProductQuantity(CartModel product) {
     return cartItems[product]?.toInt() ?? 0;
   }
 
