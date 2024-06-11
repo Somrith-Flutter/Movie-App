@@ -33,8 +33,17 @@ class OffersView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.redAccent,
+        centerTitle: false,
         title: Text(S.of(context).offer),
+        flexibleSpace: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.red, Colors.black],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
+            ),
       ),
       backgroundColor: Colors.black87,
       body: SingleChildScrollView(
