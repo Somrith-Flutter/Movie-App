@@ -1,17 +1,21 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/modules/landings/f_b/controller/f_b_controller.dart';
+import 'package:legend_cinema/modules/landings/f_b/model/card_model.dart';
 import 'package:legend_cinema/modules/landings/f_b/repository/f_b_repository.dart';
-import '../../../../widgets/animated_flipcounter_box.dart';
-import '../../../../widgets/back_widget.dart';
-import '../../../../widgets/text_widget.dart';
-import '../model/card_model.dart';
+import 'package:legend_cinema/modules/landings/f_b/widgets/f_b_payment.dart';
+import 'package:legend_cinema/widgets/animated_flipcounter_box.dart';
+import 'package:legend_cinema/widgets/back_widget.dart';
+import 'package:legend_cinema/widgets/text_widget.dart';
 
 class FBCartDetail extends StatelessWidget {
   final List<CartModel> selectedItems;
 
-  const FBCartDetail({super.key, required this.selectedItems});
+  final String selectedCinema;
+
+  const FBCartDetail({super.key, required this.selectedItems, required this.selectedCinema});
 
   @override
   Widget build(BuildContext context) {
@@ -71,9 +75,9 @@ class FBCartDetail extends StatelessWidget {
                                   color: Colors.white70.withOpacity(0.1),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
-                                child: const Center(
+                                child:  Center(
                                   child: TextWidget(
-                                    "Legend Premium Exchange Square",
+                                    selectedCinema,
                                     size: 20,
                                     bold: true,
                                   ),
@@ -304,7 +308,10 @@ class FBCartDetail extends StatelessWidget {
                     ),
                   ),
                   GestureDetector(
-                    onTap: (){},
+                    onTap: (){
+                      double totalPrice = double.parse(cartController.formattedTotalPrice);
+                      AppRoute.route.push(context, FBPayment(totalPrice: totalPrice,));
+                    },
                     child: Padding(
                       padding: const EdgeInsets.all(16),
                       child: Expanded(

@@ -24,14 +24,463 @@ class _FAndBComboState extends State<FAndBCombo> {
   String selectedCinema = "Legend Premium Exchange Square";
 
   final Map<String, List<CartModel>> cartItemsByCinema = {
-    "Legend Premium Exchange Square": [
-      CartModel(title: 'Combo 1', price: 5.0, imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(title: 'Combo 2', price: 4.50, imageUrl: 'assets/images/f&b.jpeg'),
-    ],
     "Legend Eden Garden": [
-      CartModel(title: 'Combo 3', price: 4.80, imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(title: 'Combo 4', price: 5.50, imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 1',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 2',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 3',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 4',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 5',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 6',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 7',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 8',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
     ],
+    "Legend Toul Kork": [
+      CartModel(
+          title: 'Combo 1',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 2',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 3',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 4',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 5',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 6',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 7',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 8',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+    ],
+    "Legend Premium Exchange Square": [
+      CartModel(
+          title: 'Combo 1',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 2',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 3',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 4',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 5',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 6',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 7',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 8',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+    ],
+    "Legend Olympia": [
+      CartModel(
+          title: 'Combo 1',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 2',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 3',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 4',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 5',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 6',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 7',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 8',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+    ],
+    "Legend SenSok": [
+      CartModel(
+          title: 'Combo 1',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 2',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 3',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 4',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 5',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 6',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 7',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 8',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+    ],
+    "Legend  Noro Mall": [
+      CartModel(
+          title: 'Combo 1',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 2',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 3',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 4',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 5',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 6',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 7',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 8',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+    ],
+    "Legend Midtown Mall": [
+      CartModel(
+          title: 'Combo 1',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 2',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 3',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 4',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 5',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 6',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 7',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 8',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+    ],
+    "Legend Meanchey": [
+      CartModel(
+          title: 'Combo 1',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 2',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 3',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 4',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 5',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 6',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 7',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 8',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+    ],
+    "Legend Cinema 271 Mega Mall": [
+      CartModel(
+          title: 'Combo 1',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 2',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 3',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 4',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 5',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 6',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 7',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 8',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+    ],
+    "Legend K Mall": [
+      CartModel(
+          title: 'Combo 1',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 2',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 3',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 4',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 5',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 6',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 7',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 8',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+    ],
+    "Legend Cinema Sihanoukville": [
+      CartModel(
+          title: 'Combo 1',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 2',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 3',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 4',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 5',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 6',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 7',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 8',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+    ],
+    "Legend Siem Reap": [
+      CartModel(
+          title: 'Combo 1',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 2',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 3',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 4',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 5',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 6',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+      CartModel(
+          title: 'Combo 7',
+          price: 5.0,
+          imageUrl: 'assets/images/f&b.jpeg'),
+      CartModel(
+          title: 'Combo 8',
+          price: 4.50,
+          imageUrl: 'assets/images/f&b.jpeg'
+      ),
+    ],
+
   };
 
   List<CartModel> get cartItems => cartItemsByCinema[selectedCinema] ?? [];
@@ -97,9 +546,11 @@ class _FAndBComboState extends State<FAndBCombo> {
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       TextWidget(
                                         selectedCinema,
@@ -124,7 +575,8 @@ class _FAndBComboState extends State<FAndBCombo> {
                         itemBuilder: (context, index) {
                           var product = cartItems[index];
                           return Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 8),
                             child: SizedBox(
                               height: 130,
                               child: Card(
@@ -132,13 +584,15 @@ class _FAndBComboState extends State<FAndBCombo> {
                                 elevation: 2,
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.white.withOpacity(0.8)),
+                                    border: Border.all(
+                                        color: Colors.white.withOpacity(0.8)),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 3),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Padding(
                                           padding: const EdgeInsets.all(8.0),
@@ -146,9 +600,11 @@ class _FAndBComboState extends State<FAndBCombo> {
                                             width: 100,
                                             height: 100,
                                             decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(5),
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
                                               image: DecorationImage(
-                                                image: AssetImage(product.imageUrl),
+                                                image: AssetImage(
+                                                    product.imageUrl),
                                                 fit: BoxFit.cover,
                                               ),
                                             ),
@@ -159,14 +615,18 @@ class _FAndBComboState extends State<FAndBCombo> {
                                           child: Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 TextWidget(
                                                   product.title,
                                                   size: 17,
                                                   bold: true,
-                                                  overflow: TextOverflow.ellipsis,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
                                                 ),
                                                 TextWidget(
                                                   "\$${product.price}",
@@ -182,9 +642,14 @@ class _FAndBComboState extends State<FAndBCombo> {
                                           alignment: Alignment.bottomRight,
                                           child: Row(
                                             children: [
-                                              if (logic.getProductQuantity(product) > 0)
+                                              if (logic.getProductQuantity(
+                                                      product) >
+                                                  0)
                                                 Container(
-                                                  margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                                                  margin: const EdgeInsets
+                                                      .symmetric(
+                                                      horizontal: 8,
+                                                      vertical: 8),
                                                   decoration: BoxDecoration(
                                                     shape: BoxShape.circle,
                                                     color: Colors.red[600],
@@ -199,21 +664,28 @@ class _FAndBComboState extends State<FAndBCombo> {
                                                     ),
                                                   ),
                                                 ),
-                                              if (logic.getProductQuantity(product) > 0)
+                                              if (logic.getProductQuantity(
+                                                      product) >
+                                                  0)
                                                 TextWidget(
                                                   "${logic.getProductQuantity(product)}",
                                                   size: 20,
                                                   bold: true,
                                                 ),
                                               Container(
-                                                margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                                                margin:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8,
+                                                        vertical: 8),
                                                 decoration: BoxDecoration(
                                                   shape: BoxShape.circle,
                                                   color: Colors.red[600],
                                                 ),
                                                 child: GestureDetector(
                                                   onTap: () {
-                                                    Future.delayed(const Duration(seconds: 2));
+                                                    Future.delayed(
+                                                        const Duration(
+                                                            seconds: 2));
                                                     logic.addItem(product);
                                                   },
                                                   child: const Icon(
@@ -251,7 +723,8 @@ class _FAndBComboState extends State<FAndBCombo> {
                               Container(
                                 width: 70,
                                 decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.white, width: 3),
+                                  border:
+                                      Border.all(color: Colors.white, width: 3),
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                                 child: TextWidget(
@@ -266,10 +739,12 @@ class _FAndBComboState extends State<FAndBCombo> {
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const TextWidget("Summary", size: 16, bold: true),
+                                  const TextWidget("Summary",
+                                      size: 16, bold: true),
                                   MyAnimatedFlipCounter(
                                     duration: const Duration(milliseconds: 500),
-                                    value: double.parse(cartController.formattedTotalPrice),
+                                    value: double.parse(
+                                        cartController.formattedTotalPrice),
                                     textStyle: const TextStyle(fontSize: 18),
                                     prefix: '\$',
                                   ),
@@ -279,16 +754,22 @@ class _FAndBComboState extends State<FAndBCombo> {
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              var selectedItems = cartItems.where((product) => logic.getProductQuantity(product) > 0).map((product) {
-                                product.quantity = logic.getProductQuantity(product);
+                              var selectedItems = cartItems
+                                  .where((product) =>
+                                      logic.getProductQuantity(product) > 0)
+                                  .map((product) {
+                                product.quantity =
+                                    logic.getProductQuantity(product);
                                 return product;
                               }).toList();
-                              AppRoute.route.push(context, FBCartDetail(selectedItems: selectedItems));
+                              AppRoute.route.push(context,
+                                  FBCartDetail(selectedItems: selectedItems,selectedCinema: selectedCinema));
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.red,
                             ),
-                            child: const TextWidget("Continue", size: 16, bold: true),
+                            child: const TextWidget("Continue",
+                                size: 16, bold: true),
                           ),
                         ],
                       ),
@@ -326,7 +807,8 @@ class _FAndBComboState extends State<FAndBCombo> {
                       child: Container(
                         padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white.withOpacity(0.3), width: 2),
+                          border: Border.all(
+                              color: Colors.white.withOpacity(0.3), width: 2),
                           shape: BoxShape.circle,
                         ),
                         child: const Icon(
@@ -358,13 +840,15 @@ class _FAndBComboState extends State<FAndBCombo> {
                           InkWell(
                             onTap: () {
                               setState(() {
-                                selectedCinema = cinemaList[index]["title"] ?? "";
+                                selectedCinema =
+                                    cinemaList[index]["title"] ?? "";
                               });
                               Navigator.pop(context);
                             },
                             child: Row(
                               children: [
-                                const Icon(Icons.location_on, color: Colors.red),
+                                const Icon(Icons.location_on,
+                                    color: Colors.red),
                                 const SizedBox(width: 8),
                                 TextWidget(
                                   cinemaList[index]["title"] ?? "",
@@ -374,7 +858,9 @@ class _FAndBComboState extends State<FAndBCombo> {
                               ],
                             ),
                           ),
-                          Divider(color: Colors.white.withOpacity(0.3), height: 0.5),
+                          Divider(
+                              color: Colors.white.withOpacity(0.3),
+                              height: 0.5),
                         ],
                       ),
                     );
