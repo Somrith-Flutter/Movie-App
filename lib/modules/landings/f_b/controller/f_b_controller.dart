@@ -29,6 +29,11 @@ class FBController extends GetxController{
     }
   }
 
+  void clearCart() {
+    cartItems.clear();
+    update();
+  }
+
   int getProductQuantity(CartModel product) {
     return cartItems[product]?.toInt() ?? 0;
   }

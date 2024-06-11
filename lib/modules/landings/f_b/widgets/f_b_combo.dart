@@ -19,6 +19,7 @@ class FAndBCombo extends StatefulWidget {
   State<FAndBCombo> createState() => _FAndBComboState();
 }
 
+
 class _FAndBComboState extends State<FAndBCombo> {
   var cartController = Get.put(FBController(repository: FBRepository()));
   String selectedCinema = "Legend Premium Exchange Square";
@@ -484,6 +485,17 @@ class _FAndBComboState extends State<FAndBCombo> {
   };
 
   List<CartModel> get cartItems => cartItemsByCinema[selectedCinema] ?? [];
+  @override
+  void initState() {
+    super.initState();
+    cartController = Get.put(FBController(repository: FBRepository()));
+  }
+
+  @override
+  void dispose() {
+    cartController.clearCart(); // Clear the cart when the widget is disposed
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

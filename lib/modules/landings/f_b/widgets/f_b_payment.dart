@@ -1,19 +1,27 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get/get.dart';
+import 'package:legend_cinema/config/routes/app_route.dart';
+import 'package:legend_cinema/modules/landings/f_b/controller/f_b_controller.dart';
+import 'package:legend_cinema/modules/landings/f_b/repository/f_b_repository.dart';
+import 'package:legend_cinema/modules/landings/f_b/view/f_b_view.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
 class FBPayment extends StatefulWidget {
-  const FBPayment({super.key, required this.totalPrice});
-  final double totalPrice;
+   FBPayment({super.key, required this.totalPrice});
+  double totalPrice;
 
   @override
   State<FBPayment> createState() => _FBPaymentState();
 }
 
 class _FBPaymentState extends State<FBPayment> {
+  var cartController = Get.put(FBController(repository: FBRepository()));
   String _selectedPaymentMethod = 'KHQR';
+
 
   @override
   Widget build(BuildContext context) {
@@ -256,7 +264,15 @@ class _FBPaymentState extends State<FBPayment> {
                 ),
               ),
               GestureDetector(
-                onTap: (){
+                onTap: () async {
+                  EasyLoading.show(status: 'loading...');
+                  await Future.delayed(const Duration(seconds: 1));
+                  EasyLoading.dismiss(); // Hide the loading indicator
+                  EasyLoading.showSuccess('Payment success!');
+                  setState(() {
+                    cartController.cartItems.clear();
+                  });
+                  AppRoute.route.push(context, const FBView());
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(16),

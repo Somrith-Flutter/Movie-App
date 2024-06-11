@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:legend_cinema/config/app_controller.dart';
 import 'package:legend_cinema/config/themes/app_theme.dart';
@@ -13,19 +14,20 @@ class LegendCinemaApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: AppConstant.appName,
-            theme: darkTheme(const AppThemeOptions()),
-            darkTheme: AppConstant.dark,
-            themeMode: ThemeMode.dark,
-            initialBinding: AppController(),
-            supportedLocales: S.delegate.supportedLocales,
-            localizationsDelegates: AppConstant.delegate,
-            fallbackLocale: const Locale('km', 'KH'),
-            home: const SplashScreen(),
-          );
-        }
-      }
+      debugShowCheckedModeBanner: false,
+      title: AppConstant.appName,
+      theme: darkTheme(const AppThemeOptions()),
+      darkTheme: AppConstant.dark,
+      themeMode: ThemeMode.dark,
+      initialBinding: AppController(),
+      supportedLocales: S.delegate.supportedLocales,
+      localizationsDelegates: AppConstant.delegate,
+      fallbackLocale: const Locale('km', 'KH'),
+      home: const SplashScreen(),
+      builder: EasyLoading.init(),
+    );
+  }
+}
 
 // class LegendCinemaApp extends StatelessWidget {
 //   @override
@@ -62,8 +64,3 @@ class LegendCinemaApp extends StatelessWidget {
 //     );
 //   }
 // }
-
-
-
-
-
