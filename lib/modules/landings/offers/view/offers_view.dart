@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:legend_cinema/config/themes/app_color.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
@@ -38,7 +39,7 @@ class OffersView extends StatelessWidget {
         flexibleSpace: Container(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Colors.red, Colors.black],
+                  colors: AppColor.appbarColor,
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),
