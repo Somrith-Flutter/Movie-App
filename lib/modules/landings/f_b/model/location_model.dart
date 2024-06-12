@@ -10,8 +10,8 @@ class LocationModel{
     this.image,
   });
 
-  final String? id;
-  final String? name;
+  final int? id;
+  late final String? name;
   final String? image;
 
   factory LocationModel.fromJson(Map<String, dynamic> json) =>

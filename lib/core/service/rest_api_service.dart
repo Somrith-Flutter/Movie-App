@@ -44,6 +44,15 @@ class RestApiService {
       throw Exception('Failed to load data: ${response.statusCode}');
     }
   }
+
+  Future<String> postBody(String endpoint, Map<String, dynamic> data) async {
+    final response = await http.post(
+      Uri.parse('${AppConstant.baseIosUrl}/$endpoint'),
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: data,
+    );
+    return _processResponse(response);
+  }
 }
 
 

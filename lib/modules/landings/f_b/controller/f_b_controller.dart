@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:legend_cinema/constants/api_path.dart';
 import 'package:legend_cinema/modules/landings/f_b/model/card_model.dart';
+import 'package:legend_cinema/modules/landings/f_b/model/f_b_model.dart';
 import 'package:legend_cinema/modules/landings/f_b/model/location_model.dart';
 import 'package:legend_cinema/modules/landings/f_b/repository/f_b_repository.dart';
 
@@ -64,6 +68,21 @@ class FBController extends GetxController{
       var locations = await repository.getLocationList();
       location.value = locations;
       debugPrint('$locations');
+    } catch (e) {
+      errorMessage.value = e.toString();
+    } finally {
+      isLoading(false);
+    }
+  }
+
+   var detailedData = <FBModel>[].obs;
+
+  Future<void> getDetailedData(String locationType) async {
+    try {
+      isLoading(true);
+      final response = await repository.getDetailedData(ApiPath.locationlistdata, locationType);
+      // Update the detailedData variable with the fetched data
+      detailedData.value = response as List<FBModel>;
     } catch (e) {
       errorMessage.value = e.toString();
     } finally {

@@ -5,6 +5,7 @@ import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/modules/auth/view/auth_page.dart';
 import 'package:legend_cinema/modules/landings/more/controller/more_controller.dart';
+import 'package:legend_cinema/modules/landings/more/widgets/contact_widget.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/language_widget.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/list_tile_item.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/notification_widget.dart';
@@ -155,6 +156,7 @@ class _MoreViewState extends State<MoreView> {
               title: S.of(context).contact_us,
               icon: Icons.call,
               trailing: true,
+              onTap: () => AppRoute().push(context, const ContactWidget()),
             ),
             ListTileItem(
               title: S.of(context).privacy_policy,
