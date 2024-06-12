@@ -24,7 +24,8 @@ class AuthController extends GetxController implements GetxService{
     try{
       final data = repository.loginRepo(
       type: type, 
-      email: email.text, 
+      email: email.text,
+      phone: number.text,
       password: password.text);
 
       if(data.toString().isNotEmpty){

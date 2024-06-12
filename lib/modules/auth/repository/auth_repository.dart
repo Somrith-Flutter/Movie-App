@@ -6,19 +6,17 @@ import 'package:legend_cinema/constants/api_path.dart';
 class AuthRepository {
   Future<String> loginRepo({
     required String type,
-    required String email,
+    required String? email,
+    required String? phone,
     required String password}) async {
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request(
         'POST', Uri.parse('${ApiPath.domainKey}/api/auth/login/$type'));
     request.body =
         json.encode({
-          "email": email, 
+          type == "email" ? "email" : "phone" : type == "email" ? email : phone, 
           "password": password});
     request.headers.addAll(headers);
-
-    debugPrint(email.toString());
-    debugPrint(password.toString());
 
     http.StreamedResponse response = await request.send();
     var body = await response.stream.bytesToString();

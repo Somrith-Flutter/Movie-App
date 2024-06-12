@@ -490,6 +490,15 @@ class S {
     );
   }
 
+  String get continous {
+    return Intl.message(
+      'Continous',
+      name: 'continous',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Address`
   String get address {
     return Intl.message(
