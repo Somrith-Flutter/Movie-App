@@ -11,8 +11,6 @@ import 'package:legend_cinema/modules/landings/more/controller/more_controller.d
 import 'package:legend_cinema/modules/landings/more/repository/more_repository.dart';
 import 'package:legend_cinema/modules/landings/offers/controller/offers_controller.dart';
 import 'package:legend_cinema/modules/landings/offers/repository/offers_repository.dart';
-import 'package:legend_cinema/modules/news_and_activity/controller/news_and_activity_controller.dart';
-import 'package:legend_cinema/modules/news_and_activity/repository/news_and_activity_repository.dart';
 
 class AppController extends Bindings {
   @override
@@ -34,9 +32,6 @@ class AppController extends Bindings {
     ));
     Get.lazyPut(() => AuthController(
       repository: AuthRepository()
-    ));
-    Get.lazyPut(() => NewsAndActivityController(
-      repository: NewsAndActivityRepository()
     ));
   }
 }

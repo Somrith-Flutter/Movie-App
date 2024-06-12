@@ -8,8 +8,8 @@ import 'package:legend_cinema/modules/landings/more/controller/more_controller.d
 import 'package:legend_cinema/modules/landings/more/widgets/contact_widget.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/language_widget.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/list_tile_item.dart';
+import 'package:legend_cinema/modules/landings/more/widgets/news_widget.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/notification_widget.dart';
-import 'package:legend_cinema/modules/news_and_activity/view/news_and_activity_page.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
@@ -135,7 +135,7 @@ class _MoreViewState extends State<MoreView> {
               title: S.of(context).news_activity,
               icon: Icons.local_activity,
               trailing: true,
-              onTap: () => AppRoute().push(context, const NewsAndActivityPage()),
+              onTap: () => AppRoute().push(context, const NewsWidget()),
             ),
             const Gap(8),
             TextWidget(S.of(context).notification),

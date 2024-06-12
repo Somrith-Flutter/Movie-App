@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
-import 'package:legend_cinema/modules/news_and_activity/controller/news_and_activity_controller.dart';
-import 'package:legend_cinema/modules/news_and_activity/repository/news_and_activity_repository.dart';
+import 'package:legend_cinema/modules/landings/more/controller/more_controller.dart';
+import 'package:legend_cinema/modules/landings/more/repository/more_repository.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/movie_details_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
-class NewsAndActivityView extends StatelessWidget {
-  const NewsAndActivityView({super.key});
+class NewsWidget extends StatelessWidget {
+  const NewsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(NewsAndActivityController(repository: NewsAndActivityRepository()));
+    final controller = Get.put(MoreController(repository: MoreRepository()));
     return Scaffold(
       appBar: AppBar(
         leading: const BackWidgetScreen(),

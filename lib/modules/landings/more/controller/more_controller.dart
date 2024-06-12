@@ -1,6 +1,8 @@
 import 'dart:ui';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
+import 'package:legend_cinema/modules/landings/more/model/news_model.dart';
 import 'package:legend_cinema/modules/landings/more/repository/more_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -46,6 +48,7 @@ class MoreController extends GetxController {
   void onInit() {
     super.onInit();
     _loadSavedLocale();
+    fetchNewsAndActivities();
   }
 
   var currentLocale = const Locale(AppConstant.en, AppConstant.us).obs;
@@ -69,6 +72,23 @@ class MoreController extends GetxController {
     String? countryCode = prefs.getString('countryCode');
     if (languageCode != null && countryCode != null) {
       locale.value = Locale(languageCode, countryCode);
+    }
+  }
+
+  var newsAndActivities = <NewsModel>[].obs;
+  var isLoading = true.obs;
+  var errorMessage = ''.obs;
+
+  Future<void> fetchNewsAndActivities() async {
+    try {
+      isLoading(true);
+      var items = await repository.getNewsList();
+      newsAndActivities.value = items;
+      debugPrint('$items');
+    } catch (e) {
+      errorMessage.value = e.toString();
+    } finally {
+      isLoading(false);
     }
   }
 }
