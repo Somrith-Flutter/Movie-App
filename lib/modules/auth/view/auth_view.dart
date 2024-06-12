@@ -22,6 +22,8 @@ class _AuthViewState extends State<AuthView> {
   final auth = Get.put(AuthController(repository: AuthRepository()));
   final _formKey = GlobalKey<FormState>();
   bool _isToggle = true;
+  bool _isContinous = false;
+  late PageController _pageController;
 
   String? _validatePhoneNumber(String? value) {
     if (value == null || value.isEmpty) {
@@ -50,6 +52,29 @@ class _AuthViewState extends State<AuthView> {
     setState(() {
       _isToggle = !_isToggle;
     });
+  }
+
+  void _onTabTap(bool isPhoneSelected) {
+    setState(() {
+      isPhoneTabSelected = !isPhoneSelected;
+      _pageController.animateToPage(
+        isPhoneTabSelected ? 0 : 1,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    });
+  }
+
+  @override
+  void initState() {
+    _pageController = PageController(initialPage: 0);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -85,7 +110,7 @@ class _AuthViewState extends State<AuthView> {
                           child: GestureDetector(
                             onTap: () {
                               setState(() {
-                                isPhoneTabSelected = false;
+                                _onTabTap(true);
                               });
                             },
                             child: Container(
@@ -113,9 +138,7 @@ class _AuthViewState extends State<AuthView> {
                         Expanded(
                           child: GestureDetector(
                             onTap: () {
-                              setState(() {
-                                isPhoneTabSelected = true;
-                              });
+                              _onTabTap(false);
                             },
                             child: Container(
                               decoration: BoxDecoration(
@@ -142,49 +165,125 @@ class _AuthViewState extends State<AuthView> {
                       ],
                     ),
                     const SizedBox(height: 16),
-                    isPhoneTabSelected
-                        ? buildPhoneNumberInput()
-                        : buildEmailInput(),
-                    const Spacer(),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              if (!isPhoneTabSelected) {
-                                try {
-                                  if (_formKey.currentState?.validate() ??
-                                      false) {
-                                    await logic.loginController(type: "email");
+                    Expanded(
+                      child: PageView(
+                        controller: _pageController,
+                        onPageChanged: (index) {
+                          setState(() {
+                            isPhoneTabSelected = index == 0;
+                          });
+                        },
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          Column(
+                            children: [
+                              buildPhoneNumberInput(),
+                              const Spacer(),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: ElevatedButton(
+                                      onPressed: () async {
+                                        try {
+                                          if (_formKey.currentState
+                                                  ?.validate() ??
+                                              false) {
+                                            if(logic.password.text.isEmpty){
+                                              _isContinous = true;
+                                              setState(() {});
+                                              return;
+                                            }
 
-                                    if (logic.status ==
-                                        BaseStatusEnum.success) {
-                                      await EasyLoading.dismiss();
-                                      Future.delayed(
-                                          const Duration(microseconds: 100));
-                                      logic.clear();
-                                      EasyLoading.showSuccess('Success!');
-                                    } else {
-                                      EasyLoading.show(status: 'Logging in...');
-                                    }
-                                  }
-                                } catch (_) {}
-                              }
-                            },
-                            style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 24, vertical: 12),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(24),
+                                            await logic.loginController(
+                                                type: "phone");
+
+                                            if (logic.status ==
+                                                BaseStatusEnum.success) {
+                                              await EasyLoading.dismiss();
+                                              Future.delayed(const Duration(
+                                                  microseconds: 100));
+                                              logic.clear();
+                                              EasyLoading.showSuccess(
+                                                  'Success!');
+                                            } else {
+                                              EasyLoading.show(
+                                                  status: 'Logging in...');
+                                            }
+                                          }
+                                        } catch (_) {}
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 24, vertical: 12),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(24),
+                                        ),
+                                      ),
+                                      child: !_isContinous ? TextWidget(
+                                        S.of(context).continous,
+                                        size: 16,
+                                      ) : TextWidget(
+                                        S.of(context).login,
+                                        size: 16,
+                                      )
+                                    )
+                                  ),
+                                ],
                               ),
-                            ),
-                            child: TextWidget(
-                              S.of(context).login,
-                              size: 16,
-                            ),
+                            ],
                           ),
-                        ),
-                      ],
+                          Column(
+                            children: [
+                              buildEmailInput(),
+                              const Spacer(),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: ElevatedButton(
+                                      onPressed: () async {
+                                        try {
+                                          if (_formKey.currentState
+                                                  ?.validate() ??
+                                              false) {
+                                            await logic.loginController(
+                                                type: "email");
+
+                                            if (logic.status ==
+                                                BaseStatusEnum.success) {
+                                              await EasyLoading.dismiss();
+                                              Future.delayed(const Duration(
+                                                  microseconds: 100));
+                                              logic.clear();
+                                              EasyLoading.showSuccess(
+                                                  'Success!');
+                                            } else {
+                                              EasyLoading.show(
+                                                  status: 'Logging in...');
+                                            }
+                                          }
+                                        } catch (_) {}
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 24, vertical: 12),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(24),
+                                        ),
+                                      ),
+                                      child: TextWidget(
+                                        S.of(context).login,
+                                        size: 16,
+                                      )
+                                    )
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -197,44 +296,87 @@ class _AuthViewState extends State<AuthView> {
   }
 
   Widget buildPhoneNumberInput() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Row(
-        children: [
-          Image.asset(
-            AssetPath.flagkhmer,
-            width: 24,
-            height: 24,
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey),
+            borderRadius: BorderRadius.circular(8),
           ),
-          const Gap(8),
-          const TextWidget(
-            '+855',
-            size: 16,
-          ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: TextFormField(
-              keyboardType: TextInputType.phone,
-              validator: (value) => _validatePhoneNumber(value),
-              controller: auth.number,
-              decoration: InputDecoration(
-                hintText: S.of(context).phone_number,
-                hintStyle: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontFamily: 'Khmer',
-                ),
-                border: InputBorder.none,
+          child: Row(
+            children: [
+              Image.asset(
+                AssetPath.flagkhmer,
+                width: 24,
+                height: 24,
               ),
-              style: const TextStyle(color: Colors.white),
+              const Gap(8),
+              const TextWidget(
+                '+855',
+                size: 16,
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: TextFormField(
+                  keyboardType: TextInputType.phone,
+                  validator: (value) => _validatePhoneNumber(value),
+                  controller: auth.number,
+                  decoration: InputDecoration(
+                    hintText: S.of(context).phone_number,
+                    hintStyle: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontFamily: 'Khmer',
+                    ),
+                    border: InputBorder.none,
+                  ),
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ),
+            ],
+          ),
+        ),
+        const Gap(18),
+        Visibility(
+          visible: _isContinous,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              children: [
+                const Icon(Icons.lock, color: Colors.white),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: TextFormField(
+                    obscureText: _isToggle ? true : false,
+                    validator: (value) => _passwordValidated(value),
+                    controller: auth.password,
+                    decoration: InputDecoration(
+                      hintText: S.of(context).password,
+                      hintStyle: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontFamily: 'Khmer',
+                      ),
+                      border: InputBorder.none,
+                    ),
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ),
+                GestureDetector(
+                    onTap: () => _toggleText(),
+                    child: Icon(
+                        _isToggle ? Icons.visibility_off : Icons.visibility,
+                        color: Colors.white)),
+              ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
