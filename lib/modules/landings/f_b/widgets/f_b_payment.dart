@@ -44,7 +44,7 @@ class _FBPaymentState extends State<FBPayment> {
         Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            leading: const BackWidgetScreen(),
+            leading: const BackWidget(),
             flexibleSpace: Container(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(

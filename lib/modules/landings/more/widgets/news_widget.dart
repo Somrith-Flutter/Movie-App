@@ -18,7 +18,7 @@ class NewsWidget extends StatelessWidget {
     final controller = Get.put(MoreController(repository: MoreRepository()));
     return Scaffold(
       appBar: AppBar(
-        leading: const BackWidgetScreen(),
+        leading: const BackWidget(),
         centerTitle: true,
         title: Text(S.of(context).news_activity),
         flexibleSpace: Container(

@@ -62,7 +62,7 @@ class _AuthViewState extends State<AuthView> {
         builder: (logic) {
           return Scaffold(
             appBar: AppBar(
-              leading: const BackWidgetScreen(),
+              leading: const BackWidget(),
             ),
             body: Padding(
               padding: const EdgeInsets.all(16.0),

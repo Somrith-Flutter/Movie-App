@@ -390,7 +390,7 @@ class _FAndBComboState extends State<FAndBCombo> {
         Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            leading: const BackWidgetScreen(),
+            leading: const BackWidget(),
             title: TextWidget(S.of(context).fb, size: 20, bold: true),
             centerTitle: true,
             flexibleSpace: Container(

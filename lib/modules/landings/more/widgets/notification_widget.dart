@@ -19,7 +19,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const BackWidgetScreen(),
+        leading: const BackWidget(),
         title: TextWidget(S.of(context).notification),
         centerTitle: true,
         flexibleSpace: Container(

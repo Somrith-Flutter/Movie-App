@@ -5,6 +5,7 @@ import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/modules/landings/more/controller/more_controller.dart';
 import 'package:legend_cinema/shared/share_preference.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
+import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
 class LanguageWidget extends StatefulWidget {
@@ -40,6 +41,7 @@ class _LanguageWidgetState extends State<LanguageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: const BackWidget(),
         title: Text(S.of(context).language),
       ),
       body: Column(

@@ -9,7 +9,7 @@ import 'package:legend_cinema/modules/landings/more/controller/more_controller.d
 import 'package:legend_cinema/modules/landings/more/widgets/about_us.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/contact_widget.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/language_widget.dart';
-import 'package:legend_cinema/modules/landings/more/widgets/list_tile_item.dart';
+import 'package:legend_cinema/widgets/list_tile_item.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/news_widget.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/notification_widget.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/privacy_policy.dart';
