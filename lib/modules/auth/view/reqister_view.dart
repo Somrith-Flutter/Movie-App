@@ -13,7 +13,7 @@ class Register extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          leading: const BackWidgetScreen(),
+          leading: const BackWidget(),
           flexibleSpace: Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(

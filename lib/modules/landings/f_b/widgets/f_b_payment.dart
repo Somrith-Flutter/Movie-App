@@ -10,6 +10,7 @@ import 'package:legend_cinema/modules/landings/f_b/view/f_b_view.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
+// ignore: must_be_immutable
 class FBPayment extends StatefulWidget {
    FBPayment({super.key, required this.totalPrice});
   double totalPrice;
