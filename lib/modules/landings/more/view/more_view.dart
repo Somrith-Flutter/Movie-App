@@ -5,11 +5,14 @@ import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/modules/auth/view/auth_page.dart';
 import 'package:legend_cinema/modules/landings/more/controller/more_controller.dart';
+import 'package:legend_cinema/modules/landings/more/widgets/about_us.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/contact_widget.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/language_widget.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/list_tile_item.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/news_widget.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/notification_widget.dart';
+import 'package:legend_cinema/modules/landings/more/widgets/privacy_policy.dart';
+import 'package:legend_cinema/modules/landings/more/widgets/term_condition.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
@@ -151,6 +154,7 @@ class _MoreViewState extends State<MoreView> {
               title: S.of(context).about_us,
               icon: Icons.info_outline_rounded,
               trailing: true,
+              onTap: () => AppRoute().push(context, const AboutUsWidget()),
             ),
             ListTileItem(
               title: S.of(context).contact_us,
@@ -162,11 +166,13 @@ class _MoreViewState extends State<MoreView> {
               title: S.of(context).privacy_policy,
               icon: Icons.policy,
               trailing: true,
+              onTap:() => AppRoute().push(context, const PrivacyPolicyWidget()),
             ),
             ListTileItem(
               title: S.of(context).term_condition,
               icon: Icons.person_2,
               trailing: true,
+              onTap: ()=> AppRoute().push(context, const TermConditionWidget()),
             ),
             // const ListTileItem(
             //   title: 'Logout',
