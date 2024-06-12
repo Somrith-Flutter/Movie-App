@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/modules/auth/view/auth_page.dart';
+import 'package:legend_cinema/modules/auth/view/reqister_view.dart';
 import 'package:legend_cinema/modules/landings/more/controller/more_controller.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/about_us.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/contact_widget.dart';
@@ -52,7 +53,7 @@ class _MoreViewState extends State<MoreView> {
                 const Gap(12),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: (){}, 
+                    onPressed: () => AppRoute().push(context, const Register()), 
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red
                     ),
