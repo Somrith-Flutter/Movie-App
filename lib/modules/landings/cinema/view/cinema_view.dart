@@ -59,7 +59,7 @@ class CinemaView extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => DetailScreen(
-                          imagePath: image[index],
+                          image: image[index],
                           title: titles[index],
                         ),
                       ),
