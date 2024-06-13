@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_icon_snackbar/flutter_icon_snackbar.dart';
-import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/core/enum/base_status_enum.dart';
 import 'package:legend_cinema/modules/auth/controller/auth_controller.dart';
 import 'package:legend_cinema/modules/auth/repository/auth_repository.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
-import 'package:legend_cinema/translation/generated/l10n.dart';
-import 'package:legend_cinema/widgets/text_widget.dart';
 
 class AuthView extends StatefulWidget {
   const AuthView({super.key});
@@ -35,21 +32,21 @@ class _AuthViewState extends State<AuthView> {
     return null;
   }
 
-  String? _emialValidated(String? value) {
+  String? _validateEmail(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter your email';
     }
     return null;
   }
 
-  String? _passwordValidated(String? value) {
+  String? _validatePassword(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter your password';
     }
     return null;
   }
 
-  void _toggleText() {
+  void _toggleTextVisibility() {
     setState(() {
       _isToggle = !_isToggle;
     });
@@ -57,7 +54,7 @@ class _AuthViewState extends State<AuthView> {
 
   void _onTabTap(bool isPhoneSelected) {
     setState(() {
-      isPhoneTabSelected = !isPhoneSelected;
+      isPhoneTabSelected = isPhoneSelected;
       _pageController.animateToPage(
         isPhoneTabSelected ? 0 : 1,
         duration: const Duration(milliseconds: 300),
@@ -95,25 +92,21 @@ class _AuthViewState extends State<AuthView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextWidget(
-                      S.of(context).login,
-                      size: 24,
+                    const Text(
+                      'Login',
+                      style: TextStyle(fontSize: 24),
                     ),
-                    const Gap(16),
-                    const TextWidget(
-                      'អាស័យដ្ឋានអ៊ីមែលរបស់អ្នក ឬលេខទូរស័ព្ទរបស់អ្នក',
-                      size: 16,
+                    const SizedBox(height: 16),
+                    const Text(
+                      'Enter your email or phone number',
+                      style: TextStyle(fontSize: 16),
                     ),
-                    const Gap(32),
+                    const SizedBox(height: 32),
                     Row(
                       children: [
                         Expanded(
                           child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                _onTabTap(true);
-                              });
-                            },
+                            onTap: () => _onTabTap(true),
                             child: Container(
                               decoration: BoxDecoration(
                                 color: isPhoneTabSelected
@@ -123,13 +116,13 @@ class _AuthViewState extends State<AuthView> {
                                     topLeft: Radius.circular(10),
                                     bottomLeft: Radius.circular(10)),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Padding(
                                   padding:
-                                      const EdgeInsets.symmetric(vertical: 12),
-                                  child: TextWidget(
-                                    S.of(context).email,
-                                    size: 16,
+                                      EdgeInsets.symmetric(vertical: 12),
+                                  child: Text(
+                                    'Phone',
+                                    style: TextStyle(fontSize: 16),
                                   ),
                                 ),
                               ),
@@ -138,9 +131,7 @@ class _AuthViewState extends State<AuthView> {
                         ),
                         Expanded(
                           child: GestureDetector(
-                            onTap: () {
-                              _onTabTap(false);
-                            },
+                            onTap: () => _onTabTap(false),
                             child: Container(
                               decoration: BoxDecoration(
                                 color: isPhoneTabSelected
@@ -150,13 +141,12 @@ class _AuthViewState extends State<AuthView> {
                                     topRight: Radius.circular(10),
                                     bottomRight: Radius.circular(10)),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 12),
-                                  child: TextWidget(
-                                    S.of(context).phone_number,
-                                    size: 16,
+                                  padding: EdgeInsets.symmetric(vertical: 12),
+                                  child: Text(
+                                    'Email',
+                                    style: TextStyle(fontSize: 16),
                                   ),
                                 ),
                               ),
@@ -183,69 +173,38 @@ class _AuthViewState extends State<AuthView> {
                               Row(
                                 children: [
                                   Expanded(
-                                      child: ElevatedButton(
-                                          onPressed: () async {
-                                            try {
-                                              if (_formKey.currentState
-                                                      ?.validate() ??
-                                                  false) {
-                                                if (logic
-                                                    .password.text.isEmpty) {
-                                                  _isContinous = true;
-                                                  setState(() {});
-                                                  return;
-                                                }
-
-                                                await logic.loginController(
-                                                    type: "phone");
-                                                if (logic.status ==
-                                                    BaseStatusEnum.failure) {
-                                                  IconSnackBar.show(
-                                                    context,
-                                                      snackBarType:
-                                                          SnackBarType.fail,
-                                                      label: 'Somthing went wrong!',
-                                                      snackBarStyle: const SnackBarStyle(labelTextStyle: TextStyle(color: Colors.white)));
-                                                  return;
-                                                }
-
-                                                if (logic.status ==
-                                                    BaseStatusEnum.success) {
-                                                  await EasyLoading.dismiss();
-                                                  Future.delayed(const Duration(
-                                                      microseconds: 100));
-                                                  logic.clear();
-                                                  EasyLoading.showSuccess(
-                                                      'Success!');
-                                                } else {
-                                                  EasyLoading.show(
-                                                      status: 'Logging in...');
-                                                }
-                                              }
-                                            } catch (_) {}
-                                          },
-                                          style: ElevatedButton.styleFrom(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 24, vertical: 12),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(24),
-                                            ),
-                                          ),
-                                          child: !_isContinous
-                                              ? TextWidget(
-                                                  S.of(context).continous,
-                                                  size: 16,
-                                                )
-                                              : TextWidget(
-                                                  S.of(context).login,
-                                                  size: 16,
-                                                ))),
+                                    child: ElevatedButton(
+                                      onPressed: () async {
+                                        try {
+                                          if (_formKey.currentState
+                                                  ?.validate() ??
+                                              false) {
+                                            if (logic.password.text.isEmpty) {
+                                              _isContinous = true;
+                                              setState(() {});
+                                              return;
+                                            }
+                                            await logic.loginController(
+                                                type: "phone");
+                                            if (logic.status ==
+                                                BaseStatusEnum.failure) {
+                                              IconSnackBar.show(
+                                                context,
+                                                snackBarType: SnackBarType.fail,
+                                                label: 'Something went wrong!',
+                                                snackBarStyle:
+                                                    const SnackBarStyle(
+                                                  labelTextStyle: TextStyle(
+                                                      color: Colors.white),
+                                                ),
+                                              );
+                                              return;
+                                            }
                                             if (logic.status ==
                                                 BaseStatusEnum.success) {
                                               await EasyLoading.dismiss();
                                               Future.delayed(const Duration(
-                                                  microseconds: 100));
+                                                  milliseconds: 100));
                                               logic.clear();
                                               EasyLoading.showSuccess(
                                                   'Success!');
@@ -264,14 +223,16 @@ class _AuthViewState extends State<AuthView> {
                                               BorderRadius.circular(24),
                                         ),
                                       ),
-                                      child: !_isContinous ? TextWidget(
-                                        S.of(context).continues,
-                                        size: 16,
-                                      ) : TextWidget(
-                                        S.of(context).login,
-                                        size: 16,
-                                      )
-                                    )
+                                      child: !_isContinous
+                                          ? const Text(
+                                              'Continue',
+                                              style: TextStyle(fontSize: 16),
+                                            )
+                                          : const Text(
+                                              'Login',
+                                              style: TextStyle(fontSize: 16),
+                                            ),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -284,53 +245,57 @@ class _AuthViewState extends State<AuthView> {
                               Row(
                                 children: [
                                   Expanded(
-                                      child: ElevatedButton(
-                                          onPressed: () async {
-                                            try {
-                                              if (_formKey.currentState
-                                                      ?.validate() ??
-                                                  false) {
-                                                await logic.loginController(
-                                                    type: "email");
-
-                                                if (logic.status ==
-                                                    BaseStatusEnum.failure) {
-                                                  IconSnackBar.show(
-                                                    context,
-                                                      snackBarType:
-                                                          SnackBarType.fail,
-                                                      label: 'Somthing went wrong!',
-                                                      snackBarStyle: const SnackBarStyle(labelTextStyle: TextStyle(color: Colors.white)));
-                                                  return;
-                                                }
-
-                                                if (logic.status ==
-                                                    BaseStatusEnum.success) {
-                                                  await EasyLoading.dismiss();
-                                                  Future.delayed(const Duration(
-                                                      microseconds: 100));
-                                                  logic.clear();
-                                                  EasyLoading.showSuccess(
-                                                      'Success!');
-                                                } else {
-                                                  EasyLoading.show(
-                                                      status: 'Logging in...');
-                                                }
-                                              }
-                                            } catch (_) {}
-                                          },
-                                          style: ElevatedButton.styleFrom(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 24, vertical: 12),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(24),
-                                            ),
-                                          ),
-                                          child: TextWidget(
-                                            S.of(context).login,
-                                            size: 16,
-                                          ))),
+                                    child: ElevatedButton(
+                                      onPressed: () async {
+                                        try {
+                                          if (_formKey.currentState
+                                                  ?.validate() ??
+                                              false) {
+                                            await logic.loginController(
+                                                type: "email");
+                                            if (logic.status ==
+                                                BaseStatusEnum.failure) {
+                                              IconSnackBar.show(
+                                                context,
+                                                snackBarType: SnackBarType.fail,
+                                                label: 'Something went wrong!',
+                                                snackBarStyle:
+                                                    const SnackBarStyle(
+                                                  labelTextStyle: TextStyle(
+                                                      color: Colors.white),
+                                                ),
+                                              );
+                                              return;
+                                            }
+                                            if (logic.status ==
+                                                BaseStatusEnum.success) {
+                                              await EasyLoading.dismiss();
+                                              Future.delayed(const Duration(
+                                                  milliseconds: 100));
+                                              logic.clear();
+                                              EasyLoading.showSuccess(
+                                                  'Success!');
+                                            } else {
+                                              EasyLoading.show(
+                                                  status: 'Logging in...');
+                                            }
+                                          }
+                                        } catch (_) {}
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 24, vertical: 12),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(24),
+                                        ),
+                                      ),
+                                      child: const Text(
+                                        'Login',
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ],
@@ -364,24 +329,21 @@ class _AuthViewState extends State<AuthView> {
                 width: 24,
                 height: 24,
               ),
-              const Gap(8),
-              const TextWidget(
+              const SizedBox(width: 8),
+              const Text(
                 '+855',
-                size: 16,
+                style: TextStyle(fontSize: 16),
               ),
               const SizedBox(width: 8),
               Expanded(
                 child: TextFormField(
                   keyboardType: TextInputType.phone,
-                  validator: (value) => _validatePhoneNumber(value),
+                  validator: _validatePhoneNumber,
                   controller: auth.number,
-                  decoration: InputDecoration(
-                    hintText: S.of(context).phone_number,
-                    hintStyle: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontFamily: 'Khmer',
-                    ),
+                  decoration: const InputDecoration(
+                    hintText: 'Phone number',
+                    hintStyle:
+                        TextStyle(color: Colors.white, fontSize: 16),
                     border: InputBorder.none,
                   ),
                   style: const TextStyle(color: Colors.white),
@@ -390,7 +352,7 @@ class _AuthViewState extends State<AuthView> {
             ],
           ),
         ),
-        const Gap(18),
+        const SizedBox(height: 18),
         Visibility(
           visible: _isContinous,
           child: Container(
@@ -405,26 +367,25 @@ class _AuthViewState extends State<AuthView> {
                 const SizedBox(width: 8),
                 Expanded(
                   child: TextFormField(
-                    obscureText: _isToggle ? true : false,
-                    validator: (value) => _passwordValidated(value),
+                    obscureText: _isToggle,
+                    validator: _validatePassword,
                     controller: auth.password,
-                    decoration: InputDecoration(
-                      hintText: S.of(context).password,
-                      hintStyle: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontFamily: 'Khmer',
-                      ),
+                    decoration: const InputDecoration(
+                      hintText: 'Password',
+                      hintStyle:
+                          TextStyle(color: Colors.white, fontSize: 16),
                       border: InputBorder.none,
                     ),
                     style: const TextStyle(color: Colors.white),
                   ),
                 ),
                 GestureDetector(
-                    onTap: () => _toggleText(),
-                    child: Icon(
-                        _isToggle ? Icons.visibility_off : Icons.visibility,
-                        color: Colors.white)),
+                  onTap: _toggleTextVisibility,
+                  child: Icon(
+                    _isToggle ? Icons.visibility_off : Icons.visibility,
+                    color: Colors.white,
+                  ),
+                ),
               ],
             ),
           ),
@@ -449,14 +410,11 @@ class _AuthViewState extends State<AuthView> {
               Expanded(
                 child: TextFormField(
                   controller: auth.email,
-                  validator: (value) => _emialValidated(value),
-                  decoration: InputDecoration(
-                    hintText: S.of(context).email,
-                    hintStyle: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontFamily: 'Khmer',
-                    ),
+                  validator: _validateEmail,
+                  decoration: const InputDecoration(
+                    hintText: 'Email',
+                    hintStyle:
+                        TextStyle(color: Colors.white, fontSize: 16),
                     border: InputBorder.none,
                   ),
                   style: const TextStyle(color: Colors.white),
@@ -465,7 +423,7 @@ class _AuthViewState extends State<AuthView> {
             ],
           ),
         ),
-        const Gap(18),
+        const SizedBox(height: 18),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           decoration: BoxDecoration(
@@ -478,26 +436,25 @@ class _AuthViewState extends State<AuthView> {
               const SizedBox(width: 8),
               Expanded(
                 child: TextFormField(
-                  obscureText: _isToggle ? true : false,
-                  validator: (value) => _passwordValidated(value),
+                  obscureText: _isToggle,
+                  validator: _validatePassword,
                   controller: auth.password,
-                  decoration: InputDecoration(
-                    hintText: S.of(context).password,
-                    hintStyle: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontFamily: 'Khmer',
-                    ),
+                  decoration: const InputDecoration(
+                    hintText: 'Password',
+                    hintStyle:
+                        TextStyle(color: Colors.white, fontSize: 16),
                     border: InputBorder.none,
                   ),
                   style: const TextStyle(color: Colors.white),
                 ),
               ),
               GestureDetector(
-                  onTap: () => _toggleText(),
-                  child: Icon(
-                      _isToggle ? Icons.visibility_off : Icons.visibility,
-                      color: Colors.white)),
+                onTap: _toggleTextVisibility,
+                child: Icon(
+                  _isToggle ? Icons.visibility_off : Icons.visibility,
+                  color: Colors.white,
+                ),
+              ),
             ],
           ),
         ),
