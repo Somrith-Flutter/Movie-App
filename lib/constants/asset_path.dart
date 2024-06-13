@@ -47,4 +47,18 @@ class AssetPath{
   static const String sensok = 'assets/images/sensok.jpg';
   static const String siemreap = 'assets/images/siemreap.jpg';
   static const String toulkork = 'assets/images/toulkork.jpg';
+
+  //==============Cinema location detail================
+  static const String megaMallDetail = 'assets/images/mega-mall-detail.png';
+  static const String sihanoukDetail = 'assets/images/sihanouk-detail.png';
+  static const String edenDetail = 'assets/images/eden-detail.png';
+  static const String kMallDetail = 'assets/images/k-mall-detail.png';
+  static const String meancheyDetail = 'assets/images/meanchey-detail.png';
+  static const String midTownDetail = 'assets/images/midtown-detail.png';
+  static const String noroMallDetail = 'assets/images/noro-mall-detail.png';
+  static const String olympiaDetail = 'assets/images/olympia-detail.jpeg';
+  static const String premiumDetail = 'assets/images/premium-detail.png';
+  static const String sensokDetail = 'assets/images/sensok-detail.jpeg';
+  static const String siemreapDetail = 'assets/images/siemreap-detail.png';
+  static const String toulkorkDetail = 'assets/images/toulkork-detail.png';
 }
