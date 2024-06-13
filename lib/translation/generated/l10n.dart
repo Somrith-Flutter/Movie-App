@@ -490,15 +490,6 @@ class S {
     );
   }
 
-  String get continous {
-    return Intl.message(
-      'Continous',
-      name: 'continous',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Address`
   String get address {
     return Intl.message(
@@ -624,6 +615,16 @@ class S {
     return Intl.message(
       'Allow',
       name: 'allow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue`
+  String get continues {
+    return Intl.message(
+      'Continue',
+      name: 'continues',
       desc: '',
       args: [],
     );

@@ -36,6 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cinema": MessageLookupByLibrary.simpleMessage("Cinema"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "contact_us": MessageLookupByLibrary.simpleMessage("Contact us"),
+        "continues": MessageLookupByLibrary.simpleMessage("Continue"),
         "dark": MessageLookupByLibrary.simpleMessage("Dark"),
         "delivery": MessageLookupByLibrary.simpleMessage("Delivery"),
         "dis_legend_membership": MessageLookupByLibrary.simpleMessage(

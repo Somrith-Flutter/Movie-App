@@ -221,7 +221,7 @@ class _AuthViewState extends State<AuthView> {
                                         ),
                                       ),
                                       child: !_isContinous ? TextWidget(
-                                        S.of(context).continous,
+                                        S.of(context).continues,
                                         size: 16,
                                       ) : TextWidget(
                                         S.of(context).login,

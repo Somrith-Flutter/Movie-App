@@ -37,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm": MessageLookupByLibrary.simpleMessage("បញ្ជាក់"),
         "contact_us":
             MessageLookupByLibrary.simpleMessage("ទំនាក់ទំនងមកពួកយើង"),
+        "continues": MessageLookupByLibrary.simpleMessage("បន្ត"),
         "dark": MessageLookupByLibrary.simpleMessage("ងងឹត"),
         "delivery":
             MessageLookupByLibrary.simpleMessage("សំរាប់​ការ​ដឹកជញ្ជូន"),
