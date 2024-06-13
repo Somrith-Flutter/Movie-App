@@ -121,9 +121,10 @@ class OtpWidget extends StatelessWidget {
                         borderRadius: BorderRadius.circular(24),
                       ),
                     ),
-                    child: TextWidget(
-                      S.of(context).confirm,
-                      size: 16,
+                    child: const TextWidget(
+                      "Continue",
+                      bold: true,
+                      size: 18,
                     ),
                   ),
                 ),

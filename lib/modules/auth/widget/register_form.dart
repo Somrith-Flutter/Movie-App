@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:legend_cinema/config/themes/app_color.dart';
 import 'package:legend_cinema/modules/auth/controller/pick_image_controller.dart';
-import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
 class RegisterForm extends StatefulWidget {
@@ -150,11 +149,10 @@ class _RegisterFormState extends State<RegisterForm> {
               const TextWidget("Setup your profile information",size: 22,bold: true,),
               const Row(
                 children: [
-                  TextWidget("You,ve created this account with",size: 16,bold: true),
-                  SizedBox(width: 5,),
-                  TextWidget("(+855)",size: 16,bold: true,color: Colors.red,),
-                  SizedBox(width: 5,),
-                  TextWidget("78378171",size: 16,bold: true,color: Colors.red,),
+                  TextWidget("You've created this account with",size: 14,bold: true),
+                  TextWidget("(+855)",size: 14,bold: true,color: Colors.red,),
+                  SizedBox(width: 3,),
+                  TextWidget("78378171",size: 14,bold: true,color: Colors.red,),
                 ],
               ),
               const SizedBox(height: 30,),
@@ -269,7 +267,7 @@ class _RegisterFormState extends State<RegisterForm> {
               Center(
                 child: Column(
                   children: [
-                    Container(
+                    SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
