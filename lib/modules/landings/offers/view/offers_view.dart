@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/modules/landings/offers/controller/offers_controller.dart';
 import 'package:legend_cinema/modules/landings/offers/repository/offers_repository.dart';
@@ -36,15 +37,7 @@ class OffersView extends StatelessWidget {
       appBar: AppBar(
         centerTitle: false,
         title: Text(S.of(context).offer),
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Colors.red, Colors.black],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
-          ),
-        ),
+        flexibleSpace: AppConstant.appbarTheme
       ),
       backgroundColor: Colors.black87,
       body: Obx(() {

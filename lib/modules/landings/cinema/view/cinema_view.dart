@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:legend_cinema/config/themes/app_color.dart';
+import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
@@ -80,15 +80,7 @@ class CinemaView extends StatelessWidget {
           'Cinema',
           size: 24,
         ),
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: AppColor.appbarColor,
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
-          ),
-        ),
+        flexibleSpace: AppConstant.appbarTheme,
       ),
       body: Padding(
         padding: const EdgeInsets.all(6),

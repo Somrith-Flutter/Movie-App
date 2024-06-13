@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:legend_cinema/config/routes/app_route.dart';
+import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/modules/landings/more/controller/more_controller.dart';
 import 'package:legend_cinema/modules/landings/more/repository/more_repository.dart';
@@ -21,15 +22,7 @@ class NewsWidget extends StatelessWidget {
         leading: const BackWidget(),
         centerTitle: true,
         title: Text(S.of(context).news_activity),
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color.fromRGBO(184, 10, 10, 1), Colors.black],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
-          ),
-        ),
+        flexibleSpace: AppConstant.appbarTheme,
       ),
       backgroundColor: Colors.black87,
       body: Obx(() {
