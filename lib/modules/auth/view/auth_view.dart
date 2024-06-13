@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_icon_snackbar/flutter_icon_snackbar.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
@@ -182,53 +183,65 @@ class _AuthViewState extends State<AuthView> {
                               Row(
                                 children: [
                                   Expanded(
-                                    child: ElevatedButton(
-                                      onPressed: () async {
-                                        try {
-                                          if (_formKey.currentState
-                                                  ?.validate() ??
-                                              false) {
-                                            if(logic.password.text.isEmpty){
-                                              _isContinous = true;
-                                              setState(() {});
-                                              return;
-                                            }
+                                      child: ElevatedButton(
+                                          onPressed: () async {
+                                            try {
+                                              if (_formKey.currentState
+                                                      ?.validate() ??
+                                                  false) {
+                                                if (logic
+                                                    .password.text.isEmpty) {
+                                                  _isContinous = true;
+                                                  setState(() {});
+                                                  return;
+                                                }
 
-                                            await logic.loginController(
-                                                type: "phone");
+                                                await logic.loginController(
+                                                    type: "phone");
 
-                                            if (logic.status ==
-                                                BaseStatusEnum.success) {
-                                              await EasyLoading.dismiss();
-                                              Future.delayed(const Duration(
-                                                  microseconds: 100));
-                                              logic.clear();
-                                              EasyLoading.showSuccess(
-                                                  'Success!');
-                                            } else {
-                                              EasyLoading.show(
-                                                  status: 'Logging in...');
-                                            }
-                                          }
-                                        } catch (_) {}
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 24, vertical: 12),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(24),
-                                        ),
-                                      ),
-                                      child: !_isContinous ? TextWidget(
-                                        S.of(context).continous,
-                                        size: 16,
-                                      ) : TextWidget(
-                                        S.of(context).login,
-                                        size: 16,
-                                      )
-                                    )
-                                  ),
+                                                if (logic.status ==
+                                                    BaseStatusEnum.failure) {
+                                                  IconSnackBar.show(
+                                                    context,
+                                                      snackBarType:
+                                                          SnackBarType.fail,
+                                                      label: 'Somthing went wrong!',
+                                                      snackBarStyle: const SnackBarStyle(labelTextStyle: TextStyle(color: Colors.white)));
+                                                  return;
+                                                }
+
+                                                if (logic.status ==
+                                                    BaseStatusEnum.success) {
+                                                  await EasyLoading.dismiss();
+                                                  Future.delayed(const Duration(
+                                                      microseconds: 100));
+                                                  logic.clear();
+                                                  EasyLoading.showSuccess(
+                                                      'Success!');
+                                                } else {
+                                                  EasyLoading.show(
+                                                      status: 'Logging in...');
+                                                }
+                                              }
+                                            } catch (_) {}
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 24, vertical: 12),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(24),
+                                            ),
+                                          ),
+                                          child: !_isContinous
+                                              ? TextWidget(
+                                                  S.of(context).continous,
+                                                  size: 16,
+                                                )
+                                              : TextWidget(
+                                                  S.of(context).login,
+                                                  size: 16,
+                                                ))),
                                 ],
                               ),
                             ],
@@ -240,44 +253,53 @@ class _AuthViewState extends State<AuthView> {
                               Row(
                                 children: [
                                   Expanded(
-                                    child: ElevatedButton(
-                                      onPressed: () async {
-                                        try {
-                                          if (_formKey.currentState
-                                                  ?.validate() ??
-                                              false) {
-                                            await logic.loginController(
-                                                type: "email");
+                                      child: ElevatedButton(
+                                          onPressed: () async {
+                                            try {
+                                              if (_formKey.currentState
+                                                      ?.validate() ??
+                                                  false) {
+                                                await logic.loginController(
+                                                    type: "email");
 
-                                            if (logic.status ==
-                                                BaseStatusEnum.success) {
-                                              await EasyLoading.dismiss();
-                                              Future.delayed(const Duration(
-                                                  microseconds: 100));
-                                              logic.clear();
-                                              EasyLoading.showSuccess(
-                                                  'Success!');
-                                            } else {
-                                              EasyLoading.show(
-                                                  status: 'Logging in...');
-                                            }
-                                          }
-                                        } catch (_) {}
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 24, vertical: 12),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(24),
-                                        ),
-                                      ),
-                                      child: TextWidget(
-                                        S.of(context).login,
-                                        size: 16,
-                                      )
-                                    )
-                                  ),
+                                                if (logic.status ==
+                                                    BaseStatusEnum.failure) {
+                                                  IconSnackBar.show(
+                                                    context,
+                                                      snackBarType:
+                                                          SnackBarType.fail,
+                                                      label: 'Somthing went wrong!',
+                                                      snackBarStyle: const SnackBarStyle(labelTextStyle: TextStyle(color: Colors.white)));
+                                                  return;
+                                                }
+
+                                                if (logic.status ==
+                                                    BaseStatusEnum.success) {
+                                                  await EasyLoading.dismiss();
+                                                  Future.delayed(const Duration(
+                                                      microseconds: 100));
+                                                  logic.clear();
+                                                  EasyLoading.showSuccess(
+                                                      'Success!');
+                                                } else {
+                                                  EasyLoading.show(
+                                                      status: 'Logging in...');
+                                                }
+                                              }
+                                            } catch (_) {}
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 24, vertical: 12),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(24),
+                                            ),
+                                          ),
+                                          child: TextWidget(
+                                            S.of(context).login,
+                                            size: 16,
+                                          ))),
                                 ],
                               ),
                             ],

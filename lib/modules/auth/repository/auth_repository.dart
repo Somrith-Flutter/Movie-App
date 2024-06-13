@@ -1,10 +1,10 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:legend_cinema/constants/api_path.dart';
 class AuthRepository {
-  Future<String> loginRepo({
+
+  Future<dynamic> loginRepo({
     required String type,
     required String? email,
     required String? phone,
@@ -22,14 +22,9 @@ class AuthRepository {
     var body = await response.stream.bytesToString();
 
     if (response.statusCode == 200) {
-      debugPrint(body);
-
-      var json = jsonDecode(body);
-      return json['access_token'];
-    } else {
-      debugPrint(response.reasonPhrase);
+      debugPrint(jsonDecode(body));
+      return jsonDecode(body);
     }
-
-    return "";
+    return null;
   }
 }
