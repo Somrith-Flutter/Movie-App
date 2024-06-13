@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:legend_cinema/core/enum/base_status_enum.dart';
@@ -22,37 +20,46 @@ class AuthController extends GetxController implements GetxService {
     update();
   }
 
-  Future<dynamic> loginController({required String type}) async {
+  Future<bool> loginController({required String? type}) async {
     setStatus(BaseStatusEnum.inprogress);
     try {
       await repository
           .loginRepo(
-              type: type,
-              email: email.text,
-              phone: number.text,
-              password: password.text)
-          .then((data) async {
-            debugPrint(data);
-        if (data != null && !data['error']) {
-          accessToken.$ = data['access_token'].toString();
-          await accessToken.save();
-          debugPrint(accessToken.$);
-          setStatus(BaseStatusEnum.success);
+        type: type ?? "",
+        email: email.text,
+        phone: number.text,
+        password: password.text,
+      ).then((data) async {
+        if (data != null && data is Map<String, dynamic>) {
+          if (data.containsKey('access_token')) {
+            accessToken.$ = data['access_token'].toString();
+            await accessToken.save();
+            setStatus(BaseStatusEnum.success);
+            update();
+            return true;
+          } else {
+            debugPrint('Access token not found in response');
+            setStatus(BaseStatusEnum.failure);
+          }
         } else {
+          debugPrint('Login failed or response format is incorrect');
           setStatus(BaseStatusEnum.failure);
         }
       });
-    } catch (_) {
+    } catch (e) {
+      debugPrint('Exception during login: $e');
       setStatus(BaseStatusEnum.failure);
     }
+
     update();
-    return null;
+    return false;
   }
 
   void clear() {
     email.clear();
     password.clear();
     confirmPassword.clear();
+    number.clear();
     update();
   }
 }

@@ -106,7 +106,7 @@ class _AuthViewState extends State<AuthView> {
                       children: [
                         Expanded(
                           child: GestureDetector(
-                            onTap: () => _onTabTap(true),
+                            onTap: () => _onTabTap(false),
                             child: Container(
                               decoration: BoxDecoration(
                                 color: isPhoneTabSelected
@@ -118,10 +118,9 @@ class _AuthViewState extends State<AuthView> {
                               ),
                               child: const Center(
                                 child: Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(vertical: 12),
+                                  padding: EdgeInsets.symmetric(vertical: 12),
                                   child: Text(
-                                    'Phone',
+                                    'Email',
                                     style: TextStyle(fontSize: 16),
                                   ),
                                 ),
@@ -131,7 +130,7 @@ class _AuthViewState extends State<AuthView> {
                         ),
                         Expanded(
                           child: GestureDetector(
-                            onTap: () => _onTabTap(false),
+                            onTap: () => _onTabTap(true),
                             child: Container(
                               decoration: BoxDecoration(
                                 color: isPhoneTabSelected
@@ -145,7 +144,7 @@ class _AuthViewState extends State<AuthView> {
                                 child: Padding(
                                   padding: EdgeInsets.symmetric(vertical: 12),
                                   child: Text(
-                                    'Email',
+                                    'Phone',
                                     style: TextStyle(fontSize: 16),
                                   ),
                                 ),
@@ -184,10 +183,14 @@ class _AuthViewState extends State<AuthView> {
                                               setState(() {});
                                               return;
                                             }
+
+                                            EasyLoading.show(
+                                                status: 'Logging in...');
                                             await logic.loginController(
                                                 type: "phone");
                                             if (logic.status ==
                                                 BaseStatusEnum.failure) {
+                                              await EasyLoading.dismiss();
                                               IconSnackBar.show(
                                                 context,
                                                 snackBarType: SnackBarType.fail,
@@ -200,6 +203,7 @@ class _AuthViewState extends State<AuthView> {
                                               );
                                               return;
                                             }
+
                                             if (logic.status ==
                                                 BaseStatusEnum.success) {
                                               await EasyLoading.dismiss();
@@ -208,9 +212,6 @@ class _AuthViewState extends State<AuthView> {
                                               logic.clear();
                                               EasyLoading.showSuccess(
                                                   'Success!');
-                                            } else {
-                                              EasyLoading.show(
-                                                  status: 'Logging in...');
                                             }
                                           }
                                         } catch (_) {}
@@ -253,8 +254,10 @@ class _AuthViewState extends State<AuthView> {
                                               false) {
                                             await logic.loginController(
                                                 type: "email");
+
                                             if (logic.status ==
                                                 BaseStatusEnum.failure) {
+                                              await EasyLoading.dismiss();
                                               IconSnackBar.show(
                                                 context,
                                                 snackBarType: SnackBarType.fail,
@@ -267,6 +270,7 @@ class _AuthViewState extends State<AuthView> {
                                               );
                                               return;
                                             }
+
                                             if (logic.status ==
                                                 BaseStatusEnum.success) {
                                               await EasyLoading.dismiss();
@@ -342,8 +346,7 @@ class _AuthViewState extends State<AuthView> {
                   controller: auth.number,
                   decoration: const InputDecoration(
                     hintText: 'Phone number',
-                    hintStyle:
-                        TextStyle(color: Colors.white, fontSize: 16),
+                    hintStyle: TextStyle(color: Colors.white, fontSize: 16),
                     border: InputBorder.none,
                   ),
                   style: const TextStyle(color: Colors.white),
@@ -372,8 +375,7 @@ class _AuthViewState extends State<AuthView> {
                     controller: auth.password,
                     decoration: const InputDecoration(
                       hintText: 'Password',
-                      hintStyle:
-                          TextStyle(color: Colors.white, fontSize: 16),
+                      hintStyle: TextStyle(color: Colors.white, fontSize: 16),
                       border: InputBorder.none,
                     ),
                     style: const TextStyle(color: Colors.white),
@@ -413,8 +415,7 @@ class _AuthViewState extends State<AuthView> {
                   validator: _validateEmail,
                   decoration: const InputDecoration(
                     hintText: 'Email',
-                    hintStyle:
-                        TextStyle(color: Colors.white, fontSize: 16),
+                    hintStyle: TextStyle(color: Colors.white, fontSize: 16),
                     border: InputBorder.none,
                   ),
                   style: const TextStyle(color: Colors.white),
@@ -441,8 +442,7 @@ class _AuthViewState extends State<AuthView> {
                   controller: auth.password,
                   decoration: const InputDecoration(
                     hintText: 'Password',
-                    hintStyle:
-                        TextStyle(color: Colors.white, fontSize: 16),
+                    hintStyle: TextStyle(color: Colors.white, fontSize: 16),
                     border: InputBorder.none,
                   ),
                   style: const TextStyle(color: Colors.white),
