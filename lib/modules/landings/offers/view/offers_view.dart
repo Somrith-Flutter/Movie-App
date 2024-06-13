@@ -36,7 +36,7 @@ class OffersView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: Text(S.of(context).offer),
+        title: TextWidget(S.of(context).offer, size: 22, bold: true,),
         flexibleSpace: AppConstant.appbarTheme
       ),
       backgroundColor: Colors.black87,
