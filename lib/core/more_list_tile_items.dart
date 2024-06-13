@@ -9,7 +9,7 @@ import 'package:legend_cinema/modules/landings/more/widgets/term_condition.dart'
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/list_tile_item.dart';
 
-List<ListTileItem> items(BuildContext context, String title)  {
+List<ListTileItem> items(BuildContext context, String title, String icon)  {
   return [
     // const TextWidget(
     //   'Purchase',
@@ -23,6 +23,8 @@ List<ListTileItem> items(BuildContext context, String title)  {
 
     ListTileItem(
       title: title,
+      isAssetIcon: true,
+      assetIcon: icon,
       icon: Icons.language,
       trailing: true,
       route: const LanguageWidget(),

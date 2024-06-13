@@ -48,32 +48,28 @@ class MoreController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _loadSavedLocale();
+    loadSavedLocale();
     fetchNewsAndActivities();
     fetchAboutus();
   }
 
   var currentLocale = const Locale(AppConstant.en, AppConstant.us).obs;
 
-  void changeLocal(String languageCode, String countryCode) {
-    currentLocale.value = Locale(languageCode, countryCode);
-    Get.updateLocale(currentLocale.value);
-  }
-
   void changeLocale(String languageCode, String countryCode) async {
-    Locale newLocale = Locale(languageCode, countryCode);
-    locale.value = newLocale; // Update locale directly
+    currentLocale.value = Locale(languageCode, countryCode);
+    Get.updateLocale(currentLocale.value); // Update app-wide locale
+
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('languageCode', languageCode);
     await prefs.setString('countryCode', countryCode);
   }
 
-  void _loadSavedLocale() async {
+  void loadSavedLocale() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? languageCode = prefs.getString('languageCode');
     String? countryCode = prefs.getString('countryCode');
     if (languageCode != null && countryCode != null) {
-      locale.value = Locale(languageCode, countryCode);
+      currentLocale.value = Locale(languageCode, countryCode);
     }
   }
 
