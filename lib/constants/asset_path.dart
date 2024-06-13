@@ -40,4 +40,18 @@ class AssetPath{
   static const String sensok = 'assets/images/sensok.jpg';
   static const String siemreap = 'assets/images/siemreap.jpg';
   static const String toulkork = 'assets/images/toulkork.jpg';
+
+  //Image HomePage
+  static const String story1 = 'assets/images/story1.jpg';
+  static const String story2 = 'assets/images/story2.jpg';
+  static const String story3 = 'assets/images/story3.jpg';
+  static const String story4 = 'assets/images/story4.jpg';
+  static const String story5 = 'assets/images/story5.jpg';
+  static const String story6 = 'assets/images/story6.jpg';
+  static const String story7 = 'assets/images/story7.jpg';
+  static const String story8 = 'assets/images/story8.jpg';
+  static const String story9 = 'assets/images/story9.jpg';
+  static const String story10 = 'assets/images/story10.jpg';
+
+
 }
