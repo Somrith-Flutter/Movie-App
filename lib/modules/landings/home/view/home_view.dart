@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:legend_cinema/config/themes/app_color.dart';
+import 'package:legend_cinema/constants/app_constant.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -10,15 +10,7 @@ class HomeView extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: const Text('Legend Cinema'),
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: AppColor.appbarColor,
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter
-            )
-          ),
-        ),
+        flexibleSpace: AppConstant.appbarTheme,
         actions: [
           IconButton(
             icon: const Icon(Icons.search),

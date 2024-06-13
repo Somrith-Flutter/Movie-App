@@ -198,7 +198,6 @@ class _AuthViewState extends State<AuthView> {
 
                                                 await logic.loginController(
                                                     type: "phone");
-
                                                 if (logic.status ==
                                                     BaseStatusEnum.failure) {
                                                   IconSnackBar.show(
@@ -242,6 +241,38 @@ class _AuthViewState extends State<AuthView> {
                                                   S.of(context).login,
                                                   size: 16,
                                                 ))),
+                                            if (logic.status ==
+                                                BaseStatusEnum.success) {
+                                              await EasyLoading.dismiss();
+                                              Future.delayed(const Duration(
+                                                  microseconds: 100));
+                                              logic.clear();
+                                              EasyLoading.showSuccess(
+                                                  'Success!');
+                                            } else {
+                                              EasyLoading.show(
+                                                  status: 'Logging in...');
+                                            }
+                                          }
+                                        } catch (_) {}
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 24, vertical: 12),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(24),
+                                        ),
+                                      ),
+                                      child: !_isContinous ? TextWidget(
+                                        S.of(context).continues,
+                                        size: 16,
+                                      ) : TextWidget(
+                                        S.of(context).login,
+                                        size: 16,
+                                      )
+                                    )
+                                  ),
                                 ],
                               ),
                             ],

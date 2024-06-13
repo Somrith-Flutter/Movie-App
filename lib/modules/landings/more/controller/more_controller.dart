@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
+import 'package:legend_cinema/modules/landings/more/model/about_model.dart';
 import 'package:legend_cinema/modules/landings/more/model/news_model.dart';
 import 'package:legend_cinema/modules/landings/more/repository/more_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -47,37 +48,33 @@ class MoreController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _loadSavedLocale();
+    loadSavedLocale();
     fetchNewsAndActivities();
+    fetchAboutus();
   }
 
   var currentLocale = const Locale(AppConstant.en, AppConstant.us).obs;
 
-  void changeLocal(String languageCode, String countryCode) {
-    currentLocale.value = Locale(languageCode, countryCode);
-    Get.updateLocale(currentLocale.value);
-  }
-
   void changeLocale(String languageCode, String countryCode) async {
-    Locale newLocale = Locale(languageCode, countryCode);
-    locale.value = newLocale; // Update locale directly
+    currentLocale.value = Locale(languageCode, countryCode);
+    Get.updateLocale(currentLocale.value); // Update app-wide locale
+
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('languageCode', languageCode);
     await prefs.setString('countryCode', countryCode);
   }
 
-  void _loadSavedLocale() async {
+  void loadSavedLocale() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? languageCode = prefs.getString('languageCode');
     String? countryCode = prefs.getString('countryCode');
     if (languageCode != null && countryCode != null) {
-      locale.value = Locale(languageCode, countryCode);
+      currentLocale.value = Locale(languageCode, countryCode);
     }
   }
 
   var newsAndActivities = <NewsModel>[].obs;
-  var isLoading = true.obs;
-  var errorMessage = ''.obs;
+  
 
   Future<void> fetchNewsAndActivities() async {
     try {
@@ -91,6 +88,24 @@ class MoreController extends GetxController {
       isLoading(false);
     }
   }
+  var aboutus = <AboutModel>[].obs;
+  var isLoading = true.obs;
+  var errorMessage = ''.obs;
+
+  Future<void> fetchAboutus() async {
+    try {
+      isLoading(true);
+      var data = await repository.getAbout();
+      aboutus.value = data;
+      debugPrint('Fetched items: $data');
+    } catch (e) {
+      errorMessage.value = e.toString();
+      debugPrint('Error fetching items: $e');
+    } finally {
+      isLoading(false);
+    }
+  }
+
 }
 
 

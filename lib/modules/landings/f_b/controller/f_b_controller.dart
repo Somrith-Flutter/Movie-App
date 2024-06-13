@@ -57,10 +57,10 @@ class FBController extends GetxController{
   @override
   void onInit() {
     super.onInit();
-    getlocations();
+    getLocations();
   }
 
-  Future<void> getlocations() async {
+  Future<void> getLocations() async {
     try {
       isLoading(true);
       var locations = await repository.getLocationList();

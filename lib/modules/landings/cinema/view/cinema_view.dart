@@ -1,104 +1,190 @@
 import 'package:flutter/material.dart';
 import 'package:legend_cinema/config/themes/app_color.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
-import 'package:legend_cinema/modules/landings/offers/view/offers_detail.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
-List<String> image = [
-  AssetPath.cinema2,
-  AssetPath.cinema6,
-  AssetPath.cinema4,
-  AssetPath.cinema5,
-  AssetPath.cinema7,
-];
 
-List<String> imageCard = [
-  AssetPath.cinemaCard1,
-  AssetPath.cinema6,
-  AssetPath.cinema7,
-];
-
-List<String> titles = [
-  'Special Offer 1',
-  'Special Offer 2',
-  'Special Offer 3',
-  'Special Offer 4',
-  'Special Offer 5',
-];
 class CinemaView extends StatelessWidget {
-  const CinemaView({super.key});
+  CinemaView({super.key});
+
+  final List<Map<String, String>> cinema = [
+    {
+      "main_image": AssetPath.megaMall,
+      "detail_image": AssetPath.megaMall,
+      "title": "Legend Cinema 271 Mega Mall",
+      "subtitle": "3rd Floor, Chip Mong Mega Mall,",
+    },
+    {
+      "main_image": AssetPath.sihanouk,
+      "detail_image": AssetPath.megaMall,
+      "title": "Legend Cinema Sihanoukville",
+      "subtitle": "PGB-5-021, 4th Floor of prince",
+    },
+    {
+      "main_image": AssetPath.eden,
+      "detail_image": AssetPath.megaMall,
+      "title": "Legend Eden Garden",
+      "subtitle": "City Center Boulevard, sangkat Sraschork, PhnomPenh City",
+    },
+    {
+      "main_image": AssetPath.kMall,
+      "detail_image": AssetPath.megaMall,
+      "title": "Legend K Mall",
+      "subtitle": "2nd Floor, K Mall",
+    },
+    {
+      "main_image": AssetPath.meanchey,
+      "detail_image": AssetPath.megaMall,
+      "title": "Legend Meanchey",
+      "subtitle": "3rd Floor of New Steung Meanchey New",
+    },
+    {
+      "main_image": AssetPath.midTown,
+      "detail_image": AssetPath.megaMall,
+      "title": "Legend Midtown Mall",
+      "subtitle": "1st Floor Midtown Mall",
+    },
+    {
+      "main_image": AssetPath.noroMall,
+      "detail_image": AssetPath.megaMall,
+      "title": "Legend Noro Mall",
+      "subtitle": "5th Floor, Chip Mong Nora Mall",
+    },
+    {
+      "main_image": AssetPath.olympia,
+      "detail_image": AssetPath.megaMall,
+      "title": "Legend Olympia",
+      "subtitle": "6th Floor, The Olympia Mall",
+    },
+    {
+      "main_image": AssetPath.premium,
+      "detail_image": AssetPath.megaMall,
+      "title": "Legend Premium Exchange Square",
+      "subtitle": "Street 106, Corner of Street 61",
+    },
+    {
+      "main_image": AssetPath.sensok,
+      "detail_image": AssetPath.megaMall,
+      "title": "Legend SenSok=============================",
+      "subtitle": "4th Floor, Chip Mong SenSok Mall",
+    },
+    {
+      "main_image": AssetPath.siemreap,
+      "detail_image": AssetPath.megaMall,
+      "title": "Legend Siem Reap",
+      "subtitle": "Level 3, The Heritage Walk, Corner Street 61, SiemReap",
+    },
+    {
+      "main_image": AssetPath.toulkork,
+      "detail_image": AssetPath.megaMall,
+      "title": "Legend Toul Kork",
+      "subtitle": "TK Avenue Mall, Street 315",
+    },
+
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         centerTitle: false,
-        title: const TextWidget('Cinema',size: 24,),
+        title: const TextWidget(
+          'Cinema',
+          size: 24,
+        ),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: AppColor.appbarColor,
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-            )
+
+            ),
           ),
         ),
       ),
-      body: Container(
-        color: Colors.black,
-        child: ListView(
-          physics: const BouncingScrollPhysics(),
+      body: Padding(
+        padding: const EdgeInsets.all(6),
+        child: Column(
           children: [
-            ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: image.length,
-              itemBuilder: (context, index) {
-                return InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DetailScreen(
-                          imagePath: image[index],
-                          title: titles[index],
-                        ),
-                      ),
-                    );
-                  },
-                  child: Card(
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                decoration: InputDecoration(
+                  suffixIcon: Icon(Icons.search,
+                      color: Colors.white.withOpacity(0.8)),
+                  hintText: "Search cinema...",
+                  labelStyle:
+                  TextStyle(color: Colors.white.withOpacity(0.8)),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Colors.white.withOpacity(0.8)),
+                  ),
+                  focusedBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                  filled: true,
+                  fillColor: Colors.white70.withOpacity(0.1),
+                ),
+                style:
+                TextStyle(color: Colors.white.withOpacity(0.8)),
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                itemCount: cinema.length,
+                itemBuilder: (context, index) {
+                  final item = cinema[index];
+                  return Container(
                     margin: const EdgeInsets.all(8.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.0),
-                        border: Border.all(
-                          color: Colors.white70,
-                          width: 1,
-                        ),
-                      ),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Image.asset(
-                              image[index],
-                              fit: BoxFit.fill,
-                              height: 200,
-                            ),
-                          ),
-                          ListTile(
-                            title: Text(
-                              titles[index],
-                              style: const TextStyle(
-                                fontSize: 16,
-                              ),
-                            ),
-                          ),
-                        ],
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8.0),
+                      border: Border.all(
+                        color: Colors.white70,
+                        width: 1,
                       ),
                     ),
-                  ),
-                );
-              },
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(12),
+                          child: Image.asset(
+                            item["main_image"]!,
+                            fit: BoxFit.cover,
+                            height: 280, // Adjust height as per your requirement
+                          ),
+                        ),
+                        ListTile(
+                          title: TextWidget(
+                            item["title"]!,
+                            size: 20,
+                            bold: true,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          subtitle: Row(
+                            children: [
+                              const Icon(
+                                Icons.location_on,
+                                color: Colors.red,
+                              ),
+                              const SizedBox(width: 4),
+                              Expanded(
+                                child: TextWidget(
+                                  item["subtitle"]!,
+                                  size: 16,
+                                  bold: true,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
             ),
           ],
         ),

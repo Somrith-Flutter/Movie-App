@@ -44,40 +44,44 @@ class _LanguageWidgetState extends State<LanguageWidget> {
         leading: const BackWidget(),
         title: Text(S.of(context).language),
       ),
-      body: Column(
-        children: [
-          Align(
-            alignment: Alignment.topLeft,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 16),
-              child: TextWidget(S.of(context).language, size: 16,),
-            )),
-          _buildLanguageOption(
-            context,
-            AssetPath.flagEngland,
-            S.of(context).english,
-            AppConstant.en,
-            AppConstant.us,
-            isSelectedEnglish,
-          ),
-          _buildLanguageOption(
-            context,
-            AssetPath.flagkhmer,
-            S.of(context).khmer,
-            AppConstant.km,
-            AppConstant.kh,
-            isSelectedKhmer,
-          ),
-          _buildLanguageOption(
-            context,
-            AssetPath.flagChinese,
-            S.of(context).chinese,
-            AppConstant.zh,
-            AppConstant.cn,
-            isSelectedChinese,
-          ),
-        ],
-      ),
+      body: _buildBody(), 
+    );
+  }
+
+  Widget _buildBody(){
+    return Column(
+      children: [
+        Align(
+          alignment: Alignment.topLeft,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 16),
+            child: TextWidget(S.of(context).language, size: 16,),
+          )),
+        _buildLanguageOption(
+          context,
+          AssetPath.flagEngland,
+          S.of(context).english,
+          AppConstant.en,
+          AppConstant.us,
+          isSelectedEnglish,
+        ),
+        _buildLanguageOption(
+          context,
+          AssetPath.flagkhmer,
+          S.of(context).khmer,
+          AppConstant.km,
+          AppConstant.kh,
+          isSelectedKhmer,
+        ),
+        _buildLanguageOption(
+          context,
+          AssetPath.flagChinese,
+          S.of(context).chinese,
+          AppConstant.zh,
+          AppConstant.cn,
+          isSelectedChinese,
+        ),
+      ],
     );
   }
 
@@ -95,45 +99,26 @@ class _LanguageWidgetState extends State<LanguageWidget> {
           width: 50,
           height: 70,
           child: Image.asset(flagAsset),
-        ),
+        ),onTap: () => _saveLanguage(context, languageCode, countryCode),
         title: Text(language),
-        trailing: Checkbox(
-          value: isSelected,
-          onChanged: (bool? value) {
-            showConfirmationDialog(context, languageCode, countryCode);
-          },
-        ),
+        trailing: isSelected ? const Icon(Icons.check) : const Text(''),
       ),
     );
   }
 
-  void showConfirmationDialog(BuildContext context, String languageCode, String countryCode) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(S.of(context).confirm),
-          content: const Text('Are you sure to change language'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text(S.of(context).btn_no),
-            ),
-            TextButton(
-              onPressed: () {
-                _saveLanguage(context, languageCode, countryCode);
-                Navigator.of(context).pop();
-              },
-              child: Text(S.of(context).btn_yes),
-            ),
-          ],
-        );
-      },
-    );
+  void _saveLanguage(BuildContext context, String languageCode, String countryCode) async {
+    await SharedPrefs.saveLanguage(languageCode, countryCode);
+    Get.find<MoreController>().changeLocale(languageCode, countryCode); 
+    Get.updateLocale(Locale(languageCode, countryCode));
+    setState(() {
+      isSelectedEnglish = languageCode == AppConstant.en;
+      isSelectedKhmer = languageCode == AppConstant.km;
+      isSelectedChinese = languageCode == AppConstant.zh;
+    });
   }
+}
 
+// use this one can effect to the whole app......
 //   void _saveLanguage(BuildContext context, String languageCode, String countryCode) async {
 //   await SharedPrefs.saveLanguage(languageCode, countryCode);
 //   Get.find<MoreController>().changeLocale(languageCode, countryCode); // Update locale in MoreController
@@ -144,14 +129,3 @@ class _LanguageWidgetState extends State<LanguageWidget> {
 //     isSelectedChinese = languageCode == AppConstant.zh;
 //   });
 // }
-void _saveLanguage(BuildContext context, String languageCode, String countryCode) async {
-  await SharedPrefs.saveLanguage(languageCode, countryCode);
-  Get.find<MoreController>().changeLocale(languageCode, countryCode); // Update locale in MoreController
-  Get.updateLocale(Locale(languageCode, countryCode));
-  setState(() {
-    isSelectedEnglish = languageCode == AppConstant.en;
-    isSelectedKhmer = languageCode == AppConstant.km;
-    isSelectedChinese = languageCode == AppConstant.zh;
-  });
-}
-}

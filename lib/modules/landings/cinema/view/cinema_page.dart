@@ -12,7 +12,7 @@ class CinemaPage extends StatelessWidget {
     return GetBuilder<CinemaController>(
       init: CinemaController(repository: CinemaRepository()),
       initState: (_) => Get.find<CinemaController>().onInit(),
-      builder: (_) => const Scaffold(
+      builder: (_) =>  Scaffold(
         body: CinemaView(),
       ),
     );

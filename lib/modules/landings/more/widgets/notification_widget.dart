@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:legend_cinema/config/themes/app_color.dart';
+import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
@@ -22,15 +23,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
         leading: const BackWidget(),
         title: TextWidget(S.of(context).notification),
         centerTitle: true,
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: AppColor.appbarColor,
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter
-            )
-          ),
-        ),
+        flexibleSpace: AppConstant.appbarTheme,
       ),
       body: _buildBody(),
     );

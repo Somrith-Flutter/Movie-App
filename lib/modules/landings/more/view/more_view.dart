@@ -3,10 +3,12 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
+import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/core/more_list_tile_items.dart';
 import 'package:legend_cinema/modules/auth/view/auth_page.dart';
 import 'package:legend_cinema/modules/auth/view/reqister_view.dart';
 import 'package:legend_cinema/modules/landings/more/controller/more_controller.dart';
+import 'package:legend_cinema/modules/landings/more/widgets/learn_more_widget.dart';
 import 'package:legend_cinema/widgets/list_tile_item.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
@@ -31,7 +33,7 @@ class _MoreViewState extends State<MoreView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const TextWidget('Account'),
+              TextWidget(S.of(context).account),
               const Gap(8),
               Row(
                 children: [
@@ -77,7 +79,7 @@ class _MoreViewState extends State<MoreView> {
                       Align(
                         alignment: Alignment.bottomLeft,
                         child: ElevatedButton(
-                          onPressed: (){}, 
+                          onPressed: () => AppRoute().push(context, const LearnMoreWidget()), 
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.red,
                           ),
@@ -95,23 +97,26 @@ class _MoreViewState extends State<MoreView> {
               ),
               Obx(() {
                 String title;
+                String icon;
                 switch (languageController.currentLocale.value.languageCode) {
                   case AppConstant.km:
                     title = S.of(context).khmer;
+                    icon = AssetPath.flagkhmer;
                     break;
                   case AppConstant.zh:
                     title = S.of(context).chinese;
+                    icon = AssetPath.flagChinese;
                     break;
-                  case AppConstant.en:
                   default:
                     title = S.of(context).english;
+                    icon = AssetPath.flagEngland;
                     break;
                 }
                 return MyListTile(
-                  data: items(context, title),
+                  data: items(context, title, icon),
                   onTap: (index) {
-                    if (index >= 0 && index < items(context, title).length) {
-                      var selectedItem = items(context, title)[index];
+                    if (index >= 0 && index < items(context, title, icon).length) {
+                      var selectedItem = items(context, title, icon)[index];
                       if (selectedItem.route != null) {
                         AppRoute().push(context, selectedItem.route!);
                       } else {

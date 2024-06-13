@@ -32,7 +32,12 @@ class MyListTile extends StatelessWidget {
               ),
             ListTile(
               title: TextWidget(item.title),
-              leading: Icon(item.icon),
+              leading: item.isAssetIcon == true 
+                ? SizedBox(
+                    height: 40,
+                    width: 30,
+                    child: Image.asset(item.assetIcon!)
+                  ) : Icon(item.icon),
               trailing: item.trailing ? const Icon(Icons.chevron_right) : const Text(''),
               onTap: () => onTap != null ? onTap!(index) : '',
               hoverColor: Colors.white.withOpacity(0.3),
@@ -52,12 +57,16 @@ class ListTileItem {
     this.trailing = false,
     this.header,
     this.route,
+    this.assetIcon,
     this.isSpacig = false,
     this.isheader = false,
+    this.isAssetIcon = false,
   });
 
   final String? title;
   final IconData? icon;
+  final String? assetIcon;
+  final bool isAssetIcon;
   final VoidCallback? onTap;
   final bool trailing;
   final String? header;

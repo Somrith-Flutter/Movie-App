@@ -23,11 +23,13 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about_us": MessageLookupByLibrary.simpleMessage("关于我们"),
+        "account": MessageLookupByLibrary.simpleMessage("帐户"),
         "address": MessageLookupByLibrary.simpleMessage("地址"),
         "chinese": MessageLookupByLibrary.simpleMessage("中国人"),
         "choose_cinema": MessageLookupByLibrary.simpleMessage("选择电影院"),
         "cinema": MessageLookupByLibrary.simpleMessage("电影"),
         "contact_us": MessageLookupByLibrary.simpleMessage("联系我们"),
+        "continues": MessageLookupByLibrary.simpleMessage("继续"),
         "dis_legend_membership": MessageLookupByLibrary.simpleMessage(
             "从我们的会员卡中获得诸多优惠。立即前往您附近的 Legend Cinema 购买一张吧！"),
         "english": MessageLookupByLibrary.simpleMessage("英语"),
