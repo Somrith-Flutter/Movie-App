@@ -118,12 +118,12 @@ class _AuthViewState extends State<AuthView> {
                                     topLeft: Radius.circular(10),
                                     bottomLeft: Radius.circular(10)),
                               ),
-                              child: const Center(
+                              child: Center(
                                 child: Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 12),
-                                  child: Text(
-                                    'Email',
-                                    style: TextStyle(fontSize: 16),
+                                  padding: const EdgeInsets.symmetric(vertical: 12),
+                                  child: TextWidget(
+                                    S.of(context).email,
+                                    size: 16,
                                   ),
                                 ),
                               ),
@@ -142,12 +142,12 @@ class _AuthViewState extends State<AuthView> {
                                     topRight: Radius.circular(10),
                                     bottomRight: Radius.circular(10)),
                               ),
-                              child: const Center(
+                              child: Center(
                                 child: Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 12),
-                                  child: Text(
-                                    'Phone',
-                                    style: TextStyle(fontSize: 16),
+                                  padding: const EdgeInsets.symmetric(vertical: 12),
+                                  child: TextWidget(
+                                    S.of(context).phone,
+                                    size: 16,
                                   ),
                                 ),
                               ),
@@ -228,7 +228,7 @@ class _AuthViewState extends State<AuthView> {
                                                 BorderRadius.circular(24),
                                           ),
                                         ),
-                                        child: !_isContinous
+                                        child: _isContinous
                                             ? TextWidget(
                                                 S.of(context).login,
                                                 size: 16,
