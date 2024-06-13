@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
+import 'package:legend_cinema/modules/landings/more/model/about_model.dart';
 import 'package:legend_cinema/modules/landings/more/model/news_model.dart';
 import 'package:legend_cinema/modules/landings/more/repository/more_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -49,6 +50,7 @@ class MoreController extends GetxController {
     super.onInit();
     _loadSavedLocale();
     fetchNewsAndActivities();
+    fetchAboutus();
   }
 
   var currentLocale = const Locale(AppConstant.en, AppConstant.us).obs;
@@ -76,8 +78,7 @@ class MoreController extends GetxController {
   }
 
   var newsAndActivities = <NewsModel>[].obs;
-  var isLoading = true.obs;
-  var errorMessage = ''.obs;
+  
 
   Future<void> fetchNewsAndActivities() async {
     try {
@@ -91,6 +92,24 @@ class MoreController extends GetxController {
       isLoading(false);
     }
   }
+  var aboutus = <AboutModel>[].obs;
+  var isLoading = true.obs;
+  var errorMessage = ''.obs;
+
+  Future<void> fetchAboutus() async {
+    try {
+      isLoading(true);
+      var data = await repository.getAbout();
+      aboutus.value = data;
+      debugPrint('Fetched items: $data');
+    } catch (e) {
+      errorMessage.value = e.toString();
+      debugPrint('Error fetching items: $e');
+    } finally {
+      isLoading(false);
+    }
+  }
+
 }
 
 
