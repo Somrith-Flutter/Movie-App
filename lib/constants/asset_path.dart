@@ -26,4 +26,18 @@ class AssetPath{
   static const String offer1 = 'assets/icons/offer1.png';
   static const String offer2 = 'assets/icons/offer2.png';
   static const String offer3 = 'assets/icons/offer3.png';
+
+  // =============Cinema Location==================
+  static const String megaMall = 'assets/images/271-mega-mall.jpg';
+  static const String sihanouk = 'assets/images/sihanouk.jpg';
+  static const String eden = 'assets/images/eden.jpg';
+  static const String kMall = 'assets/images/k-mall.jpg';
+  static const String meanchey = 'assets/images/meanchey.jpg';
+  static const String midTown = 'assets/images/legend-midtown.jpg';
+  static const String noroMall = 'assets/images/noro-mall.jpg';
+  static const String olympia = 'assets/images/olympia.jpg';
+  static const String premium = 'assets/images/premium.jpg';
+  static const String sensok = 'assets/images/sensok.jpg';
+  static const String siemreap = 'assets/images/siemreap.jpg';
+  static const String toulkork = 'assets/images/toulkork.jpg';
 }

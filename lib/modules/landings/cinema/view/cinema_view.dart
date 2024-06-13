@@ -8,66 +8,78 @@ class CinemaView extends StatelessWidget {
 
   final List<Map<String, String>> cinema = [
     {
-      "image": AssetPath.cinema3, // Replace with your actual asset path
+      "main_image": AssetPath.megaMall,
+      "detail_image": AssetPath.megaMall,
       "title": "Legend Cinema 271 Mega Mall",
       "subtitle": "3rd Floor, Chip Mong Mega Mall,",
     },
     {
-      "image": AssetPath.cinema2, // Replace with your actual asset path
+      "main_image": AssetPath.sihanouk,
+      "detail_image": AssetPath.megaMall,
       "title": "Legend Cinema Sihanoukville",
       "subtitle": "PGB-5-021, 4th Floor of prince",
     },
     {
-      "image": AssetPath.cinema1, // Replace with your actual asset path
+      "main_image": AssetPath.eden,
+      "detail_image": AssetPath.megaMall,
       "title": "Legend Eden Garden",
       "subtitle": "City Center Boulevard, sangkat Sraschork, PhnomPenh City",
     },
     {
-      "image": AssetPath.cinema3, // Replace with your actual asset path
-      "title": "Movie 1",
-      "subtitle": "Subtitle 1",
+      "main_image": AssetPath.kMall,
+      "detail_image": AssetPath.megaMall,
+      "title": "Legend K Mall",
+      "subtitle": "2nd Floor, K Mall",
     },
     {
-      "image": AssetPath.cinema2, // Replace with your actual asset path
-      "title": "Movie 2",
-      "subtitle": "Subtitle 2",
+      "main_image": AssetPath.meanchey,
+      "detail_image": AssetPath.megaMall,
+      "title": "Legend Meanchey",
+      "subtitle": "3rd Floor of New Steung Meanchey New",
     },
     {
-      "image": AssetPath.cinema1, // Replace with your actual asset path
-      "title": "Movie 3",
-      "subtitle": "Subtitle 3",
+      "main_image": AssetPath.midTown,
+      "detail_image": AssetPath.megaMall,
+      "title": "Legend Midtown Mall",
+      "subtitle": "1st Floor Midtown Mall",
     },
     {
-      "image": AssetPath.cinema3, // Replace with your actual asset path
-      "title": "Movie 1",
-      "subtitle": "Subtitle 1",
+      "main_image": AssetPath.noroMall,
+      "detail_image": AssetPath.megaMall,
+      "title": "Legend Noro Mall",
+      "subtitle": "5th Floor, Chip Mong Nora Mall",
     },
     {
-      "image": AssetPath.cinema2, // Replace with your actual asset path
-      "title": "Movie 2",
-      "subtitle": "Subtitle 2",
+      "main_image": AssetPath.olympia,
+      "detail_image": AssetPath.megaMall,
+      "title": "Legend Olympia",
+      "subtitle": "6th Floor, The Olympia Mall",
     },
     {
-      "image": AssetPath.cinema1, // Replace with your actual asset path
-      "title": "Movie 3",
-      "subtitle": "Subtitle 3",
+      "main_image": AssetPath.premium,
+      "detail_image": AssetPath.megaMall,
+      "title": "Legend Premium Exchange Square",
+      "subtitle": "Street 106, Corner of Street 61",
     },
     {
-      "image": AssetPath.cinema3, // Replace with your actual asset path
-      "title": "Movie 1",
-      "subtitle": "Subtitle 1",
+      "main_image": AssetPath.sensok,
+      "detail_image": AssetPath.megaMall,
+      "title": "Legend SenSok=============================",
+      "subtitle": "4th Floor, Chip Mong SenSok Mall",
     },
     {
-      "image": AssetPath.cinema2, // Replace with your actual asset path
-      "title": "Movie 2",
-      "subtitle": "Subtitle 2",
+      "main_image": AssetPath.siemreap,
+      "detail_image": AssetPath.megaMall,
+      "title": "Legend Siem Reap",
+      "subtitle": "Level 3, The Heritage Walk, Corner Street 61, SiemReap",
     },
     {
-      "image": AssetPath.cinema1, // Replace with your actual asset path
-      "title": "Movie 3",
-      "subtitle": "Subtitle 3",
+      "main_image": AssetPath.toulkork,
+      "detail_image": AssetPath.megaMall,
+      "title": "Legend Toul Kork",
+      "subtitle": "TK Avenue Mall, Street 315",
     },
-    // Add more items as needed
+
   ];
 
   @override
@@ -86,64 +98,95 @@ class CinemaView extends StatelessWidget {
               colors: AppColor.appbarColor,
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
+
             ),
           ),
         ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(6),
-        child: ListView.builder(
-          physics: const BouncingScrollPhysics(),
-          itemCount: cinema.length,
-          itemBuilder: (context, index) {
-            final item = cinema[index];
-            return Container(
-              margin: const EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.0),
-                border: Border.all(
-                  color: Colors.white70,
-                  width: 1,
-                ),
-              ),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(12),
-                    child: Image.asset(
-                      item["image"]!,
-                      fit: BoxFit.cover,
-                      height: 280, // Adjust height as per your requirement
-                    ),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                decoration: InputDecoration(
+                  suffixIcon: Icon(Icons.search,
+                      color: Colors.white.withOpacity(0.8)),
+                  hintText: "Search cinema...",
+                  labelStyle:
+                  TextStyle(color: Colors.white.withOpacity(0.8)),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Colors.white.withOpacity(0.8)),
                   ),
-                  ListTile(
-                    title: TextWidget(
-                      item["title"]!,
-                      size: 20,
-                      bold: true,
+                  focusedBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                  filled: true,
+                  fillColor: Colors.white70.withOpacity(0.1),
+                ),
+                style:
+                TextStyle(color: Colors.white.withOpacity(0.8)),
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                itemCount: cinema.length,
+                itemBuilder: (context, index) {
+                  final item = cinema[index];
+                  return Container(
+                    margin: const EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8.0),
+                      border: Border.all(
+                        color: Colors.white70,
+                        width: 1,
+                      ),
                     ),
-                    subtitle: Row(
+                    child: Column(
                       children: [
-                        const Icon(
-                          Icons.location_on,
-                          color: Colors.red,
+                        Padding(
+                          padding: const EdgeInsets.all(12),
+                          child: Image.asset(
+                            item["main_image"]!,
+                            fit: BoxFit.cover,
+                            height: 280, // Adjust height as per your requirement
+                          ),
                         ),
-                        const SizedBox(width: 4),
-                        Expanded(
-                          child: TextWidget(
-                            item["subtitle"]!,
-                            size: 16,
+                        ListTile(
+                          title: TextWidget(
+                            item["title"]!,
+                            size: 20,
                             bold: true,
                             overflow: TextOverflow.ellipsis,
+                          ),
+                          subtitle: Row(
+                            children: [
+                              const Icon(
+                                Icons.location_on,
+                                color: Colors.red,
+                              ),
+                              const SizedBox(width: 4),
+                              Expanded(
+                                child: TextWidget(
+                                  item["subtitle"]!,
+                                  size: 16,
+                                  bold: true,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
                     ),
-                  ),
-                ],
+                  );
+                },
               ),
-            );
-          },
+            ),
+          ],
         ),
       ),
     );
