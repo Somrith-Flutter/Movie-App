@@ -6,7 +6,9 @@ import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/core/enum/base_status_enum.dart';
 import 'package:legend_cinema/modules/auth/controller/auth_controller.dart';
 import 'package:legend_cinema/modules/auth/repository/auth_repository.dart';
+import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
+import 'package:legend_cinema/widgets/text_widget.dart';
 
 class AuthView extends StatefulWidget {
   const AuthView({super.key});
@@ -173,67 +175,70 @@ class _AuthViewState extends State<AuthView> {
                                 children: [
                                   Expanded(
                                     child: ElevatedButton(
-                                      onPressed: () async {
-                                        try {
-                                          if (_formKey.currentState
-                                                  ?.validate() ??
-                                              false) {
-                                            if (logic.password.text.isEmpty) {
-                                              _isContinous = true;
-                                              setState(() {});
-                                              return;
-                                            }
+                                        onPressed: () async {
+                                          try {
+                                            if (_formKey.currentState
+                                                    ?.validate() ??
+                                                false) {
+                                              if (logic.password.text.isEmpty) {
+                                                _isContinous = true;
+                                                setState(() {});
+                                                return;
+                                              }
 
-                                            EasyLoading.show(
-                                                status: 'Logging in...');
-                                            await logic.loginController(
-                                                type: "phone");
-                                            if (logic.status ==
-                                                BaseStatusEnum.failure) {
-                                              await EasyLoading.dismiss();
-                                              IconSnackBar.show(
-                                                context,
-                                                snackBarType: SnackBarType.fail,
-                                                label: 'Something went wrong!',
-                                                snackBarStyle:
-                                                    const SnackBarStyle(
-                                                  labelTextStyle: TextStyle(
-                                                      color: Colors.white),
-                                                ),
-                                              );
-                                              return;
-                                            }
+                                              EasyLoading.show(
+                                                  status: 'Logging in...');
+                                              await logic.loginController(
+                                                  type: "phone");
+                                              if (logic.status ==
+                                                  BaseStatusEnum.failure) {
+                                                await EasyLoading.dismiss();
+                                                IconSnackBar.show(
+                                                  context,
+                                                  snackBarType:
+                                                      SnackBarType.fail,
+                                                  label:
+                                                      'Something went wrong!',
+                                                  snackBarStyle:
+                                                      const SnackBarStyle(
+                                                    labelTextStyle: TextStyle(
+                                                        color: Colors.white),
+                                                  ),
+                                                );
+                                                return;
+                                              }
 
-                                            if (logic.status ==
-                                                BaseStatusEnum.success) {
-                                              await EasyLoading.dismiss();
-                                              Future.delayed(const Duration(
-                                                  milliseconds: 100));
-                                              logic.clear();
-                                              EasyLoading.showSuccess(
-                                                  'Success!');
+                                              if (logic.status ==
+                                                  BaseStatusEnum.success) {
+                                                await EasyLoading.dismiss();
+                                                Future.delayed(const Duration(
+                                                    milliseconds: 100));
+                                                logic.clear();
+                                                EasyLoading.showSuccess(
+                                                    'Success!');
+                                              }
                                             }
-                                          }
-                                        } catch (_) {}
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 24, vertical: 12),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(24),
+                                          } catch (_) {}
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 24, vertical: 12),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(24),
+                                          ),
                                         ),
-                                      ),
-                                      child: !_isContinous
-                                          ? const Text(
-                                              'Continue',
-                                              style: TextStyle(fontSize: 16),
-                                            )
-                                          : const Text(
-                                              'Login',
-                                              style: TextStyle(fontSize: 16),
-                                            ),
-                                    ),
+                                        child: !_isContinous
+                                            ? TextWidget(
+                                                S.of(context).login,
+                                                size: 16,
+                                                color: Colors.white,
+                                              )
+                                            : TextWidget(
+                                                S.of(context).continues,
+                                                size: 16,
+                                                color: Colors.white,
+                                              )),
                                   ),
                                 ],
                               ),
@@ -294,9 +299,10 @@ class _AuthViewState extends State<AuthView> {
                                               BorderRadius.circular(24),
                                         ),
                                       ),
-                                      child: const Text(
-                                        'Login',
-                                        style: TextStyle(fontSize: 16),
+                                      child: TextWidget(
+                                        S.of(context).login,
+                                        size: 16,
+                                        color: Colors.white,
                                       ),
                                     ),
                                   ),
