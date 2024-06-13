@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:legend_cinema/config/themes/app_color.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 
 class AppConstant{
@@ -53,6 +54,16 @@ class AppConstant{
   ];
 
   static const String defaultFont = 'Siemreap';
+
+  static Widget appbarTheme = Container(
+    decoration: const BoxDecoration(
+      gradient: LinearGradient(
+        colors: AppColor.appbarColor,
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter
+      )
+    ),
+  );
 
   // change it base on your ip address by replace http://127.0.0.1:8000 to your ip.
   static const String baseAndroidUrl = 'http://127.0.0.1:8000/api';
