@@ -102,6 +102,7 @@ class NewsWidget extends StatelessWidget {
                                     imageUrl: item.imageUrl!,
                                     fit: BoxFit.fill,
                                     height: 200,
+                                     width: 400,
                                   )
                                 : const SizedBox(
                                     height: 200,
@@ -111,11 +112,12 @@ class NewsWidget extends StatelessWidget {
                                   ),
                           ),
                           ListTile(
-                            title: Text(
+                            title: TextWidget(
                               item.title ?? '',
-                              style: const TextStyle(
-                                fontSize: 16,
-                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              bold: true,
+                              size: 16,
                             ),
                           ),
                         ],

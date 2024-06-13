@@ -51,6 +51,7 @@ class AppConstant{
     S.delegate,
     GlobalMaterialLocalizations.delegate,
     GlobalWidgetsLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
   ];
 
   static const String defaultFont = 'Siemreap';
