@@ -30,6 +30,9 @@ class AssetPath{
   static const String dis5 = 'assets/icons/dis5.png';
   static const String dis10 = 'assets/icons/dis10.png';
   static const String dis0 = 'assets/icons/dis0.png';
+  static const String cardGift = 'assets/icons/card_gift.png';
+  static const String loginicon = 'assets/icons/login.png';
+  static const String signupicon = 'assets/icons/signup.png'; 
 
   // =============Cinema Location==================
   static const String megaMall = 'assets/images/271-mega-mall.jpg';

@@ -21,10 +21,11 @@ class _NotificationWidgetState extends State<NotificationWidget> {
     return Scaffold(
       appBar: AppBar(
         leading: const BackWidget(),
-        title: TextWidget(S.of(context).notification),
+        title: TextWidget(S.of(context).notification, size: 22, bold: true,),
         centerTitle: true,
         flexibleSpace: AppConstant.appbarTheme,
       ),
+      backgroundColor: AppColor.primaryColor,
       body: _buildBody(),
     );
   }
@@ -33,7 +34,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
     return Container(
       margin: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        border: Border.all(width: 1, color: Colors.white),
+        border: Border.all(width: 1, color: Colors.white.withOpacity(0.7)),
         borderRadius: const BorderRadius.all(Radius.circular(10))
       ),
       child: SwitchListTile.adaptive(
@@ -45,7 +46,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
               child: Icon(
                 Icons.notifications,
                 size: 22,
-                color: AppColor.chart6,
+                color: AppColor.chart2,
               ),
             ),
             const Gap(8),

@@ -33,68 +33,132 @@ class _MoreViewState extends State<MoreView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              TextWidget(S.of(context).account),
-              const Gap(8),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () => AppRoute().push(context, const AuthPage()), 
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red
-                      ),
-                      child: TextWidget(
-                        S.of(context).login,
-                      )
+                  GestureDetector(
+                    onTap: () => AppRoute().push(context, const AuthPage()),
+                    child: Stack(
+                      children: [
+                        Container(
+                          height: 45,
+                          width: 200,
+                          decoration: BoxDecoration(
+                            color: Colors.red.shade900,
+                            borderRadius: const BorderRadius.all(Radius.circular(40))
+                          ),
+                        ),
+                        Positioned(
+                          left: 35,
+                          top: -14,
+                          child: SizedBox(
+                            height: 70,
+                            width: 70,
+                            child: Image.asset(AssetPath.loginicon)
+                          )
+                        ),
+                        Positioned(
+                          right: 55,
+                          bottom: 14,
+                          child: TextWidget(
+                            S.of(context).login,
+                            bold: true,
+                          )
+                        )
+                      ],
                     ),
                   ),
                   const Gap(12),
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () => AppRoute().push(context, const Register()), 
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red
-                      ),
-                      child: TextWidget(
-                        S.of(context).register,
-                      )
+                  GestureDetector(
+                    onTap: () => AppRoute().push(context, const Register()),
+                    child: Stack(
+                      children: [
+                        Container(
+                          height: 45,
+                          width: 200,
+                          decoration: BoxDecoration(
+                            color: Colors.red.shade900,
+                            borderRadius: const BorderRadius.all(Radius.circular(40))
+                          ),
+                        ),
+                        Positioned(
+                          left: 20,
+                          bottom: -14,
+                          child: SizedBox(
+                            height: 80,
+                            width: 80,
+                            child: Image.asset(AssetPath.signupicon)
+                          )
+                        ),
+                        Positioned(
+                          right: 50,
+                          bottom: 14,
+                          child: TextWidget(
+                            S.of(context).register,
+                            bold: true,
+                          )
+                        )
+                      ],
                     ),
                   ),
                 ],
               ),
-              Card(
-                margin: const EdgeInsets.all(5),
-                child: Padding(
-                  padding: const EdgeInsets.all(18),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: TextWidget(S.of(context).lengend_membership, size: 20,)),
-                        const Gap(12),
-                      TextWidget(S.of(context).dis_legend_membership, size: 12,),
-                      const Gap(24),
-                      Align(
-                        alignment: Alignment.bottomLeft,
-                        child: ElevatedButton(
-                          onPressed: () => AppRoute().push(context, const LearnMoreWidget()), 
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red,
-                          ),
-                          child: TextWidget(
-                            S.of(context).learn_more,
-                            size: 12,
-                            bold: true,
-                          ),
+              const Gap(20),
+              Stack(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(15)),
+                      border: Border.all(color: Colors.white.withOpacity(0.2))
+                    ),
+                    child: Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(18),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: TextWidget(S.of(context).lengend_membership, size: 20, bold: true,)),
+                              const Gap(12),
+                            TextWidget(S.of(context).dis_legend_membership, size: 13,color: Colors.white.withOpacity(0.7),),
+                            const Gap(40),
+                            Align(
+                              alignment: Alignment.bottomLeft,
+                              child: ElevatedButton(
+                                onPressed: () => AppRoute().push(context, const LearnMoreWidget()), 
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.red.shade900,
+                                ),
+                                child: TextWidget(
+                                  S.of(context).learn_more,
+                                  size: 14,
+                                  bold: true,
+                                ),
+                              ),
+                            ),
+                            const Gap(8),
+                          ],
                         ),
                       ),
-                      const Gap(8),
-                    ],
+                    ),
                   ),
-                ),
+                  Positioned(
+                    bottom: -27,
+                    right: 8,
+                    child: Container(
+                      height: 180,
+                      width: 150,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(bottomRight: Radius.circular(15)),
+                       image: DecorationImage(image: AssetImage(AssetPath.cardGift))
+                      ),
+                    )
+                  ),
+                ],
               ),
+              const Gap(12),
               Obx(() {
                 String title;
                 String icon;

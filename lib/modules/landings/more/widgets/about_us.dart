@@ -1,9 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/modules/landings/more/controller/more_controller.dart';
 import 'package:legend_cinema/modules/landings/more/repository/more_repository.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
+import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 class AboutUsWidget extends StatefulWidget {
   const AboutUsWidget({super.key});
@@ -25,54 +28,62 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.of(context).about_us),
+        leading: const BackWidget(),
+        title: TextWidget(S.of(context).about_us, size: 22, bold: true,),
+        flexibleSpace: AppConstant.appbarTheme,
       ),
       body: Obx(() {
         if (controller.isLoading.value) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(
+            child: CircularProgressIndicator()
+          );
         } else if (controller.errorMessage.isNotEmpty) {
-          return Center(child: Text('Error: ${controller.errorMessage}'));
+          return const Center(
+            child: Text('Something when wrong!, Please check your cennection!')
+          );
         } else if (controller.aboutus.isEmpty) {
           return const Center(child: Text('No data available.'));
         } else {
           final about = controller.aboutus.first;
           return SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 220,
-                    child: CachedNetworkImage(
-                      imageUrl: about.image ?? '',
-                      fit: BoxFit.cover,
-                      errorWidget: (context, url, error) => const Icon(Icons.error),
-                    ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 220,
+                  width: double.maxFinite,
+                  child: CachedNetworkImage(
+                    imageUrl: about.image ?? '',
+                    fit: BoxFit.cover,
+                    errorWidget: (context, url, error) => const Icon(Icons.error),
                   ),
+                ),
+                const Gap(12),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: TextWidget(
+                    about.title ?? '',
+                    size: 24,
+                    bold: true,
+                  ),
+                ),
+                if (about.subtitle != null && about.subtitle!.isNotEmpty)
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    padding: const EdgeInsets.only(bottom: 8.0,left: 12, top: 8),
                     child: TextWidget(
-                      about.title ?? '',
-                      size: 24,
-                      bold: true,
+                      about.subtitle!,
+                      size: 18,
+                      color: Colors.grey,
                     ),
                   ),
-                  if (about.subtitle != null && about.subtitle!.isNotEmpty)
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: TextWidget(
-                        about.subtitle!,
-                        size: 18,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  TextWidget(
-                    about.description ?? '',
+                Padding(
+                  padding: const EdgeInsets.only(left: 16, top: 12),
+                  child: TextWidget(
+                    '    ${about.description}',
                     size: 16,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           );
         }

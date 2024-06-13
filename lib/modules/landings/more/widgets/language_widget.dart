@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:legend_cinema/config/themes/app_color.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/modules/landings/more/controller/more_controller.dart';
@@ -42,8 +43,10 @@ class _LanguageWidgetState extends State<LanguageWidget> {
     return Scaffold(
       appBar: AppBar(
         leading: const BackWidget(),
-        title: Text(S.of(context).language),
+        title: TextWidget(S.of(context).language, size: 22, bold: true,),
+        flexibleSpace: AppConstant.appbarTheme,
       ),
+      backgroundColor: AppColor.primaryColor,
       body: _buildBody(), 
     );
   }
@@ -54,8 +57,8 @@ class _LanguageWidgetState extends State<LanguageWidget> {
         Align(
           alignment: Alignment.topLeft,
           child: Padding(
-            padding: const EdgeInsets.only(left: 16),
-            child: TextWidget(S.of(context).language, size: 16,),
+            padding: const EdgeInsets.only(left: 16, top: 12, bottom: 8),
+            child: TextWidget(S.of(context).language, size: 18,),
           )),
         _buildLanguageOption(
           context,

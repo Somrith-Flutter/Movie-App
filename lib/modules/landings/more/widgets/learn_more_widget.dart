@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:legend_cinema/config/routes/app_route.dart';
+import 'package:legend_cinema/config/themes/app_color.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/learn_more_details_widget.dart';
@@ -16,9 +17,10 @@ class LearnMoreWidget extends StatelessWidget {
       appBar: AppBar(
         leading: const BackWidget(),
         centerTitle: true,
-        title: const TextWidget('Legend Member', size: 26, bold: true,),
+        title: const TextWidget('Legend Member', size: 22, bold: true,),
         flexibleSpace: AppConstant.appbarTheme,
       ),
+      backgroundColor: AppColor.primaryColor,
       body: _buildBody(context),
     );
   }
@@ -33,9 +35,10 @@ class LearnMoreWidget extends StatelessWidget {
             alignment: Alignment.topLeft,
             child: TextWidget(
               'Member Benifits',
-              size: 24,
+              size: 22,
               bold: true,
             )),
+          const Gap(8),
           const Align(
             alignment: Alignment.topLeft,
             child: TextWidget(
@@ -57,17 +60,18 @@ class LearnMoreWidget extends StatelessWidget {
         thumbnails: AssetPath.dis0,
         titles: '5% Bonus on top up',
         images: AssetPath.dis5,
-        contents: 'test'
+        contents: '5% Bonus on top up'
       ),
       Benifit(
         thumbnails: AssetPath.dis0,
-        titles: 'Discount 10% Ticked &\nConcession',
+        titles: 'Discount 10% Ticked & \nConcession',
         images: AssetPath.dis10,
-        contents: 'test'
+        contents: 'Discount 10% Ticked & Concession'
       ),
     ];
     return Expanded(
       child: ListView.builder(
+        physics: const NeverScrollableScrollPhysics(),
         itemCount: images.length,
         itemBuilder: (context, index){
           var items = images[index];
@@ -93,12 +97,14 @@ class LearnMoreWidget extends StatelessWidget {
                           height: double.maxFinite,
                           width: 150,
                           decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.9),
+                            color: Colors.blueGrey.withOpacity(0.9),
                             borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(10), 
                               bottomLeft: Radius.circular(10))
                           ),
-                          child: Image.asset(items.images!, fit: BoxFit.contain,),
+                          child: Container(
+                            color: Colors.black.withOpacity(0.7),
+                            child: Image.asset(items.images!, fit: BoxFit.contain,)),
                         ),
                       ],
                     ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:legend_cinema/config/themes/app_color.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
@@ -20,9 +21,10 @@ class LernMoreDetailsWidget extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: const BackWidget(),
-        title: const TextWidget('Benifit', size: 26, bold: true,),
+        title: const TextWidget('Benifit', size: 22, bold: true,),
         flexibleSpace: AppConstant.appbarTheme,
       ),
+      backgroundColor: AppColor.primaryColor,
       body:  Column(
         children: [
           SizedBox(
@@ -30,19 +32,19 @@ class LernMoreDetailsWidget extends StatelessWidget {
             width: double.maxFinite,
             child: Image.asset(thumbnail!, fit: BoxFit.cover,),
           ),
-          const Gap(12),
+          const Gap(8),
           Padding(
             padding: const EdgeInsets.all(12),
             child: Column(
               children:[
                 Align(
                   alignment: Alignment.topLeft,
-                  child: TextWidget(title),
+                  child: TextWidget(content, bold: true, size: 20,),
                 ),
-                const Gap(12),
+                const Gap(16),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: TextWidget(content),
+                  child: TextWidget(content, color: Colors.white.withOpacity(0.8),),
                 )
               ]
             ),
