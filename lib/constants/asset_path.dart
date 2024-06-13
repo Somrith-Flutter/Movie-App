@@ -27,6 +27,9 @@ class AssetPath{
   static const String offer2 = 'assets/icons/offer2.png';
   static const String offer3 = 'assets/icons/offer3.png';
 
+  static const String dis5 = 'assets/icons/dis5.png';
+  static const String dis10 = 'assets/icons/dis10.png';
+
   // =============Cinema Location==================
   static const String megaMall = 'assets/images/271-mega-mall.jpg';
   static const String sihanouk = 'assets/images/sihanouk.jpg';

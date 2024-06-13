@@ -8,6 +8,7 @@ import 'package:legend_cinema/core/more_list_tile_items.dart';
 import 'package:legend_cinema/modules/auth/view/auth_page.dart';
 import 'package:legend_cinema/modules/auth/view/reqister_view.dart';
 import 'package:legend_cinema/modules/landings/more/controller/more_controller.dart';
+import 'package:legend_cinema/modules/landings/more/widgets/learn_more_widget.dart';
 import 'package:legend_cinema/widgets/list_tile_item.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
@@ -78,7 +79,7 @@ class _MoreViewState extends State<MoreView> {
                       Align(
                         alignment: Alignment.bottomLeft,
                         child: ElevatedButton(
-                          onPressed: (){}, 
+                          onPressed: () => AppRoute().push(context, const LearnMoreWidget()), 
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.red,
                           ),
