@@ -143,7 +143,7 @@ class OffersView extends StatelessWidget {
                 child: ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
-                  itemCount: titless.length,
+                  itemCount: icons.length,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -189,7 +189,7 @@ class OffersView extends StatelessWidget {
                               child: SizedBox(
                                 height: 100,
                                 width: 100,
-                                child: Image.asset(AssetPath.cinema1)
+                                child: Image.asset(icons[index])
                               ),
                             )
                           ],
@@ -206,3 +206,9 @@ class OffersView extends StatelessWidget {
     );
   }
 }
+
+List<String> icons = [
+  AssetPath.offer3,
+  AssetPath.offer1,
+  AssetPath.offer2,
+];
