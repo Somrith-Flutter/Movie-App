@@ -28,17 +28,24 @@ class LernMoreDetailsWidget extends StatelessWidget {
           SizedBox(
             height: 300,
             width: double.maxFinite,
-            child: Image.asset(thumbnail!),
-          ),
-          const Gap(24),
-          Align(
-            alignment: Alignment.topLeft,
-            child: TextWidget(title),
+            child: Image.asset(thumbnail!, fit: BoxFit.cover,),
           ),
           const Gap(12),
-          Align(
-            alignment: Alignment.topLeft,
-            child: TextWidget(content),
+          Padding(
+            padding: const EdgeInsets.all(12),
+            child: Column(
+              children:[
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: TextWidget(title),
+                ),
+                const Gap(12),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: TextWidget(content),
+                )
+              ]
+            ),
           )
         ],
       ),
