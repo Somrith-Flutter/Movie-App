@@ -30,17 +30,26 @@ class MyListTile extends StatelessWidget {
                 alignment: Alignment.topLeft,
                 child: TextWidget(item.header)
               ),
-            ListTile(
-              title: TextWidget(item.title),
-              leading: item.isAssetIcon == true 
-                ? SizedBox(
-                    height: 40,
-                    width: 30,
-                    child: Image.asset(item.assetIcon!)
-                  ) : Icon(item.icon),
-              trailing: item.trailing ? const Icon(Icons.chevron_right) : const Text(''),
-              onTap: () => onTap != null ? onTap!(index) : '',
-              hoverColor: Colors.white.withOpacity(0.3),
+            item.isSpacig ? const Gap(8) : const Gap(0),
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.white.withOpacity(0.2)),
+                borderRadius: const BorderRadius.all(Radius.circular(15))
+              ),
+              child: Card(
+                child: ListTile(
+                  title: TextWidget(item.title),
+                  leading: item.isAssetIcon == true 
+                    ? SizedBox(
+                        height: 40,
+                        width: 30,
+                        child: Image.asset(item.assetIcon!)
+                      ) : Icon(item.icon),
+                  trailing: item.trailing ? const Icon(Icons.chevron_right) : const Text(''),
+                  onTap: () => onTap != null ? onTap!(index) : '',
+                  hoverColor: Colors.white.withOpacity(0.3),
+                ),
+              ),
             ),
           ],
         );

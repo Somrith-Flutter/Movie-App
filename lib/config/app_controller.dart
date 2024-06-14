@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:legend_cinema/modules/auth/controller/auth_controller.dart';
+import 'package:legend_cinema/modules/auth/controller/pick_image_controller.dart';
 import 'package:legend_cinema/modules/auth/repository/auth_repository.dart';
 import 'package:legend_cinema/modules/landings/cinema/controller/cinema_controller.dart';
 import 'package:legend_cinema/modules/landings/cinema/repository/cinema_repository.dart';
@@ -33,5 +34,6 @@ class AppController extends Bindings {
     Get.lazyPut(() => AuthController(
       repository: AuthRepository()
     ));
+    Get.put(PickImageController());
   }
 }

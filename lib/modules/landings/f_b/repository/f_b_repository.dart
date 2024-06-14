@@ -1,15 +1,23 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:legend_cinema/constants/api_path.dart';
+import 'package:legend_cinema/core/model/fb_model.dart';
 import 'package:legend_cinema/core/service/rest_api_service.dart';
 import 'package:legend_cinema/modules/landings/f_b/model/f_b_model.dart';
-import 'package:legend_cinema/modules/landings/f_b/model/location_model.dart';
 
 class FBRepository extends RestApiService{
-  Future<List<LocationModel>> getLocationList() async {
+  Future<List<FANDBModel>?> getLocationList() async {
+    List<FANDBModel> fb = [];
     final String response = await getAssetData(ApiPath.locationlist);
-    final Map<String, dynamic> jsonResponse = json.decode(response);
-    final List<dynamic> data = jsonResponse['location']; 
-    return data.map((json) => LocationModel.fromJson(json)).toList();
+
+    if(response.isNotEmpty){
+      var json = jsonDecode(response);
+      for(var l in json['location']){
+        fb.add(FANDBModel.fromJson(l));
+      }
+      return fb;
+    }
+    return null;
   }
 
    Future<FBModel> getDetailedData(String endpoint, String locationType) async {

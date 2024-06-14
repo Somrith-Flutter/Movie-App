@@ -4,39 +4,22 @@ import 'package:get/get.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/modules/landings/offers/controller/offers_controller.dart';
-import 'package:legend_cinema/modules/landings/offers/repository/offers_repository.dart';
+import 'package:legend_cinema/modules/landings/offers/widget/offers_items_widget.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 import 'offers_detail.dart';
 
-List<String> titless = [
-  'Discount 10% Concession',
-  'Discount 10% Ticket',
-  'Buy 1 get 1 Every Tuesday',
-];
-
-List<String> subtitless = [
-  '10% discount on concession',
-  '10% discount on ticket',
-  'Buy one get one tickets free!',
-];
-
-List<String> icons = [
-  AssetPath.offer3,
-  AssetPath.offer2,
-  AssetPath.offer1,
-];
-final controller = Get.put(OffersController(repository: OffersRepository()));
 class OffersView extends StatelessWidget {
   const OffersView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    OffersController controller = Get.find();
     controller.fetchOffers();
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: Text(S.of(context).offer),
+        title: TextWidget(S.of(context).offer, size: 22, bold: true,),
         flexibleSpace: AppConstant.appbarTheme
       ),
       backgroundColor: Colors.black87,
@@ -46,9 +29,7 @@ class OffersView extends StatelessWidget {
             child: CircularProgressIndicator()
           );
         } else if (controller.errorMessage.isNotEmpty) {
-          return const Center(
-            child: Text('Something when wrong!, Please check or ensure your connection!')
-          );
+          return _buildDataNotAvalible(context);
         } else if (controller.offers.isEmpty) {
           return const Center(
             child: Text('No data available.')
@@ -83,61 +64,7 @@ class OffersView extends StatelessWidget {
                 bold: true,
               ),
             ),
-            ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: controller.offers.length,
-              itemBuilder: (context, index) {
-                final item = controller.offers[index];
-                return InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DetailScreen(
-                          image: item.image!,
-                          title: item.title!,
-                        ),
-                      ),
-                    );
-                  },
-                  child: Card(
-                    margin: const EdgeInsets.all(8.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                          color: Colors.white70,
-                          width: 1,
-                        ),
-                      ),
-                      child: Column(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
-                            child: CachedNetworkImage(
-                              imageUrl: item.image!,
-                              fit: BoxFit.fill,
-                              height: 250,
-                              width: 400,
-                            ),
-                          ),
-                          ListTile(
-                            title: TextWidget(
-                              item.title!,
-                              size: 20,
-                              overflow: TextOverflow.ellipsis,
-                              bold: true,
-                              maxLines: 2,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
+            _buildOffers(),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextWidget(
@@ -150,6 +77,65 @@ class OffersView extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildOffers(){
+    OffersController controller = Get.find();
+    return ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: controller.offers.length,
+      itemBuilder: (context, index) {
+        final item = controller.offers[index];
+        return InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DetailScreen(
+                  image: item.image!,
+                  title: item.title!,
+                ),
+              ),
+            );
+          },
+          child: Card(
+            margin: const EdgeInsets.all(8.0),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: Colors.white70,
+                  width: 1,
+                ),
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+                    child: CachedNetworkImage(
+                      imageUrl: item.image!,
+                      fit: BoxFit.fill,
+                      height: 250,
+                      width: 400,
+                    ),
+                  ),
+                  ListTile(
+                    title: TextWidget(
+                      item.title!,
+                      size: 20,
+                      overflow: TextOverflow.ellipsis,
+                      bold: true,
+                      maxLines: 2,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -220,6 +206,33 @@ class OffersView extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+
+  Widget _buildDataNotAvalible(BuildContext context){
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        SizedBox(
+          height: 220,
+          child: Image.asset(
+            AssetPath.cinema1,
+            fit: BoxFit.fill,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 18, left: 12, bottom: 12),
+          child: Align(
+            alignment: Alignment.topLeft,
+            child: TextWidget(
+              S.of(context).premium_benifit,
+              size: 18,
+              bold: true,
+            ),
+          ),
+        ),
+        _buildPremiumBenifit(),
+      ],
     );
   }
 }

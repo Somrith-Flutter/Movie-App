@@ -2,6 +2,7 @@ class AssetPath{
   static const String flagkhmer = 'assets/flages/flag_khmer.png';
   static const String flagEngland = 'assets/flages/flag_england.png';
   static const String flagChinese = 'assets/flages/flag_chinese.png';
+  static const String noData = 'assets/images/no-data.png';
 
   static const String cinema1 = 'assets/images/cinema1.jpeg';
   static const String cinema2 = 'assets/images/cinema2.jpeg';
@@ -27,6 +28,14 @@ class AssetPath{
   static const String offer2 = 'assets/icons/offer2.png';
   static const String offer3 = 'assets/icons/offer3.png';
 
+  static const String dis5 = 'assets/icons/dis5.png';
+  static const String dis10 = 'assets/icons/dis10.png';
+  static const String dis0 = 'assets/icons/dis0.png';
+  static const String cardGift = 'assets/icons/card_gift.png';
+  static const String loginicon = 'assets/icons/login.png';
+  static const String signupicon = 'assets/icons/signup.png'; 
+  static const String purchase = 'assets/icons/purchase.png';
+
   // =============Cinema Location==================
   static const String megaMall = 'assets/images/271-mega-mall.jpg';
   static const String sihanouk = 'assets/images/sihanouk.jpg';
@@ -41,6 +50,7 @@ class AssetPath{
   static const String siemreap = 'assets/images/siemreap.jpg';
   static const String toulkork = 'assets/images/toulkork.jpg';
 
+<<<<<<< HEAD
   //Image HomePage
   static const String story1 = 'assets/images/story1.jpg';
   static const String story2 = 'assets/images/story2.jpg';
@@ -54,4 +64,19 @@ class AssetPath{
   static const String story10 = 'assets/images/story10.jpg';
 
 
+=======
+  //==============Cinema location detail================
+  static const String megaMallDetail = 'assets/images/mega-mall-detail.png';
+  static const String sihanoukDetail = 'assets/images/sihanouk-detail.png';
+  static const String edenDetail = 'assets/images/eden-detail.png';
+  static const String kMallDetail = 'assets/images/k-mall-detail.png';
+  static const String meancheyDetail = 'assets/images/meanchey-detail.png';
+  static const String midTownDetail = 'assets/images/midtown-detail.png';
+  static const String noroMallDetail = 'assets/images/noro-mall-detail.png';
+  static const String olympiaDetail = 'assets/images/olympia-detail.jpeg';
+  static const String premiumDetail = 'assets/images/premium-detail.png';
+  static const String sensokDetail = 'assets/images/sensok-detail.jpeg';
+  static const String siemreapDetail = 'assets/images/siemreap-detail.png';
+  static const String toulkorkDetail = 'assets/images/toulkork-detail.png';
+>>>>>>> 320bd16c9eff438c8b693d049bd6f39f9eef7a22
 }

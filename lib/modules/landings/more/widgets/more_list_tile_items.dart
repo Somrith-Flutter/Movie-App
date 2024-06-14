@@ -11,16 +11,16 @@ import 'package:legend_cinema/widgets/list_tile_item.dart';
 
 List<ListTileItem> items(BuildContext context, String title, String icon)  {
   return [
-    // const TextWidget(
-    //   'Purchase',
-    // ),
     // const ListTileItem(
     //   title: 'Purchase',
     //   icon: Icons.currency_pound,
     //   trailing: true,
-    //),
+    //   route: PurchaseWidget(),
+    //   header: 'Purchase',
+    //   isheader: true,
+    //   isSpacig: true,
+    // ),
     // language
-
     ListTileItem(
       title: title,
       isAssetIcon: true,
@@ -30,6 +30,7 @@ List<ListTileItem> items(BuildContext context, String title, String icon)  {
       route: const LanguageWidget(),
       header: S.of(context).language,
       isheader: true,
+      isSpacig: true
     ),
     // const TextWidget('Account'),
     // const ListTileItem(
@@ -41,6 +42,7 @@ List<ListTileItem> items(BuildContext context, String title, String icon)  {
       title:  S.of(context).news_activity,
       icon: Icons.local_activity,
       trailing: true,
+      isSpacig: true,
       route: const NewsWidget(),
       header: S.of(context).what_new,
       isheader: true
@@ -51,12 +53,14 @@ List<ListTileItem> items(BuildContext context, String title, String icon)  {
       trailing: true,
       header: S.of(context).notification,
       isheader: true,
+      isSpacig: true,
       route: const NotificationWidget()
     ),
     ListTileItem(
       title: S.of(context).about_us,
       icon: Icons.info_outline_rounded,
       trailing: true,
+      isSpacig: true,
       header: S.of(context).about_us,
       isheader: true,
       route: const AboutUsWidget(),
@@ -83,6 +87,7 @@ List<ListTileItem> items(BuildContext context, String title, String icon)  {
     //   title: 'Logout',
     //   icon: Icons.logout,
     //   trailing: true,
+    //   route: Dialog(),
     // ),
   ];
 }

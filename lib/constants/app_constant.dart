@@ -21,6 +21,9 @@ class AppConstant{
 
   // Defualt Theme
   static ThemeData dark = ThemeData.dark();
+  static  ThemeMode themeMode = ThemeMode.dark;
+  static ThemeData themeLight = ThemeData(brightness: Brightness.light);
+  static ThemeData themeDark = ThemeData(brightness: Brightness.dark);
 
   // Number format
   static const String decimalFormat = '#,##0.00;-#,##0.00;0.00';
@@ -32,6 +35,8 @@ class AppConstant{
     Locale('km', 'KH'), 
     Locale('zh', 'CN'),
   ];
+
+  static const fallbacklocal = Locale('km', 'KH');
 
   // English language
   static const String en = 'en';
@@ -51,7 +56,9 @@ class AppConstant{
     S.delegate,
     GlobalMaterialLocalizations.delegate,
     GlobalWidgetsLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
   ];
+  static Iterable<Locale>  supportLocalLanguage = S.delegate.supportedLocales;
 
   static const String defaultFont = 'Siemreap';
 

@@ -120,6 +120,16 @@ class S {
     );
   }
 
+  /// `smart_phone`
+  String get phone {
+    return Intl.message(
+      'Phone',
+      name: 'phone',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Light`
   String get light {
     return Intl.message(

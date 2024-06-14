@@ -1,17 +1,23 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:legend_cinema/constants/api_path.dart';
+import 'package:legend_cinema/core/enum/base_status_enum.dart';
+import 'package:legend_cinema/core/model/fb_model.dart';
 import 'package:legend_cinema/modules/landings/f_b/model/card_model.dart';
 import 'package:legend_cinema/modules/landings/f_b/model/f_b_model.dart';
 import 'package:legend_cinema/modules/landings/f_b/model/location_model.dart';
 import 'package:legend_cinema/modules/landings/f_b/repository/f_b_repository.dart';
 
-class FBController extends GetxController{
+class FBController extends GetxController implements GetxService{
   FBController({required this.repository});
   final FBRepository repository;
 
   final Map<CartModel, int> cartItems = {};
+  List<FANDBModel> fb = [];
+  BaseStatusEnum status = BaseStatusEnum.initial;
 
   void addItem(CartModel product) {
     if (cartItems.containsKey(product)) {
@@ -61,16 +67,20 @@ class FBController extends GetxController{
   }
 
   Future<void> getLocations() async {
+    status = BaseStatusEnum.inprogress;
+
     try {
-      isLoading(true);
-      var locations = await repository.getLocationList();
-      location.value = locations;
-      debugPrint('$locations');
+      await repository.getLocationList().then((data) {
+        if(data != null){
+          fb = data;
+        }
+        status = BaseStatusEnum.success;
+      });
     } catch (e) {
-      errorMessage.value = e.toString();
-    } finally {
-      isLoading(false);
+      status = BaseStatusEnum.failure;
+      debugPrint(e.toString());
     }
+    update();
   }
 
    var detailedData = <FBModel>[].obs;

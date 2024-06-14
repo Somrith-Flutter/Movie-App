@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:legend_cinema/config/app_controller.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/core/splash_screen.dart';
-import 'package:legend_cinema/translation/generated/l10n.dart';
-import 'package:legend_cinema/v_globle.dart';
+import 'package:legend_cinema/shared/share_preference.dart'; 
+import 'package:legend_cinema/shared/v_globle.dart';
 
 class LegendCinemaApp extends StatefulWidget {
   const LegendCinemaApp({super.key});
@@ -15,14 +15,25 @@ class LegendCinemaApp extends StatefulWidget {
 }
 
 class _LegendCinemaAppState extends State<LegendCinemaApp> {
+  Locale? _locale;
+
   @override
   void initState() {
-    loadShareValue();
     super.initState();
+    loadShareValue();
+    _loadLocale();
   }
 
   void loadShareValue() {
     accessToken.load();
+  }
+
+  void _loadLocale() async {
+    final savedLocale = await SharedPrefs.loadSelectedLanguage();
+    setState(() {
+      _locale = Locale(savedLocale.languageCode, savedLocale.countryCode);
+      Get.updateLocale(_locale!);
+    });
   }
 
   @override
@@ -30,55 +41,16 @@ class _LegendCinemaAppState extends State<LegendCinemaApp> {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: AppConstant.appName,
-      theme: ThemeData(
-        brightness: Brightness.light,
-      ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-      ),
-      themeMode: ThemeMode.dark,
+      theme: AppConstant.themeLight,
+      darkTheme: AppConstant.themeDark,
+      themeMode: AppConstant.themeMode,
       initialBinding: AppController(),
-      supportedLocales: S.delegate.supportedLocales,
+      supportedLocales: AppConstant.supportLocalLanguage,
       localizationsDelegates: AppConstant.delegate,
-      fallbackLocale: const Locale('km', 'KH'),
+      locale: _locale,
+      fallbackLocale: AppConstant.fallbacklocal,
       home: const SplashScreen(),
       builder: EasyLoading.init(),
     );
   }
 }
-
-// class LegendCinemaApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return FutureBuilder<Locale>(
-//       future: SharedPrefs.loadLocale(),
-//       builder: (context, snapshot) {
-//         if (snapshot.connectionState == ConnectionState.waiting) {
-//           return const CircularProgressIndicator();
-//         } else {
-//           if (snapshot.hasData) {
-//             Get.updateLocale(snapshot.data!); // Update locale immediately without restarting app
-//             return GetMaterialApp(
-//               debugShowCheckedModeBanner: false,
-//               title: AppConstant.appName,
-//               theme: AppConstant.dark,
-//               darkTheme: AppConstant.dark,
-//               themeMode: ThemeMode.dark,
-//               initialBinding: AppController(),
-//               supportedLocales: S.delegate.supportedLocales,
-//               localizationsDelegates: AppConstant.delegate,
-//               locale: snapshot.data,
-//               fallbackLocale: const Locale('km', 'KH'),
-//               home: SplashScreen(),
-//             );
-//           } else {
-//             // Handle error if unable to load locale
-//             return const Center(
-//               child: Text('Error loading locale'),
-//             );
-//           }
-//         }
-//       },
-//     );
-//   }
-// }
