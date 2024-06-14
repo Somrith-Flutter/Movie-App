@@ -50,7 +50,6 @@ class AssetPath{
   static const String siemreap = 'assets/images/siemreap.jpg';
   static const String toulkork = 'assets/images/toulkork.jpg';
 
-<<<<<<< HEAD
   //Image HomePage
   static const String story1 = 'assets/images/story1.jpg';
   static const String story2 = 'assets/images/story2.jpg';
@@ -64,7 +63,6 @@ class AssetPath{
   static const String story10 = 'assets/images/story10.jpg';
 
 
-=======
   //==============Cinema location detail================
   static const String megaMallDetail = 'assets/images/mega-mall-detail.png';
   static const String sihanoukDetail = 'assets/images/sihanouk-detail.png';
@@ -78,5 +76,4 @@ class AssetPath{
   static const String sensokDetail = 'assets/images/sensok-detail.jpeg';
   static const String siemreapDetail = 'assets/images/siemreap-detail.png';
   static const String toulkorkDetail = 'assets/images/toulkork-detail.png';
->>>>>>> 320bd16c9eff438c8b693d049bd6f39f9eef7a22
 }
