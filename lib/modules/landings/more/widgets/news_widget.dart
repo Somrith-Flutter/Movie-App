@@ -4,25 +4,18 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/modules/landings/more/controller/more_controller.dart';
-import 'package:legend_cinema/modules/landings/more/repository/more_repository.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/news_details_widget.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/no_data_found.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
-class NewsWidget extends StatefulWidget {
+class NewsWidget extends StatelessWidget {
   const NewsWidget({super.key});
 
   @override
-  State<NewsWidget> createState() => _NewsWidgetState();
-}
-
-class _NewsWidgetState extends State<NewsWidget> {
-  final controller = Get.put(MoreController(repository: MoreRepository()));
-
-  @override
   Widget build(BuildContext context) {
+    MoreController controller = Get.find();
     return Scaffold(
       appBar: AppBar(
         leading: const BackWidget(),
@@ -63,71 +56,76 @@ class _NewsWidgetState extends State<NewsWidget> {
                     bold: true,
                   ),
                 ),
-                ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: controller.newsAndActivities.length,
-                  itemBuilder: (context, index) {
-                    final item = controller.newsAndActivities[index];
-                    return GestureDetector(
-                      onTap: () => _navigateToDetails(item),
-                      child: Card(
-                        margin: const EdgeInsets.all(8.0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8.0),
-                            border: Border.all(
-                              color: Colors.white70,
-                              width: 1,
-                            ),
-                          ),
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: item.imageUrl != null
-                                    ? CachedNetworkImage(
-                                        imageUrl: item.imageUrl!,
-                                        fit: BoxFit.cover,
-                                        height: 200,
-                                        width: double.infinity,
-                                        placeholder: (context, url) =>
-                                            const Center(
-                                          child: CircularProgressIndicator(),
-                                        ),
-                                        errorWidget: (context, url, error) =>
-                                            const Center(
-                                          child: Text('No Image'),
-                                        ),
-                                      )
-                                    : const SizedBox(
-                                        height: 200,
-                                        child: Center(
-                                          child: Text('No Image'),
-                                        ),
-                                      ),
-                              ),
-                              ListTile(
-                                title: TextWidget(
-                                  item.title ?? '',
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  bold: true,
-                                  size: 16,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
+                _buildNewsWidget(),
               ],
             ),
           );
         }
       }),
+    );
+  }
+
+  Widget _buildNewsWidget(){
+    MoreController controller = Get.find();
+    return ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: controller.newsAndActivities.length,
+      itemBuilder: (context, index) {
+        final item = controller.newsAndActivities[index];
+        return GestureDetector(
+          onTap: () => _navigateToDetails(item),
+          child: Card(
+            margin: const EdgeInsets.all(8.0),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8.0),
+                border: Border.all(
+                  color: Colors.white70,
+                  width: 1,
+                ),
+              ),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: item.imageUrl != null
+                        ? CachedNetworkImage(
+                            imageUrl: item.imageUrl!,
+                            fit: BoxFit.cover,
+                            height: 200,
+                            width: double.infinity,
+                            placeholder: (context, url) =>
+                                const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                            errorWidget: (context, url, error) =>
+                                const Center(
+                              child: Text('No Image'),
+                            ),
+                          )
+                        : const SizedBox(
+                            height: 200,
+                            child: Center(
+                              child: Text('No Image'),
+                            ),
+                          ),
+                  ),
+                  ListTile(
+                    title: TextWidget(
+                      item.title ?? '',
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      bold: true,
+                      size: 16,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 
