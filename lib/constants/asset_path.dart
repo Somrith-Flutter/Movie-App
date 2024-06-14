@@ -2,6 +2,7 @@ class AssetPath{
   static const String flagkhmer = 'assets/flages/flag_khmer.png';
   static const String flagEngland = 'assets/flages/flag_england.png';
   static const String flagChinese = 'assets/flages/flag_chinese.png';
+  static const String noData = 'assets/images/no-data.png';
 
   static const String cinema1 = 'assets/images/cinema1.jpeg';
   static const String cinema2 = 'assets/images/cinema2.jpeg';
