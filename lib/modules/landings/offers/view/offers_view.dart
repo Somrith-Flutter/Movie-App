@@ -46,9 +46,7 @@ class OffersView extends StatelessWidget {
             child: CircularProgressIndicator()
           );
         } else if (controller.errorMessage.isNotEmpty) {
-          return const Center(
-            child: Text('Something when wrong!, Please check or ensure your connection!')
-          );
+          return _buildDataNotAvalible(context);
         } else if (controller.offers.isEmpty) {
           return const Center(
             child: Text('No data available.')
@@ -220,6 +218,33 @@ class OffersView extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+
+  Widget _buildDataNotAvalible(BuildContext context){
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        SizedBox(
+          height: 220,
+          child: Image.asset(
+            AssetPath.cinema1,
+            fit: BoxFit.fill,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 18, left: 12, bottom: 12),
+          child: Align(
+            alignment: Alignment.topLeft,
+            child: TextWidget(
+              S.of(context).premium_benifit,
+              size: 18,
+              bold: true,
+            ),
+          ),
+        ),
+        _buildPremiumBenifit(),
+      ],
     );
   }
 }
