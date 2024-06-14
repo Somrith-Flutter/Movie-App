@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
-import 'package:legend_cinema/core/more_list_tile_items.dart';
+import 'package:legend_cinema/modules/landings/more/widgets/more_list_tile_items.dart';
 import 'package:legend_cinema/modules/auth/view/auth_page.dart';
 import 'package:legend_cinema/modules/auth/view/reqister_view.dart';
 import 'package:legend_cinema/modules/landings/more/controller/more_controller.dart';

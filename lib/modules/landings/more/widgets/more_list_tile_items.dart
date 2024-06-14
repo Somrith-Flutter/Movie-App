@@ -11,16 +11,16 @@ import 'package:legend_cinema/widgets/list_tile_item.dart';
 
 List<ListTileItem> items(BuildContext context, String title, String icon)  {
   return [
-    // const TextWidget(
-    //   'Purchase',
-    // ),
     // const ListTileItem(
     //   title: 'Purchase',
     //   icon: Icons.currency_pound,
     //   trailing: true,
-    //),
+    //   route: PurchaseWidget(),
+    //   header: 'Purchase',
+    //   isheader: true,
+    //   isSpacig: true,
+    // ),
     // language
-
     ListTileItem(
       title: title,
       isAssetIcon: true,
@@ -87,6 +87,7 @@ List<ListTileItem> items(BuildContext context, String title, String icon)  {
     //   title: 'Logout',
     //   icon: Icons.logout,
     //   trailing: true,
+    //   route: Dialog(),
     // ),
   ];
 }
