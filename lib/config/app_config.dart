@@ -5,8 +5,7 @@ import 'package:legend_cinema/config/app_controller.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/core/splash_screen.dart';
 import 'package:legend_cinema/shared/share_preference.dart'; 
-import 'package:legend_cinema/translation/generated/l10n.dart';
-import 'package:legend_cinema/v_globle.dart';
+import 'package:legend_cinema/shared/v_globle.dart';
 
 class LegendCinemaApp extends StatefulWidget {
   const LegendCinemaApp({super.key});
@@ -42,18 +41,14 @@ class _LegendCinemaAppState extends State<LegendCinemaApp> {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: AppConstant.appName,
-      theme: ThemeData(
-        brightness: Brightness.light,
-      ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-      ),
-      themeMode: ThemeMode.dark,
+      theme: AppConstant.themeLight,
+      darkTheme: AppConstant.themeDark,
+      themeMode: AppConstant.themeMode,
       initialBinding: AppController(),
-      supportedLocales: S.delegate.supportedLocales,
+      supportedLocales: AppConstant.supportLocalLanguage,
       localizationsDelegates: AppConstant.delegate,
       locale: _locale,
-      fallbackLocale: const Locale('km', 'KH'),
+      fallbackLocale: AppConstant.fallbacklocal,
       home: const SplashScreen(),
       builder: EasyLoading.init(),
     );

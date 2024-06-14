@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:legend_cinema/core/enum/base_status_enum.dart';
 import 'package:legend_cinema/modules/auth/repository/auth_repository.dart';
-import 'package:legend_cinema/v_globle.dart';
+import 'package:legend_cinema/shared/v_globle.dart';
 
 class AuthController extends GetxController implements GetxService {
   AuthController({required this.repository});
