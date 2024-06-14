@@ -7,6 +7,7 @@ import 'package:legend_cinema/modules/landings/more/controller/more_controller.d
 import 'package:legend_cinema/modules/landings/more/repository/more_repository.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
+import 'package:legend_cinema/widgets/no_data_found.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 class AboutUsWidget extends StatefulWidget {
   const AboutUsWidget({super.key});
@@ -38,9 +39,7 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
             child: CircularProgressIndicator()
           );
         } else if (controller.errorMessage.isNotEmpty) {
-          return const Center(
-            child: Text('Something when wrong!, Please check your cennection!')
-          );
+          return const NoDataFound();
         } else if (controller.aboutus.isEmpty) {
           return const Center(child: Text('No data available.'));
         } else {

@@ -103,7 +103,13 @@ class _LanguageWidgetState extends State<LanguageWidget> {
     String countryCode,
     bool isSelected,
   ) {
-    return Card(
+    return Container(
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(color: Colors.white.withOpacity(0.3)),
+          bottom: BorderSide(color: Colors.white.withOpacity(0.3)),
+        )
+      ),
       child: ListTile(
         leading: SizedBox(
           width: 50,

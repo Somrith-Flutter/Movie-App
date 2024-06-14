@@ -25,7 +25,7 @@ class NewsDetailsWidget extends StatelessWidget {
       appBar: AppBar(
         leading: const BackWidget(),
         centerTitle: true,
-        title: Text(title ?? ''),
+        title: TextWidget(title ?? '', bold: true,),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
