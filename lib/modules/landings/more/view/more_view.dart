@@ -6,6 +6,7 @@ import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/core/bottom_navigation.dart';
 import 'package:legend_cinema/modules/auth/controller/auth_controller.dart';
+import 'package:legend_cinema/modules/landings/more/widgets/activate_card.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/more_list_tile_items.dart';
 import 'package:legend_cinema/modules/auth/view/auth_page.dart';
 import 'package:legend_cinema/modules/auth/view/reqister_view.dart';
@@ -49,7 +50,8 @@ class _MoreViewState extends State<MoreView> {
               const Gap(20),
               _buildWishCard(),
               const Gap(12),
-              _buildCustomListTile()
+              _buildCustomListTile(),
+              const Gap(20),
             ],
           ),
         ),
@@ -157,20 +159,65 @@ class _MoreViewState extends State<MoreView> {
                     color: Colors.white.withOpacity(0.7),
                   ),
                   const Gap(40),
-                  Align(
+                  if(accessToken.$.isNotEmpty)...[
+                    Align(
                     alignment: Alignment.bottomLeft,
-                    child: ElevatedButton(
-                      onPressed: () => AppRoute().push(context, const LearnMoreWidget()), 
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red.shade900,
-                      ),
-                      child: TextWidget(
-                        S.of(context).learn_more,
-                        size: 14,
-                        bold: true,
-                      ),
+                    child: Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () => AppRoute().push(context, const ActivateCard()), 
+                          child: Container(
+                            height: 35,
+                            width: 110,
+                            decoration: BoxDecoration(
+                              color: Colors.red.shade900,
+                              borderRadius: BorderRadius.circular(20)
+                            ),
+                            child: const Center(
+                              child: TextWidget(
+                                'Activate',
+                                bold: true,
+                                size: 14,
+                              )),
+                          ),
+                        ),
+                        const Gap(10),
+                        GestureDetector(
+                          onTap: () => AppRoute().push(context, const LearnMoreWidget()), 
+                          child: Container(
+                            height: 35,
+                            width: 130,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.white),
+                              borderRadius: BorderRadius.circular(20)
+                            ),
+                            child: const Center(
+                              child: TextWidget(
+                                'Learn More',
+                                bold: true,
+                                size: 14,
+                              )),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
+                  ]else...[
+                    Align(
+                      alignment: Alignment.bottomLeft,
+                      child: ElevatedButton(
+                        onPressed: () => AppRoute().push(context, const LearnMoreWidget()), 
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.red.shade900,
+                        ),
+                        child: TextWidget(
+                          S.of(context).learn_more,
+                          size: 14,
+                          bold: true,
+                        ),
+                      ),
+                    ),
+                  ],
                   const Gap(8),
                 ],
               ),

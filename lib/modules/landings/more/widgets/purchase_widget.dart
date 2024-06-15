@@ -25,7 +25,7 @@ class PurchaseWidget extends StatelessWidget {
             ],
             indicatorColor: Colors.red,
             unselectedLabelColor: Colors.white,
-            labelColor: Colors.red.withOpacity(0.1),
+            labelColor: Colors.red,
           ),
         ),
         backgroundColor: AppColor.primaryColor,

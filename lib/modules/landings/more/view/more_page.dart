@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/config/themes/app_color.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
-import 'package:legend_cinema/modules/auth/widget/register_form.dart';
 import 'package:legend_cinema/modules/landings/more/controller/more_controller.dart';
 import 'package:legend_cinema/modules/landings/more/repository/more_repository.dart';
 import 'package:legend_cinema/modules/landings/more/view/more_view.dart';
+import 'package:legend_cinema/modules/landings/more/widgets/profile_widget.dart';
 import 'package:legend_cinema/shared/v_globle.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
@@ -28,7 +28,7 @@ class MorePage extends StatelessWidget {
           actions: [
             if(accessToken.$.isNotEmpty)...[
               GestureDetector(
-                onTap: () => AppRoute().push(context, const RegisterForm(numberPhone: '',)),
+                onTap: () => AppRoute().push(context, const ProfileWidget()),
                 child: Container(
                   margin: const EdgeInsets.symmetric(vertical: 10),
                   width: 85,

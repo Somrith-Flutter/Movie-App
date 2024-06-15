@@ -99,8 +99,11 @@ List<ListTileItem> items(BuildContext context, String title, String icon)  {
       ListTileItem(
         title: S.of(context).logout,
         icon: Icons.logout,
+        isSpacig: true,
         trailing: true,
         isRoute: false,
+        isheader: true,
+        header: S.of(context).logout,
       ),
     ]
   ];
