@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:ui';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
@@ -40,22 +42,27 @@ class _HomeViewState extends State<HomeView> {
   final List<Map<String, String>> movies = [
     {
       "title": "Movies 1",
+      "date": "14 june, 2024",
       "poster": "https://upload.wikimedia.org/wikipedia/en/b/be/Godzilla_x_kong_the_new_empire_poster.jpg" // Replace with the actual URL or local path
     },
     {
       "title": "Movies 2",
+      "date": "14 june, 2024",
       "poster": "https://www.ripefruitmedia.com.au/images_rfm/1223-130236796.jpg" // Replace with the actual URL or local path
     },
     {
       "title": "Movies 2",
+      "date": "14 june, 2024",
       "poster": "https://www.ripefruitmedia.com.au/images_rfm/1223-130236796.jpg" // Replace with the actual URL or local path
     },
     {
       "title": "Movies 2",
+      "date": "14 june, 2024",
       "poster": "https://www.ripefruitmedia.com.au/images_rfm/1223-130236796.jpg" // Replace with the actual URL or local path
     },
     {
       "title": "Movies 2",
+      "date": "14 june, 2024",
       "poster": "https://www.ripefruitmedia.com.au/images_rfm/1223-130236796.jpg" // Replace with the actual URL or local path
     },
   ];
@@ -225,60 +232,69 @@ class _HomeViewState extends State<HomeView> {
   }
 
   Widget _buildTabView(){
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Center(
+    return Align(
+      alignment: Alignment.topLeft,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 12, top: 12, bottom: 16, right: 12),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.grey,
+            color: Colors.grey.shade600,
             borderRadius: BorderRadius.circular(30),
           ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isNowShowing = true;
-                  });
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: isNowShowing ? Colors.red : Colors.grey,
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                  child: const Text(
-                    'Now Showing',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+          child: Padding(
+            padding: const EdgeInsets.all(4),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isNowShowing = true;
+                      });
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: isNowShowing ? Colors.red : Colors.grey.shade600,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      padding: const EdgeInsets.all(10),
+                      child: const Center(
+                        child: TextWidget(
+                          'Now Showing',
+                          bold: true,
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isNowShowing = false;
-                  });
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: isNowShowing ? Colors.grey : Colors.red,
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                  child: const Text(
-                    'Coming Soon',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isNowShowing = false;
+                      });
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 2),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: isNowShowing ? Colors.grey.shade600 : Colors.red,
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        padding: const EdgeInsets.all(10),
+                        child: const Center(
+                          child: TextWidget(
+                            'Coming Soon',
+                            bold: true,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -288,99 +304,137 @@ class _HomeViewState extends State<HomeView> {
   Widget _buildTimeLine() {
     return Align(
       alignment: Alignment.topLeft,
-      child: SizedBox(
-        height: 100,
-        width: 300,
-        child: Column(
-          children: [
-            Row(
-              children: List.generate(dateInfo.dates.length, (index) {
-                final date = dateInfo.dates[index];
-                final day = dateInfo.dayNames[index];
-                final month = dateInfo.months[index];
-                return Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedDay = date;
-                      });
-                    },
-                    child: Stack(
-                      children: [
-                        Container(
-                          height: 80,
-                          width: 70,
-                          margin: const EdgeInsets.all(4),
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          decoration: BoxDecoration(
-                            border: selectedDay == date
-                                ? Border.all(color: Colors.red, width: 2)
-                                : Border.all(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(8),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 12),
+        child: SizedBox(
+          height: 100,
+          width: 300,
+          child: Column(
+            children: [
+              Row(
+                children: List.generate(dateInfo.dates.length, (index) {
+                  final date = dateInfo.dates[index];
+                  final day = dateInfo.dayNames[index];
+                  final month = dateInfo.months[index];
+                  return Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedDay = date;
+                        });
+                      },
+                      child: Stack(
+                        children: [
+                          Container(
+                            height: 80,
+                            width: 70,
+                            margin: const EdgeInsets.all(4),
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            decoration: BoxDecoration(
+                              border: selectedDay == date
+                                  ? Border.all(color: Colors.red, width: 2)
+                                  : Border.all(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
                           ),
-                        ),
-                        Positioned(
-                          top: 10,
-                          left: 20,
-                          child: TextWidget(day, size: 12,),
-                        ),
-                        Positioned(
-                          top: 25,
-                          left: 20,
-                          child: TextWidget(date, bold: true, size: 22,),
-                        ),
-                        Positioned(
-                          bottom: 15,
-                          left: 25,
-                          child: TextWidget(month, size: 12,),
-                        ),
-                      ],
+                          Positioned(
+                            top: 10,
+                            left: 20,
+                            child: TextWidget(day, size: 12,),
+                          ),
+                          Positioned(
+                            top: 25,
+                            left: 20,
+                            child: TextWidget(date, bold: true, size: 22,),
+                          ),
+                          Positioned(
+                            bottom: 15,
+                            left: 25,
+                            child: TextWidget(month, size: 12,),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              }),
-            ),
-           // change body
-          ],
+                  );
+                }),
+              ),
+             // change body
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildTimeLineItems(){
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: GridView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 0.7,
-        ),
-        itemCount: movies.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
+  Widget _buildTimeLineItems() {
+      return Padding(
+        padding: const EdgeInsets.only(left: 12),
+        child: GridView.builder(
+          padding: EdgeInsets.zero,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 15,
+            crossAxisSpacing: 15,
+            childAspectRatio: 2 / 3,
+          ),
+          itemCount: movies.length,
+          itemBuilder: (context, index) {
+            return Column(
               children: [
-                Image.network(
-                  movies[index]['poster']!,
-                  height: 200,
-                  fit: BoxFit.cover,
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.network(
+                    movies[index]['poster']!,
+                    width: 200,
+                    height: 250,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-                const SizedBox(height: 20),
-                Text(
-                  movies[index]['title']!,
-                  style: const TextStyle(color: Colors.white),
+                const Gap(10),
+                Row(
+                  children: [
+                    TextWidget(
+                      movies[index]['date']!,
+                      size: 12,
+                    ),
+                    const Gap(5),
+                    Stack(
+                      children: [
+                        Container(
+                          height: 20,
+                          width: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Colors.white
+                          ),
+                        ),
+                        const Positioned(
+                          top: 1,
+                          left: 10,
+                          child: TextWidget('TBC', size: 12, bold: true, color: Colors.black,),
+                        )
+                      ],
+                    )
+                  ],
                 ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: TextWidget(
+                    movies[index]['title']!,
+                    bold: true,
+                    size: 14,
+                  ),
+                ),
+            
               ],
-            ),
-          );
-        },
-      ),
-    );
+            );
+          },
+        ),
+      );
+    }
   }
-}
 
 class DateInfo {
   final now = DateTime.now();

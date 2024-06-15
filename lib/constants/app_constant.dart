@@ -75,6 +75,6 @@ class AppConstant{
 
   // change it base on your ip address by replace http://127.0.0.1:8000 to your ip.
   static const String baseAndroidUrl = 'http://127.0.0.1:8000/api';
-  static const String baseIosUrl = 'http://127.0.0.1:8000/api';
-  static const String domainKey = 'http://172.16.22.228:8000';
+  static const String baseIosUrl = 'http://127.0.0.1:8000';
+  static const String domainKey = 'http://192.168.0.103:8000';
 }
