@@ -91,6 +91,12 @@ class AuthController extends GetxController implements GetxService {
     return "";
   }
 
+  Future<String> logoutController() async {
+    accessToken.$ = "";
+    await accessToken.save();
+    return "";
+  }
+
   void clear() {
     email.clear();
     password.clear();

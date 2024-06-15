@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:legend_cinema/config/routes/app_route.dart';
+import 'package:legend_cinema/core/bottom_navigation.dart';
+import 'package:legend_cinema/modules/auth/controller/auth_controller.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/about_us.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/contact_widget.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/language_widget.dart';
@@ -8,6 +12,8 @@ import 'package:legend_cinema/modules/landings/more/widgets/privacy_policy.dart'
 import 'package:legend_cinema/modules/landings/more/widgets/term_condition.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/list_tile_item.dart';
+
+final auth = Get.find<AuthController>();
 
 List<ListTileItem> items(BuildContext context, String title, String icon)  {
   return [
@@ -87,7 +93,12 @@ List<ListTileItem> items(BuildContext context, String title, String icon)  {
       title: 'Logout',
       icon: Icons.logout,
       trailing: true,
-      onTap: (){},
+      onTap: () async {
+        await auth.logoutController();
+        Future.delayed(const Duration(milliseconds: 100));
+        AppRoute.route.push(context, const BottomNavigation());
+      },
+      route: null
     ),
   ];
 }
