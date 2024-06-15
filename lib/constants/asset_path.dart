@@ -28,6 +28,20 @@ class AssetPath{
   static const String offer2 = 'assets/icons/offer2.png';
   static const String offer3 = 'assets/icons/offer3.png';
 
+  static const String homeicon = 'assets/icons/home_icon.png';
+  static const String offericon = 'assets/icons/offer_icon.png';
+  static const String cinemaicon = 'assets/icons/cinema_icon.png';
+  static const String fbicon = 'assets/icons/fb_icon.png';
+  static const String moreicon = 'assets/icons/more_icon.png';
+  static const String priicon = 'assets/icons/pri_icon.png';
+  static const String abouticon = 'assets/icons/about_icon.png';
+  static const String notiicon = 'assets/icons/noti_icon.png';
+  static const String termicon = 'assets/icons/term_icon.png';
+  static const String newsicon = 'assets/icons/news_icon.png';
+  static const String contacticon = 'assets/icons/contact_icon.png';
+
+
+
   static const String dis5 = 'assets/icons/dis5.png';
   static const String dis10 = 'assets/icons/dis10.png';
   static const String dis0 = 'assets/icons/dis0.png';

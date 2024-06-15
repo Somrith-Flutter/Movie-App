@@ -84,6 +84,14 @@ class _BottomNavigationState extends State<BottomNavigation> {
           color: isSelected ? Colors.red.shade900 : Colors.transparent,
           borderRadius: const BorderRadius.all(Radius.circular(20)),
           shape: BoxShape.rectangle,
+           boxShadow: isSelected ? [
+            BoxShadow(
+              color: Colors.red.withOpacity(0.5),
+              spreadRadius: 2,
+              blurRadius: 8,
+              offset: const Offset(0, 4),
+            ),
+          ] : [],
         ),
         child: Icon(icon, color: isSelected ? Colors.white : Colors.white.withOpacity(0.5)),
       ),
