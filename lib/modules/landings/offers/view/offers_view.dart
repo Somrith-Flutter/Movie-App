@@ -66,7 +66,7 @@ class OffersView extends StatelessWidget {
             ),
             _buildOffers(),
             Padding(
-              padding: const EdgeInsets.all(0),
+              padding: const EdgeInsets.only(left: 14, top: 12, bottom: 8),
               child: TextWidget(
                 S.of(context).premium_benifit,
                 size: 18,
@@ -83,6 +83,7 @@ class OffersView extends StatelessWidget {
   Widget _buildOffers(){
     OffersController controller = Get.find();
     return ListView.builder(
+      padding: EdgeInsets.zero,
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: controller.offers.length,
@@ -140,7 +141,8 @@ class OffersView extends StatelessWidget {
   }
 
   Widget _buildPremiumBenifit(){
-    return SizedBox(
+    return Container(
+      padding: const EdgeInsets.only(left: 12),
       height: 200,
       child: ListView.builder(
         shrinkWrap: true,
