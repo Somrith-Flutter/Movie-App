@@ -83,11 +83,11 @@ List<ListTileItem> items(BuildContext context, String title, String icon)  {
       trailing: true,
       route: const TermConditionWidget()
     ),
-    // const ListTileItem(
-    //   title: 'Logout',
-    //   icon: Icons.logout,
-    //   trailing: true,
-    //   route: Dialog(),
-    // ),
+    const ListTileItem(
+      title: 'Logout',
+      icon: Icons.logout,
+      trailing: true,
+      route: Dialog(),
+    ),
   ];
 }
