@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/widgets/dot_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
@@ -32,9 +33,10 @@ class _HomeViewState extends State<HomeView> {
   bool isNowShowing = true;
   int selectedIndex = 0;
   int _currentPage = 0;
-  String _currentImagePath = images.first; // Initial image path
+  String _currentImagePath = images.first;
+  bool isTextTapSelected = true;
+  String selectedDay = '';
 
-  final List<String> dates = ["14 Jun", "15 Jun", "16 Jun"];
   final List<Map<String, String>> movies = [
     {
       "title": "Movies 1",
@@ -280,33 +282,64 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  Widget _buildTimeLine(){
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
+  Widget _buildTimeLine() {
+     final dateInfo = DateInfo();
+    return Align(
+      alignment: Alignment.topLeft,
       child: SizedBox(
-        height: 50,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: dates.length,
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () {
-                setState(() {
-                  selectedIndex = index;
-                });
-              },
-              child: Container(
-                width: 100,
-                color: selectedIndex == index ? Colors.red.withOpacity(0.8) : Colors.black,
-                child: Center(
-                  child: Text(
-                    dates[index],
-                    style: const TextStyle(color: Colors.white),
+        height: 100,
+        width: 300,
+        child: Column(
+          children: [
+            Row(
+              children: List.generate(dateInfo.dates.length, (index) {
+                final date = dateInfo.dates[index];
+                final day = dateInfo.dayNames[index];
+                final month = dateInfo.months[index];
+                return Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedDay = date;
+                      });
+                    },
+                    child: Stack(
+                      children: [
+                        Container(
+                          height: 80,
+                          width: 70,
+                          margin: const EdgeInsets.all(4),
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          decoration: BoxDecoration(
+                            border: selectedDay == date
+                                ? Border.all(color: Colors.red, width: 2)
+                                : Border.all(color: Colors.grey),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        Positioned(
+                          top: 10,
+                          left: 20,
+                          child: TextWidget(day, size: 12,),
+                        ),
+                        Positioned(
+                          top: 25,
+                          left: 20,
+                          child: TextWidget(date, bold: true, size: 22,),
+                        ),
+                        Positioned(
+                          bottom: 15,
+                          left: 25,
+                          child: TextWidget(month, size: 12,),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ),
-            );
-          },
+                );
+              }),
+            ),
+           // change body
+          ],
         ),
       ),
     );
@@ -344,5 +377,41 @@ class _HomeViewState extends State<HomeView> {
         },
       ),
     );
+  }
+}
+
+class DateInfo {
+  final now = DateTime.now();
+
+  List<String> get daysOfWeek {
+    final days = List.generate(4, (i) => now.add(Duration(days: i)));
+    return days.map((date) {
+      if (date.isAtSameMomentAs(now)) {
+        return 'Today, ${DateFormat('MMM d').format(date)}';
+      } else {
+        return DateFormat('EEE, MMM d').format(date);
+      }
+    }).toList();
+  }
+
+  List<String> get dayNames {
+    final days = List.generate(4, (i) => now.add(Duration(days: i)));
+    return days.map((date) {
+      if (date.day == now.day && date.month == now.month && date.year == now.year) {
+        return 'Today';
+      } else {
+        return DateFormat('EEE').format(date);
+      }
+    }).toList();
+  }
+
+  List<String> get months {
+    final days = List.generate(4, (i) => now.add(Duration(days: i)));
+    return days.map((date) => DateFormat('MMM').format(date)).toList();
+  }
+
+  List<String> get dates {
+    final days = List.generate(4, (i) => now.add(Duration(days: i)));
+    return days.map((date) => DateFormat('d').format(date)).toList();
   }
 }
