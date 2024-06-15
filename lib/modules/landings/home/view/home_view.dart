@@ -4,8 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
+import 'package:legend_cinema/modules/auth/controller/auth_controller.dart';
 import 'package:legend_cinema/widgets/dot_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
@@ -31,6 +33,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   late PageController _pageController;
+  final user = Get.find<AuthController>();
   late Timer _timer;
   bool isNowShowing = true;
   int selectedIndex = 0;
@@ -71,6 +74,9 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     super.initState();
+    Future.delayed(const Duration(milliseconds: 100), () {
+      user.fetchUserController();
+    });
     selectedDay = dateInfo.dates.first;
     _pageController = PageController(viewportFraction: 0.85);
     _timer = Timer.periodic(const Duration(seconds: 3), (Timer timer) {

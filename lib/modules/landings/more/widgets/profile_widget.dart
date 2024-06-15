@@ -5,14 +5,14 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:legend_cinema/config/themes/app_color.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
+import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/modules/auth/controller/auth_controller.dart';
 import 'package:legend_cinema/modules/auth/controller/pick_image_controller.dart';
-import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
-class ProfileWidget  extends StatefulWidget {
-  const ProfileWidget ({super.key, this.numberPhone});
+class ProfileWidget extends StatefulWidget {
+  const ProfileWidget({super.key, this.numberPhone});
   final String? numberPhone;
 
   @override
@@ -80,13 +80,21 @@ class _ProfileWidgetState extends State<ProfileWidget> {
     return Scaffold(
       appBar: AppBar(
         leading: const BackWidget(),
-        title: const TextWidget('Profile', size: 22, bold: true,),
+        centerTitle: true,
+        title: const TextWidget(
+          'Profile',
+          size: 22,
+          bold: true,
+        ),
         flexibleSpace: AppConstant.appbarTheme,
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context), 
-            child: const TextWidget('Save', bold: true, color: Colors.red,)
-          )
+              onPressed: () => Navigator.pop(context),
+              child: const TextWidget(
+                'Save',
+                bold: true,
+                color: Colors.red,
+              ))
         ],
       ),
       backgroundColor: AppColor.primaryColor,
@@ -94,8 +102,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
     );
   }
 
-  Widget _buildBody(BuildContext context){
-    return  SingleChildScrollView(
+  Widget _buildBody(BuildContext context) {
+    return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Padding(
         padding: const EdgeInsets.only(left: 16.0, right: 16.0),
@@ -103,6 +111,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Gap(10),
+            // for (var us in user.uu) ...[
             Align(
               alignment: Alignment.topCenter,
               child: GestureDetector(
@@ -137,8 +146,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         child: const Icon(
                           Icons.camera_alt,
                           size: 17,
-                          color: Colors
-                              .black54, 
+                          color: Colors.black54,
                         ),
                       ),
                     ),
@@ -161,7 +169,6 @@ class _ProfileWidgetState extends State<ProfileWidget> {
               size: 20,
               bold: true,
             ),
-            
             const Gap(15),
             Form(
                 child: Column(
@@ -171,14 +178,15 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.person,
                         color: Colors.white.withOpacity(0.8)),
-                    labelText: "First Name",
+                    labelText: user.uu?.name.toString(),
                     hintText: '- -',
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Colors.white.withOpacity(0.6)),
+                      borderSide:
+                          BorderSide(color: Colors.white.withOpacity(0.6)),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white.withOpacity(0.6)),
+                      borderSide:
+                          BorderSide(color: Colors.white.withOpacity(0.6)),
                     ),
                     filled: true,
                     fillColor: Colors.white70.withOpacity(0.1),
@@ -188,23 +196,36 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                 const SizedBox(
                   height: 16,
                 ),
-                TextFormField(
-                  controller: user.email,
+                DropdownButtonFormField<String>(
+                  value: user.selectedGender,
                   decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.person,
-                        color: Colors.white.withOpacity(0.8)),
-                    labelText: "Last Name",
-                    hintText: '- -',
+                    labelText: user.uu?.gender,
+                    fillColor: Colors.white70.withOpacity(0.1),
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            width: 2, color: Colors.white.withOpacity(0.8))),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                          color: Colors.white.withOpacity(0.6)),
+                          width: 1.5, color: Colors.white.withOpacity(0.8)),
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white.withOpacity(0.6)),
-                    ),
-                    filled: true,
-                    fillColor: Colors.white70.withOpacity(0.1),
                   ),
+                  items: user.genderOptions.map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                  onChanged: (newValue) {
+                    setState(() {
+                      user.gender = newValue;
+                    });
+                  },
+                  validator: (value) {
+                    if (value == null) {
+                      return 'Please select your gender';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(
                   height: 16,
@@ -215,8 +236,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       context: context,
                       builder: (context) {
                         return Container(
-                          height:
-                              MediaQuery.of(context).size.height * 0.4,
+                          height: MediaQuery.of(context).size.height * 0.4,
                           color: Colors.black,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
@@ -258,14 +278,15 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       decoration: InputDecoration(
                         prefixIcon: Icon(Icons.cake,
                             color: Colors.white.withOpacity(0.8)),
-                        labelText: "DD-MM-YYYY",
-                       enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Colors.white.withOpacity(0.6)),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white.withOpacity(0.6)),
-                    ),
+                        labelText: user.uu?.dateOfBirth,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.white.withOpacity(0.6)),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.white.withOpacity(0.6)),
+                        ),
                         filled: true,
                         fillColor: Colors.white70.withOpacity(0.1),
                       ),
@@ -284,46 +305,72 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                 const Gap(20),
                 TextFormField(
                   obscureText: true,
-                  controller: user.confirmPassword,
+                  controller: user.email,
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.person,
                         color: Colors.white.withOpacity(0.8)),
-                    labelText: "Email Address",
+                    labelText: user.uu?.email.toString(),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Colors.white.withOpacity(0.6)),
+                      borderSide:
+                          BorderSide(color: Colors.white.withOpacity(0.6)),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white.withOpacity(0.6)),
+                      borderSide:
+                          BorderSide(color: Colors.white.withOpacity(0.6)),
                     ),
                     filled: true,
                     fillColor: Colors.white70.withOpacity(0.1),
                   ),
                 ),
-                  const Gap(15),
-                TextFormField(
-                  obscureText: true,
-                  controller: user.confirmPassword,
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.call),
-                    labelText: S.of(context).phone_number,
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Colors.white.withOpacity(0.6)),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white.withOpacity(0.6)),
-                    ),
-                    filled: true,
-                    fillColor: Colors.white70.withOpacity(0.1),
-                  ),
-                ),
+                const Gap(15),
+                buildPhoneNumberInput()
               ],
-            )
-            ),
+            )),
           ],
+          // ],
         ),
       ),
+    );
+  }
+
+  Widget buildPhoneNumberInput() {
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey),
+            borderRadius: BorderRadius.circular(3),
+          ),
+          child: Row(
+            children: [
+              Image.asset(
+                AssetPath.flagkhmer,
+                width: 24,
+                height: 24,
+              ),
+              const SizedBox(width: 8),
+              const Text(
+                '+855',
+                style: TextStyle(fontSize: 16),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: TextFormField(
+                  keyboardType: TextInputType.phone,
+                  controller: user.number,
+                  decoration: InputDecoration(
+                    hintText: user.uu?.phone,
+                    hintStyle: const TextStyle(color: Colors.white, fontSize: 16),
+                    border: InputBorder.none,
+                  ),
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

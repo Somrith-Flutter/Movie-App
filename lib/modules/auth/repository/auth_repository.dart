@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:legend_cinema/constants/app_constant.dart';
+import 'package:legend_cinema/modules/auth/model/auth_model.dart';
+import 'package:legend_cinema/shared/v_globle.dart';
 
 class AuthRepository {
   Future<dynamic> loginRepo(
@@ -85,5 +87,33 @@ class AuthRepository {
       debugPrint("=>> ${response.reasonPhrase}");
     }
     return "";
+  }
+
+  Future<UserModel?> fetchUserProfileRepo() async {
+    UserModel? user;
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ${accessToken.$}'
+    };
+    var request = http.Request(
+        'GET', Uri.parse('${AppConstant.domainKey}/api/auth/user-profile'));
+
+    request.headers.addAll(headers);
+
+    debugPrint("token ${accessToken.$}");
+
+    http.StreamedResponse response = await request.send();
+    var body = await response.stream.bytesToString();
+    debugPrint("statusCode ${response.statusCode}");
+    if (response.statusCode == 200) {
+      var json = jsonDecode(body);
+
+      user = UserModel.fromJson(json);
+      return user;
+    } else {
+      debugPrint(response.reasonPhrase);
+    }
+
+    return null;
   }
 }

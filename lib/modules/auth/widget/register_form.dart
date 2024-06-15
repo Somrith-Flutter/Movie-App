@@ -2,21 +2,27 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_icon_snackbar/flutter_icon_snackbar.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/config/themes/app_color.dart';
-import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/core/enum/base_status_enum.dart';
 import 'package:legend_cinema/modules/auth/controller/auth_controller.dart';
 import 'package:legend_cinema/modules/auth/controller/pick_image_controller.dart';
 import 'package:legend_cinema/modules/auth/view/auth_view.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
+import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
 class RegisterForm extends StatefulWidget {
-  const RegisterForm({super.key, required this.numberPhone});
-  final String numberPhone;
+  const RegisterForm({
+    super.key,
+    this.numberPhone,
+    this.isFromMoreScreen,
+  });
+  final String? numberPhone;
+  final bool? isFromMoreScreen;
 
   @override
   State<RegisterForm> createState() => _RegisterFormState();
@@ -75,7 +81,11 @@ class _RegisterFormState extends State<RegisterForm> {
     await user.registerController().then((_) async {
       if (user.status == BaseStatusEnum.success) {
         await EasyLoading.dismiss();
-        AppRoute.route.pushReplacement(context, AuthView(isFromRegister: true,));
+        AppRoute.route.pushReplacement(
+            context,
+            const AuthView(
+              isFromRegister: true,
+            ));
         user.clear();
         _buildSuccessMsg();
       } else {
@@ -136,9 +146,10 @@ class _RegisterFormState extends State<RegisterForm> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
       child: Scaffold(
-          backgroundColor: Colors.black54,
+          backgroundColor: Colors.black,
           appBar: AppBar(
-            automaticallyImplyLeading: false,
+            leading:
+                widget.isFromMoreScreen != false ? const BackWidget() : null,
             flexibleSpace: Container(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
@@ -216,25 +227,32 @@ class _RegisterFormState extends State<RegisterForm> {
                     size: 22,
                     bold: true,
                   ),
-                  Row(
-                    children: [
-                      const TextWidget("You've created this account with ",
-                          size: 14, bold: true),
-                      const TextWidget(
-                        "(+855) ",
-                        size: 14,
-                        bold: true,
-                        color: Colors.red,
-                      ),
-                      TextWidget(
-                        widget.numberPhone.toString().isNotEmpty
-                            ? widget.numberPhone
-                            : "Unkown",
-                        size: 14,
-                        bold: true,
-                        color: Colors.red,
-                      ),
-                    ],
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Row(
+                      children: [
+                        const TextWidget("You've created this account with ",
+                            size: 14, bold: true),
+                        const TextWidget(
+                          "(+855) ",
+                          size: 14,
+                          bold: true,
+                          color: Colors.red,
+                        ),
+                        TextWidget(
+                          widget.numberPhone.toString().isNotEmpty
+                              ? widget.numberPhone
+                              : "Unkown",
+                          size: 14,
+                          bold: true,
+                          color: Colors.red,
+                        ),
+                      ],
+                    ),
                   ),
                   const SizedBox(
                     height: 30,
@@ -367,10 +385,13 @@ class _RegisterFormState extends State<RegisterForm> {
                           labelText: 'Gender',
                           fillColor: Colors.white70.withOpacity(0.1),
                           border: OutlineInputBorder(
-                            borderSide: BorderSide(width: 1, color: Colors.white.withOpacity(0.8))
-                          ),
+                              borderSide: BorderSide(
+                                  width: 2,
+                                  color: Colors.white.withOpacity(0.8))),
                           enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(width: 1.5, color: Colors.white.withOpacity(0.8)),
+                            borderSide: BorderSide(
+                                width: 1.5,
+                                color: Colors.white.withOpacity(0.8)),
                           ),
                         ),
                         items: user.genderOptions.map((String value) {

@@ -1,8 +1,7 @@
-// import 'dart:js_interop';
-
-class AuthModel {
+class UserModel {
   String? id;
   String? name;
+  String? imageProfile;
   String? email;
   String? phone;
   String? gender;
@@ -11,9 +10,10 @@ class AuthModel {
   String? createdAt;
   String? updatedAt;
 
-  AuthModel(
+  UserModel(
       {this.id,
       this.name,
+      this.imageProfile,
       this.email,
       this.phone,
       this.gender,
@@ -22,9 +22,10 @@ class AuthModel {
       this.createdAt,
       this.updatedAt});
 
-  AuthModel.fromJson(Map<String, dynamic> json) {
+  UserModel.fromJson(Map<String, dynamic> json) {
     id = json['id'].toString();
     name = json['name'].toString();
+    imageProfile = json['image_profile'].toString();
     email = json['email'].toString();
     phone = json['phone'].toString();
     gender = json['gender'].toString();
@@ -38,6 +39,7 @@ class AuthModel {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id.toString();
     data['name'] = name.toString();
+    data['image_profile'] = imageProfile.toString();
     data['email'] = email.toString();
     data['phone'] = phone.toString();
     data['gender'] = gender.toString();

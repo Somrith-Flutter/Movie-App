@@ -13,8 +13,8 @@ import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
 class AuthView extends StatefulWidget {
-  AuthView({super.key, this.isFromRegister});
-  bool? isFromRegister = false;
+  const AuthView({super.key, this.isFromRegister});
+  final bool? isFromRegister;
 
   @override
   State<AuthView> createState() => _AuthViewState();

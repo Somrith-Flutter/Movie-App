@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:legend_cinema/core/enum/base_status_enum.dart';
+import 'package:legend_cinema/modules/auth/model/auth_model.dart';
 import 'package:legend_cinema/modules/auth/repository/auth_repository.dart';
 import 'package:legend_cinema/shared/v_globle.dart';
 
@@ -19,6 +20,7 @@ class AuthController extends GetxController implements GetxService {
   BaseStatusEnum get status => _status;
   final List<String> genderOptions = ['Male', 'Female', 'Other'];
   String? selectedGender;
+  UserModel? uu;
 
   void setStatus(BaseStatusEnum status) {
     _status = status;
@@ -94,6 +96,24 @@ class AuthController extends GetxController implements GetxService {
   Future<String> logoutController() async {
     accessToken.$ = "";
     await accessToken.save();
+    return "";
+  }
+
+  Future<String> fetchUserController() async {
+    setStatus(BaseStatusEnum.inprogress);
+    try{
+      await repository.fetchUserProfileRepo().then((user) {
+        if(user != null){
+          uu = user;
+          setStatus(BaseStatusEnum.success);
+        }else{
+          setStatus(BaseStatusEnum.failure);
+        }
+      });
+    }catch(e){
+      setStatus(BaseStatusEnum.failure);
+      debugPrint("=======?? $e");
+    }
     return "";
   }
 
