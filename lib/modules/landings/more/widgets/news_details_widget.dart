@@ -50,6 +50,8 @@ class NewsDetailsWidget extends StatelessWidget {
                 child: CachedNetworkImage(
                   imageUrl: image!,
                   fit: BoxFit.cover,
+                  height: 250,
+                  width: 400,
                   errorWidget: (context, url, error) => const NoImageAvailable(),
                 )
               ),
