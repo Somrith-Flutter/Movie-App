@@ -18,6 +18,7 @@ class MorePage extends StatelessWidget {
       initState: (_) => Get.find<MoreController>().onInit(),
       builder: (_) => Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           centerTitle: false,
           title: TextWidget(S.of(context).account, size: 22, bold: true,),
           flexibleSpace: AppConstant.appbarTheme,

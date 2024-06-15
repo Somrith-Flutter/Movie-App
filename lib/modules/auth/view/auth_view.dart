@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_icon_snackbar/flutter_icon_snackbar.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/core/bottom_navigation.dart';
@@ -91,7 +90,7 @@ class _AuthViewState extends State<AuthView> {
             appBar: widget.isFromRegister != true ? AppBar(
               automaticallyImplyLeading: false,
               leading: const BackWidget(),
-            ):  AppBar(
+            ) : AppBar(
               automaticallyImplyLeading: false,
             ),
             body: Padding(
@@ -215,18 +214,12 @@ class _AuthViewState extends State<AuthView> {
                                                 return;
                                               }
 
-                                              if (logic.status ==
-                                                  BaseStatusEnum.success) {
+                                              if (logic.status == BaseStatusEnum.success) {
                                                 await EasyLoading.dismiss();
-                                                Future.delayed(const Duration(
-                                                    milliseconds: 100));
+                                                Future.delayed(const Duration(milliseconds: 100));
                                                 logic.clear();
-                                                EasyLoading.showSuccess(
-                                                    'Success!');
-                                                
-                                                if(widget.isFromRegister == true){
-                                                  AppRoute.route.pushReplacement(context, const BottomNavigation());
-                                                }
+                                                EasyLoading.showSuccess('Success!');
+                                                AppRoute.route.pushReplacement(context, const BottomNavigation());
                                               }
                                             }
                                           } catch (_) {}
@@ -268,6 +261,8 @@ class _AuthViewState extends State<AuthView> {
                                           if (_formKey.currentState
                                                   ?.validate() ??
                                               false) {
+                                            EasyLoading.show(
+                                                status: 'Logging in...');
                                             await logic.loginController(
                                                 type: "email");
 
@@ -295,9 +290,7 @@ class _AuthViewState extends State<AuthView> {
                                               logic.clear();
                                               EasyLoading.showSuccess(
                                                   'Success!');
-                                            } else {
-                                              EasyLoading.show(
-                                                  status: 'Logging in...');
+                                              AppRoute.route.pushReplacement(context, const BottomNavigation());
                                             }
                                           }
                                         } catch (_) {}
