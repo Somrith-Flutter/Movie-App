@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
+import 'package:legend_cinema/core/bottom_navigation.dart';
+import 'package:legend_cinema/modules/auth/controller/auth_controller.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/more_list_tile_items.dart';
 import 'package:legend_cinema/modules/auth/view/auth_page.dart';
 import 'package:legend_cinema/modules/auth/view/reqister_view.dart';
@@ -193,6 +195,7 @@ class _MoreViewState extends State<MoreView> {
 
   Widget _buildCustomListTile(){
     final MoreController languageController = Get.find();
+    final auth = Get.find<AuthController>();
     return Obx(() {
       String title;
       String icon;
@@ -212,13 +215,18 @@ class _MoreViewState extends State<MoreView> {
       }
       return MyListTile(
         data: items(context, title, icon),
-        onTap: (index) {
+        onTap: (index) async{
           if (index >= 0 && index < items(context, title, icon).length) {
             var selectedItem = items(context, title, icon)[index];
-            if (selectedItem.route != null) {
-              AppRoute().push(context, selectedItem.route!);
-            } else if (selectedItem.onTap != null){
-              selectedItem.onTap;
+            if(selectedItem.isRoute == true){
+              if (selectedItem.route != null) {
+                AppRoute().push(context, selectedItem.route!);
+              } else {}
+            }
+            if(selectedItem.isRoute == false){
+              await auth.logoutController();
+              Future.delayed(const Duration(milliseconds: 100));
+              AppRoute.route.push(context, const BottomNavigation());
             }
           }
         }

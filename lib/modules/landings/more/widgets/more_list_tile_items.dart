@@ -1,31 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:legend_cinema/config/routes/app_route.dart';
-import 'package:legend_cinema/core/bottom_navigation.dart';
-import 'package:legend_cinema/modules/auth/controller/auth_controller.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/about_us.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/contact_widget.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/language_widget.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/news_widget.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/notification_widget.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/privacy_policy.dart';
+import 'package:legend_cinema/modules/landings/more/widgets/purchase_widget.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/term_condition.dart';
+import 'package:legend_cinema/shared/v_globle.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/list_tile_item.dart';
 
-final auth = Get.find<AuthController>();
-
 List<ListTileItem> items(BuildContext context, String title, String icon)  {
   return [
-    // const ListTileItem(
-    //   title: 'Purchase',
-    //   icon: Icons.currency_pound,
-    //   trailing: true,
-    //   route: PurchaseWidget(),
-    //   header: 'Purchase',
-    //   isheader: true,
-    //   isSpacig: true,
-    // ),
+    if (accessToken.$.isNotEmpty)...[
+      const ListTileItem(
+        title: 'Purchase',
+        icon: Icons.currency_pound,
+        trailing: true,
+        route: PurchaseWidget(),
+        header: 'Purchase',
+        isheader: true,
+        isSpacig: true,
+        isRoute: true,
+      ),
+    ],
     // language
     ListTileItem(
       title: title,
@@ -36,7 +35,8 @@ List<ListTileItem> items(BuildContext context, String title, String icon)  {
       route: const LanguageWidget(),
       header: S.of(context).language,
       isheader: true,
-      isSpacig: true
+      isSpacig: true,
+      isRoute: true
     ),
     // const TextWidget('Account'),
     // const ListTileItem(
@@ -51,7 +51,8 @@ List<ListTileItem> items(BuildContext context, String title, String icon)  {
       isSpacig: true,
       route: const NewsWidget(),
       header: S.of(context).what_new,
-      isheader: true
+      isheader: true,
+      isRoute: true
     ),
     ListTileItem(
       title: S.of(context).notification,
@@ -60,7 +61,8 @@ List<ListTileItem> items(BuildContext context, String title, String icon)  {
       header: S.of(context).notification,
       isheader: true,
       isSpacig: true,
-      route: const NotificationWidget()
+      route: const NotificationWidget(),
+      isRoute: true
     ),
     ListTileItem(
       title: S.of(context).about_us,
@@ -70,35 +72,36 @@ List<ListTileItem> items(BuildContext context, String title, String icon)  {
       header: S.of(context).about_us,
       isheader: true,
       route: const AboutUsWidget(),
+      isRoute: true
     ),
     ListTileItem(
       title: S.of(context).contact_us,
       icon: Icons.call,
       trailing: true,
       route: const ContactWidget(),
+      isRoute: true
     ),
     ListTileItem(
       title: S.of(context).privacy_policy,
       icon: Icons.policy,
       trailing: true,
-      route: const PrivacyPolicyWidget()
+      route: const PrivacyPolicyWidget(),
+      isRoute: true,
     ),
     ListTileItem(
       title: S.of(context).term_condition,
       icon: Icons.person_2,
       trailing: true,
-      route: const TermConditionWidget()
+      route: const TermConditionWidget(),
+      isRoute: true
     ),
-    ListTileItem(
-      title: 'Logout',
-      icon: Icons.logout,
-      trailing: true,
-      onTap: () async {
-        await auth.logoutController();
-        Future.delayed(const Duration(milliseconds: 100));
-        AppRoute.route.push(context, const BottomNavigation());
-      },
-      route: null
-    ),
+    if(accessToken.$.isNotEmpty)...[
+      ListTileItem(
+        title: S.of(context).logout,
+        icon: Icons.logout,
+        trailing: true,
+        isRoute: false,
+      ),
+    ]
   ];
 }

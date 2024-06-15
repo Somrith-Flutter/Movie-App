@@ -70,6 +70,7 @@ class ListTileItem {
     this.isSpacig = false,
     this.isheader = false,
     this.isAssetIcon = false,
+    this.isRoute = false,
   });
 
   final String? title;
@@ -82,6 +83,7 @@ class ListTileItem {
   final Widget? route;
   final bool isSpacig;
   final bool isheader;
+  final bool isRoute;
 }
 
 class ListTileWidget extends StatelessWidget{
