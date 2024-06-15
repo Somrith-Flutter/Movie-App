@@ -23,12 +23,15 @@ class PrivacyPolicyWidget extends StatelessWidget {
         _buildPrivacyPolicyText(),
         const Gap(14),
         _buildInfoCollectionText(),
+        _buildLogDataText(),
+        _buildCookiesText(),
         _buildServiceProviderText(),
         _buildSecurityText(),
         _buildLikeOtherSiteText(),
         _buildChidrenPrivacy(),
         _buildChangePrivacyPolicyText(),
         _buildContactText(context),
+        const Gap(100),
       ], context),
     );
   }
@@ -127,7 +130,7 @@ class PrivacyPolicyWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildTitle2() {
+  Widget _buildLogDataText() {
     return const Padding(
       padding: EdgeInsets.only(left: 2, top: 20.0, bottom: 20.0),
       child: Column(
@@ -152,7 +155,7 @@ class PrivacyPolicyWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildTitle3() {
+  Widget _buildCookiesText() {
     return const Padding(
       padding: EdgeInsets.only(left: 2, top: 20.0, bottom: 20.0),
       child: Column(
