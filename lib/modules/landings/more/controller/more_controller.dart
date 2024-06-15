@@ -81,7 +81,7 @@ class MoreController extends GetxController {
       isLoading(true);
       var items = await repository.getNewsList();
       newsAndActivities.value = items;
-      debugPrint('$items');
+      debugPrint('======== $items');
     } catch (e) {
       errorMessage.value = e.toString();
     } finally {

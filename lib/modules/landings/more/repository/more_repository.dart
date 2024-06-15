@@ -12,6 +12,7 @@ class MoreRepository extends RestApiService{
     final response = await get(ApiPath.newslist);
     final Map<String, dynamic> jsonResponse = json.decode(response);
     final List<dynamic> data = jsonResponse['data'];
+    debugPrint(data.toString());
     return data.map((json) => NewsModel.fromJson(json)).toList();
   }
 

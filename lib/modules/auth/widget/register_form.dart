@@ -1,13 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_icon_snackbar/flutter_icon_snackbar.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/config/themes/app_color.dart';
+import 'package:legend_cinema/constants/app_constant.dart';
+import 'package:legend_cinema/core/enum/base_status_enum.dart';
+import 'package:legend_cinema/modules/auth/controller/auth_controller.dart';
 import 'package:legend_cinema/modules/auth/controller/pick_image_controller.dart';
+import 'package:legend_cinema/modules/auth/view/auth_view.dart';
+import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
 class RegisterForm extends StatefulWidget {
-  const RegisterForm({super.key});
+  const RegisterForm({super.key, required this.numberPhone});
+  final String numberPhone;
 
   @override
   State<RegisterForm> createState() => _RegisterFormState();
@@ -15,7 +24,9 @@ class RegisterForm extends StatefulWidget {
 
 class _RegisterFormState extends State<RegisterForm> {
   late DateTime dateTime;
-  final TextEditingController _dateController = TextEditingController();
+  final user = Get.find<AuthController>();
+  final logic = Get.find<PickImageController>();
+  bool _isToggle = false;
 
   @override
   void initState() {
@@ -23,149 +34,223 @@ class _RegisterFormState extends State<RegisterForm> {
     super.initState();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black54,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: AppColor.appbarColor,
-              // Ensure AppColor.appbarColor is defined correctly
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
+  void _togglePassword() {
+    setState(() {
+      _isToggle = !_isToggle;
+    });
+  }
+
+  void _registerBtn() async {
+    if (user.name.text.isEmpty) {
+      _buildSnackbarMsg();
+      return;
+    }
+
+    if (user.email.text.isEmpty) {
+      _buildSnackbarMsg();
+      return;
+    }
+
+    if (user.dob.text.isEmpty) {
+      _buildSnackbarMsg();
+      return;
+    }
+
+    if (user.password.text.isEmpty) {
+      _buildSnackbarMsg();
+      return;
+    }
+
+    if (user.confirmPassword.text.isEmpty) {
+      _buildSnackbarMsg();
+      return;
+    }
+
+    if (user.password.text.toString() != user.confirmPassword.text.toString()) {
+      _buildMactchPasswordAndConfirmPassword();
+      return;
+    }
+
+    EasyLoading.show(status: "Registering...");
+    await user.registerController().then((_) async {
+      if (user.status == BaseStatusEnum.success) {
+        await EasyLoading.dismiss();
+        AppRoute.route.pushReplacement(context, AuthView(isFromRegister: true,));
+        user.clear();
+        _buildSuccessMsg();
+      } else {
+        await EasyLoading.dismiss();
+      }
+      return;
+    });
+  }
+
+  void _uploadImage() {
+    showCupertinoModalPopup(
+      context: context,
+      builder: (BuildContext context) => CupertinoActionSheet(
+        cancelButton: CupertinoActionSheetAction(
+          isDefaultAction: true,
+          onPressed: () {
+            Navigator.pop(context, 'Cancel');
+          },
+          child: const TextWidget(
+            'Cancel',
+            size: 20,
+            bold: true,
+            color: Colors.blue,
           ),
         ),
+        actions: <Widget>[
+          CupertinoActionSheetAction(
+            child: const TextWidget(
+              'From Gallery',
+              size: 20,
+              bold: true,
+              color: Colors.blue,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+              logic.loadImage(ImageSource.gallery);
+            },
+          ),
+          CupertinoActionSheetAction(
+            child: const TextWidget(
+              'From Camara',
+              size: 20,
+              bold: true,
+              color: Colors.blue,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+              logic.loadImage(ImageSource.camera);
+            },
+          ),
+        ],
       ),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              GetBuilder<PickImageController>(builder: (logic) {
-                return Align(
-                  alignment: Alignment.topCenter,
-                  child: GestureDetector(
-                    onTap: () {
-                      showCupertinoModalPopup(
-                        context: context,
-                        builder: (BuildContext context) => CupertinoActionSheet(
-                          cancelButton: CupertinoActionSheetAction(
-                            isDefaultAction: true,
-                            onPressed: () {
-                              Navigator.pop(context, 'Cancel');
-                            },
-                            child: const TextWidget(
-                              'Cancel',
-                              size: 20,
-                              bold: true,
-                              color: Colors.blue,
-                            ),
-                          ),
-                          actions: <Widget>[
-                            CupertinoActionSheetAction(
-                              child: const TextWidget(
-                                'From Gallery',
-                                size: 20,
-                                bold: true,
-                                color: Colors.blue,
-                              ),
-                              onPressed: () {
-                                Navigator.pop(context);
-                                logic.loadImage(ImageSource.gallery);
-                              },
-                            ),
-                            CupertinoActionSheetAction(
-                              child: const TextWidget(
-                                'From Camara',
-                                size: 20,
-                                bold: true,
-                                color: Colors.blue,
-                              ),
-                              onPressed: () {
-                                Navigator.pop(context);
-                                logic.loadImage(ImageSource.camera);
-                              },
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                    child: Stack(
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.symmetric(vertical: 50),
-                          width: 85,
-                          height: 85,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.white),
-                            shape: BoxShape.circle,
-                            color: Colors.grey[200],
-                          ),
-                          child: const Icon(
-                            Icons.person,
-                            color: Colors.red,
-                            size: 60,
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 50,
-                          right: 0,
-                          child: Container(
-                            width: 30,
-                            height: 30,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+      child: Scaffold(
+          backgroundColor: Colors.black54,
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            flexibleSpace: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: AppColor.appbarColor,
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
+            ),
+          ),
+          body: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: GestureDetector(
+                      onTap: () => _uploadImage(),
+                      child: Stack(
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.symmetric(vertical: 10),
+                            width: 85,
+                            height: 85,
                             decoration: BoxDecoration(
                               border: Border.all(color: Colors.white),
                               shape: BoxShape.circle,
-                              color: Colors.white,
+                              color: Colors.grey[200],
                             ),
                             child: const Icon(
-                              Icons.camera_alt,
-                              size: 17,
-                              color: Colors
-                                  .black54, // Adjusted the color to match your design
+                              Icons.person,
+                              color: Colors.red,
+                              size: 60,
                             ),
                           ),
-                        ),
-                      ],
+                          Positioned(
+                            bottom: 10,
+                            right: 0,
+                            child: Container(
+                              width: 30,
+                              height: 30,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.white),
+                                shape: BoxShape.circle,
+                                color: Colors.white,
+                              ),
+                              child: const Icon(
+                                Icons.camera_alt,
+                                size: 17,
+                                color: Colors
+                                    .black54, // Adjusted the color to match your design
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                );
-              }),
-              const Center(
-                child: TextWidget(
-                  "Set New Profile Picture",
-                  size: 18,
-                  bold: true,
-                  color: Colors.red,
-                ),
-              ),
-              const SizedBox(height: 32,),
-              const TextWidget("Setup your profile information",size: 22,bold: true,),
-              const Row(
-                children: [
-                  TextWidget("You've created this account with",size: 14,bold: true),
-                  TextWidget("(+855)",size: 14,bold: true,color: Colors.red,),
-                  SizedBox(width: 3,),
-                  TextWidget("78378171",size: 14,bold: true,color: Colors.red,),
-                ],
-              ),
-              const SizedBox(height: 30,),
-              Form(
-                  child: Column(
+                  const Center(
+                    child: TextWidget(
+                      "Set New Profile Picture",
+                      size: 18,
+                      bold: true,
+                      color: Colors.red,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10.0,
+                  ),
+                  const TextWidget(
+                    "Setup your profile information",
+                    size: 22,
+                    bold: true,
+                  ),
+                  Row(
                     children: [
-                      TextField(
+                      const TextWidget("You've created this account with ",
+                          size: 14, bold: true),
+                      const TextWidget(
+                        "(+855) ",
+                        size: 14,
+                        bold: true,
+                        color: Colors.red,
+                      ),
+                      TextWidget(
+                        widget.numberPhone.toString().isNotEmpty
+                            ? widget.numberPhone
+                            : "Unkown",
+                        size: 14,
+                        bold: true,
+                        color: Colors.red,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Form(
+                      child: Column(
+                    children: [
+                      TextFormField(
+                        controller: user.name,
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.person,
                               color: Colors.white.withOpacity(0.8)),
-                          labelText: "First Name",
-                          labelStyle:
-                          TextStyle(color: Colors.white.withOpacity(0.8),fontWeight: FontWeight.bold),
+                          labelText: "Username",
+                          labelStyle: TextStyle(
+                              color: Colors.white.withOpacity(0.8),
+                              fontWeight: FontWeight.bold),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 color: Colors.white.withOpacity(0.8)),
@@ -176,17 +261,20 @@ class _RegisterFormState extends State<RegisterForm> {
                           filled: true,
                           fillColor: Colors.white70.withOpacity(0.1),
                         ),
-                        style:
-                        TextStyle(color: Colors.white.withOpacity(0.8)),
+                        style: TextStyle(color: Colors.white.withOpacity(0.8)),
                       ),
-                      const SizedBox(height: 16,),
-                      TextField(
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      TextFormField(
+                        controller: user.email,
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.person,
                               color: Colors.white.withOpacity(0.8)),
-                          labelText: "Last Name",
-                          labelStyle:
-                          TextStyle(color: Colors.white.withOpacity(0.8),fontWeight: FontWeight.bold),
+                          labelText: "Email",
+                          labelStyle: TextStyle(
+                              color: Colors.white.withOpacity(0.8),
+                              fontWeight: FontWeight.bold),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 color: Colors.white.withOpacity(0.8)),
@@ -197,17 +285,19 @@ class _RegisterFormState extends State<RegisterForm> {
                           filled: true,
                           fillColor: Colors.white70.withOpacity(0.1),
                         ),
-                        style:
-                        TextStyle(color: Colors.white.withOpacity(0.8)),
+                        style: TextStyle(color: Colors.white.withOpacity(0.8)),
                       ),
-                      const SizedBox(height: 16,),
+                      const SizedBox(
+                        height: 16,
+                      ),
                       GestureDetector(
                         onTap: () {
                           showCupertinoModalPopup(
                             context: context,
                             builder: (context) {
                               return Container(
-                                height: MediaQuery.of(context).size.height * 0.4,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.4,
                                 color: Colors.black54,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -216,7 +306,11 @@ class _RegisterFormState extends State<RegisterForm> {
                                       onPressed: () {
                                         Navigator.pop(context);
                                       },
-                                      child: const TextWidget("Done",size: 16,bold: true,),
+                                      child: const TextWidget(
+                                        "Done",
+                                        size: 16,
+                                        bold: true,
+                                      ),
                                     ),
                                     Expanded(
                                       child: CupertinoDatePicker(
@@ -225,8 +319,10 @@ class _RegisterFormState extends State<RegisterForm> {
                                         onDateTimeChanged: (date) {
                                           setState(() {
                                             dateTime = date;
-                                            _dateController.text =
-                                            "${date.day.toString().padLeft(2, '0')}-${date.month.toString().padLeft(2, '0')}-${date.year}";
+                                            user.dob.text =
+                                                "${date.day.toString().padLeft(2, '0')}-${date.month.toString().padLeft(2, '0')}-${date.year}";
+
+                                            debugPrint(user.dob.text);
                                           });
                                         },
                                       ),
@@ -238,14 +334,15 @@ class _RegisterFormState extends State<RegisterForm> {
                           );
                         },
                         child: AbsorbPointer(
-                          child: TextField(
-                            controller: _dateController,
+                          child: TextFormField(
+                            controller: user.dob,
                             decoration: InputDecoration(
                               prefixIcon: Icon(Icons.cake,
                                   color: Colors.white.withOpacity(0.8)),
                               labelText: "DD-MM-YYYY",
                               labelStyle: const TextStyle(
-                                  color: Colors.white, fontWeight: FontWeight.bold),
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Colors.white.withOpacity(0.8)),
@@ -256,47 +353,167 @@ class _RegisterFormState extends State<RegisterForm> {
                               filled: true,
                               fillColor: Colors.white70.withOpacity(0.1),
                             ),
-                            style: TextStyle(color: Colors.white.withOpacity(0.8)),
+                            style:
+                                TextStyle(color: Colors.white.withOpacity(0.8)),
                           ),
                         ),
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      DropdownButtonFormField<String>(
+                        value: user.selectedGender,
+                        decoration: InputDecoration(
+                          labelText: 'Gender',
+                          fillColor: Colors.white70.withOpacity(0.1),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(width: 1, color: Colors.white.withOpacity(0.8))
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(width: 1.5, color: Colors.white.withOpacity(0.8)),
+                          ),
+                        ),
+                        items: user.genderOptions.map((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (newValue) {
+                          setState(() {
+                            user.gender = newValue;
+                          });
+                        },
+                        validator: (value) {
+                          if (value == null) {
+                            return 'Please select your gender';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      TextFormField(
+                        obscureText: _isToggle,
+                        controller: user.password,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.lock,
+                              color: Colors.white.withOpacity(0.8)),
+                          suffixIcon: IconButton(
+                            onPressed: () => _togglePassword(),
+                            icon: Icon(
+                                _isToggle
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                                color: Colors.white.withOpacity(0.8)),
+                          ),
+                          labelText: "Password",
+                          labelStyle: TextStyle(
+                              color: Colors.white.withOpacity(0.8),
+                              fontWeight: FontWeight.bold),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Colors.white.withOpacity(0.8)),
+                          ),
+                          focusedBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          filled: true,
+                          fillColor: Colors.white70.withOpacity(0.1),
+                        ),
+                        style: TextStyle(color: Colors.white.withOpacity(0.8)),
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      TextFormField(
+                        obscureText: true,
+                        controller: user.confirmPassword,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.lock,
+                              color: Colors.white.withOpacity(0.8)),
+                          labelText: "Re-enter password",
+                          labelStyle: TextStyle(
+                              color: Colors.white.withOpacity(0.8),
+                              fontWeight: FontWeight.bold),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Colors.white.withOpacity(0.8)),
+                          ),
+                          focusedBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          filled: true,
+                          fillColor: Colors.white70.withOpacity(0.1),
+                        ),
+                        style: TextStyle(color: Colors.white.withOpacity(0.8)),
                       ),
                     ],
-                  )
+                  )),
+                  const SizedBox(
+                    height: 190.0,
+                  ),
+                ],
               ),
-              const SizedBox(height: 90),
-              Center(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.red,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 24, vertical: 12),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(24),
-                          ),
-                        ),
-                        child: const TextWidget(
-                          "Continue",
-                          size: 16,
-                          bold: true,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20,),
-                    GestureDetector(
-                      onTap: (){},
-                        child: const TextWidget("Skip",size: 18,bold: true,))
-                  ],
-                ),
-              )
-            ],
+            ),
           ),
-        ),
+          bottomNavigationBar: BottomAppBar(
+            color: Colors.transparent,
+            child: Center(
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () => _registerBtn(),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(78, 59, 58, 58),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 24, vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                  ),
+                  child: TextWidget(
+                    S.of(context).register,
+                    size: 16,
+                    bold: true,
+                  ),
+                ),
+              ),
+            ),
+          )),
+    );
+  }
+
+  Widget _buildSnackbarMsg() {
+    return IconSnackBar.show(
+      context,
+      snackBarType: SnackBarType.fail,
+      label: 'Pleas fill all the blank!',
+      snackBarStyle: const SnackBarStyle(
+        labelTextStyle: TextStyle(color: Colors.white),
+      ),
+    );
+  }
+
+  Widget _buildMactchPasswordAndConfirmPassword() {
+    return IconSnackBar.show(
+      context,
+      snackBarType: SnackBarType.fail,
+      label: 'Password and confirm password dose not macth!',
+      snackBarStyle: const SnackBarStyle(
+        labelTextStyle: TextStyle(color: Colors.white),
+      ),
+    );
+  }
+
+  Widget _buildSuccessMsg() {
+    return IconSnackBar.show(
+      context,
+      snackBarType: SnackBarType.success,
+      label: 'Successfully',
+      snackBarStyle: const SnackBarStyle(
+        labelTextStyle: TextStyle(color: Colors.white),
       ),
     );
   }

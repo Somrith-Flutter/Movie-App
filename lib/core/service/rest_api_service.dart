@@ -6,7 +6,7 @@ import 'package:legend_cinema/constants/app_constant.dart';
 class RestApiService {
 
   Future<String> get(String endpoint) async {
-    final response = await http.get(Uri.parse('${AppConstant.baseIosUrl}/$endpoint'));
+    final response = await http.get(Uri.parse('${AppConstant.domainKey}/$endpoint'));
     return _processResponse(response);
   }
 
@@ -16,7 +16,7 @@ class RestApiService {
 
   Future<String> post(String endpoint, Map<String, dynamic> data) async {
     final response = await http.post(
-      Uri.parse('${AppConstant.baseIosUrl}/$endpoint'),
+      Uri.parse('${AppConstant.domainKey}/$endpoint'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode(data),
     );

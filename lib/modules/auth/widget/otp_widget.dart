@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/config/themes/app_color.dart';
-import 'package:legend_cinema/modules/auth/widget/register_form.dart';
-import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
@@ -111,7 +108,7 @@ class OtpWidget extends StatelessWidget {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
-                      AppRoute.route.push(context, RegisterForm());
+                      // AppRoute.route.push(context, RegisterForm());
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,

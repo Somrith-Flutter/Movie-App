@@ -93,6 +93,7 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: const Color.fromARGB(255, 26, 25, 25).withOpacity(0.9),
         centerTitle: true,
         title: const TextWidget('Legend Cinema', size: 22, bold: true,),

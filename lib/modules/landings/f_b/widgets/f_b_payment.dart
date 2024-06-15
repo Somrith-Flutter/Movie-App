@@ -5,7 +5,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/modules/landings/f_b/controller/f_b_controller.dart';
-import 'package:legend_cinema/modules/landings/f_b/repository/f_b_repository.dart';
 import 'package:legend_cinema/modules/landings/f_b/view/f_b_view.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';

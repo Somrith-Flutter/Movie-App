@@ -94,26 +94,21 @@ class FBController extends GetxController {
 
   Future<void> getDetailedData(String locationType) async {
     status = BaseStatusEnum.inprogress;
-    debugPrint("locationType $status");
     update();
 
     try {
       final List<FBFromServiceModel>? response =
           await repository.getDetailedDataRepo(locationType);
-      debugPrint("locationType $locationType");
 
       if (response != null) {
         fbs = response;
-        debugPrint(fbs.toString());
         status = BaseStatusEnum.success;
       } else {
-        debugPrint("error");
         status = BaseStatusEnum.failure;
       }
     } catch (e) {
       status = BaseStatusEnum.failure;
       errorMessage = e.toString();
-      debugPrint(errorMessage);
     } finally {
       update();
     }

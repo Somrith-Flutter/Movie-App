@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/core/model/fb_from_service_model.dart';
-import 'package:legend_cinema/core/model/fb_model.dart';
 import 'package:legend_cinema/modules/landings/f_b/controller/f_b_controller.dart';
-import 'package:legend_cinema/modules/landings/f_b/model/card_model.dart';
-import 'package:legend_cinema/modules/landings/f_b/repository/f_b_repository.dart';
 import 'package:legend_cinema/modules/landings/f_b/widgets/f_b_payment.dart';
 import 'package:legend_cinema/widgets/animated_flipcounter_box.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
@@ -23,9 +20,9 @@ class FBCartDetail extends StatefulWidget {
 
 class _FBCartDetailState extends State<FBCartDetail> {
   var cartController = Get.find<FBController>();
+  
   @override
   void initState() {
-    // cartController.getDetailedData(locationType);
     super.initState();
   }
   @override

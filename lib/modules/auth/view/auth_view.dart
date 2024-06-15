@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_icon_snackbar/flutter_icon_snackbar.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
+import 'package:legend_cinema/core/bottom_navigation.dart';
 import 'package:legend_cinema/core/enum/base_status_enum.dart';
 import 'package:legend_cinema/modules/auth/controller/auth_controller.dart';
 import 'package:legend_cinema/modules/auth/repository/auth_repository.dart';
@@ -11,7 +14,8 @@ import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
 class AuthView extends StatefulWidget {
-  const AuthView({super.key});
+  AuthView({super.key, this.isFromRegister});
+  bool? isFromRegister = false;
 
   @override
   State<AuthView> createState() => _AuthViewState();
@@ -84,8 +88,11 @@ class _AuthViewState extends State<AuthView> {
       child: GetBuilder<AuthController>(
         builder: (logic) {
           return Scaffold(
-            appBar: AppBar(
+            appBar: widget.isFromRegister != true ? AppBar(
+              automaticallyImplyLeading: false,
               leading: const BackWidget(),
+            ):  AppBar(
+              automaticallyImplyLeading: false,
             ),
             body: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -216,6 +223,10 @@ class _AuthViewState extends State<AuthView> {
                                                 logic.clear();
                                                 EasyLoading.showSuccess(
                                                     'Success!');
+                                                
+                                                if(widget.isFromRegister == true){
+                                                  AppRoute.route.pushReplacement(context, const BottomNavigation());
+                                                }
                                               }
                                             }
                                           } catch (_) {}

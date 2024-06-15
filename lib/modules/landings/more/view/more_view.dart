@@ -9,6 +9,7 @@ import 'package:legend_cinema/modules/auth/view/auth_page.dart';
 import 'package:legend_cinema/modules/auth/view/reqister_view.dart';
 import 'package:legend_cinema/modules/landings/more/controller/more_controller.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/learn_more_widget.dart';
+import 'package:legend_cinema/shared/v_globle.dart';
 import 'package:legend_cinema/widgets/list_tile_item.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
@@ -32,13 +33,16 @@ class _MoreViewState extends State<MoreView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  _buildLoginButton(),
-                  const Gap(12),
-                  _buildSignupButton(),
-                ],
+              Visibility(
+                visible: accessToken.$.isEmpty,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    _buildLoginButton(),
+                    const Gap(12),
+                    _buildSignupButton(),
+                  ],
+                ),
               ),
               const Gap(20),
               _buildWishCard(),

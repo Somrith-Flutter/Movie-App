@@ -1,14 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/config/themes/app_color.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
-import 'package:legend_cinema/core/enum/base_status_enum.dart';
 import 'package:legend_cinema/modules/landings/f_b/controller/f_b_controller.dart';
-import 'package:legend_cinema/modules/landings/f_b/repository/f_b_repository.dart';
 import 'package:legend_cinema/modules/landings/f_b/widgets/f_b_combo.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
+import 'package:legend_cinema/widgets/no_data_found.dart';
 import 'dart:ui';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
@@ -32,58 +30,59 @@ class _FBViewState extends State<FBView> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Image.asset(
-          AssetPath.fbhero,
-          width: double.infinity,
-          height: double.infinity,
-          fit: BoxFit.cover,
-        ),
-        BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-          child: Container(
-            color: AppColor.primaryColor.withOpacity(0.5),
-            width: double.infinity,
-            height: double.infinity,
-          ),
-        ),
-        Scaffold(
-            key: _key,
-            backgroundColor: Colors.transparent,
-            appBar: AppBar(
-              centerTitle: false,
-              title: TextWidget(S.of(context).fb, size: 20, bold: true),
-              flexibleSpace: Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: AppColor.appbarColor,
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                  ),
-                ),
+    return GetBuilder<FBController>(
+      builder: (logic) {
+        return Stack(
+          children: [
+            Image.asset(
+              AssetPath.fbhero,
+              width: double.infinity,
+              height: double.infinity,
+              fit: BoxFit.cover,
+            ),
+            BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+              child: Container(
+                color: AppColor.primaryColor.withOpacity(0.5),
+                width: double.infinity,
+                height: double.infinity,
               ),
             ),
-            body: GetBuilder<FBController>(builder: (logic) {
-              return SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                scrollDirection: Axis.vertical,
-                child: Column(
-                  children: [
-                    _buildBody(context),
-                    _buildListMovieLocation(),
-                  ],
+            Scaffold(
+                key: _key,
+                backgroundColor: Colors.transparent,
+                appBar: AppBar(
+                  centerTitle: false,
+                  title: TextWidget(S.of(context).fb, size: 20, bold: true),
+                  flexibleSpace: Container(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: AppColor.appbarColor,
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                      ),
+                    ),
+                  ),
                 ),
-              );
-            })),
-      ],
+                body: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  child: Column(
+                    children: [
+                      _buildBody(context),
+                      _buildListMovieLocation(),
+                    ],
+                  ),
+                ))
+          ],
+        );
+      }
     );
   }
 
   Widget _buildBody(BuildContext context) {
-    return ListView(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Image.asset(AssetPath.fbhero),
         Padding(
@@ -99,18 +98,13 @@ class _FBViewState extends State<FBView> {
   }
 
   Widget _buildListMovieLocation() {
-    if (controller.status == BaseStatusEnum.inprogress) {
-      return const Center(
-        child: CupertinoActivityIndicator(),
-      );
-    }
-
-    if (controller.status == BaseStatusEnum.failure) {
-      return const Center(child: Text("No data!"));
+    if (controller.fb.isEmpty) {
+      return const NoDataFound();
     }
 
     return ListView.builder(
       shrinkWrap: true,
+      padding: EdgeInsets.zero,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: controller.fb.length,
       itemBuilder: (context, index) {
@@ -123,7 +117,13 @@ class _FBViewState extends State<FBView> {
                 Navigator.push(
                     context,
                     CupertinoPageRoute(
-                        builder: (context) => FAndBCombo(location: controller.fb[index].locationType.toString())));
+                        builder: (context) => FAndBCombo(
+                            location:
+                                controller.fb[index].locationType.toString(),
+                                selectedCinema: controller.fb[index].name.toString(),
+                              )
+                            )
+                          );
               },
               child: Card(
                 color: Colors.white70.withOpacity(0.1),
@@ -134,27 +134,25 @@ class _FBViewState extends State<FBView> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 3),
+                    padding: const EdgeInsets.all(8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            width: 60,
-                            height: 70,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              image: DecorationImage(
-                                image: AssetImage(
-                                  controller.fb[index].image.toString(),
-                                ),
-                                fit: BoxFit.cover,
+                        Container(
+                          width: 60,
+                          height: 70,
+                          margin: const EdgeInsets.only(right: 20.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            image: DecorationImage(
+                              image: AssetImage(
+                                controller.fb[index].image.toString(),
                               ),
+                              fit: BoxFit.cover,
                             ),
                           ),
                         ),
-                        const SizedBox(width: 5),
                         Expanded(
                           child: TextWidget(
                             controller.fb[index].name.toString(),
@@ -163,8 +161,7 @@ class _FBViewState extends State<FBView> {
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        const Padding(
-                          padding: EdgeInsets.only(right: 12.0),
+                        const Center(
                           child: Icon(
                             Icons.arrow_forward_ios_rounded,
                             size: 16,

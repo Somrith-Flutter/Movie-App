@@ -7,17 +7,24 @@ class NoDataFound extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
+    return Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(AssetPath.noData,fit: BoxFit.cover,),
-            const SizedBox(height: 5,),
-            TextWidget(" No Data Found",size: 20,color: Colors.grey[400],bold: true,)
-          ],
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset(
+          AssetPath.noData,
+          fit: BoxFit.cover,
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        TextWidget(
+          " No Data Found",
+          size: 20,
+          color: Colors.grey[400],
+          bold: true,
         )
-      ),
-    );
+      ],
+    ));
   }
 }

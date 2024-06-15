@@ -12,7 +12,7 @@ class AuthPage extends StatelessWidget {
     return GetBuilder<AuthController>(
       init: AuthController(repository: AuthRepository()),
       initState: (_) => Get.find<AuthController>().onInit(),
-      builder: (_) => const Scaffold(
+      builder: (_) => Scaffold(
         body: AuthView(),
       ),
     );
