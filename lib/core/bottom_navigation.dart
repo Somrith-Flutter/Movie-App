@@ -43,7 +43,11 @@ class _BottomNavigationState extends State<BottomNavigation> {
       extendBody: true,
       body: PageView(
         controller: _pageController,
-        onPageChanged: _selectPage,
+        onPageChanged: (index) {
+          setState(() {
+            _currentPageIndex = index;
+          });
+        },
         children: _pages,
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -63,14 +67,16 @@ class _BottomNavigationState extends State<BottomNavigation> {
   }
 
   void _selectPage(int index) {
-    setState(() {
-      _currentPageIndex = index;
-      _pageController.animateToPage(
-        index,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.ease,
-      );
-    });
+    if (_currentPageIndex != index) {
+      setState(() {
+        _currentPageIndex = index;
+        _pageController.animateToPage(
+          index,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.ease,
+        );
+      });
+    }
   }
 
   BottomNavigationBarItem _buildNavItem(IconData icon, String label, bool isSelected) {

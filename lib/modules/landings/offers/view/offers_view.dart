@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
@@ -74,6 +75,7 @@ class OffersView extends StatelessWidget {
               ),
             ),
             _buildPremiumBenifit(),
+            const Gap(100)
           ],
         ),
       ),
@@ -151,7 +153,6 @@ class OffersView extends StatelessWidget {
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.all(0),
-            
             child: Card(
               child: Stack(
                 children: [

@@ -61,6 +61,7 @@ class AppConstant{
   static Iterable<Locale>  supportLocalLanguage = S.delegate.supportedLocales;
 
   static const String defaultFont = 'Siemreap';
+  static const String inlineSeparator = '•';
 
   static Widget appbarTheme = Container(
     decoration: const BoxDecoration(
