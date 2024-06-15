@@ -20,7 +20,7 @@ class FBPayment extends StatefulWidget {
 }
 
 class _FBPaymentState extends State<FBPayment> {
-  var cartController = Get.put(FBController(repository: FBRepository()));
+  var cartController = Get.find<FBController>();
   String _selectedPaymentMethod = 'KHQR';
 
 
