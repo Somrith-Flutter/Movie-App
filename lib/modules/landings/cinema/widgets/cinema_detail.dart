@@ -28,7 +28,6 @@ class _CinemaDetailState extends State<CinemaDetail> {
   }
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     selectedDay = dateInfo.dates.first;
   }
@@ -41,7 +40,7 @@ class _CinemaDetailState extends State<CinemaDetail> {
         leading: const BackWidget(),
         title: TextWidget(
           widget.title,
-          size: 26,
+          size: 20.0,
           bold: true,
           overflow: TextOverflow.ellipsis,
         ),

@@ -70,6 +70,7 @@ flutter:
     - assets/location.json
     - assets/privacy_policy.json
     - assets/term_condition.json
+    - assets/fbs/
 
   fonts:
     - family: Siemreap

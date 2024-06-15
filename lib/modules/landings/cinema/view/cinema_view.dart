@@ -91,7 +91,7 @@ class CinemaView extends StatelessWidget {
         centerTitle: false,
         title: const TextWidget(
           'Cinema',
-          size: 24,
+          size: 20.0,
         ),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
@@ -131,6 +131,7 @@ class CinemaView extends StatelessWidget {
             Expanded(
               child: ListView.builder(
                 physics: const BouncingScrollPhysics(),
+                scrollDirection: Axis.vertical,
                 itemCount: cinema.length,
                 itemBuilder: (context, index) {
                   final item = cinema[index];

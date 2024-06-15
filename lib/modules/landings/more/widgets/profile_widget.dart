@@ -77,28 +77,31 @@ class _ProfileWidgetState extends State<ProfileWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: const BackWidget(),
-        centerTitle: true,
-        title: const TextWidget(
-          'Profile',
-          size: 22,
-          bold: true,
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+      child: Scaffold(
+        appBar: AppBar(
+          leading: const BackWidget(),
+          centerTitle: true,
+          title: const TextWidget(
+            'Profile',
+            size: 22,
+            bold: true,
+          ),
+          flexibleSpace: AppConstant.appbarTheme,
+          actions: [
+            TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const TextWidget(
+                  'Save',
+                  bold: true,
+                  color: Colors.red,
+                ))
+          ],
         ),
-        flexibleSpace: AppConstant.appbarTheme,
-        actions: [
-          TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const TextWidget(
-                'Save',
-                bold: true,
-                color: Colors.red,
-              ))
-        ],
+        backgroundColor: AppColor.primaryColor,
+        body: _buildBody(context),
       ),
-      backgroundColor: AppColor.primaryColor,
-      body: _buildBody(context),
     );
   }
 

@@ -119,7 +119,7 @@ class _FBViewState extends State<FBView> {
                     CupertinoPageRoute(
                         builder: (context) => FAndBCombo(
                             location:
-                                controller.fb[index].locationType.toString(),
+                                controller.fb[index].name.toString(),
                                 selectedCinema: controller.fb[index].name.toString(),
                               )
                             )

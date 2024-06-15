@@ -3,73 +3,73 @@
         {
             "id": 1,
             "name": "Legend Eden Garden",
-            "image": "assets/images/cinema1.jpeg",
+            "image": "assets/fbs/1.jpg",
             "location_type": "eden"
         },
         {
             "id": 2,
             "name": "Legend Toul Kork",
-            "image": "assets/images/cinema1.jpeg",
+            "image": "assets/fbs/2.jpg",
             "location_type": "toul kork"
         },
         {
             "id": 3,
             "name": "Legend Premium Exchange Square",
-            "image": "assets/images/cinema1.jpeg",
+            "image": "assets/fbs/3.jpg",
             "location_type": "legend premium"
         },
         {
             "id": 4,
             "name": "Legend Olympia",
-            "image": "assets/images/cinema1.jpeg",
+            "image": "assets/fbs/4.jpg",
             "location_type": "olympia"
         },
         {
             "id": 5,
             "name": "Legend SenSok",
-            "image": "assets/images/cinema1.jpeg",
+            "image": "assets/fbs/5.jpg",
             "location_type":"sensok"
         },
         {
             "id": 6,
             "name": "Legend Noro Mall",
-            "image": "assets/images/cinema1.jpeg",
+            "image": "assets/fbs/6.jpg",
             "location_type":"noro mall"
         },
         {
             "id": 7,
             "name": "Legend Midtown Mall",
-            "image": "assets/images/cinema1.jpeg",
+            "image": "assets/fbs/7.jpg",
             "location_type":"midtown mall"
         },
         {
             "id": 8,
             "name": "Legend Meanchey",
-            "image": "assets/images/cinema1.jpeg",
+            "image": "assets/fbs/8.jpg",
             "location_type":"menchey"
         },
         {
             "id": 9,
             "name": "Legend Cinema 271 Mega Mall",
-            "image": "assets/images/cinema1.jpeg",
+            "image": "assets/fbs/9.jpg",
             "location_type":"271 mega mall"
         },
         {
             "id": 10,
             "name": "Legend K Mall",
-            "image": "assets/images/cinema1.jpeg",
+            "image": "assets/fbs/10.jpg",
             "location_type":"k mall"
         },
         {
             "id": 11,
             "name": "Legend Cinema Sihanoukville",
-            "image": "assets/images/cinema1.jpeg",
+            "image": "assets/fbs/11.jpg",
             "location_type":"sihanoukville"
         },
         {
             "id": 12,
             "name": "Legend Siem Reap",
-            "image": "assets/images/cinema1.jpeg",
+            "image": "assets/fbs/12.jpg",
             "location_type":"siem reap"
         }
     ]
