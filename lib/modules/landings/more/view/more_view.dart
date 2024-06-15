@@ -217,7 +217,8 @@ class _MoreViewState extends State<MoreView> {
             var selectedItem = items(context, title, icon)[index];
             if (selectedItem.route != null) {
               AppRoute().push(context, selectedItem.route!);
-            } else {
+            } else if (selectedItem.onTap != null){
+              selectedItem.onTap;
             }
           }
         }
