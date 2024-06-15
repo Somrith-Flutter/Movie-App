@@ -1,670 +1,323 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:legend_cinema/config/routes/app_route.dart';
+import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/modules/landings/f_b/controller/f_b_controller.dart';
-import 'package:legend_cinema/modules/landings/f_b/model/card_model.dart';
-import 'package:legend_cinema/modules/landings/f_b/repository/f_b_repository.dart';
-import 'package:legend_cinema/modules/landings/f_b/widgets/f_b_cart_detail.dart';
 import 'package:legend_cinema/widgets/animated_flipcounter_box.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
 class FAndBCombo extends StatefulWidget {
-  const FAndBCombo({super.key});
+  const FAndBCombo({super.key, required this.location});
+  final String location;
 
   @override
   State<FAndBCombo> createState() => _FAndBComboState();
 }
 
-
 class _FAndBComboState extends State<FAndBCombo> {
-  var cartController = Get.put(FBController(repository: FBRepository()));
+  final cartController = Get.find<FBController>();
   String selectedCinema = "Legend Premium Exchange Square";
 
-  final Map<String, List<CartModel>> cartItemsByCinema = {
-    "Legend Eden Garden": [
-      CartModel(
-          title: 'Combo 1',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-    ],
-    "Legend Toul Kork": [
-      CartModel(
-          title: 'Combo 1',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 2',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-    ],
-    "Legend Premium Exchange Square": [
-      CartModel(
-          title: 'Combo 1',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 2',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 3',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-    ],
-    "Legend Olympia": [
-      CartModel(
-          title: 'Combo 1',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 2',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 3',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 4',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-    ],
-    "Legend SenSok": [
-      CartModel(
-          title: 'Combo 1',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 2',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 3',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 4',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 5',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-    ],
-    "Legend  Noro Mall": [
-      CartModel(
-          title: 'Combo 1',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 2',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 3',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 4',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 5',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 6',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-    ],
-    "Legend Midtown Mall": [
-      CartModel(
-          title: 'Combo 1',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 2',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 3',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 4',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 5',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 6',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 7',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-    ],
-    "Legend Meanchey": [
-      CartModel(
-          title: 'Combo 1',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 2',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 3',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 4',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 5',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 6',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 7',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 8',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-    ],
-    "Legend Cinema 271 Mega Mall": [
-      CartModel(
-          title: 'Combo 1',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 2',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 3',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 4',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 5',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 6',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 7',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 8',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-    ],
-    "Legend K Mall": [
-      CartModel(
-          title: 'Combo 1',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 2',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 3',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 4',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 5',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 6',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 7',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 8',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-    ],
-    "Legend Cinema Sihanoukville": [
-      CartModel(
-          title: 'Combo 1',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 2',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 3',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 4',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 5',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 6',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 7',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 8',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-    ],
-    "Legend Siem Reap": [
-      CartModel(
-          title: 'Combo 1',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 2',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 3',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 4',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 5',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 6',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-      CartModel(
-          title: 'Combo 7',
-          price: 5.0,
-          imageUrl: 'assets/images/f&b.jpeg'),
-      CartModel(
-          title: 'Combo 8',
-          price: 4.50,
-          imageUrl: 'assets/images/f&b.jpeg'
-      ),
-    ],
-
-  };
-
-  List<CartModel> get cartItems => cartItemsByCinema[selectedCinema] ?? [];
   @override
   void initState() {
+    Future.delayed((Duration.zero), (){
+      cartController.getDetailedData(widget.location.toString());
+    });
     super.initState();
-    cartController = Get.put(FBController(repository: FBRepository()));
-  }
-
-  @override
-  void dispose() {
-    cartController.clearCart(); // Clear the cart when the widget is disposed
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Image.asset(
-          "assets/images/f&b.jpeg",
-          width: double.infinity,
-          height: double.infinity,
-          fit: BoxFit.cover,
-        ),
-        BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-          child: Container(
-            color: Colors.black.withOpacity(0.5),
-            width: double.infinity,
-            height: double.infinity,
-          ),
-        ),
-        Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            leading: const BackWidget(),
-            title: TextWidget(S.of(context).fb, size: 20, bold: true),
-            centerTitle: true,
-            flexibleSpace: Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.red, Colors.black],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
+    return GetBuilder<FBController>(
+      builder: (logic) {
+        return Stack(
+          children: [
+            Image.asset(
+              "assets/images/f&b.jpeg",
+              width: double.infinity,
+              height: double.infinity,
+              fit: BoxFit.cover,
+            ),
+            BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+              child: Container(
+                color: Colors.black.withOpacity(0.5),
+                width: double.infinity,
+                height: double.infinity,
               ),
             ),
-          ),
-          body: GetBuilder<FBController>(builder: (logic) {
-            return Column(
-              children: [
-                Expanded(
-                  flex: 7,
-                  child: ListView(
-                    physics: const BouncingScrollPhysics(),
-                    children: [
-                      Stack(
+            Scaffold(
+              backgroundColor: Colors.transparent,
+              appBar: AppBar(
+                leading: const BackWidget(),
+                title: TextWidget(S.of(context).fb, size: 20, bold: true),
+                centerTitle: true,
+                flexibleSpace: Container(
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Colors.red, Colors.black],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
+                  ),
+                ),
+              ),
+              body: Column(
+                  children: [
+                    Expanded(
+                      flex: 7,
+                      child: ListView(
+                        physics: const BouncingScrollPhysics(),
                         children: [
-                          Image.asset(AssetPath.fbhero),
-                          Positioned(
-                            top: 16,
-                            left: 16,
-                            right: 16,
-                            child: GestureDetector(
-                              onTap: () {
-                                _buildBottomSheet(context);
-                              },
-                              child: Container(
-                                width: MediaQuery.of(context).size.width,
-                                height: 50,
-                                decoration: BoxDecoration(
-                                  color: Colors.black54.withOpacity(0.3),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      TextWidget(
-                                        selectedCinema,
-                                        size: 16,
+                          Stack(
+                            children: [
+                              Image.asset(AssetPath.fbhero),
+                              Positioned(
+                                top: 16,
+                                left: 16,
+                                right: 16,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    _buildBottomSheet(context);
+                                  },
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      color: Colors.black54.withOpacity(0.3),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          TextWidget(
+                                            selectedCinema,
+                                            size: 16,
+                                          ),
+                                          const Icon(
+                                            Icons.arrow_drop_down_circle_outlined,
+                                          ),
+                                        ],
                                       ),
-                                      const Icon(
-                                        Icons.arrow_drop_down_circle_outlined,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                      ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: cartItems.length,
-                        itemBuilder: (context, index) {
-                          var product = cartItems[index];
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 8),
-                            child: SizedBox(
-                              height: 130,
-                              child: Card(
-                                color: Colors.white70.withOpacity(0.1),
-                                elevation: 2,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.white.withOpacity(0.8)),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 3),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Container(
-                                            width: 100,
-                                            height: 100,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              image: DecorationImage(
-                                                image: AssetImage(
-                                                    product.imageUrl),
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(width: 5),
-                                        Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                TextWidget(
-                                                  product.title,
-                                                  size: 17,
-                                                  bold: true,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                ),
-                                                TextWidget(
-                                                  "\$${product.price}",
-                                                  size: 16,
-                                                  bold: true,
-                                                  color: Colors.red,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        Align(
-                                          alignment: Alignment.bottomRight,
-                                          child: Row(
-                                            children: [
-                                              if (logic.getProductQuantity(
-                                                      product) >
-                                                  0)
-                                                Container(
-                                                  margin: const EdgeInsets
-                                                      .symmetric(
-                                                      horizontal: 8,
-                                                      vertical: 8),
-                                                  decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    color: Colors.red[600],
-                                                  ),
-                                                  child: GestureDetector(
-                                                    onTap: () {
-                                                      logic.removeItem(product);
-                                                    },
-                                                    child: const Icon(
-                                                      Icons.remove,
-                                                      size: 30,
-                                                    ),
-                                                  ),
-                                                ),
-                                              if (logic.getProductQuantity(
-                                                      product) >
-                                                  0)
-                                                TextWidget(
-                                                  "${logic.getProductQuantity(product)}",
-                                                  size: 20,
-                                                  bold: true,
-                                                ),
-                                              Container(
-                                                margin:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8,
-                                                        vertical: 8),
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  color: Colors.red[600],
-                                                ),
-                                                child: GestureDetector(
-                                                  onTap: () {
-                                                    Future.delayed(
-                                                        const Duration(
-                                                            seconds: 2));
-                                                    logic.addItem(product);
-                                                  },
-                                                  child: const Icon(
-                                                    Icons.add,
-                                                    size: 30,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    width: double.infinity,
-                    color: Colors.black,
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                width: 70,
-                                decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.white, width: 3),
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: TextWidget(
-                                  "${cartController.totalItems}",
-                                  textAlign: TextAlign.center,
-                                  size: 19,
-                                  bold: true,
-                                  color: Colors.red,
-                                ),
-                              ),
-                              const SizedBox(width: 20),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const TextWidget("Summary",
-                                      size: 16, bold: true),
-                                  MyAnimatedFlipCounter(
-                                    duration: const Duration(milliseconds: 500),
-                                    value: double.parse(
-                                        cartController.formattedTotalPrice),
-                                    textStyle: const TextStyle(fontSize: 18),
-                                    prefix: '\$',
-                                  ),
-                                ],
-                              ),
                             ],
                           ),
-                          ElevatedButton(
-                            onPressed: () {
-                              var selectedItems = cartItems
-                                  .where((product) =>
-                                      logic.getProductQuantity(product) > 0)
-                                  .map((product) {
-                                product.quantity =
-                                    logic.getProductQuantity(product);
-                                return product;
-                              }).toList();
-                              AppRoute.route.push(context,
-                                  FBCartDetail(selectedItems: selectedItems,selectedCinema: selectedCinema));
+                          const SizedBox(height: 10),
+                          ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: logic.fbs?.length,
+                            itemBuilder: (context, index) {
+                              var product = logic.fbs?[index];
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 8),
+                                child: SizedBox(
+                                  height: 130,
+                                  child: Card(
+                                    color: Colors.white70.withOpacity(0.1),
+                                    elevation: 2,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.white.withOpacity(0.8)),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left: 3),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: Container(
+                                                width: 100,
+                                                height: 100,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                  image: DecorationImage(
+                                                    image: NetworkImage(
+                                                        "${AppConstant.domainKey}/${product?.imageUrl.toString()}"),
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            const SizedBox(width: 5),
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    TextWidget(
+                                                      product?.title,
+                                                      size: 17,
+                                                      bold: true,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                    ),
+                                                    TextWidget(
+                                                      "\$${product?.price}",
+                                                      size: 16,
+                                                      bold: true,
+                                                      color: Colors.red,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            Align(
+                                              alignment: Alignment.bottomRight,
+                                              child: Row(
+                                                children: [
+                                                  if (logic.getProductQuantity(
+                                                          product!) >
+                                                      0)
+                                                    Container(
+                                                      margin: const EdgeInsets
+                                                          .symmetric(
+                                                          horizontal: 8,
+                                                          vertical: 8),
+                                                      decoration: BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                        color: Colors.red[600],
+                                                      ),
+                                                      child: GestureDetector(
+                                                        onTap: () {
+                                                          logic.removeItem(product);
+                                                        },
+                                                        child: const Icon(
+                                                          Icons.remove,
+                                                          size: 30,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  if (logic.getProductQuantity(
+                                                          product) >
+                                                      0)
+                                                    TextWidget(
+                                                      "${logic.getProductQuantity(product)}",
+                                                      size: 20,
+                                                      bold: true,
+                                                    ),
+                                                  Container(
+                                                    margin:
+                                                        const EdgeInsets.symmetric(
+                                                            horizontal: 8,
+                                                            vertical: 8),
+                                                    decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      color: Colors.red[600],
+                                                    ),
+                                                    child: GestureDetector(
+                                                      onTap: () {
+                                                        Future.delayed(
+                                                            const Duration(
+                                                                seconds: 2));
+                                                        logic.addItem(product);
+                                                      },
+                                                      child: const Icon(
+                                                        Icons.add,
+                                                        size: 30,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
                             },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.red,
-                            ),
-                            child: const TextWidget("Continue",
-                                size: 16, bold: true),
                           ),
                         ],
                       ),
                     ),
-                  ),
-                ),
-              ],
-            );
-          }),
-        ),
-      ],
+                    Expanded(
+                      child: Container(
+                        width: double.infinity,
+                        color: Colors.black,
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    width: 70,
+                                    decoration: BoxDecoration(
+                                      border:
+                                          Border.all(color: Colors.white, width: 3),
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    child: TextWidget(
+                                      "${cartController.totalItems}",
+                                      textAlign: TextAlign.center,
+                                      size: 19,
+                                      bold: true,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 20),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const TextWidget("Summary",
+                                          size: 16, bold: true),
+                                      MyAnimatedFlipCounter(
+                                        duration: const Duration(milliseconds: 500),
+                                        value: double.parse(
+                                            cartController.formattedTotalPrice),
+                                        textStyle: const TextStyle(fontSize: 18),
+                                        prefix: '\$',
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              ElevatedButton(
+                                onPressed: () {
+                                  // Your logic for the Continue button goes here
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.red,
+                                ),
+                                child: const TextWidget("Continue",
+                                    size: 16, bold: true),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+            ),
+          ],
+        );
+      }
     );
   }
 
@@ -759,7 +412,7 @@ class _FAndBComboState extends State<FAndBCombo> {
   }
 }
 
-List<Map<String, String>> cinemaList = [
+var cinemaList = [
   {"title": "Legend Eden Garden"},
   {"title": "Legend Toul Kork"},
   {"title": "Legend Premium Exchange Square"},

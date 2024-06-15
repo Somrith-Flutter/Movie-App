@@ -2,6 +2,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:legend_cinema/config/routes/app_route.dart';
+import 'package:legend_cinema/core/model/fb_from_service_model.dart';
+import 'package:legend_cinema/core/model/fb_model.dart';
 import 'package:legend_cinema/modules/landings/f_b/controller/f_b_controller.dart';
 import 'package:legend_cinema/modules/landings/f_b/model/card_model.dart';
 import 'package:legend_cinema/modules/landings/f_b/repository/f_b_repository.dart';
@@ -10,16 +12,24 @@ import 'package:legend_cinema/widgets/animated_flipcounter_box.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
-class FBCartDetail extends StatelessWidget {
-  final List<CartModel> selectedItems;
-
+class FBCartDetail extends StatefulWidget {
+  final List<FBFromServiceModel> selectedItems;
   final String selectedCinema;
-
   const FBCartDetail({super.key, required this.selectedItems, required this.selectedCinema});
 
   @override
+  State<FBCartDetail> createState() => _FBCartDetailState();
+}
+
+class _FBCartDetailState extends State<FBCartDetail> {
+  var cartController = Get.find<FBController>();
+  @override
+  void initState() {
+    // cartController.getDetailedData(locationType);
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
-    var cartController = Get.put(FBController(repository: FBRepository()));
     return Stack(
       children: [
         Image.asset(
@@ -77,7 +87,7 @@ class FBCartDetail extends StatelessWidget {
                                 ),
                                 child:  Center(
                                   child: TextWidget(
-                                    selectedCinema,
+                                    widget.selectedCinema,
                                     size: 20,
                                     bold: true,
                                   ),
@@ -87,7 +97,7 @@ class FBCartDetail extends StatelessWidget {
                               Builder(
                                 builder: (context) {
                                   const double itemHeight = 120.0;
-                                  final filteredItems = selectedItems
+                                  final filteredItems = widget.selectedItems
                                       .where((item) =>
                                           logic.getProductQuantity(item) > 0)
                                       .toList();
@@ -139,7 +149,7 @@ class FBCartDetail extends StatelessWidget {
                                                                 .circular(5),
                                                         image: DecorationImage(
                                                           image: AssetImage(
-                                                              item.imageUrl),
+                                                              item.imageUrl.toString()),
                                                           fit: BoxFit.cover,
                                                         ),
                                                       ),

@@ -25,9 +25,7 @@ class AppController extends Bindings {
     Get.lazyPut(() => CinemaController(
       repository: CinemaRepository()
     ));
-    Get.lazyPut(() => FBController(
-      repository: FBRepository()
-    ));
+    Get.lazyPut(() => FBController(repository: FBRepository()));
     Get.lazyPut(() => MoreController(
       repository: MoreRepository()
     ));
