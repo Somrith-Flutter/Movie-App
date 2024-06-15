@@ -59,10 +59,12 @@ class _HomeViewState extends State<HomeView> {
       "poster": "https://www.ripefruitmedia.com.au/images_rfm/1223-130236796.jpg" // Replace with the actual URL or local path
     },
   ];
+  final dateInfo = DateInfo();
 
   @override
   void initState() {
     super.initState();
+    selectedDay = dateInfo.dates.first;
     _pageController = PageController(viewportFraction: 0.85);
     _timer = Timer.periodic(const Duration(seconds: 3), (Timer timer) {
       if (_pageController.hasClients) {
@@ -283,7 +285,6 @@ class _HomeViewState extends State<HomeView> {
   }
 
   Widget _buildTimeLine() {
-     final dateInfo = DateInfo();
     return Align(
       alignment: Alignment.topLeft,
       child: SizedBox(
