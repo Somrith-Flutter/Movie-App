@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/config/themes/app_color.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
+import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
@@ -87,11 +88,14 @@ class ContactListTile extends StatelessWidget {
               child: ListTile(
                 title: TextWidget(item.title),
                 // ignore: unrelated_type_equality_checks
-                leading: item.iconAsset == true
+                leading: item.isAssetIcon == true
                   ? SizedBox(
-                      height: 40,
-                      width: 30,
-                      child: Image.asset(item.iconAsset!)
+                      height: 50,
+                      width: 50,
+                      child: Image.asset(
+                        item.iconAsset!, 
+                        fit: BoxFit.contain,
+                      )
                     ) : Icon(item.icon),
                 onTap: () => onTap != null ? onTap!(index) : '',
                 hoverColor: Colors.white.withOpacity(0.3),
@@ -130,42 +134,42 @@ List<ContactItem> items(BuildContext context)  {
   return [
     ContactItem(
       title: '089826667',
-      isAssetIcon: false,
-      icon: Icons.call,
+      isAssetIcon: true,
       route: const Text(''),
+      iconAsset: AssetPath.callicon,
       header: 'Contact Info',
       isheader: true,
       isSpacig: true
     ),
     ContactItem(
       title: 'Messanger',
-      isAssetIcon: false,
+      isAssetIcon: true,
       route: const Text(''),
-      icon: Icons.message,   
+      iconAsset: AssetPath.mailicon,
       isSpacig: false
     ),
     ContactItem(
       title: 'info@legend.com.kh',
-      isAssetIcon: false,
+      isAssetIcon: true,
       route: const Text(''),
-      icon: Icons.movie,
-      isSpacig: false
+      isSpacig: false,
+      iconAsset: AssetPath.aicon
     ),
 
     ContactItem(
       title: '087 888 045 / 087 888 048',
-      isAssetIcon: false,
+      isAssetIcon: true,
       route: const Text(''),
-      icon: Icons.phone,
+      iconAsset: AssetPath.callicon,
       header: 'Advertising & Partnership',
       isheader: true,
       isSpacig: true
     ),
     ContactItem(
       title: 'marketing@legend.com.kh',
-      isAssetIcon: false,
-      icon: Icons.sell, 
-     isSpacig: false,
+      isAssetIcon: true,
+      iconAsset: AssetPath.aicon,
+      isSpacig: false,
     ),
   ];
 }

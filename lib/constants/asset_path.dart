@@ -35,6 +35,9 @@ class AssetPath{
   static const String loginicon = 'assets/icons/login.png';
   static const String signupicon = 'assets/icons/signup.png'; 
   static const String purchase = 'assets/icons/purchase.png';
+  static const String aicon = 'assets/icons/@_icon.png';
+  static const String callicon = 'assets/icons/call_icon.png';
+  static const String mailicon = 'assets/icons/mail_icon.png';
 
   // =============Cinema Location==================
   static const String megaMall = 'assets/images/271-mega-mall.jpg';
