@@ -76,10 +76,11 @@ class FBController extends GetxController {
       await repository.getLocationList().then((data) {
         if (data != null) {
           fb = data;
+          status = BaseStatusEnum.success;
+          debugPrint(fb.toString());
         } else {
           debugPrint("error");
         }
-        status = BaseStatusEnum.success;
         update();
         return;
       });
@@ -97,18 +98,21 @@ class FBController extends GetxController {
     update();
 
     try {
-      final List<FBFromServiceModel>? response =
+      final response =
           await repository.getDetailedDataRepo(locationType);
 
       if (response != null) {
         fbs = response;
         status = BaseStatusEnum.success;
+        debugPrint(fbs.toString());
       } else {
+        debugPrint("error");
         status = BaseStatusEnum.failure;
       }
     } catch (e) {
       status = BaseStatusEnum.failure;
       errorMessage = e.toString();
+      debugPrint(errorMessage);
     } finally {
       update();
     }

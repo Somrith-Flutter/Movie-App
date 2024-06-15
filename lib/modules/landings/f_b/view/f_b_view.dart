@@ -115,15 +115,15 @@ class _FBViewState extends State<FBView> {
             child: GestureDetector(
               onTap: () async {
                 Navigator.push(
-                    context,
-                    CupertinoPageRoute(
-                        builder: (context) => FAndBCombo(
-                            location:
-                                controller.fb[index].name.toString(),
-                                selectedCinema: controller.fb[index].name.toString(),
-                              )
-                            )
-                          );
+                  context,
+                  CupertinoPageRoute(
+                    builder: (context) => FAndBCombo(
+                        location:
+                            controller.fb[index].locationType.toString(),
+                            selectedCinema: controller.fb[index].name.toString(),
+                          )
+                        )
+                      );
               },
               child: Card(
                 color: Colors.white70.withOpacity(0.1),

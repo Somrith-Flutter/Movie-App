@@ -20,7 +20,7 @@ class FBFromServiceModel {
     id = json['id'].toString();
     title = json['title'].toString();
     imageUrl = json['image_url'].toString();
-    price = json['price'];
+    price = json['price'].toDouble();
     locationType = json['location_type'].toString();
     createdAt = json['created_at'].toString();
     updatedAt = json['updated_at'].toString();
