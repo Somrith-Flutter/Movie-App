@@ -79,4 +79,17 @@ class AssetPath{
   static const String sensokDetail = 'assets/images/sensok-detail.jpeg';
   static const String siemreapDetail = 'assets/images/siemreap-detail.png';
   static const String toulkorkDetail = 'assets/images/toulkork-detail.png';
+
+  //===================Movie=======================
+  static const String boyKill = 'assets/images/boy-kill.jpg';
+  static const String darkMother = 'assets/images/dark-mother.jpg';
+  static const String inside = 'assets/images/inside.jpg';
+  static const String motherGhost = 'assets/images/mother-ghost.jpg';
+  static const String police = 'assets/images/police.jpg';
+  static const String roundUp = 'assets/images/round-up.jpg';
+  static const String saga = 'assets/images/saga.jpg';
+  static const String sinden = 'assets/images/sindden.jpg';
+  static const String under = 'assets/images/under.jpg';
+  static const String watcher = 'assets/images/watcher.jpg';
+
 }
