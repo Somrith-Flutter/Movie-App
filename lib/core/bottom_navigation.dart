@@ -7,63 +7,84 @@ import 'package:legend_cinema/modules/landings/offers/view/offers_page.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 
 class BottomNavigation extends StatefulWidget {
-  const BottomNavigation({super.key});
+  const BottomNavigation({Key? key}) : super(key: key);
 
   @override
   State<BottomNavigation> createState() => _BottomNavigationState();
 }
 
 class _BottomNavigationState extends State<BottomNavigation> {
-  int currentPageIndex = 0;
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  int _currentPageIndex = 0;
+  late PageController _pageController;
 
-  final List<Widget> pages = const [
-    HomePage(),
-    OffersPage(),
-    CinemaPage(),
-    FBPage(),
-    MorePage(),
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(initialPage: _currentPageIndex);
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  final List<Widget> _pages = [
+    const HomePage(),
+    const OffersPage(),
+    const CinemaPage(),
+    const FBPage(),
+    const MorePage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldKey,
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _buildNavItem(0, Icons.home_outlined, S.of(context).home),
-            _buildNavItem(1, Icons.local_offer_outlined, S.of(context).offer),
-            _buildNavItem(2, Icons.location_pin, S.of(context).cinema),
-            _buildNavItem(3, Icons.food_bank_outlined, S.of(context).fb),
-            _buildNavItem(4, Icons.crop, S.of(context).more)
-          ],
-        ),
+      extendBody: true,
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: _selectPage,
+        children: _pages,
       ),
-      body: pages[currentPageIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentPageIndex,
+        onTap: _selectPage,
+        type: BottomNavigationBarType.fixed, // Set type to fixed to avoid shifting
+        backgroundColor: const Color.fromARGB(255, 26, 25, 25).withOpacity(0.9),
+        items: [
+          _buildNavItem(Icons.home_outlined, S.of(context).home),
+          _buildNavItem(Icons.local_offer_outlined, S.of(context).offer),
+          _buildNavItem(Icons.location_pin, S.of(context).cinema),
+          _buildNavItem(Icons.food_bank_outlined, S.of(context).fb),
+          _buildNavItem(Icons.crop, S.of(context).more),
+        ],
+      ),
     );
   }
 
   void _selectPage(int index) {
     setState(() {
-      currentPageIndex = index;
+      _currentPageIndex = index;
+      _pageController.animateToPage(
+        index,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.ease,
+      );
     });
   }
 
-Widget _buildNavItem(int index, IconData icon, String label) {
-  return InkWell(
-    onTap: () {
-      _selectPage(index);
-    },
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(icon, color: index == currentPageIndex ? Colors.blue : Colors.grey),
-        Text(label, style: TextStyle(color: index == currentPageIndex ? Colors.blue : Colors.grey)),
-      ],
-    ),
-  );
-}
+  BottomNavigationBarItem _buildNavItem(IconData icon, String label) {
+    return BottomNavigationBarItem(
+      icon: Icon(icon),
+      label: label,
+      activeIcon: Container(
+        height: 20,
+        width: 35,
+        decoration: BoxDecoration(
+          color: Colors.red.withOpacity(0.5),
+          borderRadius: BorderRadius.all(Radius.circular(20))
+        ),
+      )
+    );
+  }
 }

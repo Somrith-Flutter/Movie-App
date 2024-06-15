@@ -47,6 +47,7 @@ dependencies:
   # Detect network status go offline/online
   internet_connection_checker: ^1.0.0+1
   gap: ^3.0.1
+  palette_generator: ^0.3.3+3
 
 dev_dependencies:
 

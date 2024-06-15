@@ -66,7 +66,7 @@ class OffersView extends StatelessWidget {
             ),
             _buildOffers(),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(0),
               child: TextWidget(
                 S.of(context).premium_benifit,
                 size: 18,
@@ -148,7 +148,8 @@ class OffersView extends StatelessWidget {
         itemCount: icons.length,
         itemBuilder: (context, index) {
           return Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(0),
+            
             child: Card(
               child: Stack(
                 children: [
