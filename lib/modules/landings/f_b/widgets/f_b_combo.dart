@@ -361,7 +361,7 @@ class _FAndBComboState extends State<FAndBCombo> {
                                 overflow: TextOverflow.ellipsis,
                               ),
                               TextWidget(
-                                "\$${product?.price}",
+                                "\$${product?.price}0",
                                 size: 16,
                                 bold: true,
                                 color: Colors.red,
