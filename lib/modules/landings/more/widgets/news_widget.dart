@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -23,7 +24,7 @@ class NewsWidget extends StatelessWidget {
         title: Text(S.of(context).news_activity),
         flexibleSpace: AppConstant.appbarTheme,
       ),
-      backgroundColor: Colors.black87,
+      backgroundColor: Colors.black,
       body: Obx(() {
         if (controller.isLoading.value) {
           return const Center(
@@ -65,7 +66,7 @@ class NewsWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildNewsWidget(){
+  Widget _buildNewsWidget() {
     MoreController controller = Get.find();
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
@@ -74,7 +75,14 @@ class NewsWidget extends StatelessWidget {
       itemBuilder: (context, index) {
         final item = controller.newsAndActivities[index];
         return GestureDetector(
-          onTap: () => _navigateToDetails(item),
+          onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => NewsDetailsWidget(
+                        image: item.imageUrl ?? '',
+                        title: item.title ?? '',
+                        description: item.description ?? '',
+                      ))),
           child: Card(
             margin: const EdgeInsets.all(8.0),
             child: Container(
@@ -95,12 +103,10 @@ class NewsWidget extends StatelessWidget {
                             fit: BoxFit.cover,
                             height: 200,
                             width: double.infinity,
-                            placeholder: (context, url) =>
-                                const Center(
+                            placeholder: (context, url) => const Center(
                               child: CircularProgressIndicator(),
                             ),
-                            errorWidget: (context, url, error) =>
-                                const Center(
+                            errorWidget: (context, url, error) => const Center(
                               child: Text('No Image'),
                             ),
                           )
@@ -131,10 +137,10 @@ class NewsWidget extends StatelessWidget {
 
   void _navigateToDetails(item) {
     Get.to(() => NewsDetailsWidget(
-      image: item.imageUrl ?? '',
-      title: item.title ?? '',
-      description: item.description ?? '',
-    ));
+          image: item.imageUrl ?? '',
+          title: item.title ?? '',
+          description: item.description ?? '',
+        ));
   }
 
   Widget _buildDataNotAvailable() {

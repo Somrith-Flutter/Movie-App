@@ -21,7 +21,7 @@ class NewsDetailsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.primaryColor.withOpacity(0.5),
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       appBar: AppBar(
         leading: const BackWidget(),
         centerTitle: true,

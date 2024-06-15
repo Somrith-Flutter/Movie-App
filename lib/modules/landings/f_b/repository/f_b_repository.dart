@@ -17,6 +17,7 @@ class FBRepository extends RestApiService {
       for (var l in json['location']) {
         fb.add(FANDBModel.fromJson(l));
       }
+      debugPrint(fb.toString());
       return fb;
     }
     return null;
