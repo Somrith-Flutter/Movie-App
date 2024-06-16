@@ -66,7 +66,7 @@ class CinemaView extends StatelessWidget {
     {
       "main_image": AssetPath.sensok,
       "detail_image": AssetPath.sensokDetail,
-      "title": "Legend SenSok=============================",
+      "title": "Legend SenSok",
       "subtitle": "4th Floor, Chip Mong SenSok Mall",
     },
     {
@@ -90,6 +90,7 @@ class CinemaView extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           centerTitle: false,
           title: const TextWidget(
             'Cinema',

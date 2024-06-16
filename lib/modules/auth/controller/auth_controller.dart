@@ -42,6 +42,7 @@ class AuthController extends GetxController implements GetxService {
           if (data.containsKey('access_token')) {
             accessToken.$ = data['access_token'].toString();
             await accessToken.save();
+            await fetchUserController();
             setStatus(BaseStatusEnum.success);
             update();
             return true;

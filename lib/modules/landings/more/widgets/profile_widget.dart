@@ -200,7 +200,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   height: 16,
                 ),
                 DropdownButtonFormField<String>(
-                  value: user.selectedGender,
+                  value: user.genderOptions.contains(user.selectedGender)
+                      ? user.selectedGender
+                      : null,
                   decoration: InputDecoration(
                     labelText: user.uu?.gender,
                     fillColor: Colors.white70.withOpacity(0.1),
@@ -212,7 +214,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           width: 1.5, color: Colors.white.withOpacity(0.8)),
                     ),
                   ),
-                  items: user.genderOptions.map((String value) {
+                  items:
+                      user.genderOptions.toSet().toList().map((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Text(value),
@@ -364,7 +367,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   controller: user.number,
                   decoration: InputDecoration(
                     hintText: user.uu?.phone,
-                    hintStyle: const TextStyle(color: Colors.white, fontSize: 16),
+                    hintStyle:
+                        const TextStyle(color: Colors.white, fontSize: 16),
                     border: InputBorder.none,
                   ),
                   style: const TextStyle(color: Colors.white),
