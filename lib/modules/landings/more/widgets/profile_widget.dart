@@ -129,10 +129,13 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         shape: BoxShape.circle,
                         color: Colors.white.withOpacity(0.9),
                       ),
-                      child: const Icon(
-                        Icons.person,
-                        color: Colors.red,
-                        size: 50,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: Image.network("${AppConstant.domainKey}/${user.uu?.imageProfile}",
+                          fit: BoxFit.cover,
+                          height: double.maxFinite,
+                          width: double.maxFinite,
+                        )
                       ),
                     ),
                     Positioned(

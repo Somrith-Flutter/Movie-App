@@ -90,6 +90,7 @@ class _RegisterFormState extends State<RegisterForm> {
         _buildSuccessMsg();
       } else {
         await EasyLoading.dismiss();
+        _buildInternalServerError();
       }
       return;
     });
@@ -511,6 +512,17 @@ class _RegisterFormState extends State<RegisterForm> {
       context,
       snackBarType: SnackBarType.fail,
       label: 'Pleas fill all the blank!',
+      snackBarStyle: const SnackBarStyle(
+        labelTextStyle: TextStyle(color: Colors.white),
+      ),
+    );
+  }
+
+  Widget _buildInternalServerError() {
+    return IconSnackBar.show(
+      context,
+      snackBarType: SnackBarType.fail,
+      label: 'Internal Server Error',
       snackBarStyle: const SnackBarStyle(
         labelTextStyle: TextStyle(color: Colors.white),
       ),

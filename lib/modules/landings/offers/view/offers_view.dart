@@ -30,7 +30,7 @@ class OffersView extends StatelessWidget {
       backgroundColor: Colors.black87,
       body: Obx(() {
         if (controller.isLoading.value) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: CupertinoActivityIndicator());
         } else if (controller.errorMessage.isNotEmpty) {
           return _buildDataNotAvalible(context);
         } else if (controller.offers.isEmpty) {
