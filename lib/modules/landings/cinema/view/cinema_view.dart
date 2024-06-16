@@ -85,118 +85,122 @@ class CinemaView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        centerTitle: false,
-        title: const TextWidget(
-          'Cinema',
-          size: 20.0,
-        ),
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: AppColor.appbarColor,
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        appBar: AppBar(
+          centerTitle: false,
+          title: const TextWidget(
+            'Cinema',
+            size: 20.0,
+          ),
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: AppColor.appbarColor,
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
             ),
           ),
         ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(6),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  suffixIcon:
-                      Icon(Icons.search, color: Colors.white.withOpacity(0.8)),
-                  hintText: "Search cinema...",
-                  labelStyle: TextStyle(color: Colors.white.withOpacity(0.8)),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Colors.white.withOpacity(0.8)),
+        body: Padding(
+          padding: const EdgeInsets.all(6),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  decoration: InputDecoration(
+                    suffixIcon:
+                        Icon(Icons.search, color: Colors.white.withOpacity(0.8)),
+                    hintText: "Search cinema...",
+                    labelStyle: TextStyle(color: Colors.white.withOpacity(0.8)),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Colors.white.withOpacity(0.8)),
+                    ),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    filled: true,
+                    fillColor: Colors.white70.withOpacity(0.1),
                   ),
-                  focusedBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
-                  ),
-                  filled: true,
-                  fillColor: Colors.white70.withOpacity(0.1),
+                  style: TextStyle(color: Colors.white.withOpacity(0.8)),
                 ),
-                style: TextStyle(color: Colors.white.withOpacity(0.8)),
               ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                scrollDirection: Axis.vertical,
-                itemCount: cinema.length,
-                itemBuilder: (context, index) {
-                  final item = cinema[index];
-                  return GestureDetector(
-                    onTap: () {
-                      AppRoute.route.push(
-                          context,
-                          CinemaDetail(
-                            detailImage: item["detail_image"]!,
-                            title: item["title"]!,
-                          ));
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.0),
-                        border: Border.all(
-                          color: Colors.white70,
-                          width: 1,
+              Expanded(
+                child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  itemCount: cinema.length,
+                  itemBuilder: (context, index) {
+                    final item = cinema[index];
+                    return GestureDetector(
+                      onTap: () {
+                        AppRoute.route.push(
+                            context,
+                            CinemaDetail(
+                              detailImage: item["detail_image"]!,
+                              title: item["title"]!,
+                            ));
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.all(8.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                          border: Border.all(
+                            color: Colors.white70,
+                            width: 1,
+                          ),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(12),
+                              child: Image.asset(
+                                item["main_image"]!,
+                                fit: BoxFit.cover,
+                                height:
+                                    250, // Adjust height as per your requirement
+                              ),
+                            ),
+                            ListTile(
+                              title: TextWidget(
+                                item["title"]!,
+                                size: 18.0,
+                                bold: true,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              subtitle: Row(
+                                children: [
+                                  const Icon(
+                                    Icons.location_on,
+                                    color: Colors.red,
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Expanded(
+                                    child: TextWidget(
+                                      item["subtitle"]!,
+                                      size: 16,
+                                      bold: true,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(12),
-                            child: Image.asset(
-                              item["main_image"]!,
-                              fit: BoxFit.cover,
-                              height:
-                                  280, // Adjust height as per your requirement
-                            ),
-                          ),
-                          ListTile(
-                            title: TextWidget(
-                              item["title"]!,
-                              size: 20,
-                              bold: true,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            subtitle: Row(
-                              children: [
-                                const Icon(
-                                  Icons.location_on,
-                                  color: Colors.red,
-                                ),
-                                const SizedBox(width: 4),
-                                Expanded(
-                                  child: TextWidget(
-                                    item["subtitle"]!,
-                                    size: 16,
-                                    bold: true,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

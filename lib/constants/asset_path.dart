@@ -105,5 +105,6 @@ class AssetPath{
   static const String sinden = 'assets/images/sindden.jpg';
   static const String under = 'assets/images/under.jpg';
   static const String watcher = 'assets/images/watcher.jpg';
+  static const String invalidImage = 'assets/images/no_image_available.jpg';
 
 }

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -19,22 +20,21 @@ class OffersView extends StatelessWidget {
     controller.fetchOffers();
     return Scaffold(
       appBar: AppBar(
-        centerTitle: false,
-        title: TextWidget(S.of(context).offer, size: 22, bold: true,),
-        flexibleSpace: AppConstant.appbarTheme
-      ),
+          centerTitle: false,
+          title: TextWidget(
+            S.of(context).offer,
+            size: 22,
+            bold: true,
+          ),
+          flexibleSpace: AppConstant.appbarTheme),
       backgroundColor: Colors.black87,
       body: Obx(() {
         if (controller.isLoading.value) {
-          return const Center(
-            child: CircularProgressIndicator()
-          );
+          return const Center(child: CircularProgressIndicator());
         } else if (controller.errorMessage.isNotEmpty) {
           return _buildDataNotAvalible(context);
         } else if (controller.offers.isEmpty) {
-          return const Center(
-            child: Text('No data available.')
-          );
+          return const Center(child: Text('No data available.'));
         } else {
           return _buildBody(context);
         }
@@ -42,7 +42,7 @@ class OffersView extends StatelessWidget {
     );
   }
 
-  Widget _buildBody(BuildContext context){
+  Widget _buildBody(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.only(top: 8.0, bottom: 5.0),
@@ -82,7 +82,7 @@ class OffersView extends StatelessWidget {
     );
   }
 
-  Widget _buildOffers(){
+  Widget _buildOffers() {
     OffersController controller = Get.find();
     return ListView.builder(
       padding: EdgeInsets.zero,
@@ -116,18 +116,36 @@ class OffersView extends StatelessWidget {
               child: Column(
                 children: [
                   Container(
-                    padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+                    padding: const EdgeInsets.all(8.0),
                     child: CachedNetworkImage(
-                      imageUrl: item.image!,
-                      fit: BoxFit.fill,
+                      imageUrl: "${AppConstant.domainKey}/${item.image}",
+                      fit: BoxFit.cover,
                       height: 250,
-                      width: 400,
+                      width: double.maxFinite,
+                      placeholder: (context, url) => Container(
+                        height: 250,
+                        width: double.maxFinite,
+                        color: Colors.grey[200],
+                        child: const Center(
+                          child: CupertinoActivityIndicator(),
+                        ),
+                      ),
+                      errorWidget: (context, url, error) => Container(
+                        height: 250,
+                        width: double.maxFinite,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(AssetPath.invalidImage),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                   ListTile(
                     title: TextWidget(
                       item.title!,
-                      size: 20,
+                      size: 16,
                       overflow: TextOverflow.ellipsis,
                       bold: true,
                       maxLines: 2,
@@ -142,7 +160,7 @@ class OffersView extends StatelessWidget {
     );
   }
 
-  Widget _buildPremiumBenifit(){
+  Widget _buildPremiumBenifit() {
     return Container(
       padding: const EdgeInsets.only(left: 12),
       height: 200,
@@ -213,7 +231,7 @@ class OffersView extends StatelessWidget {
     );
   }
 
-  Widget _buildDataNotAvalible(BuildContext context){
+  Widget _buildDataNotAvalible(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
