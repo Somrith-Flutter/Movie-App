@@ -96,7 +96,7 @@ class AuthRepository {
       'Authorization': 'Bearer ${accessToken.$}'
     };
     var request = http.Request(
-        'GET', Uri.parse('${AppConstant.domainKey}/api/auth/user-profile'));
+        'GET', Uri.parse('${AppConstant.domainKey}/api/auth/get-me'));
 
     request.headers.addAll(headers);
 
