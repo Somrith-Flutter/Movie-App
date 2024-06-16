@@ -28,6 +28,7 @@ class AssetPath{
   static const String offer2 = 'assets/icons/offer2.png';
   static const String offer3 = 'assets/icons/offer3.png';
 
+  static const String appLogo = 'assets/logos/logo.png';
   static const String homeicon = 'assets/icons/home_icon.png';
   static const String offericon = 'assets/icons/offer_icon.png';
   static const String cinemaicon = 'assets/icons/cinema_icon.png';
