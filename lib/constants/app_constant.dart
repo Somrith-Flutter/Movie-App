@@ -74,7 +74,11 @@ class AppConstant{
   );
 
   // change it base on your ip address by replace http://127.0.0.1:8000 to your ip.
-  static const String baseAndroidUrl = 'http://127.0.0.1:8000/api';
   static const String baseIosUrl = 'http://127.0.0.1:8000';
-  static const String domainKey = 'http://10.0.2.2:8000';
+  // [baseIosUrl] run whole machine.
+  static const String baseAndroidUrl = 'http://10.0.2.2:8000'; 
+  // [baseAndroidUrl] run based on ip Emulator.
+
+  static const String domainKey = baseIosUrl;
+  // [domainKey] local ip, Switch this one to accept data income from db.
 }

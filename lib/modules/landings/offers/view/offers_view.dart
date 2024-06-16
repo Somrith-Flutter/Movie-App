@@ -91,6 +91,15 @@ class OffersView extends StatelessWidget {
       itemCount: controller.offers.length,
       itemBuilder: (context, index) {
         final item = controller.offers[index];
+        String cacheImage({String? img}){
+          if (AppConstant.baseIosUrl == AppConstant.domainKey ){
+            img = item.image!;
+          }
+          if (AppConstant.baseAndroidUrl == AppConstant.domainKey){
+            img = "${AppConstant.domainKey}/${item.image}";
+          }
+          return img ?? '';
+        }
         return InkWell(
           onTap: () {
             Navigator.push(
@@ -113,12 +122,12 @@ class OffersView extends StatelessWidget {
                   width: 1,
                 ),
               ),
-              child: Column(
+              child: Column( 
                 children: [
                   Container(
                     padding: const EdgeInsets.all(8.0),
                     child: CachedNetworkImage(
-                      imageUrl: "${AppConstant.domainKey}/${item.image}",
+                      imageUrl: cacheImage(),
                       fit: BoxFit.cover,
                       height: 250,
                       width: double.maxFinite,
