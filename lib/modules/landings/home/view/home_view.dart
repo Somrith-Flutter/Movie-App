@@ -1,13 +1,12 @@
 import 'dart:async';
 import 'dart:ui';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/modules/auth/controller/auth_controller.dart';
+import 'package:legend_cinema/modules/landings/cinema/widgets/cinema_detail.dart';
+import 'package:legend_cinema/shared/v_globle.dart';
 import 'package:legend_cinema/widgets/dot_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
@@ -78,7 +77,7 @@ class _HomeViewState extends State<HomeView> {
       user.fetchUserController();
     });
     selectedDay = dateInfo.dates.first;
-    _pageController = PageController(viewportFraction: 0.85);
+    _pageController = PageController(viewportFraction: 0.90);
     _timer = Timer.periodic(const Duration(seconds: 3), (Timer timer) {
       if (_pageController.hasClients) {
         int nextPage = _pageController.page!.round() + 1;
@@ -122,7 +121,23 @@ class _HomeViewState extends State<HomeView> {
         ],
       ),
       backgroundColor: Colors.black,
-      body: _buildBody(),
+      body: accessToken.$.isNotEmpty ? Stack(
+        children: [
+          _buildBody(),
+          Positioned(
+            bottom: 120, 
+            right: 15,
+            child: ClipOval(
+              child: FloatingActionButton(
+                onPressed: () {
+                
+                },
+                child: const Icon(Icons.add),
+              ),
+            ),
+          ),
+        ],
+      ) : _buildBody(),
     );
   }
 
@@ -364,7 +379,6 @@ class _HomeViewState extends State<HomeView> {
                   );
                 }),
               ),
-             // change body
             ],
           ),
         ),
@@ -440,40 +454,4 @@ class _HomeViewState extends State<HomeView> {
         ),
       );
     }
-  }
-
-class DateInfo {
-  final now = DateTime.now();
-
-  List<String> get daysOfWeek {
-    final days = List.generate(4, (i) => now.add(Duration(days: i)));
-    return days.map((date) {
-      if (date.isAtSameMomentAs(now)) {
-        return 'Today, ${DateFormat('MMM d').format(date)}';
-      } else {
-        return DateFormat('EEE, MMM d').format(date);
-      }
-    }).toList();
-  }
-
-  List<String> get dayNames {
-    final days = List.generate(4, (i) => now.add(Duration(days: i)));
-    return days.map((date) {
-      if (date.day == now.day && date.month == now.month && date.year == now.year) {
-        return 'Today';
-      } else {
-        return DateFormat('EEE').format(date);
-      }
-    }).toList();
-  }
-
-  List<String> get months {
-    final days = List.generate(4, (i) => now.add(Duration(days: i)));
-    return days.map((date) => DateFormat('MMM').format(date)).toList();
-  }
-
-  List<String> get dates {
-    final days = List.generate(4, (i) => now.add(Duration(days: i)));
-    return days.map((date) => DateFormat('d').format(date)).toList();
-  }
 }
