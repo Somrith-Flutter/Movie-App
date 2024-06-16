@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/config/themes/app_color.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
+import 'package:legend_cinema/modules/landings/cinema/widgets/cinema_movie_detail.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 import 'package:intl/intl.dart';
@@ -26,6 +28,7 @@ class _CinemaDetailState extends State<CinemaDetail> {
       isTextTapSelected = isTextSelected;
     });
   }
+
   @override
   void initState() {
     super.initState();
@@ -133,17 +136,27 @@ class _CinemaDetailState extends State<CinemaDetail> {
                       Positioned(
                         top: 10,
                         left: 20,
-                        child: TextWidget(day, size: 12,),
+                        child: TextWidget(
+                          day,
+                          size: 12,
+                        ),
                       ),
                       Positioned(
                         top: 25,
                         left: 20,
-                        child: TextWidget(date, bold: true, size: 22,),
+                        child: TextWidget(
+                          date,
+                          bold: true,
+                          size: 22,
+                        ),
                       ),
                       Positioned(
                         bottom: 15,
                         left: 25,
-                        child: TextWidget(month, size: 12,),
+                        child: TextWidget(
+                          month,
+                          size: 12,
+                        ),
                       ),
                     ],
                   ),
@@ -152,75 +165,94 @@ class _CinemaDetailState extends State<CinemaDetail> {
             }),
           ),
           const SizedBox(height: 30),
-          const TextWidget("Now Showing",size: 22,bold: true,),
+          const TextWidget(
+            "Now Showing",
+            size: 22,
+            bold: true,
+          ),
           const SizedBox(height: 30),
-          GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              childAspectRatio: 0.5,
-            ),
-            itemCount: cinema.length,
-            itemBuilder: (BuildContext context, int index) {
-              final data = cinema[index];
-              return Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: Colors.black,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ClipRRect(
+          GestureDetector(
+            child: GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                childAspectRatio: 0.5,
+              ),
+              itemCount: cinema.length,
+              itemBuilder: (BuildContext context, int index) {
+                final data = cinema[index];
+                return GestureDetector(
+                  onTap: () {
+                    AppRoute.route.push(
+                        context,
+                        CinemaMovieDetail(
+                            imageMovie: data['image']!,
+                            titleMovie: data['title']!,
+                            genre: data['genre']!,
+                            duration: data['duration']!,
+                            releaseDate: data['release']!,
+                            classification: data['classification']!));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      child: Image.asset(
-                        data["image"]!,
-                        fit: BoxFit.cover,
-                        height: 300,
-                      ),
+                      color: Colors.black,
                     ),
-                    const SizedBox(height: 10),
-                    Row(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TextWidget(
-                          data['date'],
-                          bold: true,
-                          size: 14,
-                          color: Colors.grey,
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.asset(
+                            data["image"]!,
+                            fit: BoxFit.cover,
+                            height: 300,
+                          ),
                         ),
-                        const SizedBox(width: 5),
-                        Container(
-                          width: 60,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.white),
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          child: Center(
-                            child: TextWidget(
-                              data['type'],
-                              color: Colors.black,
+                        const SizedBox(height: 10),
+                        Row(
+                          children: [
+                            TextWidget(
+                              data['release'],
                               bold: true,
+                              size: 14,
+                              color: Colors.grey,
                             ),
-                          ),
+                            const SizedBox(width: 5),
+                            Container(
+                              width: 60,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.white),
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Center(
+                                child: TextWidget(
+                                  data['classification'],
+                                  color: Colors.black,
+                                  bold: true,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        TextWidget(
+                          data['title'],
+                          color: Colors.white,
+                          size: 16,
+                          bold: true,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
                         ),
                       ],
                     ),
-                    TextWidget(
-                      data['title'],
-                      color: Colors.white,
-                      size: 16,
-                      bold: true,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
-                    ),
-                  ],
-                ),
-              );
-            },
+                  ),
+                );
+              },
+            ),
           ),
         ],
       ),
@@ -249,62 +281,82 @@ class _CinemaDetailState extends State<CinemaDetail> {
     {
       "image": AssetPath.boyKill,
       "title": "Boy Kills World",
-      "date": "14 Jun, 2024",
-      "type": "R18",
+      "genre": "Action",
+      "duration": "1h 50mins",
+      "release": "14 Jun 2024",
+      "classification": "R18",
     },
     {
       "image": AssetPath.darkMother,
       "title": "Dark Mother (Extended Version),The",
-      "date": "06 Jun, 2024",
-      "type": "NC15",
+      "genre": "Horror",
+      "duration": "1h 50mins",
+      "release": "06 June 2024",
+      "classification": "NC15",
     },
     {
       "image": AssetPath.motherGhost,
       "title": "Dear Mother Ghost",
-      "date": "13 Jun, 2024",
-      "type": "NC15",
+      "genre": "Horror",
+      "duration": "1h 50mins",
+      "release": "13 June 2024",
+      "classification": "NC15",
     },
     {
       "image": AssetPath.police,
       "title": "Formed Police Unit",
-      "date": "14 Jun, 2024",
-      "type": "TBC",
+      "genre": "Action",
+      "duration": "1h 40mins",
+      "release": "14 June 2024",
+      "classification": "TBC",
     },
     {
       "image": AssetPath.saga,
       "title": "Furiosa: A Mad Max Saga",
-      "date": "23 May, 2024",
-      "type": "R18",
+      "genre": "Action",
+      "duration": "2h 29mins",
+      "release": "23 May 2024",
+      "classification": "R18",
     },
     {
       "image": AssetPath.inside,
       "title": "Inside Out 2",
-      "date": "13 Jun, 2024",
-      "type": "G",
+      "genre": "Animation",
+      "duration": "1h 36mins",
+      "release": "13 June 2024",
+      "classification": "G",
     },
     {
       "image": AssetPath.roundUp,
       "title": "Roundub : Punishment, The",
-      "date": "14 May, 2024",
-      "type": "R18",
+      "genre": "Action",
+      "duration": "1h 49mins",
+      "release": "14 May 2024",
+      "classification": "R18",
     },
     {
       "image": AssetPath.sinden,
       "title": "Sinden Gaib",
-      "date": "07 Jun, 2024",
-      "type": "R18",
+      "genre": "Horror",
+      "duration": "1h 35mins",
+      "release": "07 June 2024",
+      "classification": "R18",
     },
     {
       "image": AssetPath.under,
       "title": "Under Parallel Skies",
-      "date": "12 Jun, 2024",
-      "type": "G",
+      "genre": "romance",
+      "duration": "1h 50mins",
+      "release": "12 June 2024",
+      "classification": "G",
     },
     {
       "image": AssetPath.watcher,
       "title": "Watcher, The",
-      "date": "06 Jun, 2024",
-      "type": "NC15",
+      "genre": "Horror",
+      "duration": "1h 41mins",
+      "release": "06 June 2024",
+      "classification": "NC15",
     },
   ];
 }
@@ -326,7 +378,9 @@ class DateInfo {
   List<String> get dayNames {
     final days = List.generate(4, (i) => now.add(Duration(days: i)));
     return days.map((date) {
-      if (date.day == now.day && date.month == now.month && date.year == now.year) {
+      if (date.day == now.day &&
+          date.month == now.month &&
+          date.year == now.year) {
         return 'Today';
       } else {
         return DateFormat('EEE').format(date);
