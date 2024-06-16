@@ -3,11 +3,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
-import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/core/enum/base_status_enum.dart';
+import 'package:legend_cinema/core/model/fb_from_service_model.dart';
 import 'package:legend_cinema/modules/landings/f_b/controller/f_b_controller.dart';
 import 'package:legend_cinema/modules/landings/f_b/view/f_b_view.dart';
+import 'package:legend_cinema/modules/landings/f_b/widgets/f_b_cart_detail.dart';
 import 'package:legend_cinema/widgets/animated_flipcounter_box.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
@@ -27,10 +29,12 @@ class FAndBCombo extends StatefulWidget {
 class _FAndBComboState extends State<FAndBCombo> {
   final cartController = Get.find<FBController>();
   String cinema = '';
+  List<FBFromServiceModel> camboSelected = [];
 
   @override
   void initState() {
-    Future.delayed((Duration.zero), () {
+    cartController.cartItems.clear();
+    Future.delayed(const Duration(milliseconds: 100), () {
       cartController.getDetailedData(widget.location.toString());
     });
     super.initState();
@@ -56,136 +60,139 @@ class _FAndBComboState extends State<FAndBCombo> {
             ),
           ),
           Scaffold(
-              backgroundColor: Colors.transparent,
-              appBar: AppBar(
-                leading: const BackWidget(),
-                title: TextWidget(S.of(context).fb, size: 20, bold: true),
-                centerTitle: true,
-                flexibleSpace: Container(
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [Colors.red, Colors.black],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                    ),
+            backgroundColor: Colors.transparent,
+            appBar: AppBar(
+              leading: const BackWidget(),
+              title: const TextWidget('Food & Beverage', size: 20, bold: true),
+              centerTitle: true,
+              flexibleSpace: Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.red, Colors.black],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
                   ),
                 ),
               ),
-              body: Column(
-                children: [
-                  Expanded(
-                    flex: 7,
-                    child: ListView(
-                      physics: const BouncingScrollPhysics(),
-                      children: [
-                        Stack(
-                          children: [
-                            Image.asset(AssetPath.fbhero),
-                            Positioned(
-                              top: 16,
-                              left: 16,
-                              right: 16,
-                              child: GestureDetector(
-                                onTap: () {
-                                  _buildBottomSheet(context);
-                                },
-                                child: Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    color: Colors.black54.withOpacity(0.3),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        TextWidget(
-                                          cinema == "" ? widget.selectedCinema : cinema,
-                                          size: 16,
-                                        ),
-                                        const Icon(
-                                          Icons.arrow_drop_down_circle_outlined,
-                                        ),
-                                      ],
-                                    ),
+            ),
+            body: Column(
+              children: [
+                Expanded(
+                  flex: 7,
+                  child: ListView(
+                    physics: const BouncingScrollPhysics(),
+                    children: [
+                      Stack(
+                        children: [
+                          Image.asset('assets/images/f&b.jpeg'),
+                          Positioned(
+                            top: 16,
+                            left: 16,
+                            right: 16,
+                            child: GestureDetector(
+                              onTap: () {
+                                _buildBottomSheet(context);
+                              },
+                              child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  color: Colors.black54.withOpacity(0.3),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      TextWidget(
+                                        cinema == ""
+                                            ? 'Selected Cinema'
+                                            : cinema,
+                                        size: 16,
+                                      ),
+                                      const Icon(
+                                        Icons.arrow_drop_down_circle_outlined,
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
                             ),
-                          ],
-                        ),
-                        const SizedBox(height: 10),
-                        Expanded(
-                          child: _buildCambo(),
-                        )
-                      ],
-                    ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      _buildCambo(),
+                    ],
                   ),
-                  Expanded(
-                    child: Container(
-                      width: double.infinity,
-                      color: Colors.black,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                ),
+                Container(
+                  width: double.infinity,
+                  color: Colors.black,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
                           children: [
-                            Row(
+                            Container(
+                              width: 70,
+                              decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: Colors.white, width: 3),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: TextWidget(
+                                "${cartController.totalItems}",
+                                textAlign: TextAlign.center,
+                                size: 19,
+                                bold: true,
+                                color: Colors.red,
+                              ),
+                            ),
+                            const SizedBox(width: 20),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Container(
-                                  width: 70,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.white, width: 3),
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  child: TextWidget(
-                                    "${cartController.totalItems}",
-                                    textAlign: TextAlign.center,
-                                    size: 19,
-                                    bold: true,
-                                    color: Colors.red,
-                                  ),
-                                ),
-                                const SizedBox(width: 20),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const TextWidget("Summary",
-                                        size: 16, bold: true),
-                                    MyAnimatedFlipCounter(
-                                      duration:
-                                          const Duration(milliseconds: 500),
-                                      value: double.parse(
-                                          cartController.formattedTotalPrice),
-                                      textStyle: const TextStyle(fontSize: 18),
-                                      prefix: '\$',
-                                    ),
-                                  ],
+                                const TextWidget("Summary",
+                                    size: 16, bold: true),
+                                MyAnimatedFlipCounter(
+                                  duration: const Duration(milliseconds: 500),
+                                  value: double.parse(
+                                      cartController.formattedTotalPrice),
+                                  textStyle: const TextStyle(fontSize: 18),
+                                  prefix: '\$',
                                 ),
                               ],
                             ),
-                            ElevatedButton(
-                              onPressed: () {
-                                
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.red,
-                              ),
-                              child: const TextWidget("Continue",
-                                  size: 16, bold: true),
-                            ),
                           ],
                         ),
-                      ),
+                        ElevatedButton(
+                          onPressed: () {
+                            AppRoute.route.push(
+                                context,
+                                FBCartDetail(
+                                  selectedItems: camboSelected,
+                                  selectedCinema: widget.location,
+                                ));
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.red,
+                          ),
+                          child: TextWidget(S.of(context).continues,
+                              size: 16, bold: true),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              )),
+                ),
+              ],
+            ),
+          ),
         ],
       );
     });
@@ -248,7 +255,9 @@ class _FAndBComboState extends State<FAndBCombo> {
                           onTap: () {
                             setState(() {
                               cinema = cartController.fb[index].name.toString();
-                              controller.getDetailedData(cartController.fb[index].locationType.toString());
+                              controller.getDetailedData(cartController
+                                  .fb[index].locationType
+                                  .toString());
                             });
                             Navigator.pop(context);
                           },
@@ -311,9 +320,9 @@ class _FAndBComboState extends State<FAndBCombo> {
       shrinkWrap: true,
       padding: EdgeInsets.zero,
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: cartController.fbs?.length,
+      itemCount: cartController.fbs.length,
       itemBuilder: (context, index) {
-        var product = cartController.fbs?[index];
+        var product = cartController.fbs[index];
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           child: SizedBox(
@@ -341,7 +350,7 @@ class _FAndBComboState extends State<FAndBCombo> {
                           ),
                           child: CachedNetworkImage(
                             imageUrl:
-                                "${AppConstant.domainKey}/${product?.imageUrl.toString()}",
+                                "${AppConstant.domainKey}/${product.imageUrl.toString()}",
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -355,13 +364,13 @@ class _FAndBComboState extends State<FAndBCombo> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               TextWidget(
-                                product?.title,
+                                product.title,
                                 size: 17,
                                 bold: true,
                                 overflow: TextOverflow.ellipsis,
                               ),
                               TextWidget(
-                                "\$${product?.price}0",
+                                "\$${product.price?.toStringAsFixed(2)}",
                                 size: 16,
                                 bold: true,
                                 color: Colors.red,
@@ -374,7 +383,8 @@ class _FAndBComboState extends State<FAndBCombo> {
                         alignment: Alignment.bottomRight,
                         child: Row(
                           children: [
-                            if (cartController.getProductQuantity(product!) > 0)
+                            if (cartController.getProductQuantity(product) >
+                                0)
                               Container(
                                 margin: const EdgeInsets.symmetric(
                                     horizontal: 8, vertical: 8),
@@ -392,7 +402,8 @@ class _FAndBComboState extends State<FAndBCombo> {
                                   ),
                                 ),
                               ),
-                            if (cartController.getProductQuantity(product) > 0)
+                            if (cartController.getProductQuantity(product) >
+                                0)
                               TextWidget(
                                 "${cartController.getProductQuantity(product)}",
                                 size: 20,
@@ -409,6 +420,11 @@ class _FAndBComboState extends State<FAndBCombo> {
                                 onTap: () {
                                   Future.delayed(const Duration(seconds: 2));
                                   cartController.addItem(product);
+                                  setState(() {
+                                    if (!camboSelected.contains(product)) {
+                                      camboSelected.add(product);
+                                    }
+                                  });
                                 },
                                 child: const Icon(
                                   Icons.add,
@@ -430,18 +446,3 @@ class _FAndBComboState extends State<FAndBCombo> {
     );
   }
 }
-
-var cinemaList = [
-  {"title": "Legend Eden Garden"},
-  {"title": "Legend Toul Kork"},
-  {"title": "Legend Premium Exchange Square"},
-  {"title": "Legend Olympia"},
-  {"title": "Legend SenSok"},
-  {"title": "Legend Noro Mall"},
-  {"title": "Legend Midtown Mall"},
-  {"title": "Legend Meanchey"},
-  {"title": "Legend Cinema 271 Mega Mall"},
-  {"title": "Legend K Mall"},
-  {"title": "Legend Cinema Sihanoukville"},
-  {"title": "Legend Siem Reap"},
-];

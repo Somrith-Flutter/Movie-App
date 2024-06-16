@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -14,7 +16,7 @@ class FBController extends GetxController {
 
   final Map<FBFromServiceModel, int> cartItems = {};
   List<FANDBModel> fb = [];
-  List<FBFromServiceModel>? fbs = [];
+  List<FBFromServiceModel> fbs = [];
   BaseStatusEnum status = BaseStatusEnum.initial;
 
   void addItem(FBFromServiceModel product) {

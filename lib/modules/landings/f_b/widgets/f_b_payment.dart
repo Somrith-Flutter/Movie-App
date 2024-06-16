@@ -267,34 +267,35 @@ class _FBPaymentState extends State<FBPayment> {
                 onTap: () async {
                   EasyLoading.show(status: 'loading...');
                   await Future.delayed(const Duration(seconds: 1));
-                  EasyLoading.dismiss(); // Hide the loading indicator
+                  EasyLoading.dismiss(); 
                   EasyLoading.showSuccess('Payment success!');
                   setState(() {
                     cartController.cartItems.clear();
                   });
-                  AppRoute.route.push(context, const FBView());
+                  Get.back();
+                  Get.back();
+                  Get.back();
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(16),
-                  child: Expanded(
-                      child: Container(
-                        height: 50,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.red),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            TextWidget(
-                              "Pay. \$${widget.totalPrice.toStringAsFixed(2)}",
-                              size: 20,
-                              bold: true,
-                            ),
-                          ],
+                  child: Container(
+                    height: 50,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.red),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        TextWidget(
+                          "Pay. \$${widget.totalPrice.toStringAsFixed(2)}",
+                          size: 16.0,
+                          bold: true,
                         ),
-                      )),
+                      ],
+                    ),
+                  ),
                 ),
               )
             ],

@@ -1,7 +1,9 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:legend_cinema/config/routes/app_route.dart';
+import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/core/model/fb_from_service_model.dart';
 import 'package:legend_cinema/modules/landings/f_b/controller/f_b_controller.dart';
 import 'package:legend_cinema/modules/landings/f_b/widgets/f_b_payment.dart';
@@ -12,7 +14,8 @@ import 'package:legend_cinema/widgets/text_widget.dart';
 class FBCartDetail extends StatefulWidget {
   final List<FBFromServiceModel> selectedItems;
   final String selectedCinema;
-  const FBCartDetail({super.key, required this.selectedItems, required this.selectedCinema});
+  const FBCartDetail(
+      {super.key, required this.selectedItems, required this.selectedCinema});
 
   @override
   State<FBCartDetail> createState() => _FBCartDetailState();
@@ -20,11 +23,12 @@ class FBCartDetail extends StatefulWidget {
 
 class _FBCartDetailState extends State<FBCartDetail> {
   var cartController = Get.find<FBController>();
-  
+
   @override
   void initState() {
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -67,33 +71,32 @@ class _FBCartDetailState extends State<FBCartDetail> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 10),
+                              horizontal: 12, vertical: 20),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const TextWidget("Order Summary",
-                                  size: 20, bold: true),
+                                  size: 17.0, bold: true),
+                              const Gap(15.0),
                               Container(
                                 width: MediaQuery.of(context).size.width,
-                                height: 60,
+                                padding: const EdgeInsets.all(16),
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                       color: Colors.white.withOpacity(0.8)),
                                   color: Colors.white70.withOpacity(0.1),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
-                                child:  Center(
-                                  child: TextWidget(
-                                    widget.selectedCinema,
-                                    size: 20,
-                                    bold: true,
-                                  ),
+                                child: TextWidget(
+                                  widget.selectedCinema.toUpperCase(),
+                                  size: 16.0,
+                                  bold: true,
                                 ),
                               ),
                               const SizedBox(height: 15),
                               Builder(
                                 builder: (context) {
-                                  const double itemHeight = 120.0;
+                                  const double itemHeight = 123.00;
                                   final filteredItems = widget.selectedItems
                                       .where((item) =>
                                           logic.getProductQuantity(item) > 0)
@@ -141,12 +144,10 @@ class _FBCartDetailState extends State<FBCartDetail> {
                                                       width: 100,
                                                       height: 100,
                                                       decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
+                                                        borderRadius: BorderRadius.circular(5),
                                                         image: DecorationImage(
-                                                          image: AssetImage(
-                                                              item.imageUrl.toString()),
+                                                          image: NetworkImage(
+                                                              "${AppConstant.domainKey}/${item.imageUrl.toString()}"),
                                                           fit: BoxFit.cover,
                                                         ),
                                                       ),
@@ -154,23 +155,23 @@ class _FBCartDetailState extends State<FBCartDetail> {
                                                     const SizedBox(width: 15),
                                                     Expanded(
                                                       child: Column(
+                                                        mainAxisSize: MainAxisSize.min,
+                                                        mainAxisAlignment: MainAxisAlignment.start,
                                                         crossAxisAlignment:
                                                             CrossAxisAlignment
                                                                 .start,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
                                                         children: [
                                                           TextWidget(
                                                             item.title,
-                                                            size: 17,
+                                                            size: 16.0,
                                                             bold: true,
                                                             overflow:
                                                                 TextOverflow
                                                                     .ellipsis,
                                                           ),
+                                                          const Gap(50.0),
                                                           TextWidget(
-                                                            "\$${item.price}",
+                                                            "\$${item.price?.toStringAsFixed(2)}",
                                                             size: 16,
                                                             bold: true,
                                                             color: Colors.red,
@@ -183,10 +184,7 @@ class _FBCartDetailState extends State<FBCartDetail> {
                                                           Alignment.bottomRight,
                                                       child: Row(
                                                         children: [
-                                                          if (logic
-                                                                  .getProductQuantity(
-                                                                      item) >
-                                                              0)
+                                                          if (logic.getProductQuantity(item) > 0)
                                                             Container(
                                                               margin:
                                                                   const EdgeInsets
@@ -273,7 +271,8 @@ class _FBCartDetailState extends State<FBCartDetail> {
                                         children: [
                                           Container(
                                               width: 100,
-                                              height: 50,
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 8.0, top: 8.0),
                                               decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(5),
@@ -281,12 +280,13 @@ class _FBCartDetailState extends State<FBCartDetail> {
                                               child: const Center(
                                                   child: TextWidget(
                                                 "Total: ",
-                                                size: 20,
+                                                size: 16.0,
                                                 bold: true,
                                               ))),
                                           Container(
                                             width: 100,
-                                            height: 50,
+                                            padding: const EdgeInsets.only(
+                                                bottom: 8.0, top: 8.0),
                                             decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(5),
@@ -297,7 +297,7 @@ class _FBCartDetailState extends State<FBCartDetail> {
                                               value: double.parse(cartController
                                                   .formattedTotalPrice),
                                               textStyle: const TextStyle(
-                                                  fontSize: 20,
+                                                  fontSize: 16.0,
                                                   fontWeight: FontWeight.bold),
                                               prefix: '\$',
                                             ),
@@ -315,26 +315,29 @@ class _FBCartDetailState extends State<FBCartDetail> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: (){
-                      double totalPrice = double.parse(cartController.formattedTotalPrice);
-                      AppRoute.route.push(context, FBPayment(totalPrice: totalPrice,));
+                    onTap: () {
+                      double totalPrice =
+                          double.parse(cartController.formattedTotalPrice);
+                      AppRoute.route.push(
+                          context,
+                          FBPayment(
+                            totalPrice: totalPrice,
+                          ));
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(16),
-                      child: Expanded(
-                          child: Container(
+                      child: Container(
                         height: 50,
                         width: double.infinity,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(50),
                             color: Colors.red),
                         child: const Center(
                             child: TextWidget(
-                          "CheckOut",
-                          size: 20,
-                          bold: true,
+                          "Check Out",
+                          size: 16.0,
                         )),
-                      )),
+                      ),
                     ),
                   )
                 ],
