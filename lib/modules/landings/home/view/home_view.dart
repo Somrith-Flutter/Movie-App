@@ -661,10 +661,10 @@ class _HomeViewState extends State<HomeView> {
       itemBuilder: (context, index) {
         final item = controller.offers[index];
         String cacheImage({String? img}){
-          if (AppConstant.baseIosUrl == AppConstant.domainKey ){
+          if (AppConstant.baseIosIP == AppConstant.domainKey ){
             img = item.image!;
           }
-          if (AppConstant.baseAndroidUrl == AppConstant.domainKey){
+          if (AppConstant.baseAndroidIP == AppConstant.domainKey){
             img = "${AppConstant.domainKey}/${item.image}";
           }
           return img ?? '';

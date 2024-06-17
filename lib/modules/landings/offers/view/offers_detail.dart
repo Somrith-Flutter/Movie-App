@@ -19,6 +19,16 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String cacheImage({String? img}){
+          if (AppConstant.baseIosIP == AppConstant.domainKey ){
+            img = image;
+          }
+          if (AppConstant.baseAndroidIP == AppConstant.domainKey){
+            img = "${AppConstant.domainKey}/$image}";
+            debugPrint(img);
+          }
+          return img ?? '';
+        }
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -44,7 +54,7 @@ class DetailScreen extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: CachedNetworkImage(
-                    imageUrl: "${AppConstant.domainKey}/$image",
+                    imageUrl: cacheImage(),
                     fit: BoxFit.fill,
                     height: 250,
                     width: double.maxFinite,
