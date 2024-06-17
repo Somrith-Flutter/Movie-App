@@ -211,7 +211,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 17),
                   child: CustDropDown(
-                    color: Colors.black54,
+                    color: const Color.fromARGB(136, 255, 255, 255),
                     maxListHeight: 150,
                     items: const [
                       CustDropdownMenuItem(
@@ -236,7 +236,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         ),
                       ),
                     ],
-                    hintText: user.gender != 'null' ? user.gender.toString() : "Gender",
+                    hintText: user.uu.toString().isNotEmpty && user.uu?.gender != null ? user.uu!.gender.toString() : "Gender",
                     borderRadius: 5,
                     onChanged: (val) {
                       user.selectedGender = val;

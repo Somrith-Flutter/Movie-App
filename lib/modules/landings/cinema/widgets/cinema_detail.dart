@@ -1,9 +1,16 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/config/themes/app_color.dart';
+import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
+import 'package:legend_cinema/core/enum/base_status_enum.dart';
 import 'package:legend_cinema/modules/landings/cinema/widgets/cinema_movie_detail.dart';
+import 'package:legend_cinema/modules/landings/home/controller/home_controller.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
+import 'package:legend_cinema/widgets/no_data_found.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 import 'package:intl/intl.dart';
 
@@ -22,6 +29,7 @@ class _CinemaDetailState extends State<CinemaDetail> {
   bool isTextTapSelected = true;
   String selectedDay = '';
   final dateInfo = DateInfo();
+  final _movie = Get.find<HomeController>();
 
   void _onTabTap(bool isTextSelected) {
     setState(() {
@@ -32,39 +40,49 @@ class _CinemaDetailState extends State<CinemaDetail> {
   @override
   void initState() {
     super.initState();
+    Future.delayed(const Duration(milliseconds: 100), (){
+      _movie.fetchMoiveController(location: widget.title.toString().toLowerCase());
+    });
     selectedDay = dateInfo.dates.first;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        leading: const BackWidget(),
-        title: TextWidget(
-          widget.title,
-          size: 20.0,
-          bold: true,
-          overflow: TextOverflow.ellipsis,
-        ),
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: AppColor.appbarColor,
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
+    return GetBuilder<HomeController>(
+      builder: (logic) {
+        return Scaffold(
+          backgroundColor: Colors.black,
+          appBar: AppBar(
+            leading: const BackWidget(),
+            title: TextWidget(
+              widget.title,
+              size: 20.0,
+              bold: true,
+              overflow: TextOverflow.ellipsis,
+            ),
+            flexibleSpace: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: AppColor.appbarColor,
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
             ),
           ),
-        ),
-      ),
-      body: ListView(
-        physics: const BouncingScrollPhysics(),
-        children: [
-          Image.asset(widget.detailImage, height: 200, fit: BoxFit.cover),
-          _buildTapSelected(),
-          isTextTapSelected ? _buildNowShowing() : _buildDetail(),
-        ],
-      ),
+          body: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              children: [
+                Image.asset(widget.detailImage, height: 200, fit: BoxFit.cover),
+                _buildTapSelected(),
+                isTextTapSelected ? _buildNowShowing() : _buildDetail(),
+                _buildMoiveShow()
+              ],
+            ),
+          ),
+        );
+      }
     );
   }
 
@@ -171,90 +189,103 @@ class _CinemaDetailState extends State<CinemaDetail> {
             bold: true,
           ),
           const SizedBox(height: 30),
-          GestureDetector(
-            child: GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                childAspectRatio: 0.5,
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMoiveShow() {
+    if(_movie.response == BaseStatusEnum.inprogress){
+      return const Center(
+        child: CupertinoActivityIndicator(),
+      );
+    }
+
+    if(_movie.response == BaseStatusEnum.failure){
+      return const Center(
+        child: NoDataFound(),
+      );
+    }
+
+    return GestureDetector(
+      child: GridView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          childAspectRatio: 0.5,
+        ),
+        itemCount: _movie.moive.length,
+        itemBuilder: (BuildContext context, int index) {
+          debugPrint("${_movie.moive.length}");
+          final data = _movie.moive[index];
+          return GestureDetector(
+            onTap: () {
+              AppRoute.route.push(
+                  context,
+                  CinemaMovieDetail(data: [data], location: data.location));
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: Colors.black,
               ),
-              itemCount: cinema.length,
-              itemBuilder: (BuildContext context, int index) {
-                final data = cinema[index];
-                return GestureDetector(
-                  onTap: () {
-                    AppRoute.route.push(
-                        context,
-                        CinemaMovieDetail(
-                            imageMovie: data['image']!,
-                            titleMovie: data['title']!,
-                            genre: data['genre']!,
-                            duration: data['duration']!,
-                            releaseDate: data['release']!,
-                            classification: data['classification']!));
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.black,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Image.asset(
-                            data["image"]!,
-                            fit: BoxFit.cover,
-                            height: 300,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: CachedNetworkImage(
+                      imageUrl: "${AppConstant.domainKey}/${data.imageUrl.toString()}",
+                      fit: BoxFit.cover,
+                      height: 300,
+                      errorWidget: (context, url, error) => const Center(
+                        child: CupertinoActivityIndicator(),
+                      ),
+                    )
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      TextWidget(
+                        data.release,
+                        bold: true,
+                        size: 14,
+                        color: Colors.grey,
+                      ),
+                      const SizedBox(width: 5),
+                      Container(
+                        width: 60,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Center(
+                          child: TextWidget(
+                            data.classification,
+                            color: Colors.black,
+                            bold: true,
                           ),
                         ),
-                        const SizedBox(height: 10),
-                        Row(
-                          children: [
-                            TextWidget(
-                              data['release'],
-                              bold: true,
-                              size: 14,
-                              color: Colors.grey,
-                            ),
-                            const SizedBox(width: 5),
-                            Container(
-                              width: 60,
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.white),
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Center(
-                                child: TextWidget(
-                                  data['classification'],
-                                  color: Colors.black,
-                                  bold: true,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        TextWidget(
-                          data['title'],
-                          color: Colors.white,
-                          size: 16,
-                          bold: true,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                );
-              },
+                  TextWidget(
+                    data.title,
+                    color: Colors.white,
+                    size: 16,
+                    bold: true,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }

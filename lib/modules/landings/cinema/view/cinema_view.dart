@@ -141,11 +141,11 @@ class CinemaView extends StatelessWidget {
                     return GestureDetector(
                       onTap: () {
                         AppRoute.route.push(
-                            context,
-                            CinemaDetail(
-                              detailImage: item["detail_image"]!,
-                              title: item["title"]!,
-                            ));
+                          context,
+                          CinemaDetail(
+                            detailImage: item["detail_image"]!,
+                            title: item["title"]!,
+                          ));
                       },
                       child: Container(
                         margin: const EdgeInsets.all(8.0),

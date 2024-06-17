@@ -1,24 +1,25 @@
+import 'dart:convert';
+
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:legend_cinema/constants/app_constant.dart';
+import 'package:legend_cinema/core/enum/base_status_enum.dart';
+import 'package:legend_cinema/modules/landings/f_b/controller/f_b_controller.dart';
+import 'package:legend_cinema/modules/landings/home/controller/home_controller.dart';
+import 'package:legend_cinema/modules/landings/home/model/home_model.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
+import 'package:legend_cinema/widgets/no_data_found.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
+// ignore: must_be_immutable
 class CinemaMovieDetail extends StatefulWidget {
-  const CinemaMovieDetail(
-      {super.key,
-      required this.imageMovie,
-      required this.titleMovie,
-      required this.duration,
-      required this.releaseDate,
-      required this.classification,
-      required this.genre});
+  CinemaMovieDetail({super.key, required this.data, this.location});
 
-  final String imageMovie;
-  final String titleMovie;
-  final String genre;
-  final String duration;
-  final String releaseDate;
-  final String classification;
+  List<MoiveModel> data = [];
+  String? location;
 
   @override
   State<CinemaMovieDetail> createState() => _CinemaMovieDetailState();
@@ -27,206 +28,263 @@ class CinemaMovieDetail extends StatefulWidget {
 class _CinemaMovieDetailState extends State<CinemaMovieDetail> {
   final dateInfo = DateInfo();
   String selectedDay = '';
+  final locat = Get.find<FBController>();
+  final _movie = Get.find<HomeController>();
 
   @override
   void initState() {
     super.initState();
+    Future.delayed(const Duration(milliseconds: 100), (){
+      onInit();
+    });
     selectedDay = dateInfo.dates.first;
   }
+
+  onInit(){
+    for(var v in widget.data){
+      debugPrint("id => ${v.id}");
+      _movie.fetchMoiveController(location: widget.location.toString().toLowerCase(), id: v.id);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        physics: const  BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Stack(
-              children: [
-                Image.asset(
-                  widget.imageMovie,
-                  fit: BoxFit.cover,
-                  height: 250,
-                  width: double.infinity,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 50,horizontal: 16),
-                  child: Positioned(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const BackWidget(),
-                      Container(
-                        padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.grey.withOpacity(0.5)
-                        ),
-                          child: const Icon(Icons.ios_share_outlined)
-                      )
-                    ],
-                  )),
-                )
-              ],
-            ),
-            const SizedBox(height: 15,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            for (var v in widget.data) ...[
+              Stack(
                 children: [
-                  TextWidget(widget.titleMovie,size: 20,bold: true,),
-                  const SizedBox(height: 15,),
-                  const TextWidget("2D",size: 26,bold: true,color: Colors.blue,),
-                  const SizedBox(height: 15,),
-                  _builderRow(
-                      icon: Icons.folder_shared_rounded,
-                      text: "Genre: ",
-                      subText: widget.genre
+                  CachedNetworkImage(
+                    imageUrl: "${AppConstant.domainKey}/${v.imageUrl}",
+                    fit: BoxFit.cover,
+                    height: 250,
+                    width: double.infinity,
                   ),
-                  const SizedBox(height: 10,),
-                  _builderRow(
-                      icon: Icons.access_time_filled,
-                      text: "Duration: ",
-                      subText: widget.duration
-                  ),
-                  const SizedBox(height: 10,),
-                  _builderRow(
-                      icon: Icons.date_range,
-                      text: "Release: ",
-                      subText: widget.releaseDate
-                  ),
-                  const SizedBox(height: 10,),
-                  _builderRow(
-                      icon: Icons.visibility_off,
-                      text: "Classification: ",
-                      subText: widget.classification
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 50, horizontal: 16),
+                    child: Positioned(
+                        child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const BackWidget(),
+                        Container(
+                            padding: const EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.grey.withOpacity(0.5)),
+                            child: const Icon(Icons.ios_share_outlined))
+                      ],
+                    )),
                   )
                 ],
               ),
-            ),
-            const SizedBox(height: 10,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Divider(color: Colors.white.withOpacity(0.5),height: 3,),
-            ),
-            const SizedBox(height: 10,),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              child: TextWidget("Description about the Movie",size: 16,color: Colors.grey,),
-            ),
-            const SizedBox(height: 10,),
-            GestureDetector(
-              onTap: (){
-                _buildBottomSheet(context);
-              },
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                width: double.infinity,
-                height: 60,
-                decoration: BoxDecoration(
-                  border: Border.all(width: 2,color: Colors.white.withOpacity(0.5)),
-                  borderRadius: BorderRadius.circular(10)
-                ),
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              const SizedBox(
+                height: 15,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextWidget("Legend Eden Garden",size: 18,bold: true,),
-                    Icon(Icons.arrow_forward_ios)
+                    TextWidget(
+                      v.title,
+                      size: 20,
+                      bold: true,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    const TextWidget(
+                      "2D",
+                      size: 26,
+                      bold: true,
+                      color: Colors.blue,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    _builderRow(
+                        icon: Icons.folder_shared_rounded,
+                        text: "Genre: ",
+                        subText: v.genre.toString()),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    _builderRow(
+                        icon: Icons.access_time_filled,
+                        text: "Duration: ",
+                        subText: v.duration.toString()),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    _builderRow(
+                        icon: Icons.date_range,
+                        text: "Release: ",
+                        subText: v.release.toString()),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    _builderRow(
+                        icon: Icons.visibility_off,
+                        text: "Classification: ",
+                        subText: v.classification.toString())
                   ],
                 ),
               ),
-            ),
-            const SizedBox(height: 15,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
-                children: List.generate(dateInfo.dates.length, (index) {
-                  final date = dateInfo.dates[index];
-                  final day = dateInfo.dayNames[index];
-                  final month = dateInfo.months[index];
-                  return Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          selectedDay = date;
-                        });
-                      },
-                      child: Stack(
-                        children: [
-                          Container(
-                            height: 80,
-                            width: 70,
-                            decoration: BoxDecoration(
-                              border: selectedDay == date
-                                  ? Border.all(color: Colors.red, width: 2)
-                                  : Border.all(color: Colors.grey),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                          Positioned(
-                            top: 10,
-                            left: 20,
-                            child: TextWidget(
-                              day,
-                              size: 12,
-                            ),
-                          ),
-                          Positioned(
-                            top: 25,
-                            left: 20,
-                            child: TextWidget(
-                              date,
-                              bold: true,
-                              size: 22,
-                            ),
-                          ),
-                          Positioned(
-                            bottom: 15,
-                            left: 25,
-                            child: TextWidget(
-                              month,
-                              size: 12,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                }),
+              const SizedBox(
+                height: 10,
               ),
-            ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Divider(
+                  color: Colors.white.withOpacity(0.5),
+                  height: 3,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                child: TextWidget(
+                  "Description about the Movie",
+                  size: 16,
+                  color: Colors.grey,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              GestureDetector(
+                onTap: () {
+                  _buildBottomSheet(context);
+                },
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  width: double.infinity,
+                  height: 60,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          width: 2, color: Colors.white.withOpacity(0.5)),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextWidget(
+                        "Legend Eden Garden",
+                        size: 18,
+                        bold: true,
+                      ),
+                      Icon(Icons.arrow_forward_ios)
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Row(
+                  children: List.generate(dateInfo.dates.length, (index) {
+                    final date = dateInfo.dates[index];
+                    final day = dateInfo.dayNames[index];
+                    final month = dateInfo.months[index];
+                    return Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selectedDay = date;
+                          });
+                        },
+                        child: Stack(
+                          children: [
+                            Container(
+                              height: 80,
+                              width: 70,
+                              decoration: BoxDecoration(
+                                border: selectedDay == date
+                                    ? Border.all(color: Colors.red, width: 2)
+                                    : Border.all(color: Colors.grey),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                            Positioned(
+                              top: 10,
+                              left: 20,
+                              child: TextWidget(
+                                day,
+                                size: 12,
+                              ),
+                            ),
+                            Positioned(
+                              top: 25,
+                              left: 20,
+                              child: TextWidget(
+                                date,
+                                bold: true,
+                                size: 22,
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 15,
+                              left: 25,
+                              child: TextWidget(
+                                month,
+                                size: 12,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  }),
+                ),
+              ),
+              _buildMoiveShow(context)
+            ],
           ],
         ),
       ),
     );
   }
-}
 
-Widget  _builderRow({required IconData icon,required String text, required String subText}){
-  return  Row(
-    children: [
-      Icon(icon,color: Colors.red,),
-      const SizedBox(width: 10,),
-      TextWidget(text,bold: true,color: Colors.grey),
-      TextWidget(subText,bold: true,)
-      ]
-  );
-}
+  Widget _builderRow(
+      {required IconData icon, required String text, required String subText}) {
+    return Row(children: [
+      Icon(
+        icon,
+        color: Colors.red,
+      ),
+      const SizedBox(
+        width: 10,
+      ),
+      TextWidget(text, bold: true, color: Colors.grey),
+      TextWidget(
+        subText,
+        bold: true,
+      )
+    ]);
+  }
 
-Future _buildBottomSheet(BuildContext context) {
-  return showModalBottomSheet(
-    context: context,
-    builder: (context) {
-      return SizedBox(
-        height: 500,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Row(
+  Future _buildBottomSheet(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const TextWidget(
@@ -251,61 +309,141 @@ Future _buildBottomSheet(BuildContext context) {
                   ),
                 ],
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Divider(
+              const SizedBox(height: 10.0),
+              Divider(
                 color: Colors.white.withOpacity(0.3),
                 height: 2,
               ),
-            ),
-            const SizedBox(height: 25),
-            Expanded(
-              child: ListView.builder(
-                itemCount: cinemaList.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    height: 60,
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Column(
+              const SizedBox(height: 10.0),
+              Flexible(
+                child: ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: locat.fb.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
                           children: [
                             const Icon(Icons.location_on, color: Colors.red),
                             const SizedBox(width: 8),
-                            TextWidget(cinemaList[index]["title"] ?? "",
+                            TextWidget(locat.fb[index].name,
                                 size: 16, bold: true),
                           ],
                         ),
+                        const SizedBox(height: 10.0),
                         Divider(
-                            color: Colors.white.withOpacity(0.3), height: 0.5),
+                          color: Colors.white.withOpacity(0.3),
+                          height: 0.5,
+                        ),
+                        const SizedBox(height: 10.0),
                       ],
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildMoiveShow(BuildContext context) {
+    if (_movie.response == BaseStatusEnum.inprogress) {
+      return const Center(
+        child: CupertinoActivityIndicator(),
+      );
+    }
+
+    if (_movie.response == BaseStatusEnum.failure) {
+      return const Center(
+        child: NoDataFound(),
+      );
+    }
+
+    return GestureDetector(
+      child: GridView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          childAspectRatio: 2.1/4,
+        ),
+        itemCount: _movie.moive.length,
+        itemBuilder: (BuildContext context, int index) {
+          debugPrint("${_movie.moive.length}");
+          final data = _movie.moive[index];
+          return GestureDetector(
+            onTap: () {
+            },
+            child: Container(
+              margin: const EdgeInsets.only(left: 8, right: 8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: Colors.transparent,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: CachedNetworkImage(
+                        imageUrl:
+                            "${AppConstant.domainKey}/${data.imageUrl.toString()}",
+                        fit: BoxFit.cover,
+                        height: 300,
+                        errorWidget: (context, url, error) => const Center(
+                          child: CupertinoActivityIndicator(),
+                        ),
+                      )),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      TextWidget(
+                        data.release,
+                        bold: true,
+                        size: 14,
+                        color: Colors.grey,
+                      ),
+                      const SizedBox(width: 5),
+                      Container(
+                        width: 60,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Center(
+                          child: TextWidget(
+                            data.classification,
+                            color: Colors.black,
+                            bold: true,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  TextWidget(
+                    data.title,
+                    color: Colors.white,
+                    size: 16,
+                    bold: true,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-      );
-    },
-  );
+          );
+        },
+      ),
+    );
+  }
 }
-
-List<Map<String, String>> cinemaList = [
-  {"title": "Legend Eden Garden"},
-  {"title": "Legend Toul Kork"},
-  {"title": "Legend Premium Exchange Square"},
-  {"title": "Legend Olympia"},
-  {"title": "Legend SenSok"},
-  {"title": "Legend Noro Mall"},
-  {"title": "Legend Midtown Mall"},
-  {"title": "Legend Meanchey"},
-  {"title": "Legend Cinema 271 Mega Mall"},
-  {"title": "Legend K Mall"},
-  {"title": "Legend Cinema Sihanoukville"},
-  {"title": "Legend Siem Reap"},
-];
 
 class DateInfo {
   final now = DateTime.now();
@@ -344,4 +482,3 @@ class DateInfo {
     return days.map((date) => DateFormat('d').format(date)).toList();
   }
 }
-

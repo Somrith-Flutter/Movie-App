@@ -216,7 +216,7 @@ class _CustDropDownState extends State<CustDropDown>
                     child: Text(
                       widget.hintText,
                       style: TextStyle(
-                          fontSize: 17, color: logic.gender != 'null' ? Colors.black : Colors.grey.withOpacity(0.2)),
+                          fontSize: 17, color: logic.gender != 'null' ? Colors.white : Colors.grey.withOpacity(0.2)),
                       maxLines: 1,
                       overflow: TextOverflow.clip,
                     ),
@@ -227,7 +227,7 @@ class _CustDropDownState extends State<CustDropDown>
                   child: Icon(
                     color: widget.icon != null ? logic.gender != 'null'
                         ? Colors.green
-                        : Colors.grey.withOpacity(0.2) : widget.color ?? Colors.black,
+                        : Colors.grey.withOpacity(0.2) : widget.color ?? const Color.fromARGB(255, 255, 255, 255),
                     widget.icon ?? Icons.arrow_drop_down,
                   ),
                 ),
