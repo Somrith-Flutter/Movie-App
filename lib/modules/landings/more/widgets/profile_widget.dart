@@ -8,7 +8,7 @@ import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/modules/auth/controller/auth_controller.dart';
 import 'package:legend_cinema/modules/auth/controller/pick_image_controller.dart';
-import 'package:legend_cinema/modules/landings/more/widgets/custdropdown.dart';
+import 'package:legend_cinema/widgets/custdropdown.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 

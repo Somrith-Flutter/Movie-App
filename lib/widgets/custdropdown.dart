@@ -22,13 +22,12 @@ class CustDropDown<T> extends StatefulWidget {
     this.borderWidth = 1,
     this.maxListHeight = 100,
     this.defaultSelectedIndex = -1,
-    Key? key,
+    super.key,
     this.enabled = true,
-    this.itemSelected, this.color, this.icon})
-      : super(key: key);
+    this.itemSelected, this.color, this.icon});
 
   @override
-  _CustDropDownState createState() => _CustDropDownState();
+  State<CustDropDown> createState() => _CustDropDownState();
 }
 
 class _CustDropDownState extends State<CustDropDown>
