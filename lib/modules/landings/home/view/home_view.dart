@@ -136,7 +136,6 @@ class _HomeViewState extends State<HomeView> {
                           _buildFilterInput(),
                           const Gap(12),
                           _buildSlideImages(),
-                          const Gap(14),
                           DotIndicatorWidget(currentPage: controller.currentPage, itemCount: pages.length), 
                           const Gap(12),
                         ],
@@ -155,6 +154,25 @@ class _HomeViewState extends State<HomeView> {
                 controller.isNowShowing ? _buildNowShwing() : _buildComingSoon(),
               ],
             ),
+            const Padding(
+              padding: EdgeInsets.only(left: 12 , top: 24, right: 12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextWidget(
+                    'Promotions',
+                    bold: true,
+                    size: 20,
+                  ),
+                  TextWidget(
+                    'See all',
+                    bold: true,
+                    size: 14,
+                  ),
+                ],
+              ),
+            ),
+            _buildPromotion(),
             _buildFooter(),
           ],
         ),
@@ -173,7 +191,7 @@ class _HomeViewState extends State<HomeView> {
           width: MediaQuery.of(context).size.width,
           height: 50,
           decoration: BoxDecoration(
-            color: Colors.black54.withOpacity(0.3),
+            color: Colors.grey.withOpacity(0.5),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Padding(
@@ -327,9 +345,9 @@ class _HomeViewState extends State<HomeView> {
               ),
               Positioned(
                 bottom: 75,
-                right: 23,
+                right: 10,
                 child: Container(
-                  height: 40,
+                  height: 36,
                   width: 130,
                   decoration: const BoxDecoration(
                     color: Colors.red,
@@ -341,14 +359,14 @@ class _HomeViewState extends State<HomeView> {
                   child: const Stack(
                     children: [
                       Positioned(
-                        top: 2,
+                        top: 5,
                         left: 5,
                         child: Icon(Icons.card_giftcard)
                       ),
                       Positioned(
-                        top: 2,
+                        top: 5,
                         right: 5,
-                        child: TextWidget('Buy Ticket')
+                        child: TextWidget('Buy Ticket', bold: true,)
                       ),
                     ],
                   ),
@@ -624,11 +642,13 @@ class _HomeViewState extends State<HomeView> {
   }
 
   Widget _buildPromotion() {
-    OffersController controller = Get.find();
-    return ListView.builder(
+  OffersController controller = Get.find();
+  return SizedBox(
+    height: 280,
+    child: ListView.builder(
       padding: EdgeInsets.zero,
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
+      scrollDirection: Axis.horizontal,
+      physics: const BouncingScrollPhysics(),
       itemCount: controller.offers.length,
       itemBuilder: (context, index) {
         final item = controller.offers[index];
@@ -641,48 +661,51 @@ class _HomeViewState extends State<HomeView> {
           }
           return img ?? '';
         }
-        return InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DetailScreen(
-                  image: item.image!,
-                  title: item.title!,
+        return Container(
+          width: 350,
+          height: 200,
+          padding: const EdgeInsets.all(12),
+          child: InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailScreen(
+                    image: item.image!,
+                    title: item.title!,
+                  ),
                 ),
-              ),
-            );
-          },
-          child: Card(
-            margin: const EdgeInsets.all(8.0),
+              );
+            },
             child: Container(
+              height: 250,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  color: Colors.white70,
-                  width: 1,
-                ),
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20)
               ),
-              child: Column( 
+              child: Column(
                 children: [
-                  Container(
-                    padding: const EdgeInsets.all(8.0),
+                  ClipRRect(
+                     borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      ),
                     child: CachedNetworkImage(
                       imageUrl: cacheImage(),
                       fit: BoxFit.cover,
-                      height: 250,
-                      width: double.maxFinite,
+                      height: 200,
+                      width: double.infinity,
                       placeholder: (context, url) => Container(
-                        height: 250,
-                        width: double.maxFinite,
+                        height: 200,
+                        width: double.infinity,
                         color: Colors.grey[200],
                         child: const Center(
                           child: CupertinoActivityIndicator(),
                         ),
                       ),
                       errorWidget: (context, url, error) => Container(
-                        height: 250,
-                        width: double.maxFinite,
+                        height: 200,
+                        width: double.infinity,
                         decoration: const BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage(AssetPath.invalidImage),
@@ -692,13 +715,17 @@ class _HomeViewState extends State<HomeView> {
                       ),
                     ),
                   ),
-                  ListTile(
-                    title: TextWidget(
-                      item.title!,
-                      size: 16,
-                      overflow: TextOverflow.ellipsis,
-                      bold: true,
-                      maxLines: 2,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8,right: 4),
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: TextWidget(
+                        item.title!,
+                        size: 14,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        color: Colors.black,
+                      ),
                     ),
                   ),
                 ],
@@ -707,8 +734,10 @@ class _HomeViewState extends State<HomeView> {
           ),
         );
       },
-    );
-  }
+    ),
+  );
+}
+
 
   Widget _buildFooter(){
     return Stack(
@@ -716,21 +745,23 @@ class _HomeViewState extends State<HomeView> {
       children: [
         Container(
           height: 300,
+          padding: EdgeInsets.zero,
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(AssetPath.cinema1)
+              image: AssetImage(AssetPath.meancheyDetail)
             ),
           ),
         ),
         const Positioned(
+          left: 20,
           child: TextWidget(
-            "When to watch your favorite movie at nearby cinema?\n"
-            "Explore now to see more cinema arround you",
+            "When to watch your favorite \nmovie at nearby cinema?\n"
+            "Explore now to see more cinema arround you.",
             size: 13,
           ),
         ),
         Positioned(
-          bottom: 80,
+          bottom: 65,
           child: ElevatedButton(
             onPressed: () => {}, 
             style: ElevatedButton.styleFrom(
