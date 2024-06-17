@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:legend_cinema/constants/app_constant.dart';
-import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/modules/auth/model/auth_model.dart';
 import 'package:legend_cinema/shared/v_globle.dart';
 
