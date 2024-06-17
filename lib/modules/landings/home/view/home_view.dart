@@ -409,7 +409,12 @@ class _HomeViewState extends State<HomeView> {
       shrinkWrap: true,
       children: [
         _buildTimeLine(),
-        BuildTimeLineItems(movies: controller.selectedDay == controller.dateInfo.dates.first? movie1 : movie2),
+        BuildTimeLineItems(
+          movies: controller.selectedDay == controller.dateInfo.dates[1]
+            ? movie1 : controller.selectedDay == controller.dateInfo.dates[2] 
+              ? movie2 : controller.selectedDay == controller.dateInfo.dates[3]
+                ? movie3 : movie4
+        ),
       ],
     );
   }
@@ -484,7 +489,12 @@ class _HomeViewState extends State<HomeView> {
       shrinkWrap: true,
       children: [
         _buildMonthUpComing(),
-        BuildTimeLineItems(movies:controller.selectedMonth == controller.dateInfo.dates.first ? movie3 : movie4,),
+        BuildTimeLineItems(
+          movies: controller.selectedMonth == controller.dateInfo.dates[1] 
+            ? movie1 : controller.selectedMonth == controller.dateInfo.dates[2] 
+              ? movie2 : controller.selectedMonth == controller.dateInfo.dates[3] 
+                ? movie3 : movie4,
+        ),
       ],
     );
   }

@@ -8,6 +8,12 @@ final List<Movies> movie1 = [
     type: 'SBT',
     date: 'date": "14 june, 2024'
   ),
+  Movies(
+    image: AssetPath.story6,
+    title: 'Testing 05',
+    type: 'SBT',
+    date: 'date": "14 june, 2024'
+  ),
 ];
 
 final List<Movies> movie2 = [
@@ -15,6 +21,12 @@ final List<Movies> movie2 = [
     image: AssetPath.story2,
     title: 'Testing 02',
     type: 'SRF',
+    date: 'date": "14 june, 2024'
+  ),
+  Movies(
+    image: AssetPath.story7,
+    title: 'Testing 06',
+    type: 'SBT',
     date: 'date": "14 june, 2024'
   ),
 ];
@@ -26,13 +38,25 @@ final List<Movies> movie3 = [
     type: 'SDF',
     date: 'date": "14 june, 2024'
   ),
+  Movies(
+    image: AssetPath.story8,
+    title: 'Testing 08',
+    type: 'SBT',
+    date: 'date": "14 june, 2024'
+  ),
 ];
 
 final List<Movies> movie4 = [
   Movies(
-    image: AssetPath.story5,
+    image: AssetPath.story4,
     title: 'Testing 04',
     type: 'PPV',
+    date: 'date": "14 june, 2024'
+  ),
+  Movies(
+    image: AssetPath.story9,
+    title: 'Testing 09',
+    type: 'SBT',
     date: 'date": "14 june, 2024'
   ),
 ];
@@ -42,6 +66,12 @@ final List<Movies> movie5 = [
     image: AssetPath.story5,
     title: 'Testing 05',
     type: 'TTT',
+    date: 'date": "14 june, 2024'
+  ),
+  Movies(
+    image: AssetPath.story10,
+    title: 'Testing 10',
+    type: 'SBT',
     date: 'date": "14 june, 2024'
   ),
 ];
