@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:legend_cinema/modules/landings/more/controller/more_controller.dart';
+import 'package:legend_cinema/modules/landings/more/developer_settings/about.dart';
+import 'package:legend_cinema/modules/landings/more/developer_settings/news.dart';
+import 'package:legend_cinema/modules/landings/more/developer_settings/offers.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/about_us.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/contact_widget.dart';
+import 'package:legend_cinema/modules/landings/more/widgets/developer_mode.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/language_widget.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/news_widget.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/notification_widget.dart';
@@ -11,6 +17,7 @@ import 'package:legend_cinema/shared/v_globle.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/list_tile_item.dart';
 
+MoreController controller = Get.find();
 List<ListTileItem> items(BuildContext context, String title, String icon)  {
   return [
     if (accessToken.$.isNotEmpty)...[
@@ -95,6 +102,18 @@ List<ListTileItem> items(BuildContext context, String title, String icon)  {
       route: const TermConditionWidget(),
       isRoute: true
     ),
+    if(controller.isDeveloperModeEnabled.value)...[
+      const ListTileItem(
+        title: 'Developer Option',
+        icon: Icons.developer_mode,
+        isSpacig: true,
+        trailing: true,
+        isheader: true,
+        header: 'Deverloper Mode',
+        route: DeveloperMode(),
+        isRoute: true,
+      )
+    ],
     if(accessToken.$.isNotEmpty)...[
       ListTileItem(
         title: S.of(context).logout,
@@ -106,5 +125,40 @@ List<ListTileItem> items(BuildContext context, String title, String icon)  {
         header: S.of(context).logout,
       ),
     ]
+  ];
+}
+
+List<ListTileItem> developerItem(BuildContext context){
+  return [
+    const ListTileItem(
+      header: 'News & Activity',
+      title: 'Get | Post | Delete',
+      icon: Icons.newspaper,
+      trailing: true,
+      isSpacig: true,
+      isheader: true,
+      isRoute: true,
+      route: News(),
+    ),
+    const ListTileItem(
+      header: 'Aboutus',
+      title: 'Get | Post | Delete',
+      icon: Icons.app_settings_alt,
+      trailing: true,
+      isSpacig: true,
+      isheader: true,
+      isRoute: true,
+      route: Aboutus()
+    ),
+    const ListTileItem(
+      header: 'Offers',
+      title: 'Get | Post | Delete',
+      icon: Icons.local_offer_outlined,
+      trailing: true,
+      isSpacig: true,
+      isheader: true,
+      isRoute: true,
+      route: Offers(),
+    ),
   ];
 }

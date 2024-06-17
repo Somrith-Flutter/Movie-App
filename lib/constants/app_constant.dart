@@ -73,6 +73,8 @@ class AppConstant{
     ),
   );
 
+  static const int developerCode = 2024;
+
   // change it base on your ip address by replace http://127.0.0.1:8000 to your ip.
   static const String baseIosUrl = 'http://127.0.0.1:8000';
   // [baseIosUrl] run whole machine.
