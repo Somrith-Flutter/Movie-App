@@ -8,6 +8,7 @@ import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/modules/auth/controller/auth_controller.dart';
 import 'package:legend_cinema/modules/auth/controller/pick_image_controller.dart';
+import 'package:legend_cinema/modules/landings/more/widgets/custdropdown.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
@@ -130,13 +131,13 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         color: Colors.white.withOpacity(0.9),
                       ),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
-                        child: Image.network("${AppConstant.domainKey}/${user.uu?.imageProfile}",
-                          fit: BoxFit.cover,
-                          height: double.maxFinite,
-                          width: double.maxFinite,
-                        )
-                      ),
+                          borderRadius: BorderRadius.circular(100),
+                          child: Image.network(
+                            "${AppConstant.domainKey}/${user.uu?.imageProfile}",
+                            fit: BoxFit.cover,
+                            height: double.maxFinite,
+                            width: double.maxFinite,
+                          )),
                     ),
                     Positioned(
                       bottom: 10,
@@ -202,39 +203,45 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                 const SizedBox(
                   height: 16,
                 ),
-                DropdownButtonFormField<String>(
-                  value: user.genderOptions.contains(user.selectedGender)
-                      ? user.selectedGender
-                      : null,
-                  decoration: InputDecoration(
-                    labelText: user.uu?.gender,
-                    fillColor: Colors.white70.withOpacity(0.1),
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            width: 2, color: Colors.white.withOpacity(0.8))),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          width: 1.5, color: Colors.white.withOpacity(0.8)),
-                    ),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 1, color: const Color.fromARGB(137, 229, 225, 225)),
+                    borderRadius: BorderRadius.circular(5),
                   ),
-                  items:
-                      user.genderOptions.toSet().toList().map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                  onChanged: (newValue) {
-                    setState(() {
-                      user.gender = newValue;
-                    });
-                  },
-                  validator: (value) {
-                    if (value == null) {
-                      return 'Please select your gender';
-                    }
-                    return null;
-                  },
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 17),
+                  child: CustDropDown(
+                    color: Colors.black54,
+                    maxListHeight: 150,
+                    items: const [
+                      CustDropdownMenuItem(
+                        value: "Male",
+                        child: Text(
+                          "Male",
+                          style: TextStyle(fontSize: 17),
+                        ),
+                      ),
+                      CustDropdownMenuItem(
+                        value: "Female",
+                        child: Text(
+                          "Female",
+                          style: TextStyle(fontSize: 17),
+                        ),
+                      ),
+                      CustDropdownMenuItem(
+                        value: "Other",
+                        child: Text(
+                          "Other",
+                          style: TextStyle(fontSize: 17),
+                        ),
+                      ),
+                    ],
+                    hintText: user.gender != 'null' ? user.gender.toString() : "Gender",
+                    borderRadius: 5,
+                    onChanged: (val) {
+                      user.selectedGender = val;
+                    },
+                  ),
                 ),
                 const SizedBox(
                   height: 16,

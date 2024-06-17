@@ -97,6 +97,7 @@ class OffersView extends StatelessWidget {
           }
           if (AppConstant.baseAndroidUrl == AppConstant.domainKey){
             img = "${AppConstant.domainKey}/${item.image}";
+            debugPrint(img);
           }
           return img ?? '';
         }
