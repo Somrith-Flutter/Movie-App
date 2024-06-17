@@ -3,26 +3,15 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:legend_cinema/constants/asset_path.dart';
+import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/modules/auth/controller/auth_controller.dart';
-import 'package:legend_cinema/modules/landings/cinema/widgets/cinema_detail.dart';
+import 'package:legend_cinema/modules/landings/f_b/controller/f_b_controller.dart';
+import 'package:legend_cinema/modules/landings/home/controller/home_controller.dart';
+import 'package:legend_cinema/modules/landings/home/widgets/movie_item.dart';
 import 'package:legend_cinema/modules/landings/home/widgets/time_line_item.dart';
 import 'package:legend_cinema/shared/v_globle.dart';
 import 'package:legend_cinema/widgets/dot_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
-
-List<String> images = [
-  AssetPath.story1,
-  AssetPath.story2,
-  AssetPath.story3,
-  AssetPath.story4,
-  AssetPath.story5,
-  AssetPath.story6,
-  AssetPath.story7,
-  AssetPath.story8,
-  AssetPath.story9,
-  AssetPath.story10,
-];
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -34,15 +23,8 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   late PageController _pageController;
   final user = Get.find<AuthController>();
-  late Timer _timer;
-  bool isNowShowing = true;
-  int selectedIndex = 0;
-  int _currentPage = 0;
-  String _currentImagePath = images.first;
-  bool isTextTapSelected = true;
-  String selectedDay = '';
-
-  final dateInfo = DateInfo();
+  final HomeController controller = Get.find();
+  final FBController filter = Get.find();
 
   @override
   void initState() {
@@ -50,9 +32,12 @@ class _HomeViewState extends State<HomeView> {
     Future.delayed(const Duration(milliseconds: 100), () {
       user.fetchUserController();
     });
-    selectedDay = dateInfo.dates.first;
+
+    controller.selectedDay = controller.dateInfo.dates.first;
+    controller.selectedMonth = controller.dateInfo.dates.first;
+    
     _pageController = PageController(viewportFraction: 0.90);
-    _timer = Timer.periodic(const Duration(seconds: 3), (Timer timer) {
+    controller.timer = Timer.periodic(const Duration(seconds: 3), (Timer timer) {
       if (_pageController.hasClients) {
         int nextPage = _pageController.page!.round() + 1;
         if (nextPage >= images.length) {
@@ -69,7 +54,7 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   void dispose() {
-    _timer.cancel();
+    controller.timer.cancel();
     _pageController.dispose();
     super.dispose();
   }
@@ -82,7 +67,12 @@ class _HomeViewState extends State<HomeView> {
         automaticallyImplyLeading: false,
         backgroundColor: const Color.fromARGB(255, 26, 25, 25).withOpacity(0.9),
         centerTitle: true,
-        title: const TextWidget('Legend Cinema', size: 22, bold: true,),
+        title: const TextWidget(
+          AppConstant.appName, 
+          size: 22, 
+          bold: true,
+        ),
+        flexibleSpace: AppConstant.appbarTheme,
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
@@ -126,7 +116,7 @@ class _HomeViewState extends State<HomeView> {
                 Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage(_currentImagePath),
+                      image: AssetImage(controller.currentImagePath),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -142,7 +132,7 @@ class _HomeViewState extends State<HomeView> {
                           const Gap(12),
                           _buildSlideImages(),
                           const Gap(14),
-                          DotIndicatorWidget(currentPage: _currentPage, itemCount: images.length), 
+                          DotIndicatorWidget(currentPage: controller.currentPage, itemCount: images.length), 
                           const Gap(12),
                         ],
                       ),
@@ -157,12 +147,9 @@ class _HomeViewState extends State<HomeView> {
               shrinkWrap: true,
               children: [
                 _buildTabView(),
-                isNowShowing ? _buildNowShwing() : _buildComingSoon(),
+                controller.isNowShowing ? _buildNowShwing() : _buildComingSoon(),
               ],
             ),
-            // _buildTabView(),
-            // _buildTimeLine(),
-            //_buildTimeLineItems(),
           ],
         ),
       ],
@@ -170,32 +157,144 @@ class _HomeViewState extends State<HomeView> {
   }
 
   Widget _buildFilterInput(){
-    return Container(
-      padding: const EdgeInsets.all(14),
-      child: Container(
-        padding: const EdgeInsets.all(12),
-        width: MediaQuery.of(context).size.width,
-        height: 50,
-        decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.5),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              TextWidget(
-                'All',
-                size: 16,
-              ),
-              Icon(
-                Icons.arrow_drop_down_circle_outlined,
-              ),
-            ],
+    return Padding(
+      padding: const EdgeInsets.all(12),
+      child: GestureDetector(
+        onTap: () {
+          _buildBottomSheet(context);
+        },
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          height: 50,
+          decoration: BoxDecoration(
+            color: Colors.black54.withOpacity(0.3),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: 20),
+            child: Row(
+              mainAxisAlignment:
+                  MainAxisAlignment.spaceBetween,
+              children: [
+                TextWidget(
+                  controller.cinema == ""
+                      ? 'All Cinemas'
+                      : controller.cinema,
+                  size: 16,
+                ),
+                const Icon(
+                  Icons.arrow_drop_down_circle_outlined,
+                ),
+              ],
+            ),
           ),
         ),
       ),
+    );
+  }
+
+  Future _buildBottomSheet(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return SizedBox(
+          height: 500,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const TextWidget(
+                      "Cinema",
+                      size: 19,
+                      bold: true,
+                    ),
+                    GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: Container(
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              color: Colors.white.withOpacity(0.3), width: 2),
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.close,
+                          size: 20,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Divider(
+                  color: Colors.white.withOpacity(0.3),
+                  height: 2,
+                ),
+              ),
+              const SizedBox(
+                height: 15.0,
+              ),
+              Expanded(
+                child: ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  itemCount: filter.fb.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              controller.cinema = filter.fb[index].name.toString();
+                              filter.getDetailedData(filter
+                                  .fb[index].locationType
+                                  .toString());
+                            });
+                            Navigator.pop(context);
+                          },
+                          child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 10.0,
+                              ),
+                              Row(
+                                children: [
+                                  const Icon(Icons.location_on,
+                                      color: Colors.red),
+                                  const SizedBox(width: 8),
+                                  TextWidget(
+                                    filter.fb[index].name.toString(),
+                                    size: 16,
+                                    bold: true,
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 10.0,
+                              ),
+                              Divider(
+                                  color: Colors.white.withOpacity(0.3),
+                                  height: 0.5),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 15.0,
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -207,7 +306,7 @@ class _HomeViewState extends State<HomeView> {
         controller: _pageController,
         itemCount: images.length,
         itemBuilder: (context, index) {
-          _currentImagePath = images[index]; 
+          controller.currentImagePath = images[index]; 
           return Container(
             margin: const EdgeInsets.symmetric(horizontal: 10.0),
             child: ClipRRect(
@@ -221,8 +320,8 @@ class _HomeViewState extends State<HomeView> {
         },
         onPageChanged: (int index) {
           setState(() {
-            _currentPage = index;
-            _currentImagePath = images[index]; 
+            controller.currentPage = index;
+            controller.currentImagePath = images[index]; 
           });
           if (index == images.length - 1) {
             Future.delayed(const Duration(seconds: 1), () {
@@ -253,12 +352,12 @@ class _HomeViewState extends State<HomeView> {
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        isNowShowing = true;
+                        controller.isNowShowing = true;
                       });
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        color: isNowShowing ? Colors.red : Colors.grey.shade600,
+                        color: controller.isNowShowing ? Colors.red : Colors.grey.shade600,
                         borderRadius: BorderRadius.circular(30),
                       ),
                       padding: const EdgeInsets.all(10),
@@ -275,14 +374,14 @@ class _HomeViewState extends State<HomeView> {
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        isNowShowing = false;
+                        controller.isNowShowing = false;
                       });
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(left: 2),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: isNowShowing ? Colors.grey.shade600 : Colors.red,
+                          color: controller.isNowShowing ? Colors.grey.shade600 : Colors.red,
                           borderRadius: BorderRadius.circular(30),
                         ),
                         padding: const EdgeInsets.all(10),
@@ -304,6 +403,17 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
+  Widget _buildNowShwing(){
+    return ListView(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      children: [
+        _buildTimeLine(),
+        BuildTimeLineItems(movies: controller.selectedDay == controller.dateInfo.dates.first? movie1 : movie2),
+      ],
+    );
+  }
+
   Widget _buildTimeLine() {
     return Align(
       alignment: Alignment.topLeft,
@@ -315,15 +425,15 @@ class _HomeViewState extends State<HomeView> {
           child: Column(
             children: [
               Row(
-                children: List.generate(dateInfo.dates.length, (index) {
-                  final date = dateInfo.dates[index];
-                  final day = dateInfo.dayNames[index];
-                  final month = dateInfo.months[index];
+                children: List.generate(controller.dateInfo.dates.length, (index) {
+                  final date = controller.dateInfo.dates[index];
+                  final day = controller.dateInfo.dayNames[index];
+                  final month = controller.dateInfo.months[index];
                   return Expanded(
                     child: GestureDetector(
                       onTap: () {
                         setState(() {
-                          selectedDay = date;
+                          controller.selectedDay = date;
                         });
                       },
                       child: Stack(
@@ -334,7 +444,7 @@ class _HomeViewState extends State<HomeView> {
                             margin: const EdgeInsets.all(4),
                             padding: const EdgeInsets.symmetric(vertical: 10),
                             decoration: BoxDecoration(
-                              border: selectedDay == date
+                              border: controller.selectedDay == date
                                   ? Border.all(color: Colors.red, width: 2)
                                   : Border.all(color: Colors.grey),
                               borderRadius: BorderRadius.circular(8),
@@ -368,6 +478,17 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
+  Widget _buildComingSoon(){
+    return ListView(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      children: [
+        _buildMonthUpComing(),
+        BuildTimeLineItems(movies:controller.selectedMonth == controller.dateInfo.dates.first ? movie3 : movie4,),
+      ],
+    );
+  }
+
   Widget _buildMonthUpComing(){
     return Align(
       alignment: Alignment.topLeft,
@@ -379,14 +500,14 @@ class _HomeViewState extends State<HomeView> {
           child: Column(
             children: [
               Row(
-                children: List.generate(dateInfo.dates.length, (index) {
-                  final date = dateInfo.dates[index];
-                  final month = dateInfo.months[index];
+                children: List.generate(controller.dateInfo.dates.length, (index) {
+                  final date = controller.dateInfo.dates[index];
+                  final month = controller.dateInfo.months[index];
                   return Expanded(
                     child: GestureDetector(
                       onTap: () {
                         setState(() {
-                          selectedDay = date;
+                          controller.selectedMonth = date;
                         });
                       },
                       child: Container(
@@ -395,7 +516,7 @@ class _HomeViewState extends State<HomeView> {
                         margin: const EdgeInsets.all(4),
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         decoration: BoxDecoration(
-                          border: selectedDay == date
+                          border: controller.selectedMonth == date
                               ? Border.all(color: Colors.red, width: 2)
                               : Border.all(color: Colors.grey),
                           borderRadius: BorderRadius.circular(8),
@@ -412,42 +533,4 @@ class _HomeViewState extends State<HomeView> {
       ),
     );
   }
-
-  Widget _buildNowShwing(){
-    return ListView(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      children: [
-        _buildTimeLine(),
-        selectedDay == dateInfo.dates.first ? BuildTimeLineItems(movies: test): const Text('hi'),
-      ],
-    );
-  }
-
-  Widget _buildComingSoon(){
-    return ListView(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      children: [
-        _buildMonthUpComing(),
-        selectedDay == dateInfo.dates.first ? BuildTimeLineItems(movies: movie,) : const Text('Hello'),
-      ],
-    );
-  }
 }
-
-final List<Map<String, String>> test = [
-  {
-    "title": "Movies 2",
-    "date": "14 june, 2024",
-    "poster": "https://www.ripefruitmedia.com.au/images_rfm/1223-130236796.jpg"
-  },
-];
-
-final List<Map<String, String>> movie = [
-  {
-    "title": "Movies 1",
-    "date": "14 june, 2024",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/b/be/Godzilla_x_kong_the_new_empire_poster.jpg" 
-  },
-];
