@@ -242,7 +242,6 @@ class _MoreViewState extends State<MoreView> {
 
   Widget _buildCustomListTile(){
     final MoreController languageController = Get.find();
-    final auth = Get.find<AuthController>();
     return Obx(() {
       String title;
       String icon;
@@ -271,13 +270,42 @@ class _MoreViewState extends State<MoreView> {
               } else {}
             }
             if(selectedItem.isRoute == false){
-              await auth.logoutController();
-              Future.delayed(const Duration(milliseconds: 100));
-              AppRoute.route.push(context, const BottomNavigation());
+              _showLogoutDialog(context);
             }
           }
         }
       );
     });
+  }
+
+  Future<void> _showLogoutDialog(BuildContext context) async {
+    final auth = Get.find<AuthController>();
+    bool shouldLogout = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Confirm Logout'),
+          content: const Text('Are you sure you want to log out?'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: const  Text('No'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: const Text('Yes'),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (shouldLogout) {
+      await auth.logoutController();
+      Future.delayed(const Duration(milliseconds: 100));
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const BottomNavigation()),
+      );
+    }
   }
 }

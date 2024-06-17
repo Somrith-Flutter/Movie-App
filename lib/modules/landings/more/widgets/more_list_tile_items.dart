@@ -32,7 +32,6 @@ List<ListTileItem> items(BuildContext context, String title, String icon)  {
         isRoute: true,
       ),
     ],
-    // language
     ListTileItem(
       title: title,
       isAssetIcon: true,
