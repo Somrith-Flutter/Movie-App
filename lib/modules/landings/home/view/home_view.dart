@@ -1,14 +1,19 @@
 import 'dart:async';
 import 'dart:ui';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
+import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/modules/auth/controller/auth_controller.dart';
 import 'package:legend_cinema/modules/landings/f_b/controller/f_b_controller.dart';
 import 'package:legend_cinema/modules/landings/home/controller/home_controller.dart';
 import 'package:legend_cinema/modules/landings/home/widgets/movie_item.dart';
 import 'package:legend_cinema/modules/landings/home/widgets/time_line_item.dart';
+import 'package:legend_cinema/modules/landings/offers/controller/offers_controller.dart';
+import 'package:legend_cinema/modules/landings/offers/view/offers_detail.dart';
 import 'package:legend_cinema/shared/v_globle.dart';
 import 'package:legend_cinema/widgets/dot_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
@@ -40,7 +45,7 @@ class _HomeViewState extends State<HomeView> {
     controller.timer = Timer.periodic(const Duration(seconds: 3), (Timer timer) {
       if (_pageController.hasClients) {
         int nextPage = _pageController.page!.round() + 1;
-        if (nextPage >= images.length) {
+        if (nextPage >= pages.length) {
           nextPage = 0;
         }
         _pageController.animateToPage(
@@ -116,7 +121,7 @@ class _HomeViewState extends State<HomeView> {
                 Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage(controller.currentImagePath),
+                      image: AssetImage(controller.currentImagePath.image!),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -132,7 +137,7 @@ class _HomeViewState extends State<HomeView> {
                           const Gap(12),
                           _buildSlideImages(),
                           const Gap(14),
-                          DotIndicatorWidget(currentPage: controller.currentPage, itemCount: images.length), 
+                          DotIndicatorWidget(currentPage: controller.currentPage, itemCount: pages.length), 
                           const Gap(12),
                         ],
                       ),
@@ -150,6 +155,7 @@ class _HomeViewState extends State<HomeView> {
                 controller.isNowShowing ? _buildNowShwing() : _buildComingSoon(),
               ],
             ),
+            _buildFooter(),
           ],
         ),
       ],
@@ -304,26 +310,99 @@ class _HomeViewState extends State<HomeView> {
       height: 600,
       child: PageView.builder(
         controller: _pageController,
-        itemCount: images.length,
+        itemCount: pages.length,
         itemBuilder: (context, index) {
-          controller.currentImagePath = images[index]; 
-          return Container(
-            margin: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12.0),
-              child: Image.asset(
-                images[index],
-                fit: BoxFit.cover,
+          var heroSlides = controller.currentImagePath = pages[index]; 
+          return Stack(
+            children: [
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 10),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Image.asset(
+                    heroSlides.image!,
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
-            ),
+              Positioned(
+                bottom: 75,
+                right: 23,
+                child: Container(
+                  height: 40,
+                  width: 130,
+                  decoration: const BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(15), 
+                      bottomLeft: Radius.circular(15)
+                    )
+                  ),
+                  child: const Stack(
+                    children: [
+                      Positioned(
+                        top: 2,
+                        left: 5,
+                        child: Icon(Icons.card_giftcard)
+                      ),
+                      Positioned(
+                        top: 2,
+                        right: 5,
+                        child: TextWidget('Buy Ticket')
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: 100,
+                left: 23,
+                child: TextWidget(controller.currentImagePath.title, bold: true,),
+              ),
+              Positioned(
+                bottom: 80,
+                left: 23,
+                child: Row(
+                  children: [
+                    TextWidget(
+                      controller.currentImagePath.date,
+                      size: 12,
+                    ),
+                    const Gap(5),
+                    Stack(
+                      children: [
+                        Container(
+                          height: 20,
+                          width: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Colors.white
+                          ),
+                        ),
+                        Positioned(
+                          top: 1,
+                          left: 10,
+                          child: TextWidget(
+                            controller.currentImagePath.type, 
+                            size: 12, 
+                            bold: true, 
+                            color: Colors.black,
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ],
           );
         },
         onPageChanged: (int index) {
           setState(() {
             controller.currentPage = index;
-            controller.currentImagePath = images[index]; 
+            controller.currentImagePath = pages[index]; 
           });
-          if (index == images.length - 1) {
+          if (index == pages.length - 1) {
             Future.delayed(const Duration(seconds: 1), () {
               _pageController.jumpToPage(0);
             });
@@ -541,6 +620,130 @@ class _HomeViewState extends State<HomeView> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildPromotion() {
+    OffersController controller = Get.find();
+    return ListView.builder(
+      padding: EdgeInsets.zero,
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: controller.offers.length,
+      itemBuilder: (context, index) {
+        final item = controller.offers[index];
+        String cacheImage({String? img}){
+          if (AppConstant.baseIosUrl == AppConstant.domainKey ){
+            img = item.image!;
+          }
+          if (AppConstant.baseAndroidUrl == AppConstant.domainKey){
+            img = "${AppConstant.domainKey}/${item.image}";
+          }
+          return img ?? '';
+        }
+        return InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DetailScreen(
+                  image: item.image!,
+                  title: item.title!,
+                ),
+              ),
+            );
+          },
+          child: Card(
+            margin: const EdgeInsets.all(8.0),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: Colors.white70,
+                  width: 1,
+                ),
+              ),
+              child: Column( 
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CachedNetworkImage(
+                      imageUrl: cacheImage(),
+                      fit: BoxFit.cover,
+                      height: 250,
+                      width: double.maxFinite,
+                      placeholder: (context, url) => Container(
+                        height: 250,
+                        width: double.maxFinite,
+                        color: Colors.grey[200],
+                        child: const Center(
+                          child: CupertinoActivityIndicator(),
+                        ),
+                      ),
+                      errorWidget: (context, url, error) => Container(
+                        height: 250,
+                        width: double.maxFinite,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(AssetPath.invalidImage),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    title: TextWidget(
+                      item.title!,
+                      size: 16,
+                      overflow: TextOverflow.ellipsis,
+                      bold: true,
+                      maxLines: 2,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildFooter(){
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Container(
+          height: 300,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(AssetPath.cinema1)
+            ),
+          ),
+        ),
+        const Positioned(
+          child: TextWidget(
+            "When to watch your favorite movie at nearby cinema?\n"
+            "Explore now to see more cinema arround you",
+            size: 13,
+          ),
+        ),
+        Positioned(
+          bottom: 80,
+          child: ElevatedButton(
+            onPressed: () => {}, 
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red.shade900,
+            ),
+            child: const TextWidget(
+              'Explore more',
+              size: 14,
+              bold: true,
+            ),
+          ),
+        )
+      ],
     );
   }
 }

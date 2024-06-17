@@ -15,7 +15,7 @@ class HomeController extends GetxController{
   bool isNowShowing = true;
   int selectedIndex = 0;
   int currentPage = 0;
-  String currentImagePath = images.first;
+  Movies currentImagePath = pages.first;
   bool isTextTapSelected = true;
   final dateInfo = DateInfo();
   String cinema = '';

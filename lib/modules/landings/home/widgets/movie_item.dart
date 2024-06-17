@@ -91,15 +91,65 @@ class Movies{
   final String? date; 
 }
 
-List<String> images = [
-  AssetPath.story1,
-  AssetPath.story2,
-  AssetPath.story3,
-  AssetPath.story4,
-  AssetPath.story5,
-  AssetPath.story6,
-  AssetPath.story7,
-  AssetPath.story8,
-  AssetPath.story9,
-  AssetPath.story10,
+List<Movies> pages = [
+  Movies(
+    image: AssetPath.story1,
+    title: 'title 1',
+    date: '12, 1, 24,',
+    type: 'DGE',
+  ),
+  Movies(
+    image: AssetPath.story2,
+    title: 'title 2',
+    date: '12, 1, 24,',
+    type: 'IGE',
+  ),
+  Movies(
+    image: AssetPath.story3,
+    title: 'title 3',
+    date: '12, 1, 24,',
+    type: 'LGE',
+  ),
+  Movies(
+    image: AssetPath.story4,
+    title: 'title 4',
+    date: '12, 1, 24,',
+    type: 'HGE',
+  ),
+  Movies(
+    image: AssetPath.story5,
+    title: 'title 5',
+    date: '12, 1, 24,',
+    type: 'XGE',
+  ),
+  Movies(
+    image: AssetPath.story6,
+    title: 'title 6',
+    date: '12, 1, 24,',
+    type: 'BGE',
+  ),
+  Movies(
+    image: AssetPath.story7,
+    title: 'title 7',
+    date: '12, 1, 24,',
+    type: 'SGE',
+  ),
+  Movies(
+    image: AssetPath.story8,
+    title: 'title 8',
+    date: '12, 1, 24,',
+    type: 'FGE',
+  ),
+  Movies(
+    image: AssetPath.story9,
+    title: 'title 9',
+    date: '12, 1, 24,',
+    type: 'DAE',
+  ),
+  Movies(
+    image: AssetPath.story10,
+    title: 'title 10',
+    date: '12, 1, 24,',
+    type: 'DDE',
+  ),
 ];
