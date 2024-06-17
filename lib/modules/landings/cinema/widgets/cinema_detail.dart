@@ -218,8 +218,7 @@ class _CinemaDetailState extends State<CinemaDetail> {
           childAspectRatio: 0.5,
         ),
         itemCount: _movie.moive.length,
-        itemBuilder: (BuildContext context, int index) {
-          debugPrint("${_movie.moive.length}");
+        itemBuilder: (BuildContext context, int index) {debugPrint("${_movie.moive.length}");
           final data = _movie.moive[index];
           return GestureDetector(
             onTap: () {

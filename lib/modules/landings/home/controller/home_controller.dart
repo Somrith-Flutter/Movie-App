@@ -27,13 +27,15 @@ class HomeController extends GetxController {
 
   Future<String> fetchMoiveController({String? location, String? id}) async {
     response = BaseStatusEnum.inprogress;
-
+    update();
     try {
-      final repo = await repository.fetchMovieRepo(location: location ?? "", id: id);
+      final repo =
+          await repository.fetchMovieRepo(location: location ?? "", id: id);
 
       if (repo != null) {
         moive = repo;
         response = BaseStatusEnum.success;
+        update();
       } else {
         response = BaseStatusEnum.failure;
         debugPrint("==========Error");
@@ -43,7 +45,7 @@ class HomeController extends GetxController {
     } finally {
       update();
     }
-
+    update();
     return "";
   }
 }
