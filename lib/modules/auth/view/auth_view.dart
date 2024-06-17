@@ -152,7 +152,7 @@ class _AuthViewState extends State<AuthView> {
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(vertical: 12),
                                   child: TextWidget(
-                                    S.of(context).phone,
+                                    S.of(context).phone_number,
                                     size: 16,
                                   ),
                                 ),

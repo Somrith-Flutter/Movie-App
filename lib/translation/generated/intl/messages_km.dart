@@ -42,9 +42,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "dark": MessageLookupByLibrary.simpleMessage("ងងឹត"),
         "delivery":
             MessageLookupByLibrary.simpleMessage("សំរាប់​ការ​ដឹកជញ្ជូន"),
+        "developer_mode": MessageLookupByLibrary.simpleMessage(
+            "មុខងារ​អ្នកអភិវឌ្ឍន៍កម្មវិធី"),
         "dis_legend_membership": MessageLookupByLibrary.simpleMessage(
             "ទទួលបានអត្ថប្រយោជន៍ជាច្រើនពីកាតសមាជិករបស់យើង។ ទទួលយកអីឡូវនេះ នៅទីតាំងក្បែរលោកអ្នក"),
-        "email": MessageLookupByLibrary.simpleMessage("អីម៉ែល"),
+        "email": MessageLookupByLibrary.simpleMessage("អុីម៉ែល"),
         "english": MessageLookupByLibrary.simpleMessage("អង់គ្លេស"),
         "favorite": MessageLookupByLibrary.simpleMessage("ចូលចិត្ត"),
         "fb": MessageLookupByLibrary.simpleMessage("អាហារសម្រន់"),
@@ -53,7 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "help": MessageLookupByLibrary.simpleMessage("ជំនួយ"),
         "home": MessageLookupByLibrary.simpleMessage("ទំព័រដើម"),
         "khmer": MessageLookupByLibrary.simpleMessage("ខ្មែរ"),
-        "language": MessageLookupByLibrary.simpleMessage("ភាសារ"),
+        "language": MessageLookupByLibrary.simpleMessage("ភាសា"),
         "learn_more": MessageLookupByLibrary.simpleMessage("ស្វែងយល់បន្ថែម"),
         "lengend_membership":
             MessageLookupByLibrary.simpleMessage("សមាជិកភាព លេជេន"),

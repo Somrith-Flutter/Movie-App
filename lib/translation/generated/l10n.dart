@@ -120,16 +120,6 @@ class S {
     );
   }
 
-  /// `smart_phone`
-  String get phone {
-    return Intl.message(
-      'Phone',
-      name: 'phone',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Light`
   String get light {
     return Intl.message(
@@ -645,6 +635,16 @@ class S {
     return Intl.message(
       'Account',
       name: 'account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Developer Mode`
+  String get developer_mode {
+    return Intl.message(
+      'Developer Mode',
+      name: 'developer_mode',
       desc: '',
       args: [],
     );

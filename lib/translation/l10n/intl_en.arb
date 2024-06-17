@@ -57,5 +57,6 @@
     "choose_cinema": "Choose Cinema",
     "allow": "Allow",
     "continues": "Continue",
-    "account": "Account"
+    "account": "Account",
+    "developer_mode": "Developer Mode"
 }

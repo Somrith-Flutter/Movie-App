@@ -6,6 +6,7 @@ import 'package:legend_cinema/config/themes/app_color.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/modules/landings/more/controller/more_controller.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/more_list_tile_items.dart';
+import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/list_tile_item.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
@@ -45,7 +46,7 @@ class _DeveloperModeState extends State<DeveloperMode> {
     return Scaffold(
       appBar: AppBar(
         leading: const BackWidget(),
-        title: const TextWidget('Developer Mode', size: 22, bold: true),
+        title: TextWidget(S.of(context).developer_mode, size: 22, bold: true),
         centerTitle: true,
         flexibleSpace: AppConstant.appbarTheme,
       ),
@@ -65,9 +66,9 @@ class _DeveloperModeState extends State<DeveloperMode> {
             borderRadius: const BorderRadius.all(Radius.circular(10)),
           ),
           child: SwitchListTile.adaptive(
-            title: const Row(
+            title: Row(
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 20,
                   height: 20,
                   child: Icon(
@@ -76,8 +77,8 @@ class _DeveloperModeState extends State<DeveloperMode> {
                     color: AppColor.chart2,
                   ),
                 ),
-                Gap(8),
-                TextWidget('Developer Options'),
+                const Gap(8),
+                TextWidget(S.of(context).developer_mode),
               ],
             ),
             value: isOpen,

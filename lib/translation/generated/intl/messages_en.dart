@@ -40,6 +40,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "continues": MessageLookupByLibrary.simpleMessage("Continue"),
         "dark": MessageLookupByLibrary.simpleMessage("Dark"),
         "delivery": MessageLookupByLibrary.simpleMessage("Delivery"),
+        "developer_mode":
+            MessageLookupByLibrary.simpleMessage("Developer Mode"),
         "dis_legend_membership": MessageLookupByLibrary.simpleMessage(
             "Getting many benifit from our membership card.Take one now at your nearby Legend Cinema!"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),

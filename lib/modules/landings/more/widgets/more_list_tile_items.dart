@@ -102,14 +102,14 @@ List<ListTileItem> items(BuildContext context, String title, String icon)  {
       isRoute: true
     ),
     if(controller.isDeveloperModeEnabled.value)...[
-      const ListTileItem(
-        title: 'Developer Option',
+      ListTileItem(
+        title: S.of(context).developer_mode,
         icon: Icons.developer_mode,
         isSpacig: true,
         trailing: true,
         isheader: true,
-        header: 'Deverloper Mode',
-        route: DeveloperMode(),
+        header: S.of(context).developer_mode,
+        route: const DeveloperMode(),
         isRoute: true,
       )
     ],
