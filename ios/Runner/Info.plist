@@ -41,6 +41,13 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	
+	<key>NSCameraUsageDescription</key>
+	<string>This app needs camera to upload profile picture and scan barcode.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app needs photos to upload profile picture or save the bill.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>This app needs photos to save your electricity bill.</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
