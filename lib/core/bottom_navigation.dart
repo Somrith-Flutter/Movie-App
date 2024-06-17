@@ -6,6 +6,9 @@ import 'package:legend_cinema/modules/landings/more/view/more_page.dart';
 import 'package:legend_cinema/modules/landings/offers/view/offers_page.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 
+// ignore: library_private_types_in_public_api
+final GlobalKey<_BottomNavigationState> bottomNavigationKey = GlobalKey();
+
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({super.key});
 
@@ -27,6 +30,13 @@ class _BottomNavigationState extends State<BottomNavigation> {
   void dispose() {
     _pageController.dispose();
     super.dispose();
+  }
+
+  void navigateToPage(int index) {
+    setState(() {
+      _currentPageIndex = index;
+      _pageController.jumpToPage(index);
+    });
   }
 
   final List<Widget> _pages = [

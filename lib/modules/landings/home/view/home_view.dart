@@ -5,12 +5,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
+import 'package:legend_cinema/core/bottom_navigation.dart';
 import 'package:legend_cinema/modules/auth/controller/auth_controller.dart';
 import 'package:legend_cinema/modules/landings/f_b/controller/f_b_controller.dart';
 import 'package:legend_cinema/modules/landings/home/controller/home_controller.dart';
 import 'package:legend_cinema/modules/landings/home/widgets/movie_item.dart';
+import 'package:legend_cinema/modules/landings/home/widgets/notification.dart';
+import 'package:legend_cinema/modules/landings/home/widgets/search_widget.dart';
 import 'package:legend_cinema/modules/landings/home/widgets/time_line_item.dart';
 import 'package:legend_cinema/modules/landings/offers/controller/offers_controller.dart';
 import 'package:legend_cinema/modules/landings/offers/view/offers_detail.dart';
@@ -81,11 +85,11 @@ class _HomeViewState extends State<HomeView> {
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
-            onPressed: () {},
+            onPressed: () => AppRoute().push(context, const SearchView()),
           ),
           IconButton(
             icon: const Icon(Icons.notifications),
-            onPressed: () {},
+            onPressed: () => AppRoute().push(context, const NotificationView()),
           ),
         ],
       ),
@@ -154,21 +158,25 @@ class _HomeViewState extends State<HomeView> {
                 controller.isNowShowing ? _buildNowShwing() : _buildComingSoon(),
               ],
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 12 , top: 24, right: 12),
+            Padding(
+              padding: const EdgeInsets.only(left: 12 , top: 24, right: 12),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  TextWidget(
+                  const TextWidget(
                     'Promotions',
                     bold: true,
                     size: 20,
                   ),
-                  TextWidget(
-                    'See all',
-                    bold: true,
-                    size: 14,
+                  GestureDetector(
+                    onTap: () =>  bottomNavigationKey.currentState?.navigateToPage(1),
+                    child: const TextWidget(
+                      'See all',
+                      bold: true,
+                      size: 14,
+                    ),
                   ),
+
                 ],
               ),
             ),
