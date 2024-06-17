@@ -32,7 +32,7 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   late PageController _pageController;
   final user = Get.find<AuthController>();
-  final HomeController controller = Get.find();
+  final HomeController controller = Get.find<HomeController>();
   final FBController filter = Get.find();
 
   @override
@@ -155,7 +155,7 @@ class _HomeViewState extends State<HomeView> {
               shrinkWrap: true,
               children: [
                 _buildTabView(),
-                controller.isNowShowing ? _buildNowShwing() : _buildComingSoon(),
+                controller.isNowShowing ? _buildNowShowing() : _buildComingSoon(),
               ],
             ),
             Padding(
@@ -508,7 +508,7 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  Widget _buildNowShwing(){
+  Widget _buildNowShowing(){
     return ListView(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,

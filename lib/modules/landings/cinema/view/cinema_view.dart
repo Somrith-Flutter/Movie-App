@@ -25,7 +25,7 @@ class CinemaView extends StatelessWidget {
       "main_image": AssetPath.eden,
       "detail_image": AssetPath.edenDetail,
       "title": "Legend Eden Garden",
-      "subtitle": "City Center Boulevard, sangkat Sraschork, PhnomPenh City",
+      "subtitle": "City Center Boulevard, sangkat Srah chak, Khan Daun Penh,",
     },
     {
       "main_image": AssetPath.kMall,
