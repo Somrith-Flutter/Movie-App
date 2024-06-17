@@ -1,9 +1,6 @@
-import 'dart:convert';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
@@ -11,7 +8,7 @@ import 'package:legend_cinema/core/enum/base_status_enum.dart';
 import 'package:legend_cinema/modules/landings/f_b/controller/f_b_controller.dart';
 import 'package:legend_cinema/modules/landings/home/controller/home_controller.dart';
 import 'package:legend_cinema/modules/landings/home/model/home_model.dart';
-import 'package:legend_cinema/widgets/back_widget.dart';
+import 'package:legend_cinema/utils/helpers/helper_fn.dart';
 import 'package:legend_cinema/widgets/no_data_found.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
@@ -68,39 +65,44 @@ class _CinemaMovieDetailState extends State<CinemaMovieDetail> {
                     height: 250,
                     width: double.infinity,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 50, horizontal: 16),
-                    child: Positioned(
-                        child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          onTap: () async {
-                            _movie.fetchMoiveController(
-                                location: widget.location);
-                            Get.back();
-                          },
-                          child: Container(
-                              margin: const EdgeInsets.all(7),
-                              width: 40,
-                              height: 40,
+                  Positioned(
+                      top: 50.0,
+                      left: 16.0,
+                      right: 16.0,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          GestureDetector(
+                            onTap: () async {
+                              _movie.fetchMoiveController(
+                                  location: widget.location);
+                              Get.back();
+                            },
+                            child: Container(
+                                margin: const EdgeInsets.all(7),
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.white.withOpacity(0.5),
+                                        width: 1),
+                                    shape: BoxShape.circle),
+                                child: const Icon(Icons.arrow_back)),
+                          ),
+                          Container(
+                              padding: const EdgeInsets.all(5),
                               decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Colors.white.withOpacity(0.5),
-                                      width: 1),
-                                  shape: BoxShape.circle),
-                              child: const Icon(Icons.arrow_back)),
-                        ),
-                        Container(
-                            padding: const EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.grey.withOpacity(0.5)),
-                            child: const Icon(Icons.ios_share_outlined))
-                      ],
-                    )),
-                  )
+                                  shape: BoxShape.circle,
+                                  color: Colors.grey.withOpacity(0.5)),
+                              child: GestureDetector(
+                                  onTap: () async {
+                                    await shareNetworkImage(
+                                        "${AppConstant.domainKey}/${newMoive?.imageUrl}");
+                                    setState(() {});
+                                  },
+                                  child: const Icon(Icons.ios_share_outlined))),
+                        ],
+                      )),
                 ],
               ),
               const SizedBox(
@@ -166,39 +168,44 @@ class _CinemaMovieDetailState extends State<CinemaMovieDetail> {
                       height: 250,
                       width: double.infinity,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 50, horizontal: 16),
-                      child: Positioned(
-                          child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          GestureDetector(
-                            onTap: () async {
-                              _movie.fetchMoiveController(
-                                  location: widget.location);
-                              Get.back();
-                            },
-                            child: Container(
-                                margin: const EdgeInsets.all(7),
-                                width: 40,
-                                height: 40,
+                    Positioned(
+                        top: 50.0,
+                        left: 16.0,
+                        right: 16.0,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            GestureDetector(
+                              onTap: () async {
+                                _movie.fetchMoiveController(
+                                    location: widget.location);
+                                Get.back();
+                              },
+                              child: Container(
+                                  margin: const EdgeInsets.all(7),
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.white.withOpacity(0.5),
+                                          width: 1),
+                                      shape: BoxShape.circle),
+                                  child: const Icon(Icons.arrow_back)),
+                            ),
+                            Container(
+                                padding: const EdgeInsets.all(5),
                                 decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.white.withOpacity(0.5),
-                                        width: 1),
-                                    shape: BoxShape.circle),
-                                child: const Icon(Icons.arrow_back)),
-                          ),
-                          Container(
-                              padding: const EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.grey.withOpacity(0.5)),
-                              child: const Icon(Icons.ios_share_outlined))
-                        ],
-                      )),
-                    )
+                                    shape: BoxShape.circle,
+                                    color: Colors.grey.withOpacity(0.5)),
+                                child: GestureDetector(
+                                    onTap: () async {
+                                      await shareNetworkImage(
+                                          "${AppConstant.domainKey}/${v.imageUrl}");
+                                    },
+                                    child:
+                                        const Icon(Icons.ios_share_outlined)))
+                          ],
+                        ))
                   ],
                 ),
                 const SizedBox(

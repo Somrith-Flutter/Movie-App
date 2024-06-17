@@ -40,87 +40,88 @@ class _CinemaDetailState extends State<CinemaDetail> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 100), (){
-      _movie.fetchMoiveController(location: widget.title.toString().toLowerCase());
+    Future.delayed(const Duration(milliseconds: 100), () {
+      _movie.fetchMoiveController(
+          location: widget.title.toString().toLowerCase());
     });
     selectedDay = dateInfo.dates.first;
   }
 
+  var appBarMenu = ["New Showing", "Detail"];
+
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomeController>(
-      builder: (logic) {
-        return Scaffold(
-          backgroundColor: Colors.black,
-          appBar: AppBar(
-            leading: const BackWidget(),
-            title: TextWidget(
-              widget.title,
-              size: 20.0,
-              bold: true,
-              overflow: TextOverflow.ellipsis,
-            ),
-            flexibleSpace: Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: AppColor.appbarColor,
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
+    return DefaultTabController(
+      length: 2, // Replace with your actual tab count
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        body: GetBuilder<HomeController>(builder: (logic) {
+          return NestedScrollView(
+            headerSliverBuilder: (context, innerBoxIsScrolled) {
+              return <Widget>[
+                SliverAppBar(
+                  leading: const BackWidget(),
+                  title: TextWidget(
+                    widget.title,
+                    size: 20.0,
+                    bold: true,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  flexibleSpace: Container(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: AppColor.appbarColor,
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ),
-          body: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Column(
+                SliverToBoxAdapter(
+                  child: Image.asset(widget.detailImage,
+                      height: 250, fit: BoxFit.cover),
+                ),
+                SliverToBoxAdapter(
+                  child: TabBar(
+                    tabs: appBarMenu.map((es) => Tab(text: es)).toList(),
+                    unselectedLabelColor: Colors.grey,
+                    labelColor: Colors.white,
+                    indicatorColor: Colors.white,
+                    labelStyle: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold),
+                    //For Selected tab
+                    unselectedLabelStyle: const TextStyle(fontSize: 15),
+                  ),
+                ),
+              ];
+            },
+            body: TabBarView(
+              physics: const NeverScrollableScrollPhysics(),
               children: [
-                Image.asset(widget.detailImage, height: 200, fit: BoxFit.cover),
-                _buildTapSelected(),
-                isTextTapSelected ? _buildNowShowing() : _buildDetail(),
-                _buildMoiveShow()
+                SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      _buildNowShowing(
+                          located: widget.title.toString().toLowerCase()),
+                      _buildMoiveShow()
+                    ],
+                  ),
+                ),
+                SingleChildScrollView(
+                  child: Column(
+                    children: [_buildDetail()],
+                  ),
+                )
               ],
             ),
-          ),
-        );
-      }
-    );
-  }
-
-  Widget _buildTapSelected() {
-    return Container(
-      width: double.infinity,
-      height: 50,
-      color: Colors.black,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          GestureDetector(
-            onTap: () {
-              _onTabTap(true);
-            },
-            child: TextWidget(
-              "Now Showing",
-              bold: true,
-              color: isTextTapSelected ? Colors.white : Colors.grey,
-            ),
-          ),
-          const TextWidget("|", size: 30),
-          GestureDetector(
-            onTap: () {
-              _onTabTap(false);
-            },
-            child: TextWidget(
-              "Detail",
-              bold: true,
-              color: isTextTapSelected ? Colors.grey : Colors.white,
-            ),
-          ),
-        ],
+          );
+        }),
       ),
     );
   }
 
-  Widget _buildNowShowing() {
+
+  Widget _buildNowShowing({required String located}) {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -134,9 +135,10 @@ class _CinemaDetailState extends State<CinemaDetail> {
               return Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: GestureDetector(
-                  onTap: () {
-                    setState(() {
+                  onTap: () async {
+                    setState(() async {
                       selectedDay = date;
+                      await _movie.fetchMoiveController(location: located);
                     });
                   },
                   child: Stack(
@@ -195,13 +197,16 @@ class _CinemaDetailState extends State<CinemaDetail> {
   }
 
   Widget _buildMoiveShow() {
-    if(_movie.response == BaseStatusEnum.inprogress){
-      return const Center(
-        child: CupertinoActivityIndicator(),
+    if (_movie.response == BaseStatusEnum.inprogress) {
+      return const Padding(
+        padding: EdgeInsets.only(top: 100.0),
+        child: Center(
+          child: CupertinoActivityIndicator(),
+        ),
       );
     }
 
-    if(_movie.response == BaseStatusEnum.failure){
+    if (_movie.response == BaseStatusEnum.failure) {
       return const Center(
         child: NoDataFound(),
       );
@@ -218,12 +223,12 @@ class _CinemaDetailState extends State<CinemaDetail> {
           childAspectRatio: 0.5,
         ),
         itemCount: _movie.moive.length,
-        itemBuilder: (BuildContext context, int index) {debugPrint("${_movie.moive.length}");
+        itemBuilder: (BuildContext context, int index) {
+          debugPrint("${_movie.moive.length}");
           final data = _movie.moive[index];
           return GestureDetector(
             onTap: () {
-              AppRoute.route.push(
-                  context,
+              AppRoute.route.push(context,
                   CinemaMovieDetail(data: [data], location: data.location));
             },
             child: Container(
@@ -235,16 +240,16 @@ class _CinemaDetailState extends State<CinemaDetail> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: CachedNetworkImage(
-                      imageUrl: "${AppConstant.domainKey}/${data.imageUrl.toString()}",
-                      fit: BoxFit.cover,
-                      height: 300,
-                      errorWidget: (context, url, error) => const Center(
-                        child: CupertinoActivityIndicator(),
-                      ),
-                    )
-                  ),
+                      borderRadius: BorderRadius.circular(8),
+                      child: CachedNetworkImage(
+                        imageUrl:
+                            "${AppConstant.domainKey}/${data.imageUrl.toString()}",
+                        fit: BoxFit.cover,
+                        height: 300,
+                        errorWidget: (context, url, error) => const Center(
+                          child: CupertinoActivityIndicator(),
+                        ),
+                      )),
                   const SizedBox(height: 10),
                   Row(
                     children: [
