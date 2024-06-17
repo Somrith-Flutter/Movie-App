@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/modules/auth/controller/auth_controller.dart';
 import 'package:legend_cinema/modules/landings/cinema/widgets/cinema_detail.dart';
+import 'package:legend_cinema/modules/landings/home/widgets/time_line_item.dart';
 import 'package:legend_cinema/shared/v_globle.dart';
 import 'package:legend_cinema/widgets/dot_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
@@ -41,33 +42,6 @@ class _HomeViewState extends State<HomeView> {
   bool isTextTapSelected = true;
   String selectedDay = '';
 
-  final List<Map<String, String>> movies = [
-    {
-      "title": "Movies 1",
-      "date": "14 june, 2024",
-      "poster": "https://upload.wikimedia.org/wikipedia/en/b/be/Godzilla_x_kong_the_new_empire_poster.jpg" // Replace with the actual URL or local path
-    },
-    {
-      "title": "Movies 2",
-      "date": "14 june, 2024",
-      "poster": "https://www.ripefruitmedia.com.au/images_rfm/1223-130236796.jpg" // Replace with the actual URL or local path
-    },
-    {
-      "title": "Movies 2",
-      "date": "14 june, 2024",
-      "poster": "https://www.ripefruitmedia.com.au/images_rfm/1223-130236796.jpg" // Replace with the actual URL or local path
-    },
-    {
-      "title": "Movies 2",
-      "date": "14 june, 2024",
-      "poster": "https://www.ripefruitmedia.com.au/images_rfm/1223-130236796.jpg" // Replace with the actual URL or local path
-    },
-    {
-      "title": "Movies 2",
-      "date": "14 june, 2024",
-      "poster": "https://www.ripefruitmedia.com.au/images_rfm/1223-130236796.jpg" // Replace with the actual URL or local path
-    },
-  ];
   final dateInfo = DateInfo();
 
   @override
@@ -178,9 +152,17 @@ class _HomeViewState extends State<HomeView> {
               ],
             ),
             const Gap(12),
-            _buildTabView(),
-            _buildTimeLine(),
-            _buildTimeLineItems(),
+            ListView(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              children: [
+                _buildTabView(),
+                isNowShowing ? _buildNowShwing() : _buildComingSoon(),
+              ],
+            ),
+            // _buildTabView(),
+            // _buildTimeLine(),
+            //_buildTimeLineItems(),
           ],
         ),
       ],
@@ -386,72 +368,86 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  Widget _buildTimeLineItems() {
-      return Padding(
+  Widget _buildMonthUpComing(){
+    return Align(
+      alignment: Alignment.topLeft,
+      child: Padding(
         padding: const EdgeInsets.only(left: 12),
-        child: GridView.builder(
-          padding: EdgeInsets.zero,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 15,
-            crossAxisSpacing: 15,
-            childAspectRatio: 2 / 3,
-          ),
-          itemCount: movies.length,
-          itemBuilder: (context, index) {
-            return Column(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.network(
-                    movies[index]['poster']!,
-                    width: 200,
-                    height: 250,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                const Gap(10),
-                Row(
-                  children: [
-                    TextWidget(
-                      movies[index]['date']!,
-                      size: 12,
-                    ),
-                    const Gap(5),
-                    Stack(
-                      children: [
-                        Container(
-                          height: 20,
-                          width: 50,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Colors.white
-                          ),
+        child: SizedBox(
+          height: 100,
+          width: 300,
+          child: Column(
+            children: [
+              Row(
+                children: List.generate(dateInfo.dates.length, (index) {
+                  final date = dateInfo.dates[index];
+                  final month = dateInfo.months[index];
+                  return Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedDay = date;
+                        });
+                      },
+                      child: Container(
+                        height: 40,
+                        width: 70,
+                        margin: const EdgeInsets.all(4),
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        decoration: BoxDecoration(
+                          border: selectedDay == date
+                              ? Border.all(color: Colors.red, width: 2)
+                              : Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(8),
                         ),
-                        const Positioned(
-                          top: 1,
-                          left: 10,
-                          child: TextWidget('TBC', size: 12, bold: true, color: Colors.black,),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: TextWidget(
-                    movies[index]['title']!,
-                    bold: true,
-                    size: 14,
-                  ),
-                ),
-            
-              ],
-            );
-          },
+                        child: Center(child: TextWidget(month, size: 12,)),
+                      ),
+                    ),
+                  );
+                }),
+              ),
+            ],
+          ),
         ),
-      );
-    }
+      ),
+    );
+  }
+
+  Widget _buildNowShwing(){
+    return ListView(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      children: [
+        _buildTimeLine(),
+        selectedDay == dateInfo.dates.first ? BuildTimeLineItems(movies: test): const Text('hi'),
+      ],
+    );
+  }
+
+  Widget _buildComingSoon(){
+    return ListView(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      children: [
+        _buildMonthUpComing(),
+        selectedDay == dateInfo.dates.first ? BuildTimeLineItems(movies: movie,) : const Text('Hello'),
+      ],
+    );
+  }
 }
+
+final List<Map<String, String>> test = [
+  {
+    "title": "Movies 2",
+    "date": "14 june, 2024",
+    "poster": "https://www.ripefruitmedia.com.au/images_rfm/1223-130236796.jpg"
+  },
+];
+
+final List<Map<String, String>> movie = [
+  {
+    "title": "Movies 1",
+    "date": "14 june, 2024",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/b/be/Godzilla_x_kong_the_new_empire_poster.jpg" 
+  },
+];
