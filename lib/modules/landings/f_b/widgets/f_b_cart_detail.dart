@@ -7,6 +7,7 @@ import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/core/model/fb_from_service_model.dart';
 import 'package:legend_cinema/modules/landings/f_b/controller/f_b_controller.dart';
 import 'package:legend_cinema/modules/landings/f_b/widgets/f_b_payment.dart';
+import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/animated_flipcounter_box.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
@@ -75,7 +76,7 @@ class _FBCartDetailState extends State<FBCartDetail> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const TextWidget("Order Summary",
+                              TextWidget(S.of(context).order_summary,
                                   size: 17.0, bold: true),
                               const Gap(15.0),
                               Container(
@@ -286,9 +287,9 @@ class _FBCartDetailState extends State<FBCartDetail> {
                                                   borderRadius:
                                                       BorderRadius.circular(5),
                                                   color: Colors.red),
-                                              child: const Center(
+                                              child: Center(
                                                   child: TextWidget(
-                                                "Total: ",
+                                                S.of(context).total,
                                                 size: 16.0,
                                                 bold: true,
                                               ))),
@@ -341,9 +342,9 @@ class _FBCartDetailState extends State<FBCartDetail> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(50),
                             color: Colors.red),
-                        child: const Center(
+                        child: Center(
                             child: TextWidget(
-                          "Check Out",
+                          S.of(context).checkout,
                           size: 16.0,
                         )),
                       ),

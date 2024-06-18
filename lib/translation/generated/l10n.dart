@@ -809,6 +809,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Order Summary`
+  String get order_summary {
+    return Intl.message(
+      'Order Summary',
+      name: 'order_summary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total :`
+  String get total {
+    return Intl.message(
+      'Total :',
+      name: 'total',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check Out`
+  String get checkout {
+    return Intl.message(
+      'Check Out',
+      name: 'checkout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gust Information`
+  String get gust_info {
+    return Intl.message(
+      'Gust Information',
+      name: 'gust_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Payment Method`
+  String get payment_method {
+    return Intl.message(
+      'Payment Method',
+      name: 'payment_method',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

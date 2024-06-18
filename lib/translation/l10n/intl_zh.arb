@@ -42,5 +42,12 @@
     "upcoming": "即将推出",
     "history": "历史",
     "explore_more": "探索更多",
-    "summary": "概括"
+    "summary": "概括",
+    "logout": "登出",
+    "order_summary": "订单摘要",
+    "total": "全部的 :",
+    "checkout": "查看",
+    "gust_info": "阵风信息",
+    "payment_method": "付款方式",
+    "email": "电子邮件"
 }

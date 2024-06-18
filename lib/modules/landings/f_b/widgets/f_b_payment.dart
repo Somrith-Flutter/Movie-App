@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:legend_cinema/modules/landings/f_b/controller/f_b_controller.dart';
+import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
@@ -64,7 +65,7 @@ class _FBPaymentState extends State<FBPayment> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const TextWidget("Checkout", size: 20, bold: true),
+                        TextWidget(S.of(context).checkout, size: 20, bold: true),
                         const SizedBox(height: 16),
                         Container(
                           width: double.infinity,
@@ -80,13 +81,13 @@ class _FBPaymentState extends State<FBPayment> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                const TextWidget("Guest Information",
+                                TextWidget(S.of(context).gust_info,
                                     size: 20, bold: true),
                                 TextField(
                                   decoration: InputDecoration(
                                     prefixIcon: Icon(Icons.email,
                                         color: Colors.white.withOpacity(0.8)),
-                                    labelText: "Email",
+                                    labelText: S.of(context).email,
                                     labelStyle:
                                         TextStyle(color: Colors.white.withOpacity(0.8)),
                                     enabledBorder: OutlineInputBorder(
@@ -123,9 +124,9 @@ class _FBPaymentState extends State<FBPayment> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
-                                  "Payment Method",
-                                  style: TextStyle(
+                                Text(
+                                  S.of(context).payment_method,
+                                  style: const TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
                                   ),

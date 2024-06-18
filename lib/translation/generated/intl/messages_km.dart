@@ -37,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ប្តូរលេខសម្ងាត់"),
         "change_profile_photo":
             MessageLookupByLibrary.simpleMessage("ប្តូររូបភាពតំណាង"),
+        "checkout": MessageLookupByLibrary.simpleMessage("ពិនិត្រមុនចាក់ចេញ"),
         "chinese": MessageLookupByLibrary.simpleMessage("ចិន"),
         "choose_cinema": MessageLookupByLibrary.simpleMessage("ជ្រើសរើសរោងកុន"),
         "cinema": MessageLookupByLibrary.simpleMessage("ទីតាំង"),
@@ -60,6 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "favorite": MessageLookupByLibrary.simpleMessage("ចូលចិត្ត"),
         "fb": MessageLookupByLibrary.simpleMessage("អាហារសម្រន់"),
         "general": MessageLookupByLibrary.simpleMessage("ទូទៅ"),
+        "gust_info": MessageLookupByLibrary.simpleMessage("ព័ឥមានភ្ញៀវ"),
         "hello": MessageLookupByLibrary.simpleMessage("សួរស្តី"),
         "help": MessageLookupByLibrary.simpleMessage("ជំនួយ"),
         "history": MessageLookupByLibrary.simpleMessage("ប្រវត្តការទិញ"),
@@ -84,7 +86,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "offer": MessageLookupByLibrary.simpleMessage("ការផ្តល់ជូន"),
         "old": MessageLookupByLibrary.simpleMessage("ចាស់"),
         "order": MessageLookupByLibrary.simpleMessage("បញ្ជាទិញ"),
+        "order_summary":
+            MessageLookupByLibrary.simpleMessage("សេចក្តីសង្ខេបនៃការបញ្ជាទិញ"),
         "password": MessageLookupByLibrary.simpleMessage("លេខសម្ងាត់"),
+        "payment_method":
+            MessageLookupByLibrary.simpleMessage("វិធីសាស្រ្តទូទាត់"),
         "personal_info":
             MessageLookupByLibrary.simpleMessage("ព័ឥមានផ្ទាល់ខ្លួន"),
         "phone_number": MessageLookupByLibrary.simpleMessage("លេខទំនាក់ទំនង"),
@@ -108,6 +114,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "term_condition": MessageLookupByLibrary.simpleMessage("លក្ខខណ្ឌ"),
         "theme": MessageLookupByLibrary.simpleMessage("ទម្រង់កម្មវិធី"),
         "today": MessageLookupByLibrary.simpleMessage("ថ្ងៃនេះ"),
+        "total": MessageLookupByLibrary.simpleMessage("សរុប :"),
         "upcoming": MessageLookupByLibrary.simpleMessage("នាពេលខាងមុខ"),
         "username": MessageLookupByLibrary.simpleMessage("ឈ្មោះរបស់អ្នក"),
         "version": MessageLookupByLibrary.simpleMessage("ជំនាន់"),

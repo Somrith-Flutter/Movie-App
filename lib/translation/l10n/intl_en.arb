@@ -74,5 +74,10 @@
     "upcoming": "Upcoming",
     "history": "History",
     "explore_more": "Explore More",
-    "summary": "Summary"
+    "summary": "Summary",
+    "order_summary": "Order Summary",
+    "total": "Total :",
+    "checkout": "Check Out",
+    "gust_info": "Gust Information",
+    "payment_method": "Payment Method"
 }

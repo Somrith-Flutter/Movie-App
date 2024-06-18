@@ -137,7 +137,7 @@ List<ContactItem> items(BuildContext context)  {
       isAssetIcon: true,
       route: const Text(''),
       iconAsset: AssetPath.callicon,
-      header: 'Contact Info',
+      header: S.of(context).contact_info,
       isheader: true,
       isSpacig: true
     ),
@@ -161,7 +161,7 @@ List<ContactItem> items(BuildContext context)  {
       isAssetIcon: true,
       route: const Text(''),
       iconAsset: AssetPath.callicon,
-      header: 'Advertising & Partnership',
+      header: S.of(context).advertising_partnership,
       isheader: true,
       isSpacig: true
     ),

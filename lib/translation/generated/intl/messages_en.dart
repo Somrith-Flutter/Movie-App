@@ -37,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Change Password"),
         "change_profile_photo":
             MessageLookupByLibrary.simpleMessage("Change Profile Photo"),
+        "checkout": MessageLookupByLibrary.simpleMessage("Check Out"),
         "chinese": MessageLookupByLibrary.simpleMessage("Chinese"),
         "choose_cinema": MessageLookupByLibrary.simpleMessage("Choose Cinema"),
         "cinema": MessageLookupByLibrary.simpleMessage("Cinema"),
@@ -57,6 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "favorite": MessageLookupByLibrary.simpleMessage("Favorite"),
         "fb": MessageLookupByLibrary.simpleMessage("F&B"),
         "general": MessageLookupByLibrary.simpleMessage("General"),
+        "gust_info": MessageLookupByLibrary.simpleMessage("Gust Information"),
         "hello": MessageLookupByLibrary.simpleMessage("Hello"),
         "help": MessageLookupByLibrary.simpleMessage("Help"),
         "history": MessageLookupByLibrary.simpleMessage("History"),
@@ -81,7 +83,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "offer": MessageLookupByLibrary.simpleMessage("Offers"),
         "old": MessageLookupByLibrary.simpleMessage("Old"),
         "order": MessageLookupByLibrary.simpleMessage("Order"),
+        "order_summary": MessageLookupByLibrary.simpleMessage("Order Summary"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "payment_method":
+            MessageLookupByLibrary.simpleMessage("Payment Method"),
         "personal_info":
             MessageLookupByLibrary.simpleMessage("Personal Information"),
         "phone_number": MessageLookupByLibrary.simpleMessage("Phone Number"),
@@ -106,6 +111,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Term & Conditions"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "today": MessageLookupByLibrary.simpleMessage("Today"),
+        "total": MessageLookupByLibrary.simpleMessage("Total :"),
         "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
         "username": MessageLookupByLibrary.simpleMessage("Username"),
         "version": MessageLookupByLibrary.simpleMessage("Version"),
