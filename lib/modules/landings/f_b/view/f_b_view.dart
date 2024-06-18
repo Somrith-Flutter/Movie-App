@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:legend_cinema/config/themes/app_color.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
@@ -71,6 +72,7 @@ class _FBViewState extends State<FBView> {
                     children: [
                       _buildBody(context),
                       _buildListMovieLocation(),
+                      const Gap(100)
                     ],
                   ),
                 ))
