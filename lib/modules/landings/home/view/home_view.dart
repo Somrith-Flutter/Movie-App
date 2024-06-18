@@ -30,11 +30,13 @@ class HomeView extends StatefulWidget {
   State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin {
   late PageController _pageController;
   final user = Get.find<AuthController>();
   final HomeController controller = Get.find<HomeController>();
   final FBController filter = Get.find();
+  late AnimationController _controller;
+  late Animation<double> _animation;
 
   @override
   void initState() {
@@ -47,6 +49,14 @@ class _HomeViewState extends State<HomeView> {
     controller.selectedDay = controller.dateInfo.dates.first;
     controller.selectedMonth = controller.dateInfo.dates.first;
     
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1), 
+    );
+
+    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
+    _controller.forward();
+
     _pageController = PageController(viewportFraction: 0.90);
     controller.timer = Timer.periodic(const Duration(seconds: 3), (Timer timer) {
       if (_pageController.hasClients) {
@@ -66,6 +76,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   void dispose() {
     controller.timer.cancel();
+    _controller.dispose(); 
     _pageController.dispose();
     super.dispose();
   }
@@ -78,10 +89,22 @@ class _HomeViewState extends State<HomeView> {
         automaticallyImplyLeading: false,
         backgroundColor: const Color.fromARGB(255, 26, 25, 25).withOpacity(0.9),
         centerTitle: true,
-        title: const TextWidget(
-          AppConstant.appName, 
-          size: 22, 
-          bold: true,
+        title: SizedBox(
+          height: 120,
+          child: AnimatedBuilder(
+             animation: _animation,
+            builder: (context, child) => 
+              Transform.scale(
+              scale: _animation.value,
+              child: Opacity(
+                opacity:  _animation.value,
+                child: Image.asset(
+                  AssetPath.appLogo,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          )
         ),
         flexibleSpace: AppConstant.appbarTheme,
         actions: [
