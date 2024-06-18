@@ -13,7 +13,8 @@ class FBRepository extends RestApiService {
     final String response = await getAssetData(ApiPath.locationlist);
 
     if (response.isNotEmpty) {
-      var json = jsonDecode(response);
+      Map<String, dynamic> json = jsonDecode(response);
+      debugPrint(json.toString());
       for (var l in json['location']) {
         fb.add(FANDBModel.fromJson(l));
       }

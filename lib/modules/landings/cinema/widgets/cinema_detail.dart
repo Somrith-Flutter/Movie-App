@@ -6,7 +6,9 @@ import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/config/themes/app_color.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/core/enum/base_status_enum.dart';
+import 'package:legend_cinema/core/model/fb_model.dart';
 import 'package:legend_cinema/modules/landings/cinema/widgets/cinema_movie_detail.dart';
+import 'package:legend_cinema/modules/landings/f_b/model/f_b_model.dart';
 import 'package:legend_cinema/modules/landings/home/controller/home_controller.dart';
 import 'package:legend_cinema/utils/helpers/helper_fn.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
@@ -15,21 +17,8 @@ import 'package:legend_cinema/widgets/text_widget.dart';
 import 'package:intl/intl.dart';
 
 class CinemaDetail extends StatefulWidget {
-  final String detailImage;
-  final String title;
-  final String mapImages;
-  final String address;
-  final String numberHall;
-  final String openingHour;
-
-  const CinemaDetail(
-      {super.key,
-      required this.detailImage,
-      required this.title,
-      required this.mapImages,
-      required this.address,
-      required this.numberHall,
-      required this.openingHour});
+  const CinemaDetail({super.key, required this.data});
+  final FANDBModel data;
 
   @override
   State<CinemaDetail> createState() => _CinemaDetailState();
@@ -46,7 +35,7 @@ class _CinemaDetailState extends State<CinemaDetail> {
     super.initState();
     Future.delayed(const Duration(milliseconds: 100), () {
       _movie.fetchMoiveController(
-          location: widget.title.toString().toLowerCase());
+          location: widget.data.locationType.toString().toLowerCase());
     });
     selectedDay = dateInfo.dates.first;
   }
@@ -60,13 +49,14 @@ class _CinemaDetailState extends State<CinemaDetail> {
       child: Scaffold(
         backgroundColor: Colors.black,
         body: GetBuilder<HomeController>(builder: (logic) {
+          final v = widget.data;
           return NestedScrollView(
             headerSliverBuilder: (context, innerBoxIsScrolled) {
               return <Widget>[
                 SliverAppBar(
                   leading: const BackWidget(),
                   title: TextWidget(
-                    widget.title,
+                    v.name,
                     size: 20.0,
                     bold: true,
                     overflow: TextOverflow.ellipsis,
@@ -82,7 +72,7 @@ class _CinemaDetailState extends State<CinemaDetail> {
                   ),
                 ),
                 SliverToBoxAdapter(
-                  child: Image.asset(widget.detailImage,
+                  child: Image.asset(v.image.toString(),
                       height: 250, fit: BoxFit.cover),
                 ),
                 SliverToBoxAdapter(
@@ -106,7 +96,7 @@ class _CinemaDetailState extends State<CinemaDetail> {
                   child: Column(
                     children: [
                       _buildNowShowing(
-                          located: widget.title.toString().toLowerCase()),
+                          located: v.locationType.toString().toLowerCase()),
                       _buildMovieShow()
                     ],
                   ),
@@ -115,7 +105,9 @@ class _CinemaDetailState extends State<CinemaDetail> {
                   physics: const BouncingScrollPhysics(),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [_buildDetail()],
+                    children: [
+                      _buildDetail(v)
+                    ],
                   ),
                 )
               ],
@@ -212,9 +204,7 @@ class _CinemaDetailState extends State<CinemaDetail> {
     }
 
     if (_movie.response == BaseStatusEnum.failure) {
-      return const Center(
-        child: NoDataFound(),
-      );
+      return const NoDataFound();
     }
 
     return GestureDetector(
@@ -231,7 +221,8 @@ class _CinemaDetailState extends State<CinemaDetail> {
         itemBuilder: (BuildContext context, int index) {
           final data = _movie.moive[index];
 
-          fetchImageWithRetry("${AppConstant.domainKey}/${data.imageUrl.toString()}");
+          fetchImageWithRetry(
+              "${AppConstant.domainKey}/${data.imageUrl.toString()}");
 
           return GestureDetector(
             onTap: () {
@@ -301,7 +292,7 @@ class _CinemaDetailState extends State<CinemaDetail> {
     );
   }
 
-  Widget _buildDetail() {
+  Widget _buildDetail(FANDBModel v) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(
@@ -319,7 +310,7 @@ class _CinemaDetailState extends State<CinemaDetail> {
                 height: 10,
               ),
               TextWidget(
-                widget.numberHall,
+                v.numberHall,
                 size: 20,
                 bold: true,
                 color: Colors.white,
@@ -341,7 +332,7 @@ class _CinemaDetailState extends State<CinemaDetail> {
                 height: 10,
               ),
               TextWidget(
-                widget.openingHour,
+                v.openingHour,
                 size: 20,
                 bold: true,
                 color: Colors.white,
@@ -354,23 +345,34 @@ class _CinemaDetailState extends State<CinemaDetail> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const TextWidget("Address",size: 18,color: Colors.grey,),
+              const TextWidget(
+                "Address",
+                size: 18,
+                color: Colors.grey,
+              ),
               const SizedBox(
                 height: 10,
               ),
-              TextWidget(widget.address,size: 20,bold: true,color: Colors.white,),
+              TextWidget(
+                v.address,
+                size: 20,
+                bold: true,
+                color: Colors.white,
+              ),
             ],
           ),
-          const SizedBox(height: 20,),
-          Container(
-            width: double.infinity,
-            height: 250,
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(10),
-              image: DecorationImage(image: AssetImage(widget.mapImages),fit: BoxFit.cover)
-            ),
-          )
+          const SizedBox(
+            height: 20,
+          ),
+          // Container(
+          //   width: double.infinity,
+          //   height: 250,
+          //   decoration: BoxDecoration(
+          //     color: Colors.blue,
+          //     borderRadius: BorderRadius.circular(10),
+          //     image: DecorationImage(image: AssetImage(v.mapImages),fit: BoxFit.cover)
+          //   ),
+          // )
         ],
       ),
     );

@@ -1,76 +1,112 @@
 {
-    "location":[
+    "location": [
         {
             "id": 1,
             "name": "Legend Eden Garden",
             "image": "assets/fbs/1.jpg",
-            "location_type": "legend eden garden"
+            "location_type": "legend eden garden",
+            "opening_hour": "09:30 - 22:30",
+            "number_hall": "8",
+            "address": "City Center Boulevard, sangkat Srah chak, Khan Daun Penh,"
         },
         {
             "id": 2,
             "name": "Legend Toul Kork",
             "image": "assets/fbs/2.jpg",
-            "location_type": "legend toul kork"
+            "location_type": "legend toul kork",
+            "opening_hour": "09:30 - 22:30",
+            "number_hall": "3",
+            "address": "TK Avenue Mall, Street 315, Snagkat Beongkok 1, Khan Toul Kork"
         },
         {
             "id": 3,
             "name": "Legend Premium Exchange Square",
             "image": "assets/fbs/3.jpg",
-            "location_type": "legend premium exchange square"
+            "location_type": "legend premium exchange square",
+            "opening_hour": "09:30 - 22:30",
+            "number_hall": "4",
+            "address": "Street 106, Corner of Street 61, Sangkat Wat Phnom"
         },
         {
             "id": 4,
             "name": "Legend Olympia",
             "image": "assets/fbs/4.jpg",
-            "location_type": "legend olympia"
+            "location_type": "legend olympia",
+            "opening_hour": "09:30 - 22:30",
+            "number_hall": "7",
+            "address": "6th Floor, The Olympia Mall, Monireth Blvd(217), Sangkat Veal Vong Khan 7 Makara"
         },
         {
             "id": 5,
             "name": "Legend SenSok",
             "image": "assets/fbs/5.jpg",
-            "location_type":"legend senSok"
+            "location_type": "legend senSok",
+            "opening_hour": "09:30 - 22:30",
+            "number_hall": "5",
+            "address": "4th Floor, Chip Mong SenSok Mall, Oknha Mong Reththey street, Khan Sen Sok"
         },
         {
             "id": 6,
             "name": "Legend Noro Mall",
             "image": "assets/fbs/6.jpg",
-            "location_type":"legend noro mall"
+            "location_type": "legend noro mall",
+            "opening_hour": "09:30 - 22:30",
+            "number_hall": "3",
+            "address": "5th Floor, Chip Mong Nora Mall, Preah Norodom Blvd (41)"
         },
         {
             "id": 7,
             "name": "Legend Midtown Mall",
             "image": "assets/fbs/7.jpg",
-            "location_type":"legend midtown mall"
+            "location_type": "legend midtown mall",
+            "opening_hour": "09:30 - 22:30",
+            "number_hall": "4",
+            "address": "1st Floor Midtown Mall, St.2004 Corner 13B"
         },
         {
             "id": 8,
             "name": "Legend Meanchey",
             "image": "assets/fbs/8.jpg",
-            "location_type":"legend meanchey"
+            "location_type": "legend meanchey",
+            "opening_hour": "09:30 - 22:30",
+            "number_hall": "5",
+            "address": "3rd Floor of New Steung Meanchey market,Veng Sreng Blvd, Sangkat Steung Mean Chey, Khan Mean Chey"
         },
         {
             "id": 9,
             "name": "Legend Cinema 271 Mega Mall",
             "image": "assets/fbs/9.jpg",
-            "location_type":"legend cinema 271 mega mall"
+            "location_type": "legend cinema 271 mega mall",
+            "opening_hour": "09:30 - 22:30",
+            "number_hall": "7",
+            "address": "3rd Floor, Chip Mong Mega Mall,St271, Phum Prek Ta Nu, Sangkat Chak Angrea Lue, Khan Mean Chey"
         },
         {
             "id": 10,
             "name": "Legend K Mall",
             "image": "assets/fbs/10.jpg",
-            "location_type":"legend k mall"
+            "location_type": "legend k mall",
+            "opening_hour": "09:30 - 22:30",
+            "number_hall": "5",
+            "address": "2nd Floor, K Mall, Veng Sreng Blvd"
         },
         {
             "id": 11,
             "name": "Legend Cinema Sihanoukville",
             "image": "assets/fbs/11.jpg",
-            "location_type":"legend cinema sihanoukville"
+            "location_type": "legend cinema sihanoukville",
+            "opening_hour": "09:30 - 22:30",
+            "number_hall": "4",
+            "address": "PGB-5-021, 4th Floor of prince , PGB-5-021, 4th Floor of Prince,Sihanoukville"
         },
         {
             "id": 12,
             "name": "Legend Siem Reap",
             "image": "assets/fbs/12.jpg",
-            "location_type":"legend siem reap"
+            "location_type": "legend siem reap",
+            "opening_hour": "09:30 - 22:30",
+            "number_hall": "5",
+            "address": "Level 3, The Heritage Walk, Corner of National Road 6 and Oum Chhay Street, Svay DongKoum Commune Krong Siem Reab"
         }
     ]
 }

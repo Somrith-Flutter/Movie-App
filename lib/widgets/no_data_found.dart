@@ -16,7 +16,7 @@ class NoDataFound extends StatelessWidget {
           fit: BoxFit.cover,
         ),
         const SizedBox(
-          height: 5,
+          height: 15,
         ),
         TextWidget(
           " No Data Found",
