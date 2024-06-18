@@ -58,5 +58,20 @@
     "allow": "Allow",
     "continues": "Continue",
     "account": "Account",
-    "developer_mode": "Developer Mode"
+    "developer_mode": "Developer Mode",
+    "purchase": "Purchase",
+    "activate": "Activate",
+    "buy_ticket": "Buy Ticket",
+    "now_showing": "Now Showing",
+    "coming_soon": "Coming Soon",
+    "promotion": "Promotions",
+    "see_all": "See all",
+    "all_cinema": "All Cinemas",
+    "search_cinema": "Search cinema...",
+    "contact_info": "Contact info",
+    "advertising_partnership": "Advertising & Partnership",
+    "today": "Today",
+    "upcoming": "Upcoming",
+    "history": "History",
+    "explore_more": "Explore More"
 }

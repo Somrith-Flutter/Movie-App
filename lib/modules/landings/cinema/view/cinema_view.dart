@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:legend_cinema/config/routes/app_route.dart';
-import 'package:legend_cinema/config/themes/app_color.dart';
+import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/modules/landings/cinema/widgets/cinema_detail.dart';
+import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
 class CinemaView extends StatelessWidget {
@@ -141,19 +142,12 @@ class CinemaView extends StatelessWidget {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           centerTitle: false,
-          title: const TextWidget(
-            'Cinema',
-            size: 20.0,
+          title: TextWidget(
+            S.of(context).cinema,
+            size: 22,
+            bold: true,
           ),
-          flexibleSpace: Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: AppColor.appbarColor,
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-              ),
-            ),
-          ),
+          flexibleSpace: AppConstant.appbarTheme,
         ),
         body: Padding(
           padding: const EdgeInsets.all(6),
@@ -165,7 +159,7 @@ class CinemaView extends StatelessWidget {
                   decoration: InputDecoration(
                     suffixIcon:
                         Icon(Icons.search, color: Colors.white.withOpacity(0.8)),
-                    hintText: "Search cinema...",
+                    hintText: S.of(context).search_cinema,
                     labelStyle: TextStyle(color: Colors.white.withOpacity(0.8)),
                     enabledBorder: OutlineInputBorder(
                       borderSide:

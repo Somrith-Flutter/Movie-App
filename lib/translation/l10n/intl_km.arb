@@ -59,5 +59,20 @@
     "allow": "អនុញ្ញាតិ",
     "continues": "បន្ត",
     "account": "គណនី",
-    "developer_mode": "មុខងារ​អ្នកអភិវឌ្ឍន៍កម្មវិធី"
+    "developer_mode": "មុខងារ​អ្នកអភិវឌ្ឍន៍កម្មវិធី",
+    "purchase": "ការទិញ",
+    "activate": "ភ្ជាប់កាត",
+    "buy_ticket": "ទិញសំបុត្រ",
+    "now_showing": "កំពុងចាក់បញ្ចាំង",
+    "coming_soon": "ចាក់បញ្ចាំងឆាប់ៗ",
+    "promotion": "ការផ្សព្វផ្សាយ",
+    "see_all": "មើលទាំងអស់",
+    "all_cinema": "ទីតាំងទាំងអស់",
+    "search_cinema": "ស្វែងរករោងកុន...",
+    "contact_info": "ព័ឥមានទំនាក់ទំនង",
+    "advertising_partnership": "ការផ្សាយពាណិជ្ជកម្ម និងភាពជាដៃគូរ",
+    "today": "ថ្ងៃនេះ",
+    "upcoming": "នាពេលខាងមុខ",
+    "history": "ប្រវត្តការទិញ",
+    "explore_more": "ស្វែងយល់បន្ថែម"
 }

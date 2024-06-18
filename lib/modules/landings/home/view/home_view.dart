@@ -19,6 +19,7 @@ import 'package:legend_cinema/modules/landings/home/widgets/time_line_item.dart'
 import 'package:legend_cinema/modules/landings/more/widgets/purchase_widget.dart';
 import 'package:legend_cinema/modules/landings/offers/view/offers_detail.dart';
 import 'package:legend_cinema/shared/v_globle.dart';
+import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/dot_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
@@ -163,15 +164,15 @@ class _HomeViewState extends State<HomeView> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const TextWidget(
-                    'Promotions',
+                   TextWidget(
+                    S.of(context).promotion,
                     bold: true,
                     size: 20,
                   ),
                   GestureDetector(
                     onTap: () =>  bottomNavigationKey.currentState?.navigateToPage(1),
-                    child: const TextWidget(
-                      'See all',
+                    child: TextWidget(
+                      S.of(context).see_all,
                       bold: true,
                       size: 14,
                     ),
@@ -211,7 +212,7 @@ class _HomeViewState extends State<HomeView> {
               children: [
                 TextWidget(
                   controller.cinema == ""
-                      ? 'All Cinemas'
+                      ? S.of(context).all_cinema
                       : controller.cinema,
                   size: 16,
                 ),
@@ -239,8 +240,8 @@ class _HomeViewState extends State<HomeView> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const TextWidget(
-                      "Cinema",
+                    TextWidget(
+                      S.of(context).cinema,
                       size: 19,
                       bold: true,
                     ),
@@ -364,9 +365,9 @@ class _HomeViewState extends State<HomeView> {
                       bottomLeft: Radius.circular(15)
                     )
                   ),
-                  child: const Stack(
+                  child: Stack(
                     children: [
-                      Positioned(
+                      const Positioned(
                         top: 5,
                         left: 5,
                         child: Icon(Icons.card_giftcard)
@@ -374,7 +375,7 @@ class _HomeViewState extends State<HomeView> {
                       Positioned(
                         top: 5,
                         right: 5,
-                        child: TextWidget('Buy Ticket', bold: true,)
+                        child: TextWidget(S.of(context).buy_ticket, bold: true,)
                       ),
                     ],
                   ),
@@ -466,9 +467,9 @@ class _HomeViewState extends State<HomeView> {
                         borderRadius: BorderRadius.circular(30),
                       ),
                       padding: const EdgeInsets.all(10),
-                      child: const Center(
+                      child: Center(
                         child: TextWidget(
-                          'Now Showing',
+                          S.of(context).now_showing,
                           bold: true,
                         ),
                       ),
@@ -490,9 +491,9 @@ class _HomeViewState extends State<HomeView> {
                           borderRadius: BorderRadius.circular(30),
                         ),
                         padding: const EdgeInsets.all(10),
-                        child: const Center(
+                        child: Center(
                           child: TextWidget(
-                            'Coming Soon',
+                            S.of(context).coming_soon,
                             bold: true,
                           ),
                         ),
@@ -563,7 +564,10 @@ class _HomeViewState extends State<HomeView> {
                           Positioned(
                             top: 10,
                             left: 20,
-                            child: TextWidget(day, size: 12,),
+                            child: TextWidget(
+                              day == 'Today' ? S.of(context).today : day,
+                              size: 12,
+                            ),
                           ),
                           Positioned(
                             top: 25,
@@ -617,7 +621,7 @@ class _HomeViewState extends State<HomeView> {
               Row(
                 children: List.generate(controller.dateInfo.dates.length, (index) {
                   final date = controller.dateInfo.dates[index];
-                  final month = controller.dateInfo.months[index];
+                  final month = controller.dateInfo.monthInCome[index];
                   return Expanded(
                     child: GestureDetector(
                       onTap: () {
@@ -775,8 +779,8 @@ class _HomeViewState extends State<HomeView> {
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.red.shade900,
             ),
-            child: const TextWidget(
-              'Explore more',
+            child: TextWidget(
+              S.of(context).explore_more,
               size: 14,
               bold: true,
             ),

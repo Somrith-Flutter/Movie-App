@@ -649,6 +649,156 @@ class S {
       args: [],
     );
   }
+
+  /// `Purchase`
+  String get purchase {
+    return Intl.message(
+      'Purchase',
+      name: 'purchase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Activate`
+  String get activate {
+    return Intl.message(
+      'Activate',
+      name: 'activate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Buy Ticket`
+  String get buy_ticket {
+    return Intl.message(
+      'Buy Ticket',
+      name: 'buy_ticket',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Now Showing`
+  String get now_showing {
+    return Intl.message(
+      'Now Showing',
+      name: 'now_showing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Coming Soon`
+  String get coming_soon {
+    return Intl.message(
+      'Coming Soon',
+      name: 'coming_soon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Promotions`
+  String get promotion {
+    return Intl.message(
+      'Promotions',
+      name: 'promotion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `See all`
+  String get see_all {
+    return Intl.message(
+      'See all',
+      name: 'see_all',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All Cinemas`
+  String get all_cinema {
+    return Intl.message(
+      'All Cinemas',
+      name: 'all_cinema',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search cinema...`
+  String get search_cinema {
+    return Intl.message(
+      'Search cinema...',
+      name: 'search_cinema',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contact info`
+  String get contact_info {
+    return Intl.message(
+      'Contact info',
+      name: 'contact_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Advertising & Partnership`
+  String get advertising_partnership {
+    return Intl.message(
+      'Advertising & Partnership',
+      name: 'advertising_partnership',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Today`
+  String get today {
+    return Intl.message(
+      'Today',
+      name: 'today',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upcoming`
+  String get upcoming {
+    return Intl.message(
+      'Upcoming',
+      name: 'upcoming',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `History`
+  String get history {
+    return Intl.message(
+      'History',
+      name: 'history',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Explore More`
+  String get explore_more {
+    return Intl.message(
+      'Explore More',
+      name: 'explore_more',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

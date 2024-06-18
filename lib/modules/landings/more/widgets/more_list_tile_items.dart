@@ -21,12 +21,12 @@ MoreController controller = Get.find();
 List<ListTileItem> items(BuildContext context, String title, String icon)  {
   return [
     if (accessToken.$.isNotEmpty)...[
-      const ListTileItem(
-        title: 'Purchase',
+      ListTileItem(
+        title: S.of(context).purchase,
         icon: Icons.currency_pound,
         trailing: true,
-        route: PurchaseWidget(),
-        header: 'Purchase',
+        route: const PurchaseWidget(),
+        header: S.of(context).purchase,
         isheader: true,
         isSpacig: true,
         isRoute: true,

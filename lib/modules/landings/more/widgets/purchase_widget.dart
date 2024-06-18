@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:legend_cinema/config/themes/app_color.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
+import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
@@ -16,12 +17,12 @@ class PurchaseWidget extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           leading: const BackWidget(),
-          title: const TextWidget('Purchase', size: 22, bold: true,),
+          title:  TextWidget(S.of(context).purchase, size: 22, bold: true,),
           flexibleSpace: AppConstant.appbarTheme,
-          bottom: const TabBar(
+          bottom: TabBar(
             tabs: [
-              Tab(text: 'Upcoming'),
-              Tab(text: 'History'),
+              Tab(text: S.of(context).upcoming),
+              Tab(text: S.of(context).history),
             ],
             indicatorColor: Colors.red,
             unselectedLabelColor: Colors.white,

@@ -172,9 +172,9 @@ class _MoreViewState extends State<MoreView> {
                               color: Colors.red.shade900,
                               borderRadius: BorderRadius.circular(20)
                             ),
-                            child: const Center(
+                            child: Center(
                               child: TextWidget(
-                                'Activate',
+                                S.of(context).activate,
                                 bold: true,
                                 size: 14,
                               )),
@@ -190,9 +190,9 @@ class _MoreViewState extends State<MoreView> {
                               border: Border.all(color: Colors.white),
                               borderRadius: BorderRadius.circular(20)
                             ),
-                            child: const Center(
+                            child: Center(
                               child: TextWidget(
-                                'Learn More',
+                                S.of(context).learn_more ,
                                 bold: true,
                                 size: 14,
                               )),

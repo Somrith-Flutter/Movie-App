@@ -26,5 +26,20 @@
     "choose_cinema": "选择电影院",
     "continues": "继续",
     "account": "帐户",
-    "developer_mode": "开发者模式"
+    "developer_mode": "开发者模式",
+    "purchase": "购买",
+    "activate": "启用",
+    "buy_ticket": "买票",
+    "now_showing": "正在上映",
+    "coming_soon": "即将推出",
+    "promotion": "促销活动",
+    "see_all": "查看全部",
+    "all_cinema": "所有电影院",
+    "search_cinema": "搜索电影院",
+    "contact_info": "联系方式",
+    "advertising_partnership": "广告与合作",
+    "today": "今天",
+    "upcoming": "即将推出",
+    "history": "历史",
+    "explore_more": "探索更多"
 }
