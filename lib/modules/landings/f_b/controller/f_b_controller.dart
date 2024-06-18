@@ -4,11 +4,10 @@ import 'package:legend_cinema/core/double_format.dart';
 import 'package:legend_cinema/core/enum/base_status_enum.dart';
 import 'package:legend_cinema/core/model/fb_from_service_model.dart';
 import 'package:legend_cinema/core/model/fb_model.dart';
-import 'package:legend_cinema/modules/landings/f_b/model/f_b_model.dart';
 import 'package:legend_cinema/modules/landings/f_b/model/location_model.dart';
 import 'package:legend_cinema/modules/landings/f_b/repository/f_b_repository.dart';
 
-class FBController extends GetxController {
+class FBController extends GetxController implements GetxService {
   FBController({required this.repository});
   final FBRepository repository;
 
@@ -16,6 +15,7 @@ class FBController extends GetxController {
   List<FANDBModel> fb = [];
   List<FBFromServiceModel> fbs = [];
   BaseStatusEnum status = BaseStatusEnum.initial;
+  final textController = TextEditingController(text: "");
 
   void addItem(FBFromServiceModel product) {
     if (cartItems.containsKey(product)) {
@@ -90,15 +90,44 @@ class FBController extends GetxController {
     update();
   }
 
-  var detailedData = <FBModel>[].obs;
+  void searchLocations(String query) {
+    status = BaseStatusEnum.inprogress;
+    update();
+
+    if (fb.isNotEmpty) {
+      fb = fb.where((location) {
+        return location.name
+            .toString()
+            .toLowerCase()
+            .contains(query.toLowerCase());
+      }).toList();
+      status = BaseStatusEnum.success;
+      updateFilteredLocations(fb);
+    } else {
+      status = BaseStatusEnum.failure;
+      updateFilteredLocations(fb);
+    }
+    update();
+  }
+
+  void updateFilteredLocations(List<FANDBModel> filteredLocations) {
+    fb = filteredLocations;
+    if (filteredLocations.isEmpty) {
+      status = BaseStatusEnum.failure;
+      update();
+    } else {
+      status = BaseStatusEnum.success;
+    }
+    debugPrint(filteredLocations.toString());
+    update();
+  }
 
   Future<void> getDetailedData(String locationType) async {
     status = BaseStatusEnum.inprogress;
     update();
 
     try {
-      final response =
-          await repository.getDetailedDataRepo(locationType);
+      final response = await repository.getDetailedDataRepo(locationType);
 
       if (response != null) {
         fbs = response;

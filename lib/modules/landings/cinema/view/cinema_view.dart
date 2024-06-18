@@ -4,9 +4,11 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
+import 'package:legend_cinema/core/enum/base_status_enum.dart';
 import 'package:legend_cinema/modules/landings/cinema/widgets/cinema_detail.dart';
 import 'package:legend_cinema/modules/landings/f_b/controller/f_b_controller.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
+import 'package:legend_cinema/widgets/no_data_found.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
 class CinemaView extends StatefulWidget {
@@ -18,10 +20,23 @@ class CinemaView extends StatefulWidget {
 
 class _CinemaViewState extends State<CinemaView> {
   final fb = Get.find<FBController>();
+  FocusNode textFieldFocusNode = FocusNode();
 
   @override
   void initState() {
+    fb.textController.clear();
+    fb.getLocations();
     super.initState();
+
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   FocusScope.of(context).requestFocus(FocusNode());
+    // });
+  }
+
+  @override
+  void dispose() {
+    // textFieldFocusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -48,6 +63,16 @@ class _CinemaViewState extends State<CinemaView> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
+                    controller: logic.textController,
+                    onChanged: (key) {
+                      if (key != "" && logic.textController.text.isNotEmpty) {
+                        logic.searchLocations(key);
+                      } else {
+                        key = "";
+                        fb.getLocations();
+                      }
+                      setState(() {});
+                    },
                     decoration: InputDecoration(
                       suffixIcon: Icon(Icons.search,
                           color: Colors.white.withOpacity(0.8)),
@@ -74,11 +99,29 @@ class _CinemaViewState extends State<CinemaView> {
                     itemCount: logic.fb.length,
                     itemBuilder: (context, index) {
                       final item = logic.fb[index];
+
+                      if (logic.status == BaseStatusEnum.failure) {
+                        return const Center(
+                          child: NoDataFound(),
+                        );
+                      }
+
+                      if (logic.status == BaseStatusEnum.inprogress) {
+                        return const Center(
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 100.0),
+                            child: CupertinoActivityIndicator(),
+                          ),
+                        );
+                      }
+
                       return GestureDetector(
                         onTap: () {
                           AppRoute.route.push(
-                            context,
-                            CinemaDetail(data: item,));
+                              context,
+                              CinemaDetail(
+                                data: item,
+                              ));
                         },
                         child: Container(
                           margin: const EdgeInsets.all(8.0),
@@ -112,7 +155,10 @@ class _CinemaViewState extends State<CinemaView> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      const Icon(CupertinoIcons.map_pin_ellipse, color: Colors.red,),
+                                      const Icon(
+                                        CupertinoIcons.map_pin_ellipse,
+                                        color: Colors.red,
+                                      ),
                                       const Gap(5.0),
                                       Flexible(
                                         child: TextWidget(
