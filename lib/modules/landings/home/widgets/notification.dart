@@ -21,10 +21,10 @@ class NotificationView extends StatelessWidget {
             bold: true,
           ),
           flexibleSpace: AppConstant.appbarTheme,
-           bottom: TabBar(
+           bottom: const TabBar(
             tabs: [
-              Tab(text: '${const TextWidget('Announcement')}'),
-              Tab(text: '${const TextWidget('Orders')}'),
+              Tab(text: 'Announcement'),
+              Tab(text: 'Orders'),
             ],
             indicatorColor: Colors.red,
             unselectedLabelColor: Colors.white,

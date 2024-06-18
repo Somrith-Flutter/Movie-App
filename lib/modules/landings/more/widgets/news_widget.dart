@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -74,12 +73,22 @@ class NewsWidget extends StatelessWidget {
       itemCount: controller.newsAndActivities.length,
       itemBuilder: (context, index) {
         final item = controller.newsAndActivities[index];
+        String cacheImage({String? img}){
+          if (AppConstant.baseIosIP == AppConstant.domainKey ){
+            img = item.imageUrl;
+          }
+          if (AppConstant.baseAndroidIP == AppConstant.domainKey){
+            img = "${AppConstant.domainKey}/${item.imageUrl}";
+            debugPrint(img);
+          }
+          return img ?? '';
+        }
         return GestureDetector(
           onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => NewsDetailsWidget(
-                        image: item.imageUrl ?? '',
+                        image: cacheImage(),
                         title: item.title ?? '',
                         description: item.description ?? '',
                       ))),
@@ -99,7 +108,7 @@ class NewsWidget extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: item.imageUrl != null
                         ? CachedNetworkImage(
-                            imageUrl: item.imageUrl!,
+                            imageUrl: cacheImage(),
                             fit: BoxFit.cover,
                             height: 200,
                             width: double.infinity,
@@ -134,15 +143,7 @@ class NewsWidget extends StatelessWidget {
       },
     );
   }
-
-  void _navigateToDetails(item) {
-    Get.to(() => NewsDetailsWidget(
-          image: item.imageUrl ?? '',
-          title: item.title ?? '',
-          description: item.description ?? '',
-        ));
-  }
-
+  
   Widget _buildDataNotAvailable() {
     return Column(
       children: [

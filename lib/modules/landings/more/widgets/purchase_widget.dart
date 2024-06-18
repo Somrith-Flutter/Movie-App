@@ -18,10 +18,10 @@ class PurchaseWidget extends StatelessWidget {
           leading: const BackWidget(),
           title: const TextWidget('Purchase', size: 22, bold: true,),
           flexibleSpace: AppConstant.appbarTheme,
-          bottom: TabBar(
+          bottom: const TabBar(
             tabs: [
-              Tab(text: '${const TextWidget('Upcoming')}'),
-              Tab(text: '${const TextWidget('History')}'),
+              Tab(text: 'Upcoming'),
+              Tab(text: 'History'),
             ],
             indicatorColor: Colors.red,
             unselectedLabelColor: Colors.white,

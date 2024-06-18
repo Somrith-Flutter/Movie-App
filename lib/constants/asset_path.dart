@@ -40,7 +40,7 @@ class AssetPath{
   static const String termicon = 'assets/icons/term_icon.png';
   static const String newsicon = 'assets/icons/news_icon.png';
   static const String contacticon = 'assets/icons/contact_icon.png';
-
+  static const String t = 'assets/logos/tic.png';
 
 
   static const String dis5 = 'assets/icons/dis5.png';

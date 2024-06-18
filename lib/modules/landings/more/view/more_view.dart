@@ -65,14 +65,14 @@ class _MoreViewState extends State<MoreView> {
         children: [
           Container(
             height: 45,
-            width: 200,
+            width: 190,
             decoration: BoxDecoration(
               color: Colors.red.shade900,
               borderRadius: const BorderRadius.all(Radius.circular(40))
             ),
           ),
           Positioned(
-            left: 20,
+            left: 10,
             bottom: -14,
             child: SizedBox(
               height: 80,
@@ -100,14 +100,14 @@ class _MoreViewState extends State<MoreView> {
         children: [
           Container(
             height: 45,
-            width: 200,
+            width: 190,
             decoration: BoxDecoration(
               color: Colors.red.shade900,
               borderRadius: const BorderRadius.all(Radius.circular(40))
             ),
           ),
           Positioned(
-            left: 35,
+            left: 25,
             top: -14,
             child: SizedBox(
               height: 70,

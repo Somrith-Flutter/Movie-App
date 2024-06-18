@@ -13,7 +13,7 @@ class BuildTimeLineItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 12),
+      padding: const EdgeInsets.only(left: 12, bottom: 15),
       child: GridView.builder(
         padding: EdgeInsets.zero,
         shrinkWrap: true,
@@ -24,29 +24,33 @@ class BuildTimeLineItems extends StatelessWidget {
           crossAxisSpacing: 15,
           childAspectRatio: 2 / 3,
         ),
-        itemCount: movies!.length,
+        itemCount: movies?.length ?? 0,
         itemBuilder: (context, index) {
           var item = movies?[index];
+          if (item == null) return const SizedBox.shrink();
           return GestureDetector(
             onTap: () {
               AppRoute.route.push(
-                  context,
-                  HomeMovieDetail(
-                      imageMovie: item.image!,
-                      titleMovie: item.title!,
-                      genre: item.genre!,
-                      duration: item.duration!,
-                      releaseDate: item.release!,
-                      classification: item.classification!));
+                context,
+                HomeMovieDetail(
+                  imageMovie: item.image!,
+                  titleMovie: item.title!,
+                  genre: item.genre!,
+                  duration: item.duration!,
+                  releaseDate: item.release!,
+                  classification: item.classification!,
+                ),
+              );
             },
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.asset(
-                    item!.image!,
-                    width: 200,
-                    height: 250,
+                    item.image!,
+                    width: double.infinity,
+                    height: 235,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -60,37 +64,33 @@ class BuildTimeLineItems extends StatelessWidget {
                       color: Colors.grey,
                     ),
                     const Gap(5),
-                    Stack(
-                      children: [
-                        Container(
-                          height: 20,
-                          width: 50,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: Colors.white),
+                    Container(
+                      height: 20,
+                      width: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.white,
+                      ),
+                      child: Center(
+                        child: TextWidget(
+                          item.classification,
+                          size: 12,
+                          bold: true,
+                          textAlign: TextAlign.center,
+                          color: Colors.black,
                         ),
-                        Positioned(
-                          top: 1,
-                          left: 10,
-                          child: TextWidget(
-                            item.classification,
-                            size: 12,
-                            bold: true,
-                            textAlign: TextAlign.center,
-                            color: Colors.black,
-                          ),
-                        )
-                      ],
-                    )
+                      ),
+                    ),
                   ],
                 ),
-                Align(
-                  alignment: Alignment.topLeft,
+                const Gap(5),
+                Flexible(
                   child: TextWidget(
                     item.title,
                     bold: true,
-                    size: 14,
+                    size: 12,
                     overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                   ),
                 ),
               ],

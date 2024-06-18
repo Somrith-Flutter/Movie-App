@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -107,6 +108,16 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   }
 
   Widget _buildBody(BuildContext context) {
+     String cacheImage({String? img}){
+      if (AppConstant.baseIosIP == AppConstant.domainKey ){
+        img = user.uu?.imageProfile;
+      }
+      if (AppConstant.baseAndroidIP == AppConstant.domainKey){
+        img = "${AppConstant.domainKey}/${user.uu?.imageProfile}";
+        debugPrint(img);
+      }
+      return img ?? '';
+    }
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Padding(
@@ -132,8 +143,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       ),
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(100),
-                          child: Image.network(
-                            "${AppConstant.domainKey}/${user.uu?.imageProfile}",
+                          child: CachedNetworkImage(
+                            imageUrl: cacheImage(),
                             fit: BoxFit.cover,
                             height: double.maxFinite,
                             width: double.maxFinite,

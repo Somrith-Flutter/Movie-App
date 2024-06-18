@@ -6,6 +6,7 @@ import 'package:legend_cinema/core/enum/base_status_enum.dart';
 import 'package:legend_cinema/modules/landings/home/model/home_model.dart';
 import 'package:legend_cinema/modules/landings/home/repository/home_repository.dart';
 import 'package:legend_cinema/modules/landings/home/widgets/movie_item.dart';
+import 'package:legend_cinema/modules/landings/offers/model/offers_model.dart';
 import 'package:legend_cinema/utils/helpers/date_helper.dart';
 
 class HomeController extends GetxController {
@@ -47,5 +48,24 @@ class HomeController extends GetxController {
     }
     update();
     return "";
+  }
+
+  var offers = <OfferModel>[].obs;
+  var isLoading = true.obs;
+  var errorMessage = ''.obs;
+
+  Future<void> getPromotion() async {
+    try {
+      isLoading(true);
+      errorMessage('');
+      var items = await repository.getPromotion();
+      offers.value = items;
+      debugPrint('Fetched Offers: $items');
+    } catch (e) {
+      errorMessage.value = e.toString();
+      debugPrint('Error fetching offers: $e');
+    } finally {
+      isLoading(false);
+    }
   }
 }

@@ -16,7 +16,7 @@ import 'package:legend_cinema/modules/landings/home/widgets/movie_item.dart';
 import 'package:legend_cinema/modules/landings/home/widgets/notification.dart';
 import 'package:legend_cinema/modules/landings/home/widgets/search_widget.dart';
 import 'package:legend_cinema/modules/landings/home/widgets/time_line_item.dart';
-import 'package:legend_cinema/modules/landings/offers/controller/offers_controller.dart';
+import 'package:legend_cinema/modules/landings/more/widgets/purchase_widget.dart';
 import 'package:legend_cinema/modules/landings/offers/view/offers_detail.dart';
 import 'package:legend_cinema/shared/v_globle.dart';
 import 'package:legend_cinema/widgets/dot_widget.dart';
@@ -42,6 +42,7 @@ class _HomeViewState extends State<HomeView> {
       user.fetchUserController();
     });
 
+    controller.getPromotion();
     controller.selectedDay = controller.dateInfo.dates.first;
     controller.selectedMonth = controller.dateInfo.dates.first;
     
@@ -102,10 +103,9 @@ class _HomeViewState extends State<HomeView> {
             right: 15,
             child: ClipOval(
               child: FloatingActionButton(
-                onPressed: () {
-                
-                },
-                child: const Icon(Icons.add),
+                backgroundColor: Colors.red,
+                onPressed: () => AppRoute().push(context, const PurchaseWidget()),
+                child: Image.asset(AssetPath.t, height: 100, width: 100, fit: BoxFit.fill,),
               ),
             ),
           ),
@@ -159,7 +159,7 @@ class _HomeViewState extends State<HomeView> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 12 , top: 24, right: 12),
+              padding: const EdgeInsets.only(left: 12 , top: 12, right: 12),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -650,7 +650,7 @@ class _HomeViewState extends State<HomeView> {
   }
 
   Widget _buildPromotion() {
-  OffersController controller = Get.find();
+  HomeController controller = Get.find();
   return SizedBox(
     height: 280,
     child: ListView.builder(
