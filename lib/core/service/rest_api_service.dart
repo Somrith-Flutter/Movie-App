@@ -33,7 +33,7 @@ class RestApiService {
   }
 
   Future<String> delete(String endpoint) async {
-    final response = await http.delete(Uri.parse('${AppConstant.baseIosUrl}/$endpoint'));
+    final response = await http.delete(Uri.parse('${AppConstant.baseIosIP}/$endpoint'));
     return _processResponse(response);
   }
 
@@ -47,7 +47,7 @@ class RestApiService {
 
   Future<String> postBody(String endpoint, Map<String, dynamic> data) async {
     final response = await http.post(
-      Uri.parse('${AppConstant.baseIosUrl}/$endpoint'),
+      Uri.parse('${AppConstant.baseIosIP}/$endpoint'),
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: data,
     );

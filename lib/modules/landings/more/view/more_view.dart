@@ -39,10 +39,9 @@ class _MoreViewState extends State<MoreView> {
               Visibility(
                 visible: accessToken.$.isEmpty,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     _buildLoginButton(),
-                    const Gap(12),
                     _buildSignupButton(),
                   ],
                 ),

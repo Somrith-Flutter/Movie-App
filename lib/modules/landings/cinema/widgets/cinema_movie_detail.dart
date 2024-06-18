@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +8,7 @@ import 'package:legend_cinema/core/enum/base_status_enum.dart';
 import 'package:legend_cinema/modules/landings/f_b/controller/f_b_controller.dart';
 import 'package:legend_cinema/modules/landings/home/controller/home_controller.dart';
 import 'package:legend_cinema/modules/landings/home/model/home_model.dart';
-import 'package:legend_cinema/widgets/back_widget.dart';
+import 'package:legend_cinema/utils/helpers/helper_fn.dart';
 import 'package:legend_cinema/widgets/no_data_found.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
@@ -30,20 +28,23 @@ class _CinemaMovieDetailState extends State<CinemaMovieDetail> {
   String selectedDay = '';
   final locat = Get.find<FBController>();
   final _movie = Get.find<HomeController>();
+  String? cinema;
+  MoiveModel? newMoive;
 
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 100), (){
+    Future.delayed(const Duration(milliseconds: 100), () {
       onInit();
     });
     selectedDay = dateInfo.dates.first;
   }
 
-  onInit(){
-    for(var v in widget.data){
+  onInit() {
+    for (var v in widget.data) {
       debugPrint("id => ${v.id}");
-      _movie.fetchMoiveController(location: widget.location.toString().toLowerCase(), id: v.id);
+      _movie.fetchMoiveController(
+          location: widget.location.toString().toLowerCase(), id: v.id);
     }
   }
 
@@ -55,32 +56,53 @@ class _CinemaMovieDetailState extends State<CinemaMovieDetail> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            for (var v in widget.data) ...[
+            if (newMoive != null) ...[
               Stack(
                 children: [
                   CachedNetworkImage(
-                    imageUrl: "${AppConstant.domainKey}/${v.imageUrl}",
+                    imageUrl: "${AppConstant.domainKey}/${newMoive?.imageUrl}",
                     fit: BoxFit.cover,
                     height: 250,
                     width: double.infinity,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 50, horizontal: 16),
-                    child: Positioned(
-                        child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const BackWidget(),
-                        Container(
-                            padding: const EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.grey.withOpacity(0.5)),
-                            child: const Icon(Icons.ios_share_outlined))
-                      ],
-                    )),
-                  )
+                  Positioned(
+                      top: 50.0,
+                      left: 16.0,
+                      right: 16.0,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          GestureDetector(
+                            onTap: () async {
+                              _movie.fetchMoiveController(
+                                  location: widget.location);
+                              Get.back();
+                            },
+                            child: Container(
+                                margin: const EdgeInsets.all(7),
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.white.withOpacity(0.5),
+                                        width: 1),
+                                    shape: BoxShape.circle),
+                                child: const Icon(Icons.arrow_back)),
+                          ),
+                          Container(
+                              padding: const EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.grey.withOpacity(0.5)),
+                              child: GestureDetector(
+                                  onTap: () async {
+                                    await shareNetworkImage(
+                                        "${AppConstant.domainKey}/${newMoive?.imageUrl}");
+                                    setState(() {});
+                                  },
+                                  child: const Icon(Icons.ios_share_outlined))),
+                        ],
+                      )),
                 ],
               ),
               const SizedBox(
@@ -92,7 +114,7 @@ class _CinemaMovieDetailState extends State<CinemaMovieDetail> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextWidget(
-                      v.title,
+                      newMoive?.title,
                       size: 20,
                       bold: true,
                     ),
@@ -111,145 +133,249 @@ class _CinemaMovieDetailState extends State<CinemaMovieDetail> {
                     _builderRow(
                         icon: Icons.folder_shared_rounded,
                         text: "Genre: ",
-                        subText: v.genre.toString()),
+                        subText: newMoive!.genre.toString()),
                     const SizedBox(
                       height: 10,
                     ),
                     _builderRow(
                         icon: Icons.access_time_filled,
                         text: "Duration: ",
-                        subText: v.duration.toString()),
+                        subText: newMoive!.duration.toString()),
                     const SizedBox(
                       height: 10,
                     ),
                     _builderRow(
                         icon: Icons.date_range,
                         text: "Release: ",
-                        subText: v.release.toString()),
+                        subText: newMoive!.release.toString()),
                     const SizedBox(
                       height: 10,
                     ),
                     _builderRow(
                         icon: Icons.visibility_off,
                         text: "Classification: ",
-                        subText: v.classification.toString())
+                        subText: newMoive!.classification.toString())
+                  ],
+                ),
+              )
+            ] else ...[
+              for (var v in widget.data) ...[
+                Stack(
+                  children: [
+                    CachedNetworkImage(
+                      imageUrl: "${AppConstant.domainKey}/${v.imageUrl}",
+                      fit: BoxFit.cover,
+                      height: 250,
+                      width: double.infinity,
+                    ),
+                    Positioned(
+                        top: 50.0,
+                        left: 16.0,
+                        right: 16.0,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            GestureDetector(
+                              onTap: () async {
+                                _movie.fetchMoiveController(
+                                    location: widget.location);
+                                Get.back();
+                              },
+                              child: Container(
+                                  margin: const EdgeInsets.all(7),
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.white.withOpacity(0.5),
+                                          width: 1),
+                                      shape: BoxShape.circle),
+                                  child: const Icon(Icons.arrow_back)),
+                            ),
+                            Container(
+                                padding: const EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.grey.withOpacity(0.5)),
+                                child: GestureDetector(
+                                    onTap: () async {
+                                      await shareNetworkImage(
+                                          "${AppConstant.domainKey}/${v.imageUrl}");
+                                    },
+                                    child:
+                                        const Icon(Icons.ios_share_outlined)))
+                          ],
+                        ))
+                  ],
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TextWidget(
+                        v.title,
+                        size: 20,
+                        bold: true,
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      const TextWidget(
+                        "2D",
+                        size: 26,
+                        bold: true,
+                        color: Colors.blue,
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      _builderRow(
+                          icon: Icons.folder_shared_rounded,
+                          text: "Genre: ",
+                          subText: v.genre.toString()),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      _builderRow(
+                          icon: Icons.access_time_filled,
+                          text: "Duration: ",
+                          subText: v.duration.toString()),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      _builderRow(
+                          icon: Icons.date_range,
+                          text: "Release: ",
+                          subText: v.release.toString()),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      _builderRow(
+                          icon: Icons.visibility_off,
+                          text: "Classification: ",
+                          subText: v.classification.toString())
+                    ],
+                  ),
+                )
+              ],
+            ],
+            const SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Divider(
+                color: Colors.white.withOpacity(0.5),
+                height: 3,
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.0),
+              child: TextWidget(
+                "Description about the Movie",
+                size: 16,
+                color: Colors.grey,
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            GestureDetector(
+              onTap: () {
+                _buildBottomSheet(context);
+              },
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                width: double.infinity,
+                height: 60,
+                decoration: BoxDecoration(
+                    border: Border.all(
+                        width: 2, color: Colors.white.withOpacity(0.5)),
+                    borderRadius: BorderRadius.circular(10)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextWidget(
+                      cinema ?? widget.location.toString().toUpperCase(),
+                      size: 18,
+                      bold: true,
+                    ),
+                    const Icon(Icons.arrow_forward_ios)
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Divider(
-                  color: Colors.white.withOpacity(0.5),
-                  height: 3,
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.0),
-                child: TextWidget(
-                  "Description about the Movie",
-                  size: 16,
-                  color: Colors.grey,
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              GestureDetector(
-                onTap: () {
-                  _buildBottomSheet(context);
-                },
-                child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  width: double.infinity,
-                  height: 60,
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                          width: 2, color: Colors.white.withOpacity(0.5)),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TextWidget(
-                        "Legend Eden Garden",
-                        size: 18,
-                        bold: true,
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                children: List.generate(dateInfo.dates.length, (index) {
+                  final date = dateInfo.dates[index];
+                  final day = dateInfo.dayNames[index];
+                  final month = dateInfo.months[index];
+                  return Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedDay = date;
+                        });
+                      },
+                      child: Stack(
+                        children: [
+                          Container(
+                            height: 80,
+                            width: 70,
+                            decoration: BoxDecoration(
+                              border: selectedDay == date
+                                  ? Border.all(color: Colors.red, width: 2)
+                                  : Border.all(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          Positioned(
+                            top: 10,
+                            left: 20,
+                            child: TextWidget(
+                              day,
+                              size: 12,
+                            ),
+                          ),
+                          Positioned(
+                            top: 25,
+                            left: 20,
+                            child: TextWidget(
+                              date,
+                              bold: true,
+                              size: 22,
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 15,
+                            left: 25,
+                            child: TextWidget(
+                              month,
+                              size: 12,
+                            ),
+                          ),
+                        ],
                       ),
-                      Icon(Icons.arrow_forward_ios)
-                    ],
-                  ),
-                ),
+                    ),
+                  );
+                }),
               ),
-              const SizedBox(
-                height: 15,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Row(
-                  children: List.generate(dateInfo.dates.length, (index) {
-                    final date = dateInfo.dates[index];
-                    final day = dateInfo.dayNames[index];
-                    final month = dateInfo.months[index];
-                    return Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            selectedDay = date;
-                          });
-                        },
-                        child: Stack(
-                          children: [
-                            Container(
-                              height: 80,
-                              width: 70,
-                              decoration: BoxDecoration(
-                                border: selectedDay == date
-                                    ? Border.all(color: Colors.red, width: 2)
-                                    : Border.all(color: Colors.grey),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                            ),
-                            Positioned(
-                              top: 10,
-                              left: 20,
-                              child: TextWidget(
-                                day,
-                                size: 12,
-                              ),
-                            ),
-                            Positioned(
-                              top: 25,
-                              left: 20,
-                              child: TextWidget(
-                                date,
-                                bold: true,
-                                size: 22,
-                              ),
-                            ),
-                            Positioned(
-                              bottom: 15,
-                              left: 25,
-                              child: TextWidget(
-                                month,
-                                size: 12,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  }),
-                ),
-              ),
-              _buildMoiveShow(context)
-            ],
+            ),
+            _buildMoiveShow(context)
           ],
         ),
       ),
@@ -321,24 +447,38 @@ class _CinemaMovieDetailState extends State<CinemaMovieDetail> {
                   shrinkWrap: true,
                   itemCount: locat.fb.length,
                   itemBuilder: (context, index) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            const Icon(Icons.location_on, color: Colors.red),
-                            const SizedBox(width: 8),
-                            TextWidget(locat.fb[index].name,
-                                size: 16, bold: true),
-                          ],
-                        ),
-                        const SizedBox(height: 10.0),
-                        Divider(
-                          color: Colors.white.withOpacity(0.3),
-                          height: 0.5,
-                        ),
-                        const SizedBox(height: 10.0),
-                      ],
+                    return GestureDetector(
+                      onTap: () async {
+                        Navigator.pop(context);
+                        Future.delayed(const Duration(milliseconds: 300));
+                        await _movie.fetchMoiveController(
+                            location: locat.fb[index].locationType
+                                .toString()
+                                .toLowerCase());
+                        cinema = locat.fb[index].name.toString();
+                        setState(() {});
+                      },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              const Icon(Icons.location_on, color: Colors.red),
+                              const SizedBox(width: 8),
+                              TextWidget(
+                                locat.fb[index].name,
+                                size: 18,
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 10.0),
+                          Divider(
+                            color: Colors.white.withOpacity(0.3),
+                            height: 0.5,
+                          ),
+                          const SizedBox(height: 10.0),
+                        ],
+                      ),
                     );
                   },
                 ),
@@ -371,7 +511,7 @@ class _CinemaMovieDetailState extends State<CinemaMovieDetail> {
           crossAxisCount: 2,
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
-          childAspectRatio: 2.1/4,
+          childAspectRatio: 2.1 / 4,
         ),
         itemCount: _movie.moive.length,
         itemBuilder: (BuildContext context, int index) {
@@ -379,6 +519,9 @@ class _CinemaMovieDetailState extends State<CinemaMovieDetail> {
           final data = _movie.moive[index];
           return GestureDetector(
             onTap: () {
+              setState(() {
+                newMoive = data;
+              });
             },
             child: Container(
               margin: const EdgeInsets.only(left: 8, right: 8),

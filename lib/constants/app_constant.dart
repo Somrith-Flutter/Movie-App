@@ -76,11 +76,12 @@ class AppConstant{
   static const int developerCode = 2024;
 
   // change it base on your ip address by replace http://127.0.0.1:8000 to your ip.
-  static const String baseIosUrl = 'http://127.0.0.1:8000';
+  static const String baseIosIP = 'http://127.0.0.1:8000';
   // [baseIosUrl] run whole machine.
-  static const String baseAndroidUrl = 'http://10.0.2.2:8080'; 
+  static const String baseAndroidIP = 'http://192.168.0.105:8080'; 
   // [baseAndroidUrl] run based on ip Emulator.
 
-  static const String domainKey = "http://192.168.0.105:8080";
+  // ios = baseIosIP;      android = baseAndroidIP;
+  static const String domainKey = baseAndroidIP;
   // [domainKey] local ip, Switch this one to accept data income from db.
 }
