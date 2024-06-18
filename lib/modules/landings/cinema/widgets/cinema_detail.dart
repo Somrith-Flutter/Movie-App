@@ -5,10 +5,10 @@ import 'package:get/get.dart';
 import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/config/themes/app_color.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
-import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/core/enum/base_status_enum.dart';
 import 'package:legend_cinema/modules/landings/cinema/widgets/cinema_movie_detail.dart';
 import 'package:legend_cinema/modules/landings/home/controller/home_controller.dart';
+import 'package:legend_cinema/utils/helpers/map_helper.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/no_data_found.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
@@ -17,9 +17,19 @@ import 'package:intl/intl.dart';
 class CinemaDetail extends StatefulWidget {
   final String detailImage;
   final String title;
+  final String mapImages;
+  final String address;
+  final String numberHall;
+  final String openingHour;
 
   const CinemaDetail(
-      {super.key, required this.detailImage, required this.title});
+      {super.key,
+      required this.detailImage,
+      required this.title,
+      required this.mapImages,
+      required this.address,
+      required this.numberHall,
+      required this.openingHour});
 
   @override
   State<CinemaDetail> createState() => _CinemaDetailState();
@@ -30,12 +40,6 @@ class _CinemaDetailState extends State<CinemaDetail> {
   String selectedDay = '';
   final dateInfo = DateInfo();
   final _movie = Get.find<HomeController>();
-
-  void _onTabTap(bool isTextSelected) {
-    setState(() {
-      isTextTapSelected = isTextSelected;
-    });
-  }
 
   @override
   void initState() {
@@ -103,12 +107,14 @@ class _CinemaDetailState extends State<CinemaDetail> {
                     children: [
                       _buildNowShowing(
                           located: widget.title.toString().toLowerCase()),
-                      _buildMoiveShow()
+                      _buildMovieShow()
                     ],
                   ),
                 ),
                 SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [_buildDetail()],
                   ),
                 )
@@ -119,7 +125,6 @@ class _CinemaDetailState extends State<CinemaDetail> {
       ),
     );
   }
-
 
   Widget _buildNowShowing({required String located}) {
     return Padding(
@@ -196,7 +201,7 @@ class _CinemaDetailState extends State<CinemaDetail> {
     );
   }
 
-  Widget _buildMoiveShow() {
+  Widget _buildMovieShow() {
     if (_movie.response == BaseStatusEnum.inprogress) {
       return const Padding(
         padding: EdgeInsets.only(top: 100.0),
@@ -295,105 +300,84 @@ class _CinemaDetailState extends State<CinemaDetail> {
   }
 
   Widget _buildDetail() {
-    return const Center(child: TextWidget("Ah bek"));
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const TextWidget(
+                "Number fo Hall",
+                size: 18,
+                color: Colors.grey,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              TextWidget(
+                widget.numberHall,
+                size: 20,
+                bold: true,
+                color: Colors.white,
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const TextWidget(
+                "Opening Hour",
+                size: 18,
+                color: Colors.grey,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              TextWidget(
+                widget.openingHour,
+                size: 20,
+                bold: true,
+                color: Colors.white,
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const TextWidget("Address",size: 18,color: Colors.grey,),
+              const SizedBox(
+                height: 10,
+              ),
+              TextWidget(widget.address,size: 20,bold: true,color: Colors.white,),
+            ],
+          ),
+          const SizedBox(height: 20,),
+          GestureDetector(
+            onTap: (){
+              MapUtils.openMap(11.526122523200359, 104.92418387069722);
+            },
+            child: Container(
+              width: double.infinity,
+              height: 250,
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.circular(10),
+                image: DecorationImage(image: AssetImage(widget.mapImages),fit: BoxFit.cover)
+              ),
+            ),
+          )
+        ],
+      ),
+    );
   }
-
-  List<String> get daysOfWeek {
-    final now = DateTime.now();
-    final dateFormat = DateFormat('EEE, MMM d'); // Format: Day, Month Day
-    final days = List.generate(4, (i) => now.add(Duration(days: i)));
-
-    return days.map((date) {
-      if (date.isAtSameMomentAs(now)) {
-        return 'Today, ${DateFormat('MMM d').format(date)}'; // Format for Today
-      } else {
-        return dateFormat.format(date);
-      }
-    }).toList();
-  }
-
-  final List<Map<String, String>> cinema = [
-    {
-      "image": AssetPath.boyKill,
-      "title": "Boy Kills World",
-      "genre": "Action",
-      "duration": "1h 50mins",
-      "release": "14 Jun 2024",
-      "classification": "R18",
-    },
-    {
-      "image": AssetPath.darkMother,
-      "title": "Dark Mother (Extended Version),The",
-      "genre": "Horror",
-      "duration": "1h 50mins",
-      "release": "06 June 2024",
-      "classification": "NC15",
-    },
-    {
-      "image": AssetPath.motherGhost,
-      "title": "Dear Mother Ghost",
-      "genre": "Horror",
-      "duration": "1h 50mins",
-      "release": "13 June 2024",
-      "classification": "NC15",
-    },
-    {
-      "image": AssetPath.police,
-      "title": "Formed Police Unit",
-      "genre": "Action",
-      "duration": "1h 40mins",
-      "release": "14 June 2024",
-      "classification": "TBC",
-    },
-    {
-      "image": AssetPath.saga,
-      "title": "Furiosa: A Mad Max Saga",
-      "genre": "Action",
-      "duration": "2h 29mins",
-      "release": "23 May 2024",
-      "classification": "R18",
-    },
-    {
-      "image": AssetPath.inside,
-      "title": "Inside Out 2",
-      "genre": "Animation",
-      "duration": "1h 36mins",
-      "release": "13 June 2024",
-      "classification": "G",
-    },
-    {
-      "image": AssetPath.roundUp,
-      "title": "Roundub : Punishment, The",
-      "genre": "Action",
-      "duration": "1h 49mins",
-      "release": "14 May 2024",
-      "classification": "R18",
-    },
-    {
-      "image": AssetPath.sinden,
-      "title": "Sinden Gaib",
-      "genre": "Horror",
-      "duration": "1h 35mins",
-      "release": "07 June 2024",
-      "classification": "R18",
-    },
-    {
-      "image": AssetPath.under,
-      "title": "Under Parallel Skies",
-      "genre": "romance",
-      "duration": "1h 50mins",
-      "release": "12 June 2024",
-      "classification": "G",
-    },
-    {
-      "image": AssetPath.watcher,
-      "title": "Watcher, The",
-      "genre": "Horror",
-      "duration": "1h 41mins",
-      "release": "06 June 2024",
-      "classification": "NC15",
-    },
-  ];
 }
 
 class DateInfo {

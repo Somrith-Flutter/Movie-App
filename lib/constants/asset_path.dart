@@ -109,4 +109,19 @@ class AssetPath{
   static const String invalidImage = 'assets/images/no_image_available.jpg';
   static const String defualProfile = 'assets/images/legend.png';
 
+
+  // ======================Map image=======================
+  static const String mapChipMong = 'assets/images/map-chip-mong.PNG';
+  static const String mapEden = 'assets/images/map-eden.PNG';
+  static const String mapKMall = 'assets/images/map-k-mall.PNG';
+  static const String mapMeanChey = 'assets/images/map-mean-chey.PNG';
+  static const String mapMidtown = 'assets/images/map-midtown.PNG';
+  static const String mapNoro = 'assets/images/map-noro.PNG';
+  static const String mapOlympia = 'assets/images/map-olympia.PNG';
+  static const String mapPremium = 'assets/images/map-premium.PNG';
+  static const String mapSenSok = 'assets/images/map-sensok.PNG';
+  static const String mapSiemReap = 'assets/images/map-siem-reap.PNG';
+  static const String mapSihanouk = 'assets/images/map-sihanouk.PNG';
+  static const String mapToulKork = 'assets/images/map-toul-kork.PNG';
+
 }
