@@ -8,7 +8,6 @@ import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/core/enum/base_status_enum.dart';
 import 'package:legend_cinema/modules/landings/cinema/widgets/cinema_movie_detail.dart';
 import 'package:legend_cinema/modules/landings/home/controller/home_controller.dart';
-import 'package:legend_cinema/utils/helpers/map_helper.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/no_data_found.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
@@ -360,18 +359,13 @@ class _CinemaDetailState extends State<CinemaDetail> {
             ],
           ),
           const SizedBox(height: 20,),
-          GestureDetector(
-            onTap: (){
-              MapUtils.openMap(11.526122523200359, 104.92418387069722);
-            },
-            child: Container(
-              width: double.infinity,
-              height: 250,
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.circular(10),
-                image: DecorationImage(image: AssetImage(widget.mapImages),fit: BoxFit.cover)
-              ),
+          Container(
+            width: double.infinity,
+            height: 250,
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.circular(10),
+              image: DecorationImage(image: AssetImage(widget.mapImages),fit: BoxFit.cover)
             ),
           )
         ],
