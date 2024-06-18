@@ -103,7 +103,6 @@ class _FBCartDetailState extends State<FBCartDetail> {
                                       .toList();
                                   final double totalHeight =
                                       itemHeight * filteredItems.length;
-
                                   return Column(
                                     children: [
                                       SizedBox(
@@ -132,6 +131,16 @@ class _FBCartDetailState extends State<FBCartDetail> {
                                             itemCount: filteredItems.length,
                                             itemBuilder: (context, index) {
                                               final item = filteredItems[index];
+                                              String cacheImage({String? img}){
+                                                if (AppConstant.baseIosIP == AppConstant.domainKey ){
+                                                  img = item.imageUrl;
+                                                }
+                                                if (AppConstant.baseAndroidIP == AppConstant.domainKey){
+                                                  img = "${AppConstant.domainKey}/${item.imageUrl.toString()}";
+                                                  debugPrint(img);
+                                                }
+                                                return img ?? '';
+                                              }
                                               return Padding(
                                                 padding:
                                                     const EdgeInsets.all(10),
@@ -147,7 +156,7 @@ class _FBCartDetailState extends State<FBCartDetail> {
                                                         borderRadius: BorderRadius.circular(5),
                                                         image: DecorationImage(
                                                           image: NetworkImage(
-                                                              "${AppConstant.domainKey}/${item.imageUrl.toString()}"),
+                                                              cacheImage()),
                                                           fit: BoxFit.cover,
                                                         ),
                                                       ),

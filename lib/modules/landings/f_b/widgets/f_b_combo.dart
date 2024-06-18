@@ -323,6 +323,16 @@ class _FAndBComboState extends State<FAndBCombo> {
       itemCount: cartController.fbs.length,
       itemBuilder: (context, index) {
         var product = cartController.fbs[index];
+        String cacheImage({String? img}){
+          if (AppConstant.baseIosIP == AppConstant.domainKey ){
+            img = product.imageUrl;
+          }
+          if (AppConstant.baseAndroidIP == AppConstant.domainKey){
+            img = "${AppConstant.domainKey}/${product.imageUrl.toString()}";
+            debugPrint(img);
+          }
+          return img ?? '';
+        }
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           child: SizedBox(
@@ -349,8 +359,7 @@ class _FAndBComboState extends State<FAndBCombo> {
                             borderRadius: BorderRadius.circular(5),
                           ),
                           child: CachedNetworkImage(
-                            imageUrl:
-                                "${AppConstant.domainKey}/${product.imageUrl.toString()}",
+                            imageUrl: cacheImage(),
                             fit: BoxFit.cover,
                           ),
                         ),

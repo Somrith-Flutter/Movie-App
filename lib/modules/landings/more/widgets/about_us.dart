@@ -44,6 +44,16 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
           return const Center(child: Text('No data available.'));
         } else {
           final about = controller.aboutus.first;
+          String cacheImage({String? img}){
+            if (AppConstant.baseIosIP == AppConstant.domainKey ){
+              img = about.image;
+            }
+            if (AppConstant.baseAndroidIP == AppConstant.domainKey){
+              img = "${AppConstant.domainKey}/${about.image}";
+              debugPrint(img);
+            }
+            return img ?? '';
+          }
           return SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,7 +62,7 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
                   height: 220,
                   width: double.maxFinite,
                   child: CachedNetworkImage(
-                    imageUrl: about.image ?? '',
+                    imageUrl: cacheImage(),
                     fit: BoxFit.cover,
                     errorWidget: (context, url, error) => const Icon(Icons.error),
                   ),
