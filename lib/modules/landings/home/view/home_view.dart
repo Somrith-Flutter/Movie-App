@@ -43,7 +43,7 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
   void initState() {
     super.initState();
     Future.delayed(const Duration(milliseconds: 100), () {
-      user.fetchUserController();
+      accessToken.$.isNotEmpty ? user.refreshMeController() : user.fetchUserController();
     });
 
     controller.getPromotion();

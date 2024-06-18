@@ -32,15 +32,12 @@ class AuthRepository {
         if (json is Map<String, dynamic>) {
           return json;
         } else {
-          debugPrint('Unexpected response format');
           return null;
         }
       } catch (e) {
-        debugPrint('Error decoding JSON: $e');
         return null;
       }
     } else {
-      debugPrint('Request failed with status: ${response.statusCode}');
       return null;
     }
   }
@@ -77,11 +74,8 @@ class AuthRepository {
     http.StreamedResponse response = await request.send();
     var body = await response.stream.bytesToString();
 
-    debugPrint("data ${response.statusCode.toString()}");
-
     if (response.statusCode == 201) {
       Map<String, dynamic> json = jsonDecode(body);
-      debugPrint(body);
       return json.toString();
     } else {
       debugPrint("=>> ${response.reasonPhrase}");
@@ -89,11 +83,11 @@ class AuthRepository {
     return "";
   }
 
-  Future<UserModel?> fetchUserProfileRepo() async {
+  Future<UserModel?> fetchUserProfileRepo({String? newToken}) async {
     UserModel? user;
     var headers = {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ${accessToken.$}'
+      'Authorization': 'Bearer ${newToken ?? accessToken.$}'
     };
     var request = http.Request(
         'GET', Uri.parse('${AppConstant.domainKey}/api/auth/get-me'));
@@ -107,13 +101,34 @@ class AuthRepository {
     debugPrint("statusCode ${response.statusCode}");
     if (response.statusCode == 200) {
       var json = jsonDecode(body);
-
       user = UserModel.fromJson(json);
       return user;
     } else {
       debugPrint(response.reasonPhrase);
     }
-
     return null;
+  }
+
+  Future<String> refreshToken() async {
+    var headers = {
+      'Authorization':
+          'Bearer ${accessToken.$}'
+    };
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('${AppConstant.domainKey}/api/auth/refresh'));
+
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+    var body = await response.stream.bytesToString();
+
+    debugPrint("response.statusCode ${response.statusCode}");
+    if (response.statusCode == 200) {
+      Map<String, dynamic> newToken = jsonDecode(body);
+      return newToken['access_token'].toString();
+    } else {
+      debugPrint(response.reasonPhrase);
+    }
+    return "";
   }
 }

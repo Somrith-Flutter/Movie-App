@@ -47,11 +47,9 @@ class AuthController extends GetxController implements GetxService {
             update();
             return true;
           } else {
-            debugPrint('Access token not found in response');
             setStatus(BaseStatusEnum.failure);
           }
         } else {
-          debugPrint('Login failed or response format is incorrect');
           setStatus(BaseStatusEnum.failure);
         }
       });
@@ -95,15 +93,21 @@ class AuthController extends GetxController implements GetxService {
   }
 
   Future<String> logoutController() async {
-    accessToken.$ = "";
-    await accessToken.save();
-    return "";
+    if(accessToken.$ != ""){
+      accessToken.$ = "";
+      await accessToken.save();
+      return "";
+    }else{
+      tokenRefreshMe.$ = "";
+      await tokenRefreshMe.save();
+      return "";
+    }
   }
 
-  Future<String> fetchUserController() async {
+  Future<String> fetchUserController({String? newToken}) async {
     setStatus(BaseStatusEnum.inprogress);
     try{
-      await repository.fetchUserProfileRepo().then((user) {
+      await repository.fetchUserProfileRepo(newToken: newToken??"").then((user) {
         if(user != null){
           uu = user;
           setStatus(BaseStatusEnum.success);
@@ -116,6 +120,23 @@ class AuthController extends GetxController implements GetxService {
       debugPrint("=======?? $e");
     }
     return "";
+  }
+
+  void refreshMeController() async {
+    try{
+      final t = await repository.refreshToken();
+
+      if(t.toString().isNotEmpty){
+        tokenRefreshMe.$ = t;
+        await tokenRefreshMe.save();
+        await fetchUserController(newToken: t);
+        debugPrint("new token => $t");
+      }
+    }catch(e){
+      debugPrint("catche $e");
+    }
+
+    update();
   }
 
   void clear() {
