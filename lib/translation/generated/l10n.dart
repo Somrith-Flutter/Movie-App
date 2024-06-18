@@ -859,6 +859,176 @@ class S {
       args: [],
     );
   }
+
+  /// `Set New Profile Picture`
+  String get set_new_profile {
+    return Intl.message(
+      'Set New Profile Picture',
+      name: 'set_new_profile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message(
+      'Save',
+      name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Male`
+  String get male {
+    return Intl.message(
+      'Male',
+      name: 'male',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Female`
+  String get female {
+    return Intl.message(
+      'Female',
+      name: 'female',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Other`
+  String get other {
+    return Intl.message(
+      'Other',
+      name: 'other',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `From Camera`
+  String get from_camera {
+    return Intl.message(
+      'From Camera',
+      name: 'from_camera',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `From Gallery`
+  String get from_gallery {
+    return Intl.message(
+      'From Gallery',
+      name: 'from_gallery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Legend Member`
+  String get legend_member {
+    return Intl.message(
+      'Legend Member',
+      name: 'legend_member',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Member Benifits`
+  String get member_benifit {
+    return Intl.message(
+      'Member Benifits',
+      name: 'member_benifit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Getting many benifit from our membership card. Take one now at your nearby Lengend Cinema!`
+  String get txt_member_benifit {
+    return Intl.message(
+      'Getting many benifit from our membership card. Take one now at your nearby Lengend Cinema!',
+      name: 'txt_member_benifit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `5% Bonus on top up`
+  String get bonus_5 {
+    return Intl.message(
+      '5% Bonus on top up',
+      name: 'bonus_5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Discount 10% Ticket &\nConcession`
+  String get bonus_10 {
+    return Intl.message(
+      'Discount 10% Ticket &\nConcession',
+      name: 'bonus_10',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Benifits`
+  String get benifit {
+    return Intl.message(
+      'Benifits',
+      name: 'benifit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Activate Card`
+  String get activate_card {
+    return Intl.message(
+      'Activate Card',
+      name: 'activate_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Card Activate`
+  String get card_activate {
+    return Intl.message(
+      'Card Activate',
+      name: 'card_activate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Card Number`
+  String get card_number {
+    return Intl.message(
+      'Card Number',
+      name: 'card_number',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

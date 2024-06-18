@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
+import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
@@ -12,7 +13,7 @@ class ActivateCard extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: const BackWidget(),
-        title: const TextWidget('Activate Card', size: 22, bold: true,),
+        title: TextWidget(S.of(context).activate_card, size: 22, bold: true,),
         flexibleSpace: AppConstant.appbarTheme,
       ),
       backgroundColor: Colors.black,
@@ -25,22 +26,22 @@ class ActivateCard extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       child: Column(
         children: [
-          const Align(
+          Align(
             alignment: Alignment.topLeft,
             child: TextWidget(
-              'Card Activation',
+              S.of(context).card_activate,
               size: 16,
               bold: true,
             ),
           ),
           const Gap(20),
-          const Expanded(
+          Expanded(
             child: TextField(
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Card Numbesr',
+                border: const OutlineInputBorder(),
+                labelText: S.of(context).card_number,
                 hintText: '',
-                prefixIcon: Icon(Icons.credit_card),
+                prefixIcon: const Icon(Icons.credit_card),
               ),
             ),
           ),
@@ -53,7 +54,7 @@ class ActivateCard extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red.shade900,
                   ),
-                  child: const TextWidget('Activate Card') 
+                  child: TextWidget(S.of(context).activate_card) 
                 ),
               ),
             ],

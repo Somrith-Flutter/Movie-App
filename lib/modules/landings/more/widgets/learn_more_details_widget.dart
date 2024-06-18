@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:legend_cinema/config/themes/app_color.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
+import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
@@ -21,7 +22,7 @@ class LernMoreDetailsWidget extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: const BackWidget(),
-        title: const TextWidget('Benifit', size: 22, bold: true,),
+        title: TextWidget(S.of(context).benifit, size: 22, bold: true,),
         flexibleSpace: AppConstant.appbarTheme,
       ),
       backgroundColor: AppColor.primaryColor,

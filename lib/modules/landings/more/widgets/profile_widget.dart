@@ -9,6 +9,7 @@ import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/modules/auth/controller/auth_controller.dart';
 import 'package:legend_cinema/modules/auth/controller/pick_image_controller.dart';
+import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/custdropdown.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
@@ -32,10 +33,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
         cancelButton: CupertinoActionSheetAction(
           isDefaultAction: true,
           onPressed: () {
-            Navigator.pop(context, 'Cancel');
+            Navigator.pop(context, S.of(context).cancel);
           },
-          child: const TextWidget(
-            'Cancel',
+          child: TextWidget(
+            S.of(context).cancel,
             size: 20,
             bold: true,
             color: Colors.blue,
@@ -43,8 +44,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
         ),
         actions: <Widget>[
           CupertinoActionSheetAction(
-            child: const TextWidget(
-              'From Gallery',
+            child: TextWidget(
+              S.of(context).from_gallery,
               size: 20,
               bold: true,
               color: Colors.blue,
@@ -55,8 +56,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
             },
           ),
           CupertinoActionSheetAction(
-            child: const TextWidget(
-              'From Camara',
+            child: TextWidget(
+              S.of(context).from_camera,
               size: 20,
               bold: true,
               color: Colors.blue,
@@ -85,8 +86,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
         appBar: AppBar(
           leading: const BackWidget(),
           centerTitle: true,
-          title: const TextWidget(
-            'Profile',
+          title: TextWidget(
+            S.of(context).profile,
             size: 22,
             bold: true,
           ),
@@ -94,8 +95,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
           actions: [
             TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const TextWidget(
-                  'Save',
+                child: TextWidget(
+                  S.of(context).save,
                   bold: true,
                   color: Colors.red,
                 ))
@@ -173,17 +174,17 @@ class _ProfileWidgetState extends State<ProfileWidget> {
               ),
             ),
             const Gap(15),
-            const Center(
+            Center(
               child: TextWidget(
-                "Set New Profile Picture",
+                S.of(context).set_new_profile,
                 size: 12,
                 bold: true,
                 color: Colors.red,
               ),
             ),
             const Gap(30),
-            const TextWidget(
-              "Personal Information",
+            TextWidget(
+              S.of(context).personal_info,
               size: 20,
               bold: true,
             ),
@@ -224,26 +225,26 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   child: CustDropDown(
                     color: const Color.fromARGB(136, 255, 255, 255),
                     maxListHeight: 150,
-                    items: const [
+                    items: [
                       CustDropdownMenuItem(
                         value: "Male",
                         child: Text(
-                          "Male",
-                          style: TextStyle(fontSize: 17),
+                          S.of(context).male,
+                          style: const TextStyle(fontSize: 17),
                         ),
                       ),
                       CustDropdownMenuItem(
                         value: "Female",
                         child: Text(
-                          "Female",
-                          style: TextStyle(fontSize: 17),
+                          S.of(context).female,
+                          style:const TextStyle(fontSize: 17),
                         ),
                       ),
                       CustDropdownMenuItem(
                         value: "Other",
                         child: Text(
-                          "Other",
-                          style: TextStyle(fontSize: 17),
+                          S.of(context).other,
+                          style:const TextStyle(fontSize: 17),
                         ),
                       ),
                     ],
@@ -321,10 +322,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   ),
                 ),
                 const Gap(30),
-                const Align(
+                Align(
                   alignment: Alignment.topLeft,
                   child: TextWidget(
-                    'Content Information',
+                    S.of(context).contact_info,
                     size: 20,
                     bold: true,
                   ),

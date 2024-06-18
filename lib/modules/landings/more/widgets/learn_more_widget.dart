@@ -5,6 +5,7 @@ import 'package:legend_cinema/config/themes/app_color.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/modules/landings/more/widgets/learn_more_details_widget.dart';
+import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
@@ -17,7 +18,7 @@ class LearnMoreWidget extends StatelessWidget {
       appBar: AppBar(
         leading: const BackWidget(),
         centerTitle: true,
-        title: const TextWidget('Legend Member', size: 22, bold: true,),
+        title: TextWidget(S.of(context).legend_member, size: 22, bold: true,),
         flexibleSpace: AppConstant.appbarTheme,
       ),
       backgroundColor: AppColor.primaryColor,
@@ -31,42 +32,42 @@ class LearnMoreWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const Align(
+          Align(
             alignment: Alignment.topLeft,
             child: TextWidget(
-              'Member Benifits',
+              S.of(context).member_benifit,
               size: 22,
               bold: true,
             )),
           const Gap(8),
-          const Align(
+          Align(
             alignment: Alignment.topLeft,
             child: TextWidget(
-              'Getting many benifit from our membership card. Take one now at your nearby Legend Cinema!',
+              S.of(context).txt_member_benifit,
               size: 14,
               color: Colors.grey,
             )
           ),
           const Gap(24),
-          _buildBnifit()
+          _buildBnifit(context)
         ],
       ),
     );
   }
 
-  Widget _buildBnifit(){
+  Widget _buildBnifit(BuildContext context){
      List<Benifit> images =[
       Benifit(
         thumbnails: AssetPath.dis0,
-        titles: '5% Bonus on top up',
+        titles: S.of(context).bonus_5,
         images: AssetPath.dis5,
-        contents: '5% Bonus on top up'
+        contents: S.of(context).bonus_5
       ),
       Benifit(
         thumbnails: AssetPath.dis0,
-        titles: 'Discount 10% Ticked & \nConcession',
+        titles: S.of(context).bonus_10,
         images: AssetPath.dis10,
-        contents: 'Discount 10% Ticked & Concession'
+        contents: S.of(context).bonus_10
       ),
     ];
     return Expanded(

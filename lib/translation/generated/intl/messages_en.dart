@@ -25,14 +25,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "about_us": MessageLookupByLibrary.simpleMessage("About us"),
         "account": MessageLookupByLibrary.simpleMessage("Account"),
         "activate": MessageLookupByLibrary.simpleMessage("Activate"),
+        "activate_card": MessageLookupByLibrary.simpleMessage("Activate Card"),
         "address": MessageLookupByLibrary.simpleMessage("Address"),
         "advertising_partnership":
             MessageLookupByLibrary.simpleMessage("Advertising & Partnership"),
         "all_cinema": MessageLookupByLibrary.simpleMessage("All Cinemas"),
         "allow": MessageLookupByLibrary.simpleMessage("Allow"),
+        "benifit": MessageLookupByLibrary.simpleMessage("Benifits"),
+        "bonus_10": MessageLookupByLibrary.simpleMessage(
+            "Discount 10% Ticket &\nConcession"),
+        "bonus_5": MessageLookupByLibrary.simpleMessage("5% Bonus on top up"),
         "btn_no": MessageLookupByLibrary.simpleMessage("No"),
         "btn_yes": MessageLookupByLibrary.simpleMessage("Yes"),
         "buy_ticket": MessageLookupByLibrary.simpleMessage("Buy Ticket"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "card_activate": MessageLookupByLibrary.simpleMessage("Card Activate"),
+        "card_number": MessageLookupByLibrary.simpleMessage("Card Number"),
         "change_password":
             MessageLookupByLibrary.simpleMessage("Change Password"),
         "change_profile_photo":
@@ -57,6 +65,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "explore_more": MessageLookupByLibrary.simpleMessage("Explore More"),
         "favorite": MessageLookupByLibrary.simpleMessage("Favorite"),
         "fb": MessageLookupByLibrary.simpleMessage("F&B"),
+        "female": MessageLookupByLibrary.simpleMessage("Female"),
+        "from_camera": MessageLookupByLibrary.simpleMessage("From Camera"),
+        "from_gallery": MessageLookupByLibrary.simpleMessage("From Gallery"),
         "general": MessageLookupByLibrary.simpleMessage("General"),
         "gust_info": MessageLookupByLibrary.simpleMessage("Gust Information"),
         "hello": MessageLookupByLibrary.simpleMessage("Hello"),
@@ -66,11 +77,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "khmer": MessageLookupByLibrary.simpleMessage("Khmer"),
         "language": MessageLookupByLibrary.simpleMessage("Languages"),
         "learn_more": MessageLookupByLibrary.simpleMessage("Learn More"),
+        "legend_member": MessageLookupByLibrary.simpleMessage("Legend Member"),
         "lengend_membership":
             MessageLookupByLibrary.simpleMessage("Legend Membership"),
         "light": MessageLookupByLibrary.simpleMessage("Light"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "logout": MessageLookupByLibrary.simpleMessage("Log out"),
+        "male": MessageLookupByLibrary.simpleMessage("Male"),
+        "member_benifit":
+            MessageLookupByLibrary.simpleMessage("Member Benifits"),
         "more": MessageLookupByLibrary.simpleMessage("More"),
         "msg_confirm_logout":
             MessageLookupByLibrary.simpleMessage("Do you want to logout?"),
@@ -84,6 +99,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "old": MessageLookupByLibrary.simpleMessage("Old"),
         "order": MessageLookupByLibrary.simpleMessage("Order"),
         "order_summary": MessageLookupByLibrary.simpleMessage("Order Summary"),
+        "other": MessageLookupByLibrary.simpleMessage("Other"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "payment_method":
             MessageLookupByLibrary.simpleMessage("Payment Method"),
@@ -99,10 +115,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "promotion": MessageLookupByLibrary.simpleMessage("Promotions"),
         "purchase": MessageLookupByLibrary.simpleMessage("Purchase"),
         "register": MessageLookupByLibrary.simpleMessage("Signup"),
+        "save": MessageLookupByLibrary.simpleMessage("Save"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "search_cinema":
             MessageLookupByLibrary.simpleMessage("Search cinema..."),
         "see_all": MessageLookupByLibrary.simpleMessage("See all"),
+        "set_new_profile":
+            MessageLookupByLibrary.simpleMessage("Set New Profile Picture"),
         "setting": MessageLookupByLibrary.simpleMessage("Settings"),
         "spacing": MessageLookupByLibrary.simpleMessage(" "),
         "summary": MessageLookupByLibrary.simpleMessage("Summary"),
@@ -112,6 +131,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "today": MessageLookupByLibrary.simpleMessage("Today"),
         "total": MessageLookupByLibrary.simpleMessage("Total :"),
+        "txt_member_benifit": MessageLookupByLibrary.simpleMessage(
+            "Getting many benifit from our membership card. Take one now at your nearby Lengend Cinema!"),
         "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
         "username": MessageLookupByLibrary.simpleMessage("Username"),
         "version": MessageLookupByLibrary.simpleMessage("Version"),

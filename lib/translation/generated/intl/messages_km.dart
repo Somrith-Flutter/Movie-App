@@ -25,14 +25,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "about_us": MessageLookupByLibrary.simpleMessage("អំពីពួកយើង"),
         "account": MessageLookupByLibrary.simpleMessage("គណនី"),
         "activate": MessageLookupByLibrary.simpleMessage("ភ្ជាប់កាត"),
+        "activate_card": MessageLookupByLibrary.simpleMessage("ភ្ជាប់កាត"),
         "address": MessageLookupByLibrary.simpleMessage("អាស័យ​ដ្ឋាន"),
         "advertising_partnership": MessageLookupByLibrary.simpleMessage(
             "ការផ្សាយពាណិជ្ជកម្ម និងភាពជាដៃគូរ"),
         "all_cinema": MessageLookupByLibrary.simpleMessage("ទីតាំងទាំងអស់"),
         "allow": MessageLookupByLibrary.simpleMessage("អនុញ្ញាតិ"),
+        "benifit": MessageLookupByLibrary.simpleMessage("អត្ថប្រយោជន៍"),
+        "bonus_10": MessageLookupByLibrary.simpleMessage(
+            "បញ្ចុះតម្លៃ 10% សម្រាប់សំបុត្រកុន ចំណីអាហា\nនិងភេសជ្ជះ"),
+        "bonus_5": MessageLookupByLibrary.simpleMessage(
+            "បន្ថែម 5% រាល់ពេលបញ្ចូលទឹកប្រាក់"),
         "btn_no": MessageLookupByLibrary.simpleMessage("ទេ"),
         "btn_yes": MessageLookupByLibrary.simpleMessage("បាទ/ចាស"),
         "buy_ticket": MessageLookupByLibrary.simpleMessage("ទិញសំបុត្រ"),
+        "cancel": MessageLookupByLibrary.simpleMessage("បោះបង់"),
+        "card_activate": MessageLookupByLibrary.simpleMessage("ការភ្ជាប់កាត"),
+        "card_number": MessageLookupByLibrary.simpleMessage("លេខកាត"),
         "change_password":
             MessageLookupByLibrary.simpleMessage("ប្តូរលេខសម្ងាត់"),
         "change_profile_photo":
@@ -60,6 +69,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "explore_more": MessageLookupByLibrary.simpleMessage("ស្វែងយល់បន្ថែម"),
         "favorite": MessageLookupByLibrary.simpleMessage("ចូលចិត្ត"),
         "fb": MessageLookupByLibrary.simpleMessage("អាហារសម្រន់"),
+        "female": MessageLookupByLibrary.simpleMessage("ស្រី"),
+        "from_camera": MessageLookupByLibrary.simpleMessage("កាមេរ៉ា"),
+        "from_gallery": MessageLookupByLibrary.simpleMessage("វិចិត្រសាល"),
         "general": MessageLookupByLibrary.simpleMessage("ទូទៅ"),
         "gust_info": MessageLookupByLibrary.simpleMessage("ព័ឥមានភ្ញៀវ"),
         "hello": MessageLookupByLibrary.simpleMessage("សួរស្តី"),
@@ -69,11 +81,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "khmer": MessageLookupByLibrary.simpleMessage("ខ្មែរ"),
         "language": MessageLookupByLibrary.simpleMessage("ភាសា"),
         "learn_more": MessageLookupByLibrary.simpleMessage("ស្វែងយល់បន្ថែម"),
+        "legend_member": MessageLookupByLibrary.simpleMessage("សមាជិក Legend"),
         "lengend_membership":
             MessageLookupByLibrary.simpleMessage("សមាជិកភាព លេជេន"),
         "light": MessageLookupByLibrary.simpleMessage("ភ្លឺ"),
         "login": MessageLookupByLibrary.simpleMessage("ចូល"),
         "logout": MessageLookupByLibrary.simpleMessage("ចាកចេញ"),
+        "male": MessageLookupByLibrary.simpleMessage("ប្រុស"),
+        "member_benifit":
+            MessageLookupByLibrary.simpleMessage("អត្ថប្រយោជន៍សមាជិក"),
         "more": MessageLookupByLibrary.simpleMessage("ផ្សេងៗទៀត"),
         "msg_confirm_logout": MessageLookupByLibrary.simpleMessage(
             "តើអ្នកចង់ចាកចេញពីកម្មវិធីដែរ​​​ឬទេ?"),
@@ -88,6 +104,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "order": MessageLookupByLibrary.simpleMessage("បញ្ជាទិញ"),
         "order_summary":
             MessageLookupByLibrary.simpleMessage("សេចក្តីសង្ខេបនៃការបញ្ជាទិញ"),
+        "other": MessageLookupByLibrary.simpleMessage("ផ្សេងៗទៀត"),
         "password": MessageLookupByLibrary.simpleMessage("លេខសម្ងាត់"),
         "payment_method":
             MessageLookupByLibrary.simpleMessage("វិធីសាស្រ្តទូទាត់"),
@@ -103,10 +120,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "promotion": MessageLookupByLibrary.simpleMessage("ការផ្សព្វផ្សាយ"),
         "purchase": MessageLookupByLibrary.simpleMessage("ការទិញ"),
         "register": MessageLookupByLibrary.simpleMessage("ចុះឈ្មោះ"),
+        "save": MessageLookupByLibrary.simpleMessage("រក្សាទុក"),
         "search": MessageLookupByLibrary.simpleMessage("ស្វែងរក"),
         "search_cinema":
             MessageLookupByLibrary.simpleMessage("ស្វែងរករោងកុន..."),
         "see_all": MessageLookupByLibrary.simpleMessage("មើលទាំងអស់"),
+        "set_new_profile":
+            MessageLookupByLibrary.simpleMessage("កំណត់រូបភាពគណនីថ្មី"),
         "setting": MessageLookupByLibrary.simpleMessage("ការកំណត់"),
         "spacing": MessageLookupByLibrary.simpleMessage(" "),
         "summary": MessageLookupByLibrary.simpleMessage("សង្ខេប"),
@@ -115,6 +135,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "theme": MessageLookupByLibrary.simpleMessage("ទម្រង់កម្មវិធី"),
         "today": MessageLookupByLibrary.simpleMessage("ថ្ងៃនេះ"),
         "total": MessageLookupByLibrary.simpleMessage("សរុប :"),
+        "txt_member_benifit": MessageLookupByLibrary.simpleMessage(
+            "ទទួលបានអត្ថប្រយោជន៍ជាច្រើនពីកាតសមាជិករបស់យើង។ ទទួលយកអីឡូវនេះ នៅទីតាំងក្បែរលោកអ្នក"),
         "upcoming": MessageLookupByLibrary.simpleMessage("នាពេលខាងមុខ"),
         "username": MessageLookupByLibrary.simpleMessage("ឈ្មោះរបស់អ្នក"),
         "version": MessageLookupByLibrary.simpleMessage("ជំនាន់"),

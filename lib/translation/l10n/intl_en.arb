@@ -79,5 +79,22 @@
     "total": "Total :",
     "checkout": "Check Out",
     "gust_info": "Gust Information",
-    "payment_method": "Payment Method"
+    "payment_method": "Payment Method",
+    "set_new_profile": "Set New Profile Picture",
+    "save": "Save",
+    "male": "Male",
+    "female": "Female",
+    "other": "Other",
+    "cancel": "Cancel",
+    "from_camera": "From Camera",
+    "from_gallery": "From Gallery",
+    "legend_member": "Legend Member",
+    "member_benifit": "Member Benifits",
+    "txt_member_benifit": "Getting many benifit from our membership card. Take one now at your nearby Lengend Cinema!",
+    "bonus_5": "5% Bonus on top up",
+    "bonus_10": "Discount 10% Ticket &\nConcession",
+    "benifit": "Benifits",
+    "activate_card": "Activate Card",
+    "card_activate": "Card Activate",
+    "card_number": "Card Number"
 }
