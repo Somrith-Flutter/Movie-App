@@ -8,6 +8,7 @@ import 'package:legend_cinema/modules/landings/home/repository/home_repository.d
 import 'package:legend_cinema/modules/landings/home/widgets/movie_item.dart';
 import 'package:legend_cinema/modules/landings/offers/model/offers_model.dart';
 import 'package:legend_cinema/utils/helpers/date_helper.dart';
+import 'package:legend_cinema/utils/helpers/helper_fn.dart';
 
 class HomeController extends GetxController {
   HomeController({required this.repository});

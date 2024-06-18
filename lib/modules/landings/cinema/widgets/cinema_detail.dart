@@ -8,6 +8,7 @@ import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/core/enum/base_status_enum.dart';
 import 'package:legend_cinema/modules/landings/cinema/widgets/cinema_movie_detail.dart';
 import 'package:legend_cinema/modules/landings/home/controller/home_controller.dart';
+import 'package:legend_cinema/utils/helpers/helper_fn.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/no_data_found.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
@@ -55,7 +56,7 @@ class _CinemaDetailState extends State<CinemaDetail> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2, // Replace with your actual tab count
+      length: appBarMenu.length,
       child: Scaffold(
         backgroundColor: Colors.black,
         body: GetBuilder<HomeController>(builder: (logic) {
@@ -228,8 +229,10 @@ class _CinemaDetailState extends State<CinemaDetail> {
         ),
         itemCount: _movie.moive.length,
         itemBuilder: (BuildContext context, int index) {
-          debugPrint("${_movie.moive.length}");
           final data = _movie.moive[index];
+
+          fetchImageWithRetry("${AppConstant.domainKey}/${data.imageUrl.toString()}");
+
           return GestureDetector(
             onTap: () {
               AppRoute.route.push(context,

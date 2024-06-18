@@ -30,3 +30,24 @@ Future<String> shareNetworkImage(String imageUrl) async {
   return "";
 }
 
+Future<String> fetchImageWithRetry(String url, {int retries = 3}) async {
+  int attempt = 0;
+  while (attempt < retries) {
+    try {
+      final response = await HttpClient().getUrl(Uri.parse(url)).then((request) => request.close());
+      if (response.statusCode == 200) {
+        return url;
+      } else {
+        throw HttpException('Failed to load image: ${response.statusCode}');
+      }
+    } catch (e) {
+      attempt++;
+      if (attempt >= retries) {
+        rethrow;
+      }
+      await Future.delayed(const Duration(seconds: 2)); // Wait before retrying
+    }
+  }
+  return "";
+}
+
