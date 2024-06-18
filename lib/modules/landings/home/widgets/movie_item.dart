@@ -129,6 +129,155 @@ final List<Movies> movie4 = [
   ),
 ];
 
+final List<Movies> movie5 = [
+  Movies(
+    image: '',
+    title: '',
+    genre: '',
+    duration: '',
+    classification: '',
+  ),
+   Movies(
+    image: '',
+    title: '',
+    genre: '',
+    duration: '',
+    classification: '',
+  ),
+   Movies(
+    image: '',
+    title: '',
+    genre: '',
+    duration: '',
+    classification: '',
+  ),
+   Movies(
+    image: '',
+    title: '',
+    genre: '',
+    duration: '',
+    classification: '',
+  ),
+   Movies(
+    image: '',
+    title: '',
+    genre: '',
+    duration: '',
+    classification: '',
+  ),
+];
+
+final List<Movies> movie6 = [
+  Movies(
+    image: '',
+    title: '',
+    genre: '',
+    duration: '',
+    classification: '',
+  ),
+   Movies(
+    image: '',
+    title: '',
+    genre: '',
+    duration: '',
+    classification: '',
+  ),
+   Movies(
+    image: '',
+    title: '',
+    genre: '',
+    duration: '',
+    classification: '',
+  ),
+   Movies(
+    image: '',
+    title: '',
+    genre: '',
+    duration: '',
+    classification: '',
+  ),
+   Movies(
+    image: '',
+    title: '',
+    genre: '',
+    duration: '',
+    classification: '',
+   ),
+];
+final List<Movies> movie7 = [
+  Movies(
+    image: '',
+    title: '',
+    genre: '',
+    duration: '',
+    classification: '',
+  ),
+   Movies(
+    image: '',
+    title: '',
+    genre: '',
+    duration: '',
+    classification: '',
+  ),
+   Movies(
+    image: '',
+    title: '',
+    genre: '',
+    duration: '',
+    classification: '',
+  ),
+   Movies(
+    image: '',
+    title: '',
+    genre: '',
+    duration: '',
+    classification: '',
+  ),
+   Movies(
+    image: '',
+    title: '',
+    genre: '',
+    duration: '',
+    classification: '',
+   )
+];
+final List<Movies> movie8 = [
+  Movies(
+    image: '',
+    title: '',
+    genre: '',
+    duration: '',
+    classification: '',
+  ),
+   Movies(
+    image: '',
+    title: '',
+    genre: '',
+    duration: '',
+    classification: '',
+  ),
+   Movies(
+    image: '',
+    title: '',
+    genre: '',
+    duration: '',
+    classification: '',
+  ),
+   Movies(
+    image: '',
+    title: '',
+    genre: '',
+    duration: '',
+    classification: '',
+  ),
+   Movies(
+    image: '',
+    title: '',
+    genre: '',
+    duration: '',
+    classification: '',
+   )
+];
 
 class Movies{
   Movies({
