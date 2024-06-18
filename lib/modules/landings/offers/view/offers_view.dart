@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,6 @@ import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/modules/landings/offers/controller/offers_controller.dart';
 import 'package:legend_cinema/modules/landings/offers/widget/offers_items_widget.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
-import 'package:legend_cinema/utils/helpers/helper_fn.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 import 'offers_detail.dart';
 

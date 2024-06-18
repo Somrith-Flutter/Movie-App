@@ -63,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "register": MessageLookupByLibrary.simpleMessage("报名"),
         "search_cinema": MessageLookupByLibrary.simpleMessage("搜索电影院"),
         "see_all": MessageLookupByLibrary.simpleMessage("查看全部"),
+        "summary": MessageLookupByLibrary.simpleMessage("概括"),
         "term_condition": MessageLookupByLibrary.simpleMessage("条款和条件"),
         "today": MessageLookupByLibrary.simpleMessage("今天"),
         "upcoming": MessageLookupByLibrary.simpleMessage("即将推出"),

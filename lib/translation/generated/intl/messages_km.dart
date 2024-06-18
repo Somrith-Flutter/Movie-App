@@ -103,6 +103,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "see_all": MessageLookupByLibrary.simpleMessage("មើលទាំងអស់"),
         "setting": MessageLookupByLibrary.simpleMessage("ការកំណត់"),
         "spacing": MessageLookupByLibrary.simpleMessage(" "),
+        "summary": MessageLookupByLibrary.simpleMessage("សង្ខេប"),
         "system": MessageLookupByLibrary.simpleMessage("ប្រព័ន្ធ"),
         "term_condition": MessageLookupByLibrary.simpleMessage("លក្ខខណ្ឌ"),
         "theme": MessageLookupByLibrary.simpleMessage("ទម្រង់កម្មវិធី"),

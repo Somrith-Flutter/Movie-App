@@ -158,7 +158,7 @@ class _FAndBComboState extends State<FAndBCombo> {
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const TextWidget("Summary",
+                                TextWidget(S.of(context).summary,
                                     size: 16, bold: true),
                                 MyAnimatedFlipCounter(
                                   duration: const Duration(milliseconds: 500),
@@ -211,8 +211,8 @@ class _FAndBComboState extends State<FAndBCombo> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const TextWidget(
-                      "Cinema",
+                    TextWidget(
+                      S.of(context).cinema,
                       size: 19,
                       bold: true,
                     ),

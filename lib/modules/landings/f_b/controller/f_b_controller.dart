@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
+import 'package:legend_cinema/core/double_format.dart';
 import 'package:legend_cinema/core/enum/base_status_enum.dart';
 import 'package:legend_cinema/core/model/fb_from_service_model.dart';
 import 'package:legend_cinema/core/model/fb_model.dart';
@@ -55,8 +55,7 @@ class FBController extends GetxController {
         return sum + (price * quantity);
       });
 
-  String get formattedTotalPrice => NumberFormat('#,##0.00').format(totalPrice);
-
+  String get formattedTotalPrice => totalPrice.format();
   var location = <LocationModel>[].obs;
   var isLoading = true.obs;
   String errorMessage = '';

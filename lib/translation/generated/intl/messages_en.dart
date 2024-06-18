@@ -100,6 +100,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "see_all": MessageLookupByLibrary.simpleMessage("See all"),
         "setting": MessageLookupByLibrary.simpleMessage("Settings"),
         "spacing": MessageLookupByLibrary.simpleMessage(" "),
+        "summary": MessageLookupByLibrary.simpleMessage("Summary"),
         "system": MessageLookupByLibrary.simpleMessage("System"),
         "term_condition":
             MessageLookupByLibrary.simpleMessage("Term & Conditions"),
