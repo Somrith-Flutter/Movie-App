@@ -35,6 +35,11 @@ class DateInfo {
     return days.map((date) => DateFormat('d').format(date)).toList();
   }
 
+  List<String> get dateTime {
+    final now = DateTime.now();
+    final days = List.generate(4, (i) => now.add(Duration(days: i)));
+    return days.map((date) => DateFormat('d, MMMM, yyyy').format(date)).toList();
+  }
 
   List<String> get monthInCome {
     final now = DateTime.now();

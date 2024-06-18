@@ -12,6 +12,7 @@ import 'package:legend_cinema/core/bottom_navigation.dart';
 import 'package:legend_cinema/modules/auth/controller/auth_controller.dart';
 import 'package:legend_cinema/modules/landings/f_b/controller/f_b_controller.dart';
 import 'package:legend_cinema/modules/landings/home/controller/home_controller.dart';
+import 'package:legend_cinema/modules/landings/home/widgets/home_movie_detail.dart';
 import 'package:legend_cinema/modules/landings/home/widgets/movie_item.dart';
 import 'package:legend_cinema/modules/landings/home/widgets/notification.dart';
 import 'package:legend_cinema/modules/landings/home/widgets/search_widget.dart';
@@ -365,13 +366,28 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
           var heroSlides = controller.currentImagePath = pages[index]; 
           return Stack(
             children: [
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Image.asset(
-                    heroSlides.image!,
-                    fit: BoxFit.cover,
+              GestureDetector(
+                onTap: (){
+                  AppRoute.route.push(
+                context,
+                HomeMovieDetail(
+                  imageMovie: heroSlides.image!,
+                  titleMovie: heroSlides.title!,
+                  genre: heroSlides.genre!,
+                  duration: heroSlides.duration!,
+                  releaseDate: heroSlides.release!,
+                  classification: heroSlides.classification!,
+                ),
+              );
+                },
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.asset(
+                      heroSlides.image!,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
@@ -415,8 +431,10 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
                 child: Row(
                   children: [
                     TextWidget(
-                      controller.currentImagePath.date,
+                      controller.currentImagePath.release,
                       size: 12,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
                     const Gap(5),
                     Stack(
@@ -433,7 +451,7 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
                           top: 1,
                           left: 10,
                           child: TextWidget(
-                            controller.currentImagePath.type, 
+                            controller.currentImagePath.classification, 
                             size: 12, 
                             bold: true, 
                             color: Colors.black,
@@ -539,9 +557,9 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
       children: [
         _buildTimeLine(),
         BuildTimeLineItems(
-          movies: controller.selectedDay == controller.dateInfo.dates[1]
-            ? movie1 : controller.selectedDay == controller.dateInfo.dates[2] 
-              ? movie2 : controller.selectedDay == controller.dateInfo.dates[3]
+          movies: controller.selectedDay == controller.dateInfo.dates[0]
+            ? movie1 : controller.selectedDay == controller.dateInfo.dates[1] 
+              ? movie2 : controller.selectedDay == controller.dateInfo.dates[2]
                 ? movie3 : movie4
         ),
       ],
@@ -622,9 +640,9 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
       children: [
         _buildMonthUpComing(),
         BuildTimeLineItems(
-          movies: controller.selectedMonth == controller.dateInfo.dates[1] 
-            ? movie1 : controller.selectedMonth == controller.dateInfo.dates[2] 
-              ? movie2 : controller.selectedMonth == controller.dateInfo.dates[3] 
+          movies: controller.selectedMonth == controller.dateInfo.dates[0] 
+            ? movie1 : controller.selectedMonth == controller.dateInfo.dates[1] 
+              ? movie2 : controller.selectedMonth == controller.dateInfo.dates[2] 
                 ? movie3 : movie4,
         ),
       ],
