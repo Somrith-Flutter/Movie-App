@@ -363,15 +363,15 @@ class _CinemaDetailState extends State<CinemaDetail> {
           const SizedBox(
             height: 20,
           ),
-          // Container(
-          //   width: double.infinity,
-          //   height: 250,
-          //   decoration: BoxDecoration(
-          //     color: Colors.blue,
-          //     borderRadius: BorderRadius.circular(10),
-          //     image: DecorationImage(image: AssetImage(v.mapImages),fit: BoxFit.cover)
-          //   ),
-          // )
+          Container(
+            width: double.infinity,
+            height: 250,
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.circular(10),
+              image: DecorationImage(image: AssetImage(widget),fit: BoxFit.cover)
+            ),
+          )
         ],
       ),
     );

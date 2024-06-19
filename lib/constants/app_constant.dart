@@ -78,7 +78,7 @@ class AppConstant{
   // change it base on your ip address by replace http://127.0.0.1:8000 to your ip.
   static const String baseIosIP = 'http://127.0.0.1:8000';
   // [baseIosUrl] run whole machine.
-  static const String baseAndroidIP = 'http://192.168.0.104:8080'; 
+  static const String baseAndroidIP = 'http://172.20.10.4:8080'; 
   // [baseAndroidUrl] run based on ip Emulator.
 
   // ios = baseIosIP;      android = baseAndroidIP;
