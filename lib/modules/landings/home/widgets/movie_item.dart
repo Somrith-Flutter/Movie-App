@@ -69,7 +69,47 @@ final List<Movies> movie1 = [
     duration: "1h 41mins",
     release: controller.dateInfo.dateTime[0],
     classification: "NC15",
-  )
+  ),
+  Movies(
+    image: AssetPath.movie16,
+    title: 'IF',
+    genre: 'Comedy, Fantasy, Family, Animation',
+    duration: '1h 34min',
+     release: controller.dateInfo.dateTime[0],
+    classification: 'G',
+  ),
+   Movies(
+    image: AssetPath.movie17,
+    title: 'Kingdom of the Planet of the Apes',
+    genre: 'Science Fiction, Adventure, Action',
+    duration: '2h 25min',
+     release: controller.dateInfo.dateTime[0],
+    classification: 'R18',
+  ),
+   Movies(
+    image: AssetPath.movie18,
+    title: 'House of the Dragon',
+    genre: 'Sci-Fi & Fantasy, Drama, Action & Adventure',
+    duration: '1h',
+     release: controller.dateInfo.dateTime[0],
+    classification: 'R18',
+  ),
+   Movies(
+    image: AssetPath.movie19,
+    title: 'Ready, Set, Love',
+    genre: 'Comedy',
+    duration: 'N/A min',
+     release: controller.dateInfo.dateTime[0],
+    classification: 'G',
+   ),
+  Movies(
+    image: AssetPath.movie20,
+    title: 'Godzilla x Kong: The New Empire',
+    genre: 'Action, Science Fiction, Adventure',
+    duration: '1h 55min',
+    release: controller.dateInfo.dateTime[0],
+    classification: 'G',
+  ),
 ];
 
 final List<Movies> movie2 = [
@@ -88,6 +128,46 @@ final List<Movies> movie2 = [
     duration: "1h 40mins",
     release: controller.dateInfo.dateTime[1],
     classification: "TBC",
+  ),
+  Movies(
+    image: AssetPath.movie2,
+    title: 'How to Make Millions before Grandma Dies',
+    genre: 'Drama',
+    release: controller.dateInfo.dateTime[1],
+    duration: '2h 07min',
+    classification: 'G',
+  ),
+   Movies(
+    image: AssetPath.movie1,
+    title: 'Strangers: Chapter 1, The',
+    genre: 'Horror',
+    duration: '1h 18min',
+     release: controller.dateInfo.dateTime[1],
+    classification: 'R18',
+  ),
+   Movies(
+    image: AssetPath.movie3,
+    title: 'Fast and Furious',
+    genre: 'Action, Crime, Thriller',
+    duration: '1h 41min',
+     release: controller.dateInfo.dateTime[1],
+    classification: 'G',
+  ),
+   Movies(
+    image: AssetPath.movie4,
+    title: 'Exhuma',
+    genre: 'Horror, Mystery, Thriller',
+    duration: '2h 14min',
+     release: controller.dateInfo.dateTime[1],
+    classification: 'R18',
+  ),
+   Movies(
+    image: AssetPath.movie5,
+    title: 'Rising',
+    genre: 'Animation,Science Fiction,Family,Action',
+    duration: '2h 1min',
+     release: controller.dateInfo.dateTime[1],
+    classification: 'G',
   ),
 ];
 
@@ -108,6 +188,46 @@ final List<Movies> movie3 = [
     release: controller.dateInfo.dateTime[2],
     classification: "G",
   ),
+  Movies(
+    image: AssetPath.movie6,
+    title: 'Mysteries of the Terracotta Warriors',
+    genre: 'Documentary',
+    duration: '1h 23min',
+     release: controller.dateInfo.dateTime[2],
+    classification: 'G',
+  ),
+   Movies(
+    image: AssetPath.movie7,
+    title: 'Big City Greens',
+    genre: 'TV Movie, Animation, Family, Comedy, Music',
+    duration: '1h 20min',
+    release: controller.dateInfo.dateTime[2],
+    classification: 'G',
+  ),
+   Movies(
+    image: AssetPath.movie8,
+    title: 'The Primevals',
+    genre: 'Science Fiction, Fantasy',
+    duration: '1h 31min',
+     release: controller.dateInfo.dateTime[2],
+    classification: 'G',
+  ),
+  Movies(
+    image: AssetPath.movie9,
+    title: 'Inside Out',
+    genre: 'Drama, Comedy, Animation, Family',
+    duration: '1h 35min',
+     release: controller.dateInfo.dateTime[2],
+    classification: 'G',
+   ),
+  Movies(
+    image: AssetPath.movie10,
+    title: 'Ship of the Damned',
+    genre: 'Action, Horror',
+    duration: '1h 25min',
+    release: controller.dateInfo.dateTime[2],
+    classification: 'R18',
+  ),
 ];
 
 final List<Movies> movie4 = [
@@ -126,6 +246,46 @@ final List<Movies> movie4 = [
     duration: "1h 35mins",
     release: controller.dateInfo.dateTime[3],
     classification: "R18",
+  ),
+  Movies(
+    image: AssetPath.movie11,
+    title: 'Kung Fu Panda 4',
+    genre: 'Action, Adventure, Animation, Comedy, Family',
+    duration: '1h 34min',
+     release: controller.dateInfo.dateTime[3],
+    classification: 'G',
+  ),
+   Movies(
+    image: AssetPath.movie12,
+    title: 'Dark Gathering',
+    genre: 'Animation, Comedy, Drama',
+    duration: '24min',
+     release: controller.dateInfo.dateTime[3],
+    classification: 'G',
+  ),
+   Movies(
+    image: AssetPath.movie13,
+    title: 'Down the Rabbit Hole',
+    genre: 'Comedy, Drama',
+    duration: '1h 33min',
+     release: controller.dateInfo.dateTime[3],
+    classification: 'G',
+  ),
+   Movies(
+    image: AssetPath.movie14,
+    title: 'Inside Out 2',
+    genre: 'Animation, Family, Drama, Adventure, Comedy',
+    duration: '1h 37min',
+     release: controller.dateInfo.dateTime[3],
+    classification: 'G',
+   ),
+  Movies(
+    image: AssetPath.movie15,
+    title: 'The Meaning and Mystery of Life',
+    genre: 'Animation, Drama, Fantasy, Mystery',
+    duration: '2h 24min',
+    release: controller.dateInfo.dateTime[3],
+    classification: 'G',
   ),
 ];
 
@@ -173,7 +333,6 @@ final List<Movies> movie5 = [
 ];
 
 final List<Movies> movie6 = [
-
    Movies(
     image: AssetPath.movie6,
     title: 'Mysteries of the Terracotta Warriors',
@@ -187,7 +346,7 @@ final List<Movies> movie6 = [
     title: 'Big City Greens',
     genre: 'TV Movie, Animation, Family, Comedy, Music',
     duration: '1h 20min',
-     release: controller.dateInfo.dateTime[1],
+    release: controller.dateInfo.dateTime[1],
     classification: 'G',
   ),
    Movies(
