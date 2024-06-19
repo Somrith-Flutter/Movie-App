@@ -81,6 +81,7 @@ class _RegisterFormState extends State<RegisterForm> {
       if (user.status == BaseStatusEnum.success) {
         await EasyLoading.dismiss();
         AppRoute.route.pushReplacement(
+            // ignore: use_build_context_synchronously
             context,
             const AuthView(
               isFromRegister: true,
@@ -102,10 +103,10 @@ class _RegisterFormState extends State<RegisterForm> {
         cancelButton: CupertinoActionSheetAction(
           isDefaultAction: true,
           onPressed: () {
-            Navigator.pop(context, 'Cancel');
+            Navigator.pop(context, S.of(context).cancel);
           },
-          child: const TextWidget(
-            'Cancel',
+          child: TextWidget(
+            S.of(context).cancel,
             size: 20,
             bold: true,
             color: Colors.blue,
@@ -113,8 +114,8 @@ class _RegisterFormState extends State<RegisterForm> {
         ),
         actions: <Widget>[
           CupertinoActionSheetAction(
-            child: const TextWidget(
-              'From Gallery',
+            child: TextWidget(
+              S.of(context).from_gallery,
               size: 20,
               bold: true,
               color: Colors.blue,
@@ -125,8 +126,8 @@ class _RegisterFormState extends State<RegisterForm> {
             },
           ),
           CupertinoActionSheetAction(
-            child: const TextWidget(
-              'From Camara',
+            child: TextWidget(
+              S.of(context).from_camera,
               size: 20,
               bold: true,
               color: Colors.blue,
@@ -211,9 +212,9 @@ class _RegisterFormState extends State<RegisterForm> {
                       ),
                     ),
                   ),
-                  const Center(
+                  Center(
                     child: TextWidget(
-                      "Set New Profile Picture",
+                      S.of(context).set_new_profile,
                       size: 18,
                       bold: true,
                       color: Colors.red,
@@ -222,8 +223,8 @@ class _RegisterFormState extends State<RegisterForm> {
                   const SizedBox(
                     height: 10.0,
                   ),
-                  const TextWidget(
-                    "Setup your profile information",
+                  TextWidget(
+                    S.of(context).set_new_profile,
                     size: 22,
                     bold: true,
                   ),
@@ -289,7 +290,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.person,
                               color: Colors.white.withOpacity(0.8)),
-                          labelText: "Email",
+                          labelText: S.of(context).email,
                           labelStyle: TextStyle(
                               color: Colors.white.withOpacity(0.8),
                               fontWeight: FontWeight.bold),
@@ -429,7 +430,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                     : Icons.visibility,
                                 color: Colors.white.withOpacity(0.8)),
                           ),
-                          labelText: "Password",
+                          labelText: S.of(context).password,
                           labelStyle: TextStyle(
                               color: Colors.white.withOpacity(0.8),
                               fontWeight: FontWeight.bold),

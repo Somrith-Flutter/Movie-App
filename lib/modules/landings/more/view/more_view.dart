@@ -302,6 +302,7 @@ class _MoreViewState extends State<MoreView> {
     if (shouldLogout) {
       await auth.logoutController();
       Future.delayed(const Duration(milliseconds: 100));
+      // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const BottomNavigation()),
       );

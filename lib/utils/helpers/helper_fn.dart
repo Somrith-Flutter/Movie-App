@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+// ignore: depend_on_referenced_packages
 import 'package:share_plus/share_plus.dart';
+// ignore: depend_on_referenced_packages
 import 'package:path_provider/path_provider.dart';
 
 Future<String> shareNetworkImage(String imageUrl) async {
@@ -18,6 +20,7 @@ Future<String> shareNetworkImage(String imageUrl) async {
       File file = File('$tempPath/movie.jpg');
       debugPrint("$file");
       file.writeAsBytesSync(response.data);
+      // ignore: deprecated_member_use
       await Share.shareFiles([file.path], text: 'Check out this image!');
     } else {
       throw Exception('Failed to load image from network. Status code: ${response.statusCode}');

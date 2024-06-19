@@ -200,6 +200,7 @@ class _AuthViewState extends State<AuthView> {
                                                   BaseStatusEnum.failure) {
                                                 await EasyLoading.dismiss();
                                                 IconSnackBar.show(
+                                                  // ignore: use_build_context_synchronously
                                                   context,
                                                   snackBarType:
                                                       SnackBarType.fail,
@@ -219,6 +220,7 @@ class _AuthViewState extends State<AuthView> {
                                                 Future.delayed(const Duration(milliseconds: 100));
                                                 logic.clear();
                                                 EasyLoading.showSuccess('Success!');
+                                                // ignore: use_build_context_synchronously
                                                 AppRoute.route.pushReplacement(context, const BottomNavigation());
                                               }
                                             }
@@ -270,6 +272,7 @@ class _AuthViewState extends State<AuthView> {
                                                 BaseStatusEnum.failure) {
                                               await EasyLoading.dismiss();
                                               IconSnackBar.show(
+                                                // ignore: use_build_context_synchronously
                                                 context,
                                                 snackBarType: SnackBarType.fail,
                                                 label: 'Something went wrong!',
@@ -290,6 +293,7 @@ class _AuthViewState extends State<AuthView> {
                                               logic.clear();
                                               EasyLoading.showSuccess(
                                                   'Success!');
+                                              // ignore: use_build_context_synchronously
                                               AppRoute.route.pushReplacement(context, const BottomNavigation());
                                             }
                                           }

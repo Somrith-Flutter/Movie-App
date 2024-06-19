@@ -136,6 +136,7 @@ class _CustDropDownState extends State<CustDropDown>
                                     _isAnyItemSelected = true;
                                     _itemSelected = item.child;
                                     _removeOverlay();
+                                    // ignore: unnecessary_null_comparison
                                     if (widget.onChanged != null) {
                                       widget.onChanged(item.value);
                                     }
@@ -258,6 +259,7 @@ class _CustDropDownState extends State<CustDropDown>
       return BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius)));
     }
+    return null;
   }
 }
 
@@ -265,7 +267,7 @@ class CustDropdownMenuItem<T> extends StatelessWidget {
   final T value;
   final Widget child;
 
-  const CustDropdownMenuItem({required this.value, required this.child});
+  const CustDropdownMenuItem({super.key, required this.value, required this.child});
 
   @override
   Widget build(BuildContext context) {
