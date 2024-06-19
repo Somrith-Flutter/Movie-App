@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class BackWidget extends StatelessWidget {
-  const BackWidget({super.key});
+  const BackWidget({super.key, this.color});
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +16,10 @@ class BackWidget extends StatelessWidget {
           width: 30,
           height: 30,
           decoration: BoxDecoration(
-              border: Border.all(color: Colors.white.withOpacity(0.5),width: 1),
+              border: Border.all(color: color ?? Colors.white.withOpacity(0.5),width: 1),
               shape: BoxShape.circle
           ),
-          child: const Icon(Icons.arrow_back)
+          child: Icon(Icons.arrow_back ,color: color ?? Colors.white,)
       ),
     );
   }
