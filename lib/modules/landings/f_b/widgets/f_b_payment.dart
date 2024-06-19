@@ -1,17 +1,24 @@
+import 'dart:convert';
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:legend_cinema/core/model/fb_from_service_model.dart';
 import 'package:legend_cinema/modules/landings/f_b/controller/f_b_controller.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // ignore: must_be_immutable
 class FBPayment extends StatefulWidget {
-   FBPayment({super.key, required this.totalPrice});
+  FBPayment({
+    super.key, 
+    required this.totalPrice,
+    this.items,
+  });
   double totalPrice;
+  final List<FBFromServiceModel>? items;
 
   @override
   State<FBPayment> createState() => _FBPaymentState();
@@ -271,6 +278,7 @@ class _FBPaymentState extends State<FBPayment> {
                   setState(() {
                     cartController.cartItems.clear();
                   });
+                  await _savePaymentDetails();
                   Get.back();
                   Get.back();
                   Get.back();
@@ -303,4 +311,30 @@ class _FBPaymentState extends State<FBPayment> {
       ],
     );
   }
+
+  Future<void> _savePaymentDetails() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? paymentDataString = prefs.getString('paymentDataList');
+
+    List<Map<String, dynamic>> paymentDataList = [];
+    
+    if (paymentDataString != null) {
+      paymentDataList = List<Map<String, dynamic>>.from(jsonDecode(paymentDataString));
+    }
+
+    List<Map<String, dynamic>> itemsData = [];
+    if (widget.items != null) {
+      itemsData = widget.items!.map((item) => item.toJson()).toList();
+    }
+
+    Map<String, dynamic> paymentData = {
+      'totalPrice': widget.totalPrice,
+      'items': itemsData,
+    };
+
+    paymentDataList.add(paymentData);
+
+    await prefs.setString('paymentDataList', jsonEncode(paymentDataList));
+  }
+
 }

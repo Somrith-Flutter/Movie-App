@@ -332,6 +332,7 @@ class _FBCartDetailState extends State<FBCartDetail> {
                           context,
                           FBPayment(
                             totalPrice: totalPrice,
+                            items: widget.selectedItems,
                           ));
                     },
                     child: Padding(
