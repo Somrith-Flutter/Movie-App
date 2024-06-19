@@ -68,5 +68,22 @@
     "benifit": "好处",
     "activate_card": "激活卡",
     "card_activate": "卡激活",
-    "card_number": "卡号"
+    "card_number": "卡号",
+    "btn_yes": "是的",
+    "btn_no": "不",
+    "msg_confirm_logout": "您确定要退出吗",
+    "confirm": "确认",
+    "order": "命令",
+    "announcement": "公告",
+    "ms_notification": "登录订单查看通知",
+    "no_notification": "无通知",
+    "details": "细节",
+    "ms_footer": "何时去附近的电影院观看您最喜爱\n的电影? 立即探索,看看您周围有更多电影院.",
+    "opening_hour": "开放时间",
+    "number_of_hall": "大厅数量",
+    "release": "发布: ",
+    "duration" :"期间: " ,
+    "classification": "分类: ",
+    "genre": "类型: ",
+    "dis_movie": "关于电影的描述"
 }
