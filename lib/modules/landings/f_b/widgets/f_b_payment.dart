@@ -141,16 +141,16 @@ class _FBPaymentState extends State<FBPayment> {
                                       fit: BoxFit.cover,
                                     ),
                                     const SizedBox(width: 10),
-                                    const Column(
+                                    Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         TextWidget(
-                                          "Member points",
+                                          S.of(context).member_point,
                                           size: 16,
                                           bold: true,
                                           color: Colors.grey,
                                         ),
-                                        TextWidget("Available", color: Colors.grey, size: 12,),
+                                        TextWidget(S.of(context).available, color: Colors.grey, size: 12,),
                                       ],
                                     ),
                                     const Spacer(),
@@ -184,17 +184,17 @@ class _FBPaymentState extends State<FBPayment> {
                                       ),
                                     ),
                                     const SizedBox(width: 5),
-                                    const Column(
+                                    Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        TextWidget(
+                                        const TextWidget(
                                           "ABA KHQR",
                                           size: 16,
                                           bold: true,
                                           color: Colors.grey,
                                         ),
                                         TextWidget(
-                                          "Scan to pay with any baking app",
+                                          S.of(context).scan_to_pay,
                                           size: 12,
                                           color: Colors.grey
                                         ),
@@ -227,16 +227,16 @@ class _FBPaymentState extends State<FBPayment> {
                                       fit: BoxFit.cover,
                                     ),
                                     const SizedBox(width: 10),
-                                    const Column(
+                                    Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        TextWidget(
+                                        const TextWidget(
                                           "Debit/Credit Card",
                                           size: 16,
                                           bold: true,
                                           color: Colors.grey,
                                         ),
-                                        TextWidget("Available", color: Colors.grey, size: 12,),
+                                        TextWidget(S.of(context).available, color: Colors.grey, size: 12,),
                                       ],
                                     ),
                                     const Spacer(),

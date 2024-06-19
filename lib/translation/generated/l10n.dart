@@ -1349,6 +1349,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Available...`
+  String get available {
+    return Intl.message(
+      'Available...',
+      name: 'available',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Scan to pay with any baking app`
+  String get scan_to_pay {
+    return Intl.message(
+      'Scan to pay with any baking app',
+      name: 'scan_to_pay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Member points`
+  String get member_point {
+    return Intl.message(
+      'Member points',
+      name: 'member_point',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Food & Beverage`
+  String get food_b {
+    return Intl.message(
+      'Food & Beverage',
+      name: 'food_b',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

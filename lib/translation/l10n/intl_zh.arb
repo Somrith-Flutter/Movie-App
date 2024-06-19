@@ -109,5 +109,9 @@
     "ms_create_account": "您已使用 ",
     "re_enter_password": "重新输入密码",
     "gender": "性别",
-    "ms_select_gender": "请选择您的性别"
+    "ms_select_gender": "请选择您的性别",
+    "available": "可用的...",
+    "scan_to_pay": "使用任何烘焙应用程序扫描付款",
+    "member_point": "会员积分",
+    "food_b": "食品与饮品"
 }

@@ -63,7 +63,7 @@ class _FAndBComboState extends State<FAndBCombo> {
             backgroundColor: Colors.transparent,
             appBar: AppBar(
               leading: const BackWidget(),
-              title: const TextWidget('Food & Beverage', size: 20, bold: true),
+              title: TextWidget(S.of(context).food_b, size: 20, bold: true),
               centerTitle: true,
               flexibleSpace: Container(
                 decoration: const BoxDecoration(
@@ -109,7 +109,7 @@ class _FAndBComboState extends State<FAndBCombo> {
                                     children: [
                                       TextWidget(
                                         cinema == ""
-                                            ? 'Selected Cinema'
+                                            ? S.of(context).search_cinema
                                             : cinema,
                                         size: 16,
                                       ),

@@ -32,6 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "all_cinema": MessageLookupByLibrary.simpleMessage("ទីតាំងទាំងអស់"),
         "allow": MessageLookupByLibrary.simpleMessage("អនុញ្ញាតិ"),
         "announcement": MessageLookupByLibrary.simpleMessage("សេចក្តីប្រកាស"),
+        "available": MessageLookupByLibrary.simpleMessage("មាន..."),
         "benifit": MessageLookupByLibrary.simpleMessage("អត្ថប្រយោជន៍"),
         "bonus_10": MessageLookupByLibrary.simpleMessage(
             "បញ្ចុះតម្លៃ 10% សម្រាប់សំបុត្រកុន ចំណីអាហា\nនិងភេសជ្ជះ"),
@@ -77,6 +78,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "favorite": MessageLookupByLibrary.simpleMessage("ចូលចិត្ត"),
         "fb": MessageLookupByLibrary.simpleMessage("អាហារសម្រន់"),
         "female": MessageLookupByLibrary.simpleMessage("ស្រី"),
+        "food_b":
+            MessageLookupByLibrary.simpleMessage("អាហារសម្រន់ និង ភេសជ្ជៈ"),
         "from_camera": MessageLookupByLibrary.simpleMessage("កាមេរ៉ា"),
         "from_gallery": MessageLookupByLibrary.simpleMessage("វិចិត្រសាល"),
         "gender": MessageLookupByLibrary.simpleMessage("ភេទ"),
@@ -101,6 +104,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "male": MessageLookupByLibrary.simpleMessage("ប្រុស"),
         "member_benifit":
             MessageLookupByLibrary.simpleMessage("អត្ថប្រយោជន៍សមាជិក"),
+        "member_point": MessageLookupByLibrary.simpleMessage("ពិន្ទុសមាជិក"),
         "more": MessageLookupByLibrary.simpleMessage("ផ្សេងៗទៀត"),
         "ms_create_account":
             MessageLookupByLibrary.simpleMessage("អ្នកបានបង្កើតគណនីនេះជាមួយ "),
@@ -176,6 +180,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "register": MessageLookupByLibrary.simpleMessage("ចុះឈ្មោះ"),
         "release": MessageLookupByLibrary.simpleMessage("ចេញផ្សាយ៖ "),
         "save": MessageLookupByLibrary.simpleMessage("រក្សាទុក"),
+        "scan_to_pay": MessageLookupByLibrary.simpleMessage(
+            "ស្កេនដើម្បីបង់ប្រាក់ជាមួយកម្មវិធីធានាគាណាមួយ។"),
         "search": MessageLookupByLibrary.simpleMessage("ស្វែងរក"),
         "search_cinema":
             MessageLookupByLibrary.simpleMessage("ស្វែងរករោងកុន..."),

@@ -32,6 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "all_cinema": MessageLookupByLibrary.simpleMessage("All Cinemas"),
         "allow": MessageLookupByLibrary.simpleMessage("Allow"),
         "announcement": MessageLookupByLibrary.simpleMessage("Announcement"),
+        "available": MessageLookupByLibrary.simpleMessage("Available..."),
         "benifit": MessageLookupByLibrary.simpleMessage("Benifits"),
         "bonus_10": MessageLookupByLibrary.simpleMessage(
             "Discount 10% Ticket &\nConcession"),
@@ -73,6 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "favorite": MessageLookupByLibrary.simpleMessage("Favorite"),
         "fb": MessageLookupByLibrary.simpleMessage("F&B"),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
+        "food_b": MessageLookupByLibrary.simpleMessage("Food & Beverage"),
         "from_camera": MessageLookupByLibrary.simpleMessage("From Camera"),
         "from_gallery": MessageLookupByLibrary.simpleMessage("From Gallery"),
         "gender": MessageLookupByLibrary.simpleMessage("Gender"),
@@ -96,6 +98,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "male": MessageLookupByLibrary.simpleMessage("Male"),
         "member_benifit":
             MessageLookupByLibrary.simpleMessage("Member Benifits"),
+        "member_point": MessageLookupByLibrary.simpleMessage("Member points"),
         "more": MessageLookupByLibrary.simpleMessage("More"),
         "ms_create_account": MessageLookupByLibrary.simpleMessage(
             "You\'ve created this account with "),
@@ -171,6 +174,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "register": MessageLookupByLibrary.simpleMessage("Signup"),
         "release": MessageLookupByLibrary.simpleMessage("Release: "),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
+        "scan_to_pay": MessageLookupByLibrary.simpleMessage(
+            "Scan to pay with any baking app"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "search_cinema":
             MessageLookupByLibrary.simpleMessage("Search cinema..."),
