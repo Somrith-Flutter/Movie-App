@@ -125,4 +125,26 @@ class AssetPath{
   static const String mapSihanouk = 'assets/images/map-sihanouk.PNG';
   static const String mapToulKork = 'assets/images/map-toul-kork.PNG';
 
+  static const String movie1 = 'assets/images/movie1.jpg';
+  static const String movie2 = 'assets/images/movie2.jpg';
+  static const String movie3 = 'assets/images/movie3.jpg';
+  static const String movie4 = 'assets/images/movie4.jpg';
+  static const String movie5 = 'assets/images/movie5.jpg';
+  static const String movie6 = 'assets/images/movie6.jpg';
+  static const String movie7 = 'assets/images/movie7.jpg';
+  static const String movie8 = 'assets/images/movie8.jpg';
+  static const String movie9 = 'assets/images/movie9.jpg';
+  static const String movie10 = 'assets/images/movie10.jpg';
+  static const String movie11 = 'assets/images/movie11.jpg';
+  static const String movie12 = 'assets/images/movie12.jpg';
+  static const String movie13 = 'assets/images/movie13.jpg';
+  static const String movie14 = 'assets/images/movie14.jpg';
+  static const String movie15 = 'assets/images/movie15.jpg';
+  static const String movie16 = 'assets/images/movie16.jpg';
+  static const String movie17 = 'assets/images/movie17.jpg';
+  static const String movie18 = 'assets/images/movie18.jpg';
+  static const String movie19 = 'assets/images/movie19.jpg';
+  static const String movie20 = 'assets/images/movie20.jpg';
+
+
 }
