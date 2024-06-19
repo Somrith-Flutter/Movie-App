@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
-import 'package:legend_cinema/modules/landings/home/widgets/home_movie_detail.dart';
 import 'package:legend_cinema/modules/landings/home/widgets/movie_item.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
@@ -18,8 +16,36 @@ class SearchView extends StatefulWidget {
 
 class _SearchViewState extends State<SearchView> {
   List<Movies> displayList = [];
+  List<Movies> allMovies = [];
   bool isLoading = false;
   bool hasSearched = false;
+  final FocusNode _focusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    allMovies = [
+      ...movie1,
+      ...movie2,
+      ...movie3,
+      ...movie4,
+      ...movie5,
+      ...movie6,
+      ...movie7,
+      ...movie8,
+    ];
+
+    _focusNode.addListener(() {
+      if (!_focusNode.hasFocus && _focusNode.hasPrimaryFocus) {
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
 
   void updateList(String value) async {
     setState(() {
@@ -33,7 +59,7 @@ class _SearchViewState extends State<SearchView> {
       if (value.isEmpty) {
         displayList = [];
       } else {
-        displayList = movie1
+        displayList = allMovies
             .where((movie) =>
                 movie.title!.toLowerCase().contains(value.toLowerCase()))
             .toList();
@@ -55,18 +81,21 @@ class _SearchViewState extends State<SearchView> {
         flexibleSpace: AppConstant.appbarTheme,
       ),
       backgroundColor: Colors.black,
-      body: Column(
-        children: [
-          _buildBody(),
-          const SizedBox(height: 10),
-          Expanded(
-            child: isLoading
-                ? _buildLoadingIndicator()
-                : (displayList.isEmpty
-                    ? _showImages(hasSearched)
-                    : _buildList()),
-          ),
-        ],
+      body: FocusScope(
+        node: FocusScopeNode(),
+        child: Column(
+          children: [
+            _buildBody(),
+            const SizedBox(height: 10),
+            Expanded(
+              child: isLoading
+                  ? _buildLoadingIndicator()
+                  : (displayList.isEmpty
+                      ? _showImages(hasSearched)
+                      : _buildList()),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -75,6 +104,7 @@ class _SearchViewState extends State<SearchView> {
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: TextField(
+        focusNode: _focusNode,
         decoration: InputDecoration(
           hintText: S.of(context).search_cinema,
           hintStyle: TextStyle(color: Colors.white.withOpacity(0.8)),
@@ -97,13 +127,11 @@ class _SearchViewState extends State<SearchView> {
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: GestureDetector(
-            onTap: (){
-              AppRoute.route.push(context, HomeMovieDetail(list: displayList[index],));
-            },
-            child: Column(
-              children: [
-                Row(
+          child: Column(
+            children: [
+              GestureDetector(
+                
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -138,15 +166,15 @@ class _SearchViewState extends State<SearchView> {
                     ),
                   ],
                 ),
-                const Divider(
-                  color: Colors.grey,
-                  height: 40,
-                  thickness: 0.5,
-                  indent: 10,
-                  endIndent: 10,
-                ),
-              ],
-            ),
+              ),
+              const Divider(
+                color: Colors.grey,
+                height: 40,
+                thickness: 0.5,
+                indent: 10,
+                endIndent: 10,
+              ),
+            ],
           ),
         );
       },
