@@ -163,15 +163,6 @@ class _NotificationViewState extends State<NotificationView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Align(
-                    alignment: Alignment.center,
-                    child: TextWidget(
-                      'Total Price: \$${paymentData['totalPrice']}',
-                      size: 20,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
                   ...itemsData.map((itemData) {
                     String cacheImage({String? img}) {
                       if (AppConstant.baseIosIP == AppConstant.domainKey) {
@@ -189,21 +180,25 @@ class _NotificationViewState extends State<NotificationView> {
                         Container(
                           width: 100,
                           height: 100,
+                          padding: const EdgeInsets.all(5),
                           margin: const EdgeInsets.only(right: 10),
                           decoration: BoxDecoration(
+                            color: Colors.grey,
                             borderRadius: BorderRadius.circular(5),
-                            image: DecorationImage(
-                              image: CachedNetworkImageProvider(
-                                cacheImage(),
-                              ),
-                              fit: BoxFit.cover,
-                            ),
                           ),
+                          child: itemData['image'] == '' ? CachedNetworkImage(
+                            imageUrl: cacheImage()
+                          ): Image.asset(AssetPath.noImage),
                         ),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              TextWidget(
+                                'Total Price: \$${paymentData['totalPrice']}',
+                                size: 20,
+                                color: Colors.grey,
+                              ),
                               TextWidget(
                                 'Title: ${itemData['title']}',
                                 size: 20,
