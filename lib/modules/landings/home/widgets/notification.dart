@@ -85,9 +85,6 @@ class _NotificationViewState extends State<NotificationView> {
     contro.updateUnreadNotificationCount(_paymentDataList);
   }
 
-
-
-
   Future<void> _savePaymentData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String paymentDataString = jsonEncode(_paymentDataList);
@@ -166,10 +163,10 @@ class _NotificationViewState extends State<NotificationView> {
                   ...itemsData.map((itemData) {
                     String cacheImage({String? img}) {
                       if (AppConstant.baseIosIP == AppConstant.domainKey) {
-                        img = itemData['image'];
+                        img = itemData['image_url'];
                       }
                       if (AppConstant.baseAndroidIP == AppConstant.domainKey) {
-                        img = "${AppConstant.domainKey}/${itemData['image']}";
+                        img = "${AppConstant.domainKey}/${itemData['image_url']}";
                       }
                       return img ?? '';
                     }
@@ -183,12 +180,15 @@ class _NotificationViewState extends State<NotificationView> {
                           padding: const EdgeInsets.all(5),
                           margin: const EdgeInsets.only(right: 10),
                           decoration: BoxDecoration(
-                            color: Colors.grey,
+                            color: Colors.grey.withOpacity(0.5),
                             borderRadius: BorderRadius.circular(5),
                           ),
-                          child: itemData['image'] == '' ? CachedNetworkImage(
-                            imageUrl: cacheImage()
-                          ): Image.asset(AssetPath.noImage),
+                          child: CachedNetworkImage(
+                            height: 100,
+                            width: 100,
+                            imageUrl: cacheImage(),
+                            fit: BoxFit.cover,
+                          ),
                         ),
                         Expanded(
                           child: Column(
@@ -197,17 +197,15 @@ class _NotificationViewState extends State<NotificationView> {
                               TextWidget(
                                 'Total Price: \$${paymentData['totalPrice']}',
                                 size: 20,
-                                color: Colors.grey,
+                                color: Colors.blue,
                               ),
                               TextWidget(
                                 'Title: ${itemData['title']}',
-                                size: 20,
-                                color: Colors.grey,
+                                size: 16,
                               ),
                               TextWidget(
                                 'Price: \$${itemData['price']}',
                                 size: 16,
-                                color: Colors.grey,
                               ),
                               const SizedBox(height: 10),
                             ],
