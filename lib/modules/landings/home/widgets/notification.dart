@@ -26,7 +26,9 @@ class _NotificationViewState extends State<NotificationView> {
   @override
   void initState() {
     super.initState();
-    _loadPaymentData();
+    Future.delayed(const Duration(milliseconds: 100), (){
+      _loadPaymentData();
+    });
   }
 
   Future<void> _loadPaymentData() async {

@@ -329,9 +329,12 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
         width: 10,
       ),
       TextWidget(text, bold: true, color: Colors.grey),
-      TextWidget(
-        subText,
-        bold: true,
+      Flexible(
+        child: TextWidget(
+          subText,
+          bold: true,
+          overflow: TextOverflow.ellipsis,
+        ),
       )
     ]);
   }
