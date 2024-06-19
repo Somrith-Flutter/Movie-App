@@ -1149,6 +1149,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Discount 10% Concession`
+  String get offer_dis_t1 {
+    return Intl.message(
+      'Discount 10% Concession',
+      name: 'offer_dis_t1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Discount 10% Ticket`
+  String get offer_dis_t2 {
+    return Intl.message(
+      'Discount 10% Ticket',
+      name: 'offer_dis_t2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Buy 1 get 1 Every Tuesday`
+  String get offer_dis_t3 {
+    return Intl.message(
+      'Buy 1 get 1 Every Tuesday',
+      name: 'offer_dis_t3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `10% discount on concession`
+  String get offer_s1 {
+    return Intl.message(
+      '10% discount on concession',
+      name: 'offer_s1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `10% discount on ticket`
+  String get offer_s2 {
+    return Intl.message(
+      '10% discount on ticket',
+      name: 'offer_s2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Buy one get one tickets free!`
+  String get offer_s3 {
+    return Intl.message(
+      'Buy one get one tickets free!',
+      name: 'offer_s3',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -74,7 +74,7 @@ class OffersView extends StatelessWidget {
                 bold: true,
               ),
             ),
-            _buildPremiumBenifit(),
+            _buildPremiumBenifit(context),
             const Gap(100)
           ],
         ),
@@ -169,7 +169,18 @@ class OffersView extends StatelessWidget {
     );
   }
 
-  Widget _buildPremiumBenifit() {
+  Widget _buildPremiumBenifit(BuildContext context) {
+    List<String> titless = [
+      S.of(context).offer_dis_t1,
+      S.of(context).offer_dis_t2,
+      S.of(context).offer_dis_t3,
+    ];
+
+    List<String> subtitless = [
+      S.of(context).offer_s1,
+      S.of(context).offer_s2,
+      S.of(context).offer_s3,
+    ];
     return Container(
       padding: const EdgeInsets.only(left: 12),
       height: 200,
@@ -262,7 +273,7 @@ class OffersView extends StatelessWidget {
             ),
           ),
         ),
-        _buildPremiumBenifit(),
+        _buildPremiumBenifit(context),
       ],
     );
   }

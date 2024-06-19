@@ -115,6 +115,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "now_showing": MessageLookupByLibrary.simpleMessage("កំពុងចាក់បញ្ចាំង"),
         "number_of_hall": MessageLookupByLibrary.simpleMessage("លេខរៀងសាល"),
         "offer": MessageLookupByLibrary.simpleMessage("ការផ្តល់ជូន"),
+        "offer_dis_t1":
+            MessageLookupByLibrary.simpleMessage("បញ្ចុះតម្លៃ 10% សម្បទាន"),
+        "offer_dis_t2":
+            MessageLookupByLibrary.simpleMessage("បញ្ចុះតម្លៃ 10% សំបុត្រ"),
+        "offer_dis_t3": MessageLookupByLibrary.simpleMessage(
+            "ទិញ 1 ថែម 1 រៀងរាល់ថ្ងៃអង្គារ"),
+        "offer_s1": MessageLookupByLibrary.simpleMessage(
+            "ការបញ្ចុះតម្លៃ 10% លើសម្បទាន"),
+        "offer_s2": MessageLookupByLibrary.simpleMessage(
+            "ការបញ្ចុះតម្លៃ 10% លើសំបុត្រ"),
+        "offer_s3": MessageLookupByLibrary.simpleMessage(
+            "ទិញមួយបានសំបុត្រមួយដោយឥតគិតថ្លៃ!"),
         "old": MessageLookupByLibrary.simpleMessage("ចាស់"),
         "opening_hour": MessageLookupByLibrary.simpleMessage("ម៉ោងបើក"),
         "order": MessageLookupByLibrary.simpleMessage("បញ្ជាទិញ"),

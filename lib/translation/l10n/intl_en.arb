@@ -108,5 +108,11 @@
     "duration" :"Duration: " ,
     "classification": "Classification: ",
     "genre": "Genre: ",
-    "dis_movie": "Description about the Movie"
+    "dis_movie": "Description about the Movie",
+    "offer_dis_t1": "Discount 10% Concession",
+    "offer_dis_t2": "Discount 10% Ticket",
+    "offer_dis_t3": "Buy 1 get 1 Every Tuesday",
+    "offer_s1": "10% discount on concession",
+    "offer_s2": "10% discount on ticket",
+    "offer_s3": "Buy one get one tickets free!" 
 }

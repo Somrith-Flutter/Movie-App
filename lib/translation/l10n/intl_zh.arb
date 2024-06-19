@@ -85,5 +85,11 @@
     "duration" :"期间: " ,
     "classification": "分类: ",
     "genre": "类型: ",
-    "dis_movie": "关于电影的描述"
+    "dis_movie": "关于电影的描述",
+    "offer_dis_t1": "折扣 10% 优惠",
+    "offer_dis_t2": "折扣 10% 门票",
+    "offer_dis_t3": "每周二买1送1",
+    "offer_s1": "10% 优惠折扣",
+    "offer_s2": "门票 10% 折扣",
+    "offer_s3": "门票买一送一！" 
 }

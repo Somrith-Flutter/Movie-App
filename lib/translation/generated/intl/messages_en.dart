@@ -112,6 +112,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "number_of_hall":
             MessageLookupByLibrary.simpleMessage("Number fo Hall"),
         "offer": MessageLookupByLibrary.simpleMessage("Offers"),
+        "offer_dis_t1":
+            MessageLookupByLibrary.simpleMessage("Discount 10% Concession"),
+        "offer_dis_t2":
+            MessageLookupByLibrary.simpleMessage("Discount 10% Ticket"),
+        "offer_dis_t3":
+            MessageLookupByLibrary.simpleMessage("Buy 1 get 1 Every Tuesday"),
+        "offer_s1":
+            MessageLookupByLibrary.simpleMessage("10% discount on concession"),
+        "offer_s2":
+            MessageLookupByLibrary.simpleMessage("10% discount on ticket"),
+        "offer_s3": MessageLookupByLibrary.simpleMessage(
+            "Buy one get one tickets free!"),
         "old": MessageLookupByLibrary.simpleMessage("Old"),
         "opening_hour": MessageLookupByLibrary.simpleMessage("Opening Hour"),
         "order": MessageLookupByLibrary.simpleMessage("Order"),
