@@ -235,29 +235,31 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
                 controller.isNowShowing ? _buildNowShowing() : _buildComingSoon(),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 12 , top: 12, right: 12),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                   TextWidget(
-                    S.of(context).promotion,
-                    bold: true,
-                    size: 20,
-                  ),
-                  GestureDetector(
-                    onTap: () =>  bottomNavigationKey.currentState?.navigateToPage(1),
-                    child: TextWidget(
-                      S.of(context).see_all,
+            if(Get.isLogEnable)...[
+              Padding(
+                padding: const EdgeInsets.only(left: 12 , top: 12, right: 12),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextWidget(
+                      S.of(context).promotion,
                       bold: true,
-                      size: 14,
+                      size: 20,
                     ),
-                  ),
+                    GestureDetector(
+                      onTap: () =>  bottomNavigationKey.currentState?.navigateToPage(1),
+                      child: TextWidget(
+                        S.of(context).see_all,
+                        bold: true,
+                        size: 14,
+                      ),
+                    ),
 
-                ],
+                  ],
+                ),
               ),
-            ),
-            _buildPromotion(),
+               _buildPromotion(),
+            ],
             _buildFooter(),
           ],
         ),
