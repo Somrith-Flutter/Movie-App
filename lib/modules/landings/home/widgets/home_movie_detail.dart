@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:legend_cinema/modules/landings/home/widgets/movie_item.dart';
+import 'package:legend_cinema/modules/landings/home/widgets/time_line_item.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/utils/helpers/date_helper.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
@@ -164,22 +166,51 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 15,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
-                children: List.generate(dateInfo.dates.length, (index) {
-                  final date = dateInfo.dates[index];
-                  final day = dateInfo.dayNames[index];
-                  final month = dateInfo.months[index];
-                  return Padding(
-                    padding: const EdgeInsets.all(5.0),
+            const Gap(15),
+            _buildNowShowing(context),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNowShowing(BuildContext context){
+    return ListView(
+      padding: EdgeInsets.zero,
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      children: [
+        _buildTimeLine(context),
+        BuildTimeLineItems(
+          movies: controller.selectedDay == controller.dateInfo.dates[0]
+            ? movie1 : controller.selectedDay == controller.dateInfo.dates[1] 
+              ? movie2 : controller.selectedDay == controller.dateInfo.dates[2]
+                ? movie3 : movie4
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTimeLine(BuildContext context) {
+    return Align(
+      alignment: Alignment.topLeft,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 12),
+        child: SizedBox(
+          height: 100,
+          width: 300,
+          child: Column(
+            children: [
+              Row(
+                children: List.generate(controller.dateInfo.dates.length, (index) {
+                  final date = controller.dateInfo.dates[index];
+                  final day = controller.dateInfo.dayNames[index];
+                  final month = controller.dateInfo.months[index];
+                  return Expanded(
                     child: GestureDetector(
                       onTap: () {
                         setState(() {
-                          selectedDay = date;
+                          controller.selectedDay = date;
                         });
                       },
                       child: Stack(
@@ -187,8 +218,10 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
                           Container(
                             height: 80,
                             width: 70,
+                            margin: const EdgeInsets.all(4),
+                            padding: const EdgeInsets.symmetric(vertical: 10),
                             decoration: BoxDecoration(
-                              border: selectedDay == date
+                              border: controller.selectedDay == date
                                   ? Border.all(color: Colors.red, width: 2)
                                   : Border.all(color: Colors.grey),
                               borderRadius: BorderRadius.circular(8),
@@ -198,26 +231,19 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
                             top: 10,
                             left: 20,
                             child: TextWidget(
-                              day,
+                              day == 'Today' ? S.of(context).today : day,
                               size: 12,
                             ),
                           ),
                           Positioned(
                             top: 25,
                             left: 20,
-                            child: TextWidget(
-                              date,
-                              bold: true,
-                              size: 22,
-                            ),
+                            child: TextWidget(date, bold: true, size: 22,),
                           ),
                           Positioned(
                             bottom: 15,
                             left: 25,
-                            child: TextWidget(
-                              month,
-                              size: 12,
-                            ),
+                            child: TextWidget(month, size: 12,),
                           ),
                         ],
                       ),
@@ -225,108 +251,108 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
                   );
                 }),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
-}
 
-Widget _builderRow(
-    {required IconData icon, required String text, required String subText}) {
-  return Row(children: [
-    Icon(
-      icon,
-      color: Colors.red,
-    ),
-    const SizedBox(
-      width: 10,
-    ),
-    TextWidget(text, bold: true, color: Colors.grey),
-    TextWidget(
-      subText,
-      bold: true,
-    )
-  ]);
-}
+  Widget _builderRow(
+      {required IconData icon, required String text, required String subText}) {
+    return Row(children: [
+      Icon(
+        icon,
+        color: Colors.red,
+      ),
+      const SizedBox(
+        width: 10,
+      ),
+      TextWidget(text, bold: true, color: Colors.grey),
+      TextWidget(
+        subText,
+        bold: true,
+      )
+    ]);
+  }
 
-Future _buildBottomSheet(BuildContext context) {
-  return showModalBottomSheet(
-    context: context,
-    builder: (context) {
-      return SizedBox(
-        height: 500,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextWidget(
-                    S.of(context).cinema,
-                    size: 19,
-                    bold: true,
-                  ),
-                  GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: Container(
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                            color: Colors.white.withOpacity(0.3), width: 2),
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(
-                        Icons.close,
-                        size: 20,
-                      ),
+  Future _buildBottomSheet(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return SizedBox(
+          height: 500,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextWidget(
+                      S.of(context).cinema,
+                      size: 19,
+                      bold: true,
                     ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Divider(
-                color: Colors.white.withOpacity(0.3),
-                height: 2,
-              ),
-            ),
-            const SizedBox(height: 25),
-            Expanded(
-              child: ListView.builder(
-                itemCount: cinemaList.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    height: 60,
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            const Icon(Icons.location_on, color: Colors.red),
-                            const SizedBox(width: 8),
-                            TextWidget(cinemaList[index]["title"] ?? "",
-                                size: 16, bold: true),
-                          ],
+                    GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: Container(
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              color: Colors.white.withOpacity(0.3), width: 2),
+                          shape: BoxShape.circle,
                         ),
-                        Divider(
-                            color: Colors.white.withOpacity(0.3), height: 0.5),
-                      ],
+                        child: const Icon(
+                          Icons.close,
+                          size: 20,
+                        ),
+                      ),
                     ),
-                  );
-                },
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
-      );
-    },
-  );
-}
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Divider(
+                  color: Colors.white.withOpacity(0.3),
+                  height: 2,
+                ),
+              ),
+              const SizedBox(height: 25),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: cinemaList.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      height: 60,
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              const Icon(Icons.location_on, color: Colors.red),
+                              const SizedBox(width: 8),
+                              TextWidget(cinemaList[index]["title"] ?? "",
+                                  size: 16, bold: true),
+                            ],
+                          ),
+                          Divider(
+                              color: Colors.white.withOpacity(0.3), height: 0.5),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 
+}
 List<Map<String, String>> cinemaList = [
   {"title": "Legend Eden Garden"},
   {"title": "Legend Toul Kork"},
