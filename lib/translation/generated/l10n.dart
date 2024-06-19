@@ -1409,6 +1409,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Confirm Delete`
+  String get confirm_delete {
+    return Intl.message(
+      'Confirm Delete',
+      name: 'confirm_delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete this notification?`
+  String get ms_delete {
+    return Intl.message(
+      'Are you sure you want to delete this notification?',
+      name: 'ms_delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get delete {
+    return Intl.message(
+      'Delete',
+      name: 'delete',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -6,9 +6,11 @@ import 'package:legend_cinema/modules/landings/home/widgets/movie_item.dart';
 import '../../../../widgets/text_widget.dart';
 
 class BuildTimeLineItems extends StatelessWidget {
-  const BuildTimeLineItems({super.key, this.movies});
+  const BuildTimeLineItems({super.key, this.movies, this.isdetails = false, this.switcer});
 
   final List<Movies>? movies;
+  final bool isdetails;
+  final Function(Movies)? switcer;
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +32,16 @@ class BuildTimeLineItems extends StatelessWidget {
           if (item == null) return const SizedBox.shrink();
           return GestureDetector(
             onTap: () {
-              AppRoute.route.push(
-                context,
-                HomeMovieDetail(
-                  list: item,
-                ),
-              );
+              if (isdetails) {
+                switcer?.call(item);
+              } else {
+                AppRoute.route.push(
+                  context,
+                  HomeMovieDetail(
+                    list: item,
+                  ),
+                );
+              }
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

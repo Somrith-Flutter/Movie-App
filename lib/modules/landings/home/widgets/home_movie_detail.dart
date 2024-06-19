@@ -26,18 +26,20 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
   String selectedDay = '';
   String selectedCinema = "Legend Eden Garden";
   final FBController controller = Get.find();
+  bool isSwitchDetails = false;
+  Movies? currentMovie;
 
   @override
   void initState() {
     super.initState();
-
     selectedDay = dateInfo.dates.first;
+    currentMovie = widget.list;
   }
 
   Future<void> shareAssetImage(String assetPath) async {
     try {
       final byteData = await rootBundle.load(assetPath);
-    
+
       // Write image to a temporary file
       final tempDir = await getTemporaryDirectory();
       final file = await File('${tempDir.path}/temp_image.png').create();
@@ -61,7 +63,7 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
             Stack(
               children: [
                 Image.asset(
-                  widget.list.image!,
+                  currentMovie?.image ?? widget.list.image!,
                   fit: BoxFit.cover,
                   height: 250,
                   width: double.infinity,
@@ -101,7 +103,7 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextWidget(
-                    widget.list.title,
+                    currentMovie?.title ?? widget.list.title,
                     size: 20,
                     bold: true,
                   ),
@@ -120,28 +122,28 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
                   _builderRow(
                       icon: Icons.folder_shared_rounded,
                       text: S.of(context).genre,
-                      subText: widget.list.genre!),
+                      subText: currentMovie?.genre ?? widget.list.genre!),
                   const SizedBox(
                     height: 10,
                   ),
                   _builderRow(
                       icon: Icons.access_time_filled,
                       text: S.of(context).duration,
-                      subText: widget.list.duration!),
+                      subText: currentMovie?.duration ?? widget.list.duration!),
                   const SizedBox(
                     height: 10,
                   ),
                   _builderRow(
                       icon: Icons.date_range,
                       text: S.of(context).release,
-                      subText: widget.list.release!),
+                      subText: currentMovie?.release ?? widget.list.release!),
                   const SizedBox(
                     height: 10,
                   ),
                   _builderRow(
                       icon: Icons.visibility_off,
                       text: S.of(context).classification,
-                      subText: widget.list.classification!)
+                      subText: currentMovie?.classification ?? widget.list.classification!)
                 ],
               ),
             ),
@@ -196,10 +198,7 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
               ),
             ),
             const Gap(15),
-            // ignore: unrelated_type_equality_checks
-            controller.fb.first.name == selectedCinema 
-              ? _buildSwitchingMovies(context) : controller.fb[2].name == selectedCinema
-                ? _buildSwitchingMoviesList(context) : _buildSwitchingMovies(context),
+            _buildSwitchingMovies(context),
           ],
         ),
       ),
@@ -207,23 +206,16 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
   }
 
   Widget _buildSwitchingMovies(BuildContext context) {
-    return ListView(
-      padding: EdgeInsets.zero,
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      children: [
-        _buildTimeLine(context),
-        BuildTimeLineItems(
-          movies: selectedDay == dateInfo.dates[0]
-            ? movie1 : selectedDay == dateInfo.dates[1]
-              ? movie2 : selectedDay == dateInfo.dates[2]
-                ? movie3 : movie4
-        ),
-      ],
-    );
-  }
+    List<Movies> movies = selectedCinema == controller.fb.first.name
+      ? (selectedDay == dateInfo.dates[0]
+        ? movie1 : selectedDay == dateInfo.dates[1]
+          ? movie2 : selectedDay == dateInfo.dates[2]
+            ? movie3 : movie4)
+      : (selectedDay == dateInfo.dates[0]
+        ? movie5 : selectedDay == dateInfo.dates[1]
+          ? movie6 : selectedDay == dateInfo.dates[2]
+            ? movie7 : movie8);
 
-   Widget _buildSwitchingMoviesList(BuildContext context) {
     return ListView(
       padding: EdgeInsets.zero,
       physics: const NeverScrollableScrollPhysics(),
@@ -231,10 +223,13 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
       children: [
         _buildTimeLine(context),
         BuildTimeLineItems(
-          movies: selectedDay == dateInfo.dates[0]
-            ? movie5 : selectedDay == dateInfo.dates[1]
-              ? movie6 : selectedDay == dateInfo.dates[2]
-                ? movie7 : movie8
+          movies: movies,
+          isdetails: true,
+          switcer: (Movies movie) {
+            setState(() {
+              currentMovie = movie;
+            });
+          },
         ),
       ],
     );
@@ -260,6 +255,15 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
                       onTap: () {
                         setState(() {
                           selectedDay = date;
+                          currentMovie = (selectedCinema == controller.fb.first.name
+                            ? (selectedDay == dateInfo.dates[0]
+                              ? movie1 : selectedDay == dateInfo.dates[1]
+                                ? movie2 : selectedDay == dateInfo.dates[2]
+                                  ? movie3 : movie4)[0] 
+                            : (selectedDay == dateInfo.dates[0]
+                              ? movie5 : selectedDay == dateInfo.dates[1]
+                                ? movie6 : selectedDay == dateInfo.dates[2]
+                                  ? movie7 : movie8)[0]); 
                         });
                       },
                       child: Stack(
@@ -280,19 +284,27 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
                             top: 10,
                             left: 20,
                             child: TextWidget(
-                              day == 'Today' ? S.of(context).today : day,
-                              size: 12,
+                              day == "Today" ? S.of(context).today : day,
+                              size: 14,
+                              bold: true,
                             ),
                           ),
                           Positioned(
-                            top: 25,
-                            left: 20,
-                            child: TextWidget(date, bold: true, size: 22,),
+                            top: 35,
+                            left: 25,
+                            child: TextWidget(
+                              date.split('/')[0],
+                              size: 16,
+                              bold: true,
+                            ),
                           ),
                           Positioned(
-                            bottom: 15,
-                            left: 25,
-                            child: TextWidget(month, size: 12,),
+                            top: 55,
+                            left: 15,
+                            child: TextWidget(
+                              month,
+                              size: 12,
+                            ),
                           ),
                         ],
                       ),
@@ -307,8 +319,7 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
     );
   }
 
-  Widget _builderRow(
-      {required IconData icon, required String text, required String subText}) {
+  Widget _builderRow({required IconData icon, required String text, required String subText}) {
     return Row(children: [
       Icon(
         icon,
@@ -382,6 +393,10 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
                           onTap: () {
                             setState(() {
                               selectedCinema = cinemaName;
+                              selectedDay = dateInfo.dates.first; 
+                              currentMovie = (selectedCinema == controller.fb.first.name
+                                ? movie1[0] 
+                                : movie5[0]); 
                             });
                             Navigator.pop(context);
                           },

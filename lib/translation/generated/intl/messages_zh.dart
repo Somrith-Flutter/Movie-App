@@ -48,9 +48,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "classification": MessageLookupByLibrary.simpleMessage("分类: "),
         "coming_soon": MessageLookupByLibrary.simpleMessage("即将推出"),
         "confirm": MessageLookupByLibrary.simpleMessage("确认"),
+        "confirm_delete": MessageLookupByLibrary.simpleMessage("确认删除"),
         "contact_info": MessageLookupByLibrary.simpleMessage("联系方式"),
         "contact_us": MessageLookupByLibrary.simpleMessage("联系我们"),
         "continues": MessageLookupByLibrary.simpleMessage("继续"),
+        "delete": MessageLookupByLibrary.simpleMessage("删除"),
         "details": MessageLookupByLibrary.simpleMessage("细节"),
         "developer_mode": MessageLookupByLibrary.simpleMessage("开发者模式"),
         "dis_legend_membership": MessageLookupByLibrary.simpleMessage(
@@ -86,6 +88,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "member_point": MessageLookupByLibrary.simpleMessage("会员积分"),
         "more": MessageLookupByLibrary.simpleMessage("更多的"),
         "ms_create_account": MessageLookupByLibrary.simpleMessage("您已使用 "),
+        "ms_delete": MessageLookupByLibrary.simpleMessage("您确定要删除此通知吗？"),
         "ms_error": MessageLookupByLibrary.simpleMessage("出了些问题！"),
         "ms_footer": MessageLookupByLibrary.simpleMessage(
             "何时去附近的电影院观看您最喜爱\n的电影? 立即探索,看看您周围有更多电影院."),

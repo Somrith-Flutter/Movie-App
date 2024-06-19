@@ -136,6 +136,7 @@ class _NotificationViewState extends State<NotificationView> {
   if (_paymentDataList.isEmpty) {
     return _buildNoNotification(context);
   }
+
   List<Map<String, dynamic>> reversedList = List.from(_paymentDataList.reversed);
 
   return ListView.builder(
@@ -145,102 +146,122 @@ class _NotificationViewState extends State<NotificationView> {
       final List<Map<String, dynamic>> itemsData = List<Map<String, dynamic>>.from(paymentData['items']);
       bool isRead = paymentData['isRead'];
 
-      return Stack(
-        children: [
-          GestureDetector(
-            onTap: () => _markAsRead(index),
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              margin: const EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                color: isRead ? Colors.transparent : Colors.blue.withOpacity(0.5),
-                border: Border.all(color: Colors.red.withOpacity(0.5)),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ...itemsData.map((itemData) {
-                    String cacheImage({String? img}) {
-                      if (AppConstant.baseIosIP == AppConstant.domainKey) {
-                        img = itemData['image_url'];
-                      }
-                      if (AppConstant.baseAndroidIP == AppConstant.domainKey) {
-                        img = "${AppConstant.domainKey}/${itemData['image_url']}";
-                      }
-                      return img ?? '';
-                    }
-
-                    return Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: 100,
-                          height: 100,
-                          padding: const EdgeInsets.all(5),
-                          margin: const EdgeInsets.only(right: 10),
-                          decoration: BoxDecoration(
-                            color: Colors.grey.withOpacity(0.5),
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          child: CachedNetworkImage(
-                            height: 100,
-                            width: 100,
-                            imageUrl: cacheImage(),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              TextWidget(
-                                'Total Price: \$${paymentData['totalPrice']}',
-                                size: 20,
-                                color: Colors.blue,
-                              ),
-                              TextWidget(
-                                'Title: ${itemData['title']}',
-                                size: 16,
-                              ),
-                              TextWidget(
-                                'Price: \$${itemData['price']}',
-                                size: 16,
-                              ),
-                              const SizedBox(height: 10),
-                            ],
-                          ),
-                        ),
-                      ],
-                    );
-                  }),
+      return Dismissible(
+        key: Key(paymentData.hashCode.toString()),
+        direction: DismissDirection.endToStart,
+        confirmDismiss: (direction) async {
+          return await showDialog(
+            context: context,
+            builder: (BuildContext dialogContext) {
+              return AlertDialog(
+                title: Text(S.of(context).confirm_delete),
+                content: Text(S.of(context).ms_delete),
+                actions: <Widget>[
+                  TextButton(
+                    child: Text(S.of(context).cancel),
+                    onPressed: () {
+                      Navigator.of(dialogContext).pop(false);
+                    },
+                  ),
+                  TextButton(
+                    child: Text(S.of(context).delete, style: const TextStyle(color: Colors.red)),
+                    onPressed: () {
+                      Navigator.of(dialogContext).pop(true);
+                    },
+                  ),
                 ],
-              ),
+              );
+            },
+          );
+        },
+        onDismissed: (direction) {
+          if (direction == DismissDirection.endToStart) {
+            _deleteNotification(index);
+          }
+        },
+        background: Container(
+          color: Colors.red,
+          alignment: Alignment.centerRight,
+          padding: const EdgeInsets.only(right: 20),
+          child: const Icon(Icons.delete, color: Colors.white),
+        ),
+        child: GestureDetector(
+          onTap: () => _markAsRead(index),
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            margin: const EdgeInsets.all(5),
+            decoration: BoxDecoration(
+              color: isRead ? Colors.transparent : Colors.blue.withOpacity(0.5),
+              border: Border.all(color: Colors.red.withOpacity(0.5)),
+              borderRadius: BorderRadius.circular(10),
             ),
-          ),
-          Positioned(
-            top: 10,
-            right: 10,
-            child: PopupMenuButton<int>(
-              itemBuilder: (context) => [
-                const PopupMenuItem(
-                  value: 0,
-                  child: Text('Delete'),
-                ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ...itemsData.map((itemData) {
+                  String cacheImage({String? img}) {
+                    if (AppConstant.baseIosIP == AppConstant.domainKey) {
+                      img = itemData['image_url'];
+                    }
+                    if (AppConstant.baseAndroidIP == AppConstant.domainKey) {
+                      img = "${AppConstant.domainKey}/${itemData['image_url']}";
+                    }
+                    return img ?? '';
+                  }
+
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 100,
+                        height: 100,
+                        padding: const EdgeInsets.all(5),
+                        margin: const EdgeInsets.only(right: 10),
+                        decoration: BoxDecoration(
+                          color: Colors.grey.withOpacity(0.5),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: CachedNetworkImage(
+                          height: 100,
+                          width: 100,
+                          imageUrl: cacheImage(),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextWidget(
+                              'Total Price: \$${paymentData['totalPrice']}',
+                              size: 20,
+                              color: Colors.blue,
+                            ),
+                            TextWidget(
+                              'Title: ${itemData['title']}',
+                              size: 16,
+                            ),
+                            TextWidget(
+                              'Price: \$${itemData['price']}',
+                              size: 16,
+                            ),
+                            const SizedBox(height: 10),
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                }),
               ],
-              onSelected: (value) {
-                if (value == 0) {
-                  _deleteNotification(index);
-                }
-              },
-              icon: const Icon(Icons.more_horiz, color: Colors.white),
             ),
           ),
-        ],
+        ),
       );
     },
   );
 }
+
+
 
   Widget _buildOrdersTab(BuildContext context) {
     final MoreController moreController = Get.find();

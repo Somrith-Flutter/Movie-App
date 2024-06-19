@@ -115,5 +115,8 @@
     "member_point": "会员积分",
     "food_b": "食品与饮品",
     "no_data": "没有找到数据!",
-    "enable_notification": "请先启用通知才能查看通知！"
+    "enable_notification": "请先启用通知才能查看通知！",
+    "confirm_delete": "确认删除",
+    "ms_delete": "您确定要删除此通知吗？",
+    "delete": "删除"
 }

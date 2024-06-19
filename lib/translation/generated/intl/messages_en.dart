@@ -55,10 +55,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Classification: "),
         "coming_soon": MessageLookupByLibrary.simpleMessage("Coming Soon"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+        "confirm_delete":
+            MessageLookupByLibrary.simpleMessage("Confirm Delete"),
         "contact_info": MessageLookupByLibrary.simpleMessage("Contact info"),
         "contact_us": MessageLookupByLibrary.simpleMessage("Contact us"),
         "continues": MessageLookupByLibrary.simpleMessage("Continue"),
         "dark": MessageLookupByLibrary.simpleMessage("Dark"),
+        "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "delivery": MessageLookupByLibrary.simpleMessage("Delivery"),
         "details": MessageLookupByLibrary.simpleMessage("Details"),
         "developer_mode":
@@ -104,6 +107,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "more": MessageLookupByLibrary.simpleMessage("More"),
         "ms_create_account": MessageLookupByLibrary.simpleMessage(
             "You\'ve created this account with "),
+        "ms_delete": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to delete this notification?"),
         "ms_error":
             MessageLookupByLibrary.simpleMessage("Something went wrong!"),
         "ms_footer": MessageLookupByLibrary.simpleMessage(

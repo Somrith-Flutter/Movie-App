@@ -56,12 +56,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ចំណាត់ថ្នាក់៖ "),
         "coming_soon": MessageLookupByLibrary.simpleMessage("ចាក់បញ្ចាំងឆាប់ៗ"),
         "confirm": MessageLookupByLibrary.simpleMessage("បញ្ជាក់"),
+        "confirm_delete": MessageLookupByLibrary.simpleMessage("បញ្ជាក់ការលុប"),
         "contact_info":
             MessageLookupByLibrary.simpleMessage("ព័ឥមានទំនាក់ទំនង"),
         "contact_us":
             MessageLookupByLibrary.simpleMessage("ទំនាក់ទំនងមកពួកយើង"),
         "continues": MessageLookupByLibrary.simpleMessage("បន្ត"),
         "dark": MessageLookupByLibrary.simpleMessage("ងងឹត"),
+        "delete": MessageLookupByLibrary.simpleMessage("លុប"),
         "delivery":
             MessageLookupByLibrary.simpleMessage("សំរាប់​ការ​ដឹកជញ្ជូន"),
         "details": MessageLookupByLibrary.simpleMessage("លម្អិត"),
@@ -110,6 +112,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "more": MessageLookupByLibrary.simpleMessage("ផ្សេងៗទៀត"),
         "ms_create_account":
             MessageLookupByLibrary.simpleMessage("អ្នកបានបង្កើតគណនីនេះជាមួយ "),
+        "ms_delete": MessageLookupByLibrary.simpleMessage(
+            "តើអ្នកប្រាកដថាចង់លុបការជូនដំណឹងនេះទេ?"),
         "ms_error":
             MessageLookupByLibrary.simpleMessage("មាន​អ្វីមួយ​មិន​ប្រក្រតី!"),
         "ms_footer": MessageLookupByLibrary.simpleMessage(
