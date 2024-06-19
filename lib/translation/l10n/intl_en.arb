@@ -96,5 +96,17 @@
     "benifit": "Benifits",
     "activate_card": "Activate Card",
     "card_activate": "Card Activate",
-    "card_number": "Card Number"
+    "card_number": "Card Number",
+    "announcement": "Announcement",
+    "ms_notification": "Login Order to see notification",
+    "no_notification": "No notification",
+    "details": "Details",
+    "ms_footer": "When to watch your favorite\nmovie at the nearby cinema?\nExplore now to see more cinema around you.",
+    "opening_hour": "Opening Hour",
+    "number_of_hall": "Number fo Hall",
+    "release": "Release: ",
+    "duration" :"Duration: " ,
+    "classification": "Classification: ",
+    "genre": "Genre: ",
+    "dis_movie": "Description about the Movie"
 }

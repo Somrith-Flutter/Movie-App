@@ -31,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "ការផ្សាយពាណិជ្ជកម្ម និងភាពជាដៃគូរ"),
         "all_cinema": MessageLookupByLibrary.simpleMessage("ទីតាំងទាំងអស់"),
         "allow": MessageLookupByLibrary.simpleMessage("អនុញ្ញាតិ"),
+        "announcement": MessageLookupByLibrary.simpleMessage("សេចក្តីប្រកាស"),
         "benifit": MessageLookupByLibrary.simpleMessage("អត្ថប្រយោជន៍"),
         "bonus_10": MessageLookupByLibrary.simpleMessage(
             "បញ្ចុះតម្លៃ 10% សម្រាប់សំបុត្រកុន ចំណីអាហា\nនិងភេសជ្ជះ"),
@@ -50,6 +51,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "chinese": MessageLookupByLibrary.simpleMessage("ចិន"),
         "choose_cinema": MessageLookupByLibrary.simpleMessage("ជ្រើសរើសរោងកុន"),
         "cinema": MessageLookupByLibrary.simpleMessage("ទីតាំង"),
+        "classification":
+            MessageLookupByLibrary.simpleMessage("ចំណាត់ថ្នាក់៖ "),
         "coming_soon": MessageLookupByLibrary.simpleMessage("ចាក់បញ្ចាំងឆាប់ៗ"),
         "confirm": MessageLookupByLibrary.simpleMessage("បញ្ជាក់"),
         "contact_info":
@@ -60,10 +63,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "dark": MessageLookupByLibrary.simpleMessage("ងងឹត"),
         "delivery":
             MessageLookupByLibrary.simpleMessage("សំរាប់​ការ​ដឹកជញ្ជូន"),
+        "details": MessageLookupByLibrary.simpleMessage("លម្អិត"),
         "developer_mode": MessageLookupByLibrary.simpleMessage(
             "មុខងារ​អ្នកអភិវឌ្ឍន៍កម្មវិធី"),
         "dis_legend_membership": MessageLookupByLibrary.simpleMessage(
             "ទទួលបានអត្ថប្រយោជន៍ជាច្រើនពីកាតសមាជិករបស់យើង។ ទទួលយកអីឡូវនេះ នៅទីតាំងក្បែរលោកអ្នក"),
+        "dis_movie":
+            MessageLookupByLibrary.simpleMessage("ការពិពណ៌នាអំពីភាពយន្ត"),
+        "duration": MessageLookupByLibrary.simpleMessage("រយៈពេល៖ "),
         "email": MessageLookupByLibrary.simpleMessage("អុីម៉ែល"),
         "english": MessageLookupByLibrary.simpleMessage("អង់គ្លេស"),
         "explore_more": MessageLookupByLibrary.simpleMessage("ស្វែងយល់បន្ថែម"),
@@ -73,6 +80,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "from_camera": MessageLookupByLibrary.simpleMessage("កាមេរ៉ា"),
         "from_gallery": MessageLookupByLibrary.simpleMessage("វិចិត្រសាល"),
         "general": MessageLookupByLibrary.simpleMessage("ទូទៅ"),
+        "genre": MessageLookupByLibrary.simpleMessage("ប្រភេទ៖ "),
         "gust_info": MessageLookupByLibrary.simpleMessage("ព័ឥមានភ្ញៀវ"),
         "hello": MessageLookupByLibrary.simpleMessage("សួរស្តី"),
         "help": MessageLookupByLibrary.simpleMessage("ជំនួយ"),
@@ -91,16 +99,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "member_benifit":
             MessageLookupByLibrary.simpleMessage("អត្ថប្រយោជន៍សមាជិក"),
         "more": MessageLookupByLibrary.simpleMessage("ផ្សេងៗទៀត"),
+        "ms_footer": MessageLookupByLibrary.simpleMessage(
+            "ពេលណាត្រូវមើលភាពយន្តដែលអ្នកចូលចិត្តនៅរោងកុនក្បែរនោះ?\nស្វែងរកឥឡូវនេះ ដើម្បីមើលភាពយន្តជាច្រើនទៀតនៅជុំវិញអ្នក។"),
+        "ms_notification": MessageLookupByLibrary.simpleMessage(
+            "ចូលទៅក្នុងកម្មវិធីរួចធ្វើការកម៉ងដើម្បីទទួលបានសារជូនដំណឹង"),
         "msg_confirm_logout": MessageLookupByLibrary.simpleMessage(
             "តើអ្នកចង់ចាកចេញពីកម្មវិធីដែរ​​​ឬទេ?"),
         "my_cart": MessageLookupByLibrary.simpleMessage("My Cart"),
         "new_": MessageLookupByLibrary.simpleMessage("ថ្មី"),
         "news_activity":
             MessageLookupByLibrary.simpleMessage("ព័ឥមាន និងសកម្មភាព"),
+        "no_notification":
+            MessageLookupByLibrary.simpleMessage("មិនមានសារជូនដំណឹងទេ"),
         "notification": MessageLookupByLibrary.simpleMessage("សារជូនដំណឹង"),
         "now_showing": MessageLookupByLibrary.simpleMessage("កំពុងចាក់បញ្ចាំង"),
+        "number_of_hall": MessageLookupByLibrary.simpleMessage("លេខរៀងសាល"),
         "offer": MessageLookupByLibrary.simpleMessage("ការផ្តល់ជូន"),
         "old": MessageLookupByLibrary.simpleMessage("ចាស់"),
+        "opening_hour": MessageLookupByLibrary.simpleMessage("ម៉ោងបើក"),
         "order": MessageLookupByLibrary.simpleMessage("បញ្ជាទិញ"),
         "order_summary":
             MessageLookupByLibrary.simpleMessage("សេចក្តីសង្ខេបនៃការបញ្ជាទិញ"),
@@ -120,6 +136,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "promotion": MessageLookupByLibrary.simpleMessage("ការផ្សព្វផ្សាយ"),
         "purchase": MessageLookupByLibrary.simpleMessage("ការទិញ"),
         "register": MessageLookupByLibrary.simpleMessage("ចុះឈ្មោះ"),
+        "release": MessageLookupByLibrary.simpleMessage("ចេញផ្សាយ៖ "),
         "save": MessageLookupByLibrary.simpleMessage("រក្សាទុក"),
         "search": MessageLookupByLibrary.simpleMessage("ស្វែងរក"),
         "search_cinema":

@@ -1029,6 +1029,126 @@ class S {
       args: [],
     );
   }
+
+  /// `Announcement`
+  String get announcement {
+    return Intl.message(
+      'Announcement',
+      name: 'announcement',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login Order to see notification`
+  String get ms_notification {
+    return Intl.message(
+      'Login Order to see notification',
+      name: 'ms_notification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No notification`
+  String get no_notification {
+    return Intl.message(
+      'No notification',
+      name: 'no_notification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Details`
+  String get details {
+    return Intl.message(
+      'Details',
+      name: 'details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `When to watch your favorite\nmovie at the nearby cinema?\nExplore now to see more cinema around you.`
+  String get ms_footer {
+    return Intl.message(
+      'When to watch your favorite\nmovie at the nearby cinema?\nExplore now to see more cinema around you.',
+      name: 'ms_footer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Opening Hour`
+  String get opening_hour {
+    return Intl.message(
+      'Opening Hour',
+      name: 'opening_hour',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Number fo Hall`
+  String get number_of_hall {
+    return Intl.message(
+      'Number fo Hall',
+      name: 'number_of_hall',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Release: `
+  String get release {
+    return Intl.message(
+      'Release: ',
+      name: 'release',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Duration: `
+  String get duration {
+    return Intl.message(
+      'Duration: ',
+      name: 'duration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Classification: `
+  String get classification {
+    return Intl.message(
+      'Classification: ',
+      name: 'classification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Genre: `
+  String get genre {
+    return Intl.message(
+      'Genre: ',
+      name: 'genre',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description about the Movie`
+  String get dis_movie {
+    return Intl.message(
+      'Description about the Movie',
+      name: 'dis_movie',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -8,13 +8,13 @@ import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/core/enum/base_status_enum.dart';
 import 'package:legend_cinema/core/model/fb_model.dart';
 import 'package:legend_cinema/modules/landings/cinema/widgets/cinema_movie_detail.dart';
-import 'package:legend_cinema/modules/landings/f_b/model/f_b_model.dart';
 import 'package:legend_cinema/modules/landings/home/controller/home_controller.dart';
+import 'package:legend_cinema/translation/generated/l10n.dart';
+import 'package:legend_cinema/utils/helpers/date_helper.dart';
 import 'package:legend_cinema/utils/helpers/helper_fn.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/no_data_found.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
-import 'package:intl/intl.dart';
 
 class CinemaDetail extends StatefulWidget {
   const CinemaDetail({super.key, required this.data});
@@ -40,10 +40,9 @@ class _CinemaDetailState extends State<CinemaDetail> {
     selectedDay = dateInfo.dates.first;
   }
 
-  var appBarMenu = ["New Showing", "Detail"];
-
   @override
   Widget build(BuildContext context) {
+    var appBarMenu = [S.of(context).now_showing, S.of(context).details];
     return DefaultTabController(
       length: appBarMenu.length,
       child: Scaffold(
@@ -77,7 +76,7 @@ class _CinemaDetailState extends State<CinemaDetail> {
                 ),
                 SliverToBoxAdapter(
                   child: TabBar(
-                    tabs: appBarMenu.map((es) => Tab(text: es)).toList(),
+                    tabs: appBarMenu.map((es) => Tab(text: es.toString())).toList(),
                     unselectedLabelColor: Colors.grey,
                     labelColor: Colors.white,
                     indicatorColor: Colors.white,
@@ -182,12 +181,11 @@ class _CinemaDetailState extends State<CinemaDetail> {
             }),
           ),
           const SizedBox(height: 30),
-          const TextWidget(
-            "Now Showing",
+          TextWidget(
+            S.of(context).now_showing,
             size: 22,
             bold: true,
           ),
-          const SizedBox(height: 30),
         ],
       ),
     );
@@ -209,6 +207,7 @@ class _CinemaDetailState extends State<CinemaDetail> {
 
     return GestureDetector(
       child: GridView.builder(
+        padding: EdgeInsets.zero,
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -301,8 +300,8 @@ class _CinemaDetailState extends State<CinemaDetail> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const TextWidget(
-                "Number fo Hall",
+              TextWidget(
+                S.of(context).number_of_hall,
                 size: 18,
                 color: Colors.grey,
               ),
@@ -323,8 +322,8 @@ class _CinemaDetailState extends State<CinemaDetail> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const TextWidget(
-                "Opening Hour",
+              TextWidget(
+                S.of(context).opening_hour,
                 size: 18,
                 color: Colors.grey,
               ),
@@ -345,8 +344,8 @@ class _CinemaDetailState extends State<CinemaDetail> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const TextWidget(
-                "Address",
+              TextWidget(
+                S.of(context).address,
                 size: 18,
                 color: Colors.grey,
               ),
@@ -376,43 +375,5 @@ class _CinemaDetailState extends State<CinemaDetail> {
         ],
       ),
     );
-  }
-}
-
-class DateInfo {
-  final now = DateTime.now();
-
-  List<String> get daysOfWeek {
-    final days = List.generate(4, (i) => now.add(Duration(days: i)));
-    return days.map((date) {
-      if (date.isAtSameMomentAs(now)) {
-        return 'Today, ${DateFormat('MMM d').format(date)}';
-      } else {
-        return DateFormat('EEE, MMM d').format(date);
-      }
-    }).toList();
-  }
-
-  List<String> get dayNames {
-    final days = List.generate(4, (i) => now.add(Duration(days: i)));
-    return days.map((date) {
-      if (date.day == now.day &&
-          date.month == now.month &&
-          date.year == now.year) {
-        return 'Today';
-      } else {
-        return DateFormat('EEE').format(date);
-      }
-    }).toList();
-  }
-
-  List<String> get months {
-    final days = List.generate(4, (i) => now.add(Duration(days: i)));
-    return days.map((date) => DateFormat('MMM').format(date)).toList();
-  }
-
-  List<String> get dates {
-    final days = List.generate(4, (i) => now.add(Duration(days: i)));
-    return days.map((date) => DateFormat('d').format(date)).toList();
   }
 }

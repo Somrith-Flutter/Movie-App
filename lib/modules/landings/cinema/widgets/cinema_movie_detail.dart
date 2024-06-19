@@ -2,12 +2,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/core/enum/base_status_enum.dart';
 import 'package:legend_cinema/modules/landings/f_b/controller/f_b_controller.dart';
 import 'package:legend_cinema/modules/landings/home/controller/home_controller.dart';
 import 'package:legend_cinema/modules/landings/home/model/home_model.dart';
+import 'package:legend_cinema/translation/generated/l10n.dart';
+import 'package:legend_cinema/utils/helpers/date_helper.dart';
 import 'package:legend_cinema/utils/helpers/helper_fn.dart';
 import 'package:legend_cinema/widgets/no_data_found.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
@@ -132,28 +133,28 @@ class _CinemaMovieDetailState extends State<CinemaMovieDetail> {
                     ),
                     _builderRow(
                         icon: Icons.folder_shared_rounded,
-                        text: "Genre: ",
+                        text: S.of(context).genre,
                         subText: newMoive!.genre.toString()),
                     const SizedBox(
                       height: 10,
                     ),
                     _builderRow(
                         icon: Icons.access_time_filled,
-                        text: "Duration: ",
+                        text: S.of(context).duration,
                         subText: newMoive!.duration.toString()),
                     const SizedBox(
                       height: 10,
                     ),
                     _builderRow(
                         icon: Icons.date_range,
-                        text: "Release: ",
+                        text: S.of(context).release,
                         subText: newMoive!.release.toString()),
                     const SizedBox(
                       height: 10,
                     ),
                     _builderRow(
                         icon: Icons.visibility_off,
-                        text: "Classification: ",
+                        text: S.of(context).classification,
                         subText: newMoive!.classification.toString())
                   ],
                 ),
@@ -235,28 +236,28 @@ class _CinemaMovieDetailState extends State<CinemaMovieDetail> {
                       ),
                       _builderRow(
                           icon: Icons.folder_shared_rounded,
-                          text: "Genre: ",
+                          text: S.of(context).genre,
                           subText: v.genre.toString()),
                       const SizedBox(
                         height: 10,
                       ),
                       _builderRow(
                           icon: Icons.access_time_filled,
-                          text: "Duration: ",
+                          text: S.of(context).duration,
                           subText: v.duration.toString()),
                       const SizedBox(
                         height: 10,
                       ),
                       _builderRow(
                           icon: Icons.date_range,
-                          text: "Release: ",
+                          text: S.of(context).release,
                           subText: v.release.toString()),
                       const SizedBox(
                         height: 10,
                       ),
                       _builderRow(
                           icon: Icons.visibility_off,
-                          text: "Classification: ",
+                          text: S.of(context).classification,
                           subText: v.classification.toString())
                     ],
                   ),
@@ -276,10 +277,10 @@ class _CinemaMovieDetailState extends State<CinemaMovieDetail> {
             const SizedBox(
               height: 10,
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: TextWidget(
-                "Description about the Movie",
+                S.of(context).dis_movie,
                 size: 16,
                 color: Colors.grey,
               ),
@@ -413,8 +414,8 @@ class _CinemaMovieDetailState extends State<CinemaMovieDetail> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const TextWidget(
-                    "Cinema",
+                  TextWidget(
+                    S.of(context).cinema,
                     size: 19,
                     bold: true,
                   ),
@@ -585,43 +586,5 @@ class _CinemaMovieDetailState extends State<CinemaMovieDetail> {
         },
       ),
     );
-  }
-}
-
-class DateInfo {
-  final now = DateTime.now();
-
-  List<String> get daysOfWeek {
-    final days = List.generate(4, (i) => now.add(Duration(days: i)));
-    return days.map((date) {
-      if (date.isAtSameMomentAs(now)) {
-        return 'Today, ${DateFormat('MMM d').format(date)}';
-      } else {
-        return DateFormat('EEE, MMM d').format(date);
-      }
-    }).toList();
-  }
-
-  List<String> get dayNames {
-    final days = List.generate(4, (i) => now.add(Duration(days: i)));
-    return days.map((date) {
-      if (date.day == now.day &&
-          date.month == now.month &&
-          date.year == now.year) {
-        return 'Today';
-      } else {
-        return DateFormat('EEE').format(date);
-      }
-    }).toList();
-  }
-
-  List<String> get months {
-    final days = List.generate(4, (i) => now.add(Duration(days: i)));
-    return days.map((date) => DateFormat('MMM').format(date)).toList();
-  }
-
-  List<String> get dates {
-    final days = List.generate(4, (i) => now.add(Duration(days: i)));
-    return days.map((date) => DateFormat('d').format(date)).toList();
   }
 }

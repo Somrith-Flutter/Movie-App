@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:legend_cinema/modules/landings/home/widgets/movie_item.dart';
+import 'package:legend_cinema/translation/generated/l10n.dart';
+import 'package:legend_cinema/utils/helpers/date_helper.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
@@ -87,28 +88,28 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
                   ),
                   _builderRow(
                       icon: Icons.folder_shared_rounded,
-                      text: "Genre: ",
+                      text: S.of(context).genre,
                       subText: widget.list.genre!),
                   const SizedBox(
                     height: 10,
                   ),
                   _builderRow(
                       icon: Icons.access_time_filled,
-                      text: "Duration: ",
+                      text: S.of(context).duration,
                       subText: widget.list.duration!),
                   const SizedBox(
                     height: 10,
                   ),
                   _builderRow(
                       icon: Icons.date_range,
-                      text: "Release: ",
+                      text: S.of(context).release,
                       subText: widget.list.release!),
                   const SizedBox(
                     height: 10,
                   ),
                   _builderRow(
                       icon: Icons.visibility_off,
-                      text: "Classification: ",
+                      text: S.of(context).classification,
                       subText: widget.list.classification!)
                 ],
               ),
@@ -126,10 +127,10 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
             const SizedBox(
               height: 10,
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: TextWidget(
-                "Description about the Movie",
+                S.of(context).dis_movie,
                 size: 16,
                 color: Colors.grey,
               ),
@@ -263,8 +264,8 @@ Future _buildBottomSheet(BuildContext context) {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const TextWidget(
-                    "Cinema",
+                  TextWidget(
+                    S.of(context).cinema,
                     size: 19,
                     bold: true,
                   ),
@@ -340,41 +341,3 @@ List<Map<String, String>> cinemaList = [
   {"title": "Legend Cinema Sihanoukville"},
   {"title": "Legend Siem Reap"},
 ];
-
-class DateInfo {
-  final now = DateTime.now();
-
-  List<String> get daysOfWeek {
-    final days = List.generate(4, (i) => now.add(Duration(days: i)));
-    return days.map((date) {
-      if (date.isAtSameMomentAs(now)) {
-        return 'Today, ${DateFormat('MMM d').format(date)}';
-      } else {
-        return DateFormat('EEE, MMM d').format(date);
-      }
-    }).toList();
-  }
-
-  List<String> get dayNames {
-    final days = List.generate(4, (i) => now.add(Duration(days: i)));
-    return days.map((date) {
-      if (date.day == now.day &&
-          date.month == now.month &&
-          date.year == now.year) {
-        return 'Today';
-      } else {
-        return DateFormat('EEE').format(date);
-      }
-    }).toList();
-  }
-
-  List<String> get months {
-    final days = List.generate(4, (i) => now.add(Duration(days: i)));
-    return days.map((date) => DateFormat('MMM').format(date)).toList();
-  }
-
-  List<String> get dates {
-    final days = List.generate(4, (i) => now.add(Duration(days: i)));
-    return days.map((date) => DateFormat('d').format(date)).toList();
-  }
-}

@@ -283,16 +283,16 @@ class _MoreViewState extends State<MoreView> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Confirm Logout'),
-          content: const Text('Are you sure you want to log out?'),
+          title: Text(S.of(context).confirm),
+          content: Text(S.of(context).msg_confirm_logout),
           actions: <Widget>[
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: const  Text('No'),
+              child: Text(S.of(context).btn_no),
             ),
             TextButton(
               onPressed: () => Navigator.of(context).pop(true),
-              child: const Text('Yes'),
+              child: Text(S.of(context).btn_yes),
             ),
           ],
         );

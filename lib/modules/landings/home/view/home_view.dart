@@ -800,11 +800,10 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
             ),
           ),
         ),
-        const Positioned(
+        Positioned(
           left: 20,
           child: TextWidget(
-            "When to watch your favorite \nmovie at nearby cinema?\n"
-            "Explore now to see more cinema arround you.",
+            S.of(context).ms_footer,
             size: 13,
           ),
         ),
