@@ -1,18 +1,21 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
+import 'package:legend_cinema/modules/landings/f_b/controller/f_b_controller.dart';
 import 'package:legend_cinema/modules/landings/home/widgets/movie_item.dart';
 import 'package:legend_cinema/modules/landings/home/widgets/time_line_item.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/utils/helpers/date_helper.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 class HomeMovieDetail extends StatefulWidget {
   final Movies list;
-  const HomeMovieDetail(
-      {super.key,
-     required this.list});
-
+  const HomeMovieDetail({super.key, required this.list});
 
   @override
   State<HomeMovieDetail> createState() => _HomeMovieDetailState();
@@ -21,11 +24,30 @@ class HomeMovieDetail extends StatefulWidget {
 class _HomeMovieDetailState extends State<HomeMovieDetail> {
   final dateInfo = DateInfo();
   String selectedDay = '';
+  String selectedCinema = "Legend Eden Garden";
+  final FBController controller = Get.find();
 
   @override
   void initState() {
     super.initState();
+
     selectedDay = dateInfo.dates.first;
+  }
+
+  Future<void> shareAssetImage(String assetPath) async {
+    try {
+      final byteData = await rootBundle.load(assetPath);
+    
+      // Write image to a temporary file
+      final tempDir = await getTemporaryDirectory();
+      final file = await File('${tempDir.path}/temp_image.png').create();
+      await file.writeAsBytes(byteData.buffer.asUint8List());
+
+      // ignore: deprecated_member_use
+      await Share.shareFiles([file.path], text: 'Check out this image!');
+    } catch (e) {
+      debugPrint('Error sharing asset image: $e');
+    }
   }
 
   @override
@@ -45,22 +67,29 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
                   width: double.infinity,
                 ),
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 50, horizontal: 16),
-                  child: Positioned(
-                      child: Row(
+                  padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 16),
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const BackWidget(),
-                      Container(
+                      GestureDetector(
+                        onTap: () async {
+                          await shareAssetImage(widget.list.image!);
+                          setState(() {});
+                        },
+                        child: Container(
                           padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.grey.withOpacity(0.5)),
-                          child: const Icon(Icons.ios_share_outlined))
+                            shape: BoxShape.circle,
+                            color: Colors.grey.withOpacity(0.5),
+                          ),
+                          child: const Icon(Icons.ios_share_outlined),
+                        ),
+                      ),
                     ],
-                  )),
+                  ),
                 )
+
               ],
             ),
             const SizedBox(
@@ -153,15 +182,15 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
                     border: Border.all(
                         width: 2, color: Colors.white.withOpacity(0.5)),
                     borderRadius: BorderRadius.circular(10)),
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextWidget(
-                      "Legend Eden Garden",
+                      selectedCinema,
                       size: 18,
                       bold: true,
                     ),
-                    Icon(Icons.arrow_forward_ios)
+                    const Icon(Icons.arrow_forward_ios)
                   ],
                 ),
               ),
@@ -174,7 +203,7 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
     );
   }
 
-  Widget _buildNowShowing(BuildContext context){
+  Widget _buildNowShowing(BuildContext context) {
     return ListView(
       padding: EdgeInsets.zero,
       physics: const NeverScrollableScrollPhysics(),
@@ -182,9 +211,9 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
       children: [
         _buildTimeLine(context),
         BuildTimeLineItems(
-          movies: controller.selectedDay == controller.dateInfo.dates[0]
-            ? movie1 : controller.selectedDay == controller.dateInfo.dates[1] 
-              ? movie2 : controller.selectedDay == controller.dateInfo.dates[2]
+          movies: selectedDay == dateInfo.dates[0]
+            ? movie1 : selectedDay == dateInfo.dates[1]
+              ? movie2 : selectedDay == dateInfo.dates[2]
                 ? movie3 : movie4
         ),
       ],
@@ -202,15 +231,15 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
           child: Column(
             children: [
               Row(
-                children: List.generate(controller.dateInfo.dates.length, (index) {
-                  final date = controller.dateInfo.dates[index];
-                  final day = controller.dateInfo.dayNames[index];
-                  final month = controller.dateInfo.months[index];
+                children: List.generate(dateInfo.dates.length, (index) {
+                  final date = dateInfo.dates[index];
+                  final day = dateInfo.dayNames[index];
+                  final month = dateInfo.months[index];
                   return Expanded(
                     child: GestureDetector(
                       onTap: () {
                         setState(() {
-                          controller.selectedDay = date;
+                          selectedDay = date;
                         });
                       },
                       child: Stack(
@@ -221,7 +250,7 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
                             margin: const EdgeInsets.all(4),
                             padding: const EdgeInsets.symmetric(vertical: 10),
                             decoration: BoxDecoration(
-                              border: controller.selectedDay == date
+                              border: selectedDay == date
                                   ? Border.all(color: Colors.red, width: 2)
                                   : Border.all(color: Colors.grey),
                               borderRadius: BorderRadius.circular(8),
@@ -322,25 +351,39 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
               const SizedBox(height: 25),
               Expanded(
                 child: ListView.builder(
-                  itemCount: cinemaList.length,
+                  itemCount: controller.fb.length,
                   itemBuilder: (context, index) {
-                    return Container(
-                      height: 60,
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              const Icon(Icons.location_on, color: Colors.red),
-                              const SizedBox(width: 8),
-                              TextWidget(cinemaList[index]["title"] ?? "",
-                                  size: 16, bold: true),
-                            ],
+                    String cinemaName = controller.fb[index].name ?? "Unknown";
+                    bool isSelected = selectedCinema == cinemaName;
+
+                    return Column(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              selectedCinema = cinemaName;
+                            });
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            height: 50,
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Row(
+                              children: [
+                                const Icon(Icons.location_on, color: Colors.red),
+                                const SizedBox(width: 8),
+                                TextWidget(
+                                  cinemaName,
+                                  size: 16,
+                                  bold: true,
+                                  color: isSelected ? Colors.red : Colors.white,
+                                ),
+                              ],
+                            ),
                           ),
-                          Divider(
-                              color: Colors.white.withOpacity(0.3), height: 0.5),
-                        ],
-                      ),
+                        ),
+                        Divider(color: Colors.white.withOpacity(0.3), height: 0.5),
+                      ],
                     );
                   },
                 ),
@@ -351,19 +394,4 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
       },
     );
   }
-
 }
-List<Map<String, String>> cinemaList = [
-  {"title": "Legend Eden Garden"},
-  {"title": "Legend Toul Kork"},
-  {"title": "Legend Premium Exchange Square"},
-  {"title": "Legend Olympia"},
-  {"title": "Legend SenSok"},
-  {"title": "Legend Noro Mall"},
-  {"title": "Legend Midtown Mall"},
-  {"title": "Legend Meanchey"},
-  {"title": "Legend Cinema 271 Mega Mall"},
-  {"title": "Legend K Mall"},
-  {"title": "Legend Cinema Sihanoukville"},
-  {"title": "Legend Siem Reap"},
-];

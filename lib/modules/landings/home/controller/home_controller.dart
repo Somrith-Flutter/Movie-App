@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:legend_cinema/core/enum/base_status_enum.dart';
+import 'package:legend_cinema/modules/landings/f_b/controller/f_b_controller.dart';
 import 'package:legend_cinema/modules/landings/home/model/home_model.dart';
 import 'package:legend_cinema/modules/landings/home/repository/home_repository.dart';
 import 'package:legend_cinema/modules/landings/home/widgets/movie_item.dart';
@@ -24,6 +25,13 @@ class HomeController extends GetxController {
   String cinema = '';
   List<MoiveModel> moive = [];
   BaseStatusEnum response = BaseStatusEnum.initial;
+  
+  final FBController fbController = Get.find();
+   @override
+  void onInit() {
+    super.onInit();
+    fbController.location;
+  }
 
   Future<String> fetchMoiveController({String? location, String? id}) async {
     response = BaseStatusEnum.inprogress;
