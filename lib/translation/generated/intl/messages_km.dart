@@ -135,6 +135,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "new_": MessageLookupByLibrary.simpleMessage("ថ្មី"),
         "news_activity":
             MessageLookupByLibrary.simpleMessage("ព័ឥមាន និងសកម្មភាព"),
+        "no_data": MessageLookupByLibrary.simpleMessage(
+            "មិនមានទិន្ន័យដែរត្រូវបានរកឃើញទេ!"),
         "no_movie": MessageLookupByLibrary.simpleMessage(
             "រកមិនឃើញភាពយន្តទេ សូមសាកល្បងចំណងជើងភាពយន្តផ្សេងទៀត។"),
         "no_notification":

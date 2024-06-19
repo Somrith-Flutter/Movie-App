@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
+import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
 class NoDataFound extends StatelessWidget {
@@ -19,7 +20,7 @@ class NoDataFound extends StatelessWidget {
           height: 15,
         ),
         TextWidget(
-          " No Data Found",
+          S.of(context).no_data,
           size: 20,
           color: Colors.grey[400],
           bold: true,

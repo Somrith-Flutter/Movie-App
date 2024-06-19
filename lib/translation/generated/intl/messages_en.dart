@@ -129,6 +129,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "new_": MessageLookupByLibrary.simpleMessage("New"),
         "news_activity":
             MessageLookupByLibrary.simpleMessage("News & Activity"),
+        "no_data": MessageLookupByLibrary.simpleMessage("No Data Found!"),
         "no_movie": MessageLookupByLibrary.simpleMessage(
             "No movie were found, Please try other movie title"),
         "no_notification":

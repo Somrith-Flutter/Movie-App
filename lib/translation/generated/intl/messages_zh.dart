@@ -99,6 +99,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "ms_valid_phone": MessageLookupByLibrary.simpleMessage("电话号码格式无效"),
         "msg_confirm_logout": MessageLookupByLibrary.simpleMessage("您确定要退出吗"),
         "news_activity": MessageLookupByLibrary.simpleMessage("新闻和活动"),
+        "no_data": MessageLookupByLibrary.simpleMessage("没有找到数据!"),
         "no_movie": MessageLookupByLibrary.simpleMessage("未找到电影，请尝试其他电影名称"),
         "no_notification": MessageLookupByLibrary.simpleMessage("无通知"),
         "notification": MessageLookupByLibrary.simpleMessage("通知"),
