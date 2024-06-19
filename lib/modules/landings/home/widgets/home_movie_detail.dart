@@ -1,24 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:legend_cinema/modules/landings/home/widgets/movie_item.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 
 class HomeMovieDetail extends StatefulWidget {
+  final Movies list;
   const HomeMovieDetail(
       {super.key,
-      required this.imageMovie,
-      required this.titleMovie,
-      required this.genre,
-      required this.duration,
-      required this.releaseDate,
-      required this.classification});
+     required this.list});
 
-  final String imageMovie;
-  final String titleMovie;
-  final String genre;
-  final String duration;
-  final String releaseDate;
-  final String classification;
 
   @override
   State<HomeMovieDetail> createState() => _HomeMovieDetailState();
@@ -45,7 +36,7 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
             Stack(
               children: [
                 Image.asset(
-                  widget.imageMovie,
+                  widget.list.image!,
                   fit: BoxFit.cover,
                   height: 250,
                   width: double.infinity,
@@ -78,7 +69,7 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextWidget(
-                    widget.titleMovie,
+                    widget.list.title,
                     size: 20,
                     bold: true,
                   ),
@@ -97,28 +88,28 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
                   _builderRow(
                       icon: Icons.folder_shared_rounded,
                       text: "Genre: ",
-                      subText: widget.genre),
+                      subText: widget.list.genre!),
                   const SizedBox(
                     height: 10,
                   ),
                   _builderRow(
                       icon: Icons.access_time_filled,
                       text: "Duration: ",
-                      subText: widget.duration),
+                      subText: widget.list.duration!),
                   const SizedBox(
                     height: 10,
                   ),
                   _builderRow(
                       icon: Icons.date_range,
                       text: "Release: ",
-                      subText: widget.releaseDate),
+                      subText: widget.list.release!),
                   const SizedBox(
                     height: 10,
                   ),
                   _builderRow(
                       icon: Icons.visibility_off,
                       text: "Classification: ",
-                      subText: widget.classification)
+                      subText: widget.list.classification!)
                 ],
               ),
             ),

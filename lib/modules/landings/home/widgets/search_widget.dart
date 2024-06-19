@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
+import 'package:legend_cinema/modules/landings/home/widgets/home_movie_detail.dart';
 import 'package:legend_cinema/modules/landings/home/widgets/movie_item.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
@@ -93,51 +95,56 @@ class _SearchViewState extends State<SearchView> {
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 100,
-                    height: 150,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(
-                        image: AssetImage(displayList[index].image!),
-                        fit: BoxFit.cover,
+          child: GestureDetector(
+            onTap: (){
+              AppRoute.route.push(context, HomeMovieDetail(list: displayList[index],));
+            },
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 100,
+                      height: 150,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
+                          image: AssetImage(displayList[index].image!),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TextWidget(
-                          displayList[index].title,
-                          size: 16,
-                          color: Colors.white,
-                        ),
-                        TextWidget(
-                          displayList[index].release,
-                          size: 14,
-                          color: Colors.grey,
-                        ),
-                      ],
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TextWidget(
+                            displayList[index].title,
+                            size: 16,
+                            color: Colors.white,
+                          ),
+                          TextWidget(
+                            displayList[index].release,
+                            size: 14,
+                            color: Colors.grey,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              const Divider(
-                color: Colors.grey,
-                height: 40,
-                thickness: 0.5,
-                indent: 10,
-                endIndent: 10,
-              ),
-            ],
+                  ],
+                ),
+                const Divider(
+                  color: Colors.grey,
+                  height: 40,
+                  thickness: 0.5,
+                  indent: 10,
+                  endIndent: 10,
+                ),
+              ],
+            ),
           ),
         );
       },

@@ -371,12 +371,7 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
                   AppRoute.route.push(
                 context,
                 HomeMovieDetail(
-                  imageMovie: heroSlides.image!,
-                  titleMovie: heroSlides.title!,
-                  genre: heroSlides.genre!,
-                  duration: heroSlides.duration!,
-                  releaseDate: heroSlides.release!,
-                  classification: heroSlides.classification!,
+                  list: pages[index],
                 ),
               );
                 },

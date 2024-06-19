@@ -33,12 +33,7 @@ class BuildTimeLineItems extends StatelessWidget {
               AppRoute.route.push(
                 context,
                 HomeMovieDetail(
-                  imageMovie: item.image!,
-                  titleMovie: item.title!,
-                  genre: item.genre!,
-                  duration: item.duration!,
-                  releaseDate: item.release!,
-                  classification: item.classification!,
+                  list: item,
                 ),
               );
             },
