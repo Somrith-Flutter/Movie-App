@@ -75,6 +75,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "female": MessageLookupByLibrary.simpleMessage("Female"),
         "from_camera": MessageLookupByLibrary.simpleMessage("From Camera"),
         "from_gallery": MessageLookupByLibrary.simpleMessage("From Gallery"),
+        "gender": MessageLookupByLibrary.simpleMessage("Gender"),
         "general": MessageLookupByLibrary.simpleMessage("General"),
         "genre": MessageLookupByLibrary.simpleMessage("Genre: "),
         "gust_info": MessageLookupByLibrary.simpleMessage("Gust Information"),
@@ -96,6 +97,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "member_benifit":
             MessageLookupByLibrary.simpleMessage("Member Benifits"),
         "more": MessageLookupByLibrary.simpleMessage("More"),
+        "ms_create_account": MessageLookupByLibrary.simpleMessage(
+            "You\'ve created this account with "),
         "ms_error":
             MessageLookupByLibrary.simpleMessage("Something went wrong!"),
         "ms_footer": MessageLookupByLibrary.simpleMessage(
@@ -108,6 +111,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Phone number is required"),
         "ms_register": MessageLookupByLibrary.simpleMessage(
             "Enter your phone number to create new account"),
+        "ms_select_gender":
+            MessageLookupByLibrary.simpleMessage("Please select your gender"),
         "ms_sucess": MessageLookupByLibrary.simpleMessage("Success!"),
         "ms_valid_email":
             MessageLookupByLibrary.simpleMessage("Please enter your email"),
@@ -161,6 +166,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "promotion": MessageLookupByLibrary.simpleMessage("Promotions"),
         "purchase": MessageLookupByLibrary.simpleMessage("Purchase"),
+        "re_enter_password":
+            MessageLookupByLibrary.simpleMessage("Re-Enter Password"),
         "register": MessageLookupByLibrary.simpleMessage("Signup"),
         "release": MessageLookupByLibrary.simpleMessage("Release: "),
         "save": MessageLookupByLibrary.simpleMessage("Save"),

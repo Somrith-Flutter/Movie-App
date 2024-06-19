@@ -144,6 +144,7 @@ class _RegisterFormState extends State<RegisterForm> {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> genderOptions = [S.of(context).male, S.of(context).female, S.of(context).other];
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
       child: Scaffold(
@@ -204,7 +205,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                 Icons.camera_alt,
                                 size: 17,
                                 color: Colors
-                                    .black54, // Adjusted the color to match your design
+                                    .black54,
                               ),
                             ),
                           ),
@@ -236,7 +237,7 @@ class _RegisterFormState extends State<RegisterForm> {
                     ),
                     child: Row(
                       children: [
-                        const TextWidget("You've created this account with ",
+                        TextWidget(S.of(context).ms_create_account,
                             size: 14, bold: true),
                         const TextWidget(
                           "(+855) ",
@@ -266,7 +267,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.person,
                               color: Colors.white.withOpacity(0.8)),
-                          labelText: "Username",
+                          labelText: S.of(context).username,
                           labelStyle: TextStyle(
                               color: Colors.white.withOpacity(0.8),
                               fontWeight: FontWeight.bold),
@@ -383,7 +384,7 @@ class _RegisterFormState extends State<RegisterForm> {
                       DropdownButtonFormField<String>(
                         value: user.selectedGender,
                         decoration: InputDecoration(
-                          labelText: 'Gender',
+                          labelText: S.of(context).gender,
                           fillColor: Colors.white70.withOpacity(0.1),
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -395,7 +396,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                 color: Colors.white.withOpacity(0.8)),
                           ),
                         ),
-                        items: user.genderOptions.map((String value) {
+                        items: genderOptions.map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: Text(value),
@@ -408,7 +409,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         },
                         validator: (value) {
                           if (value == null) {
-                            return 'Please select your gender';
+                            return S.of(context).ms_select_gender;
                           }
                           return null;
                         },
@@ -455,7 +456,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.lock,
                               color: Colors.white.withOpacity(0.8)),
-                          labelText: "Re-enter password",
+                          labelText: S.of(context).re_enter_password,
                           labelStyle: TextStyle(
                               color: Colors.white.withOpacity(0.8),
                               fontWeight: FontWeight.bold),
@@ -544,7 +545,7 @@ class _RegisterFormState extends State<RegisterForm> {
     return IconSnackBar.show(
       context,
       snackBarType: SnackBarType.success,
-      label: 'Successfully',
+      label: S.of(context).ms_sucess,
       snackBarStyle: const SnackBarStyle(
         labelTextStyle: TextStyle(color: Colors.white),
       ),

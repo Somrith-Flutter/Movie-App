@@ -125,5 +125,9 @@
     "ms_phone_number_required": "ត្រូវការលេខទូរស័ព្ទ",
     "ms_error": "មាន​អ្វីមួយ​មិន​ប្រក្រតី!",
     "ms_sucess": "ជោគជ័យ!",
-    "login_process": "កំពុង​​ដំណើរការ..."
+    "login_process": "កំពុង​​ដំណើរការ...",
+    "ms_create_account": "អ្នកបានបង្កើតគណនីនេះជាមួយ ",
+    "re_enter_password": "បញ្ចូល​លេខសំងាត់​ម្តង​ទៀត",
+    "gender": "ភេទ",
+    "ms_select_gender": "សូមជ្រើសរើសភេទរបស់អ្នក។"
 }

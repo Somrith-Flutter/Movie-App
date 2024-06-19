@@ -63,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "female": MessageLookupByLibrary.simpleMessage("女性"),
         "from_camera": MessageLookupByLibrary.simpleMessage("来自相机"),
         "from_gallery": MessageLookupByLibrary.simpleMessage("来自画廊"),
+        "gender": MessageLookupByLibrary.simpleMessage("性别"),
         "genre": MessageLookupByLibrary.simpleMessage("类型: "),
         "gust_info": MessageLookupByLibrary.simpleMessage("阵风信息"),
         "history": MessageLookupByLibrary.simpleMessage("历史"),
@@ -79,6 +80,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "male": MessageLookupByLibrary.simpleMessage("男性"),
         "member_benifit": MessageLookupByLibrary.simpleMessage("传奇会员 好处"),
         "more": MessageLookupByLibrary.simpleMessage("更多的"),
+        "ms_create_account": MessageLookupByLibrary.simpleMessage("您已使用 "),
         "ms_error": MessageLookupByLibrary.simpleMessage("出了些问题！"),
         "ms_footer": MessageLookupByLibrary.simpleMessage(
             "何时去附近的电影院观看您最喜爱\n的电影? 立即探索,看看您周围有更多电影院."),
@@ -87,6 +89,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "ms_phone_number_required":
             MessageLookupByLibrary.simpleMessage("电话号码"),
         "ms_register": MessageLookupByLibrary.simpleMessage("输入您的电话号码以创建新帐户"),
+        "ms_select_gender": MessageLookupByLibrary.simpleMessage("请选择您的性别"),
         "ms_sucess": MessageLookupByLibrary.simpleMessage("成功！"),
         "ms_valid_email": MessageLookupByLibrary.simpleMessage("请输入您的电子邮箱"),
         "ms_valid_pass": MessageLookupByLibrary.simpleMessage("请输入您的密码"),
@@ -118,6 +121,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "profile": MessageLookupByLibrary.simpleMessage("轮廓"),
         "promotion": MessageLookupByLibrary.simpleMessage("促销活动"),
         "purchase": MessageLookupByLibrary.simpleMessage("购买"),
+        "re_enter_password": MessageLookupByLibrary.simpleMessage("重新输入密码"),
         "register": MessageLookupByLibrary.simpleMessage("报名"),
         "release": MessageLookupByLibrary.simpleMessage("发布: "),
         "save": MessageLookupByLibrary.simpleMessage("节省"),
@@ -132,6 +136,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "txt_member_benifit": MessageLookupByLibrary.simpleMessage(
             "从我们的会员卡中获得很多好处。立即前往附近的 Lengend 电影院观看一场吧！"),
         "upcoming": MessageLookupByLibrary.simpleMessage("即将推出"),
+        "username": MessageLookupByLibrary.simpleMessage("用户名"),
         "what_new": MessageLookupByLibrary.simpleMessage("什么是新的"),
         "what_we_offer": MessageLookupByLibrary.simpleMessage("我们提供什么")
       };

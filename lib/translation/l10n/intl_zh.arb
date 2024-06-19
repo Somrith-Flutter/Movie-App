@@ -104,5 +104,10 @@
     "ms_phone_number_required": "电话号码",
     "ms_error": "出了些问题！",
     "ms_sucess": "成功！",
-    "login_process": "在登录..."
+    "login_process": "在登录...",
+    "username": "用户名",
+    "ms_create_account": "您已使用 ",
+    "re_enter_password": "重新输入密码",
+    "gender": "性别",
+    "ms_select_gender": "请选择您的性别"
 }

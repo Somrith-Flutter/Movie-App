@@ -124,5 +124,9 @@
     "ms_phone_number_required": "Phone number is required",
     "ms_error": "Something went wrong!",
     "ms_sucess": "Success!",
-    "login_process": "Logging in..."
+    "login_process": "Logging in...",
+    "ms_create_account": "You've created this account with ",
+    "re_enter_password": "Re-Enter Password",
+    "gender": "Gender",
+    "ms_select_gender": "Please select your gender"
 }

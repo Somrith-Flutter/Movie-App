@@ -1309,6 +1309,46 @@ class S {
       args: [],
     );
   }
+
+  /// `You've created this account with `
+  String get ms_create_account {
+    return Intl.message(
+      'You\'ve created this account with ',
+      name: 'ms_create_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Re-Enter Password`
+  String get re_enter_password {
+    return Intl.message(
+      'Re-Enter Password',
+      name: 're_enter_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gender`
+  String get gender {
+    return Intl.message(
+      'Gender',
+      name: 'gender',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select your gender`
+  String get ms_select_gender {
+    return Intl.message(
+      'Please select your gender',
+      name: 'ms_select_gender',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

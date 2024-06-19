@@ -79,6 +79,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "female": MessageLookupByLibrary.simpleMessage("ស្រី"),
         "from_camera": MessageLookupByLibrary.simpleMessage("កាមេរ៉ា"),
         "from_gallery": MessageLookupByLibrary.simpleMessage("វិចិត្រសាល"),
+        "gender": MessageLookupByLibrary.simpleMessage("ភេទ"),
         "general": MessageLookupByLibrary.simpleMessage("ទូទៅ"),
         "genre": MessageLookupByLibrary.simpleMessage("ប្រភេទ៖ "),
         "gust_info": MessageLookupByLibrary.simpleMessage("ព័ឥមានភ្ញៀវ"),
@@ -101,6 +102,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "member_benifit":
             MessageLookupByLibrary.simpleMessage("អត្ថប្រយោជន៍សមាជិក"),
         "more": MessageLookupByLibrary.simpleMessage("ផ្សេងៗទៀត"),
+        "ms_create_account":
+            MessageLookupByLibrary.simpleMessage("អ្នកបានបង្កើតគណនីនេះជាមួយ "),
         "ms_error":
             MessageLookupByLibrary.simpleMessage("មាន​អ្វីមួយ​មិន​ប្រក្រតី!"),
         "ms_footer": MessageLookupByLibrary.simpleMessage(
@@ -113,6 +116,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ត្រូវការលេខទូរស័ព្ទ"),
         "ms_register": MessageLookupByLibrary.simpleMessage(
             "បញ្ចូលលេខទូរស័ព្ទរបស់អ្នកដើម្បីបង្កើតគណនីថ្មី។"),
+        "ms_select_gender":
+            MessageLookupByLibrary.simpleMessage("សូមជ្រើសរើសភេទរបស់អ្នក។"),
         "ms_sucess": MessageLookupByLibrary.simpleMessage("ជោគជ័យ!"),
         "ms_valid_email":
             MessageLookupByLibrary.simpleMessage("សូមបញ្ចូលអ៊ីមែលរបស់អ្នក។"),
@@ -166,6 +171,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "profile": MessageLookupByLibrary.simpleMessage("រូបតំណាង"),
         "promotion": MessageLookupByLibrary.simpleMessage("ការផ្សព្វផ្សាយ"),
         "purchase": MessageLookupByLibrary.simpleMessage("ការទិញ"),
+        "re_enter_password":
+            MessageLookupByLibrary.simpleMessage("បញ្ចូល​លេខសំងាត់​ម្តង​ទៀត"),
         "register": MessageLookupByLibrary.simpleMessage("ចុះឈ្មោះ"),
         "release": MessageLookupByLibrary.simpleMessage("ចេញផ្សាយ៖ "),
         "save": MessageLookupByLibrary.simpleMessage("រក្សាទុក"),
