@@ -1219,6 +1219,96 @@ class S {
       args: [],
     );
   }
+
+  /// `Enter your email or phone number`
+  String get ms_login {
+    return Intl.message(
+      'Enter your email or phone number',
+      name: 'ms_login',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your phone number to create new account`
+  String get ms_register {
+    return Intl.message(
+      'Enter your phone number to create new account',
+      name: 'ms_register',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter your password`
+  String get ms_valid_pass {
+    return Intl.message(
+      'Please enter your password',
+      name: 'ms_valid_pass',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter your email`
+  String get ms_valid_email {
+    return Intl.message(
+      'Please enter your email',
+      name: 'ms_valid_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid phone number format`
+  String get ms_valid_phone {
+    return Intl.message(
+      'Invalid phone number format',
+      name: 'ms_valid_phone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone number is required`
+  String get ms_phone_number_required {
+    return Intl.message(
+      'Phone number is required',
+      name: 'ms_phone_number_required',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Something went wrong!`
+  String get ms_error {
+    return Intl.message(
+      'Something went wrong!',
+      name: 'ms_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Success!`
+  String get ms_sucess {
+    return Intl.message(
+      'Success!',
+      name: 'ms_sucess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logging in...`
+  String get login_process {
+    return Intl.message(
+      'Logging in...',
+      name: 'login_process',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

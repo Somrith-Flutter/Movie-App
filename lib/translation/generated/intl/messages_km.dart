@@ -94,15 +94,32 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("សមាជិកភាព លេជេន"),
         "light": MessageLookupByLibrary.simpleMessage("ភ្លឺ"),
         "login": MessageLookupByLibrary.simpleMessage("ចូល"),
+        "login_process":
+            MessageLookupByLibrary.simpleMessage("កំពុង​​ដំណើរការ..."),
         "logout": MessageLookupByLibrary.simpleMessage("ចាកចេញ"),
         "male": MessageLookupByLibrary.simpleMessage("ប្រុស"),
         "member_benifit":
             MessageLookupByLibrary.simpleMessage("អត្ថប្រយោជន៍សមាជិក"),
         "more": MessageLookupByLibrary.simpleMessage("ផ្សេងៗទៀត"),
+        "ms_error":
+            MessageLookupByLibrary.simpleMessage("មាន​អ្វីមួយ​មិន​ប្រក្រតី!"),
         "ms_footer": MessageLookupByLibrary.simpleMessage(
             "ពេលណាត្រូវមើលភាពយន្តដែលអ្នកចូលចិត្តនៅរោងកុនក្បែរនោះ?\nស្វែងរកឥឡូវនេះ ដើម្បីមើលភាពយន្តជាច្រើនទៀតនៅជុំវិញអ្នក។"),
+        "ms_login": MessageLookupByLibrary.simpleMessage(
+            "បញ្ចូលអ៊ីមែល ឬលេខទូរស័ព្ទរបស់អ្នក។"),
         "ms_notification": MessageLookupByLibrary.simpleMessage(
             "ចូលទៅក្នុងកម្មវិធីរួចធ្វើការកម៉ងដើម្បីទទួលបានសារជូនដំណឹង"),
+        "ms_phone_number_required":
+            MessageLookupByLibrary.simpleMessage("ត្រូវការលេខទូរស័ព្ទ"),
+        "ms_register": MessageLookupByLibrary.simpleMessage(
+            "បញ្ចូលលេខទូរស័ព្ទរបស់អ្នកដើម្បីបង្កើតគណនីថ្មី។"),
+        "ms_sucess": MessageLookupByLibrary.simpleMessage("ជោគជ័យ!"),
+        "ms_valid_email":
+            MessageLookupByLibrary.simpleMessage("សូមបញ្ចូលអ៊ីមែលរបស់អ្នក។"),
+        "ms_valid_pass": MessageLookupByLibrary.simpleMessage(
+            "សូម​បញ្ចូល​ពាក្យ​សម្ងាត់​របស់​អ្នក"),
+        "ms_valid_phone": MessageLookupByLibrary.simpleMessage(
+            "ទម្រង់លេខទូរស័ព្ទមិនត្រឹមត្រូវ"),
         "msg_confirm_logout": MessageLookupByLibrary.simpleMessage(
             "តើអ្នកចង់ចាកចេញពីកម្មវិធីដែរ​​​ឬទេ?"),
         "my_cart": MessageLookupByLibrary.simpleMessage("My Cart"),

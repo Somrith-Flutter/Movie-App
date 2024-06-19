@@ -115,5 +115,14 @@
     "offer_s1": "10% discount on concession",
     "offer_s2": "10% discount on ticket",
     "offer_s3": "Buy one get one tickets free!",
-    "no_movie": "No movie were found, Please try other movie title"
+    "no_movie": "No movie were found, Please try other movie title",
+    "ms_login": "Enter your email or phone number",
+    "ms_register": "Enter your phone number to create new account",
+    "ms_valid_pass": "Please enter your password",
+    "ms_valid_email": "Please enter your email",
+    "ms_valid_phone": "Invalid phone number format",
+    "ms_phone_number_required": "Phone number is required",
+    "ms_error": "Something went wrong!",
+    "ms_sucess": "Success!",
+    "login_process": "Logging in..."
 }

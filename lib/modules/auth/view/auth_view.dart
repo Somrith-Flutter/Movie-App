@@ -26,23 +26,23 @@ class _AuthViewState extends State<AuthView> {
 
   String? _validatePhoneNumber(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Phone number is required';
+      return S.of(context).ms_phone_number_required;
     } else if (!RegExp(r'^\d{7,15}$').hasMatch(value)) {
-      return 'Invalid phone number format';
+      return S.of(context).ms_valid_phone;
     }
     return null;
   }
 
   String? _validateEmail(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter your email';
+      return S.of(context).ms_valid_email;
     }
     return null;
   }
 
   String? _validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter your password';
+      return S.of(context).ms_valid_pass;
     }
     return null;
   }
@@ -104,19 +104,42 @@ class _AuthViewState extends State<AuthView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Login',
-              style: TextStyle(fontSize: 24),
+            TextWidget(
+              S.of(context).login,
+              size: 24,
             ),
             const SizedBox(height: 16),
-            const Text(
-              'Enter your email or phone number',
-              style: TextStyle(fontSize: 16),
+            TextWidget(
+              S.of(context).ms_login,
+              size: 16,
             ),
             const SizedBox(height: 32),
             Row(
               children: [
-                
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () => _onTabTap(false),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: auth.isPhoneTabSelected
+                            ? Colors.grey[800]
+                            : Colors.red,
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            bottomLeft: Radius.circular(10)),
+                      ),
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          child: TextWidget(
+                            S.of(context).email,
+                            size: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
                 Expanded(
                   child: GestureDetector(
                     onTap: () => _onTabTap(true),
@@ -173,8 +196,7 @@ class _AuthViewState extends State<AuthView> {
                                         return;
                                       }
 
-                                      EasyLoading.show(
-                                          status: 'Logging in...');
+                                      EasyLoading.show(status: S.of(context).login_process);
                                       await logic.loginController(
                                           type: "phone");
                                       if (logic.status ==
@@ -185,8 +207,7 @@ class _AuthViewState extends State<AuthView> {
                                           context,
                                           snackBarType:
                                               SnackBarType.fail,
-                                          label:
-                                              'Something went wrong!',
+                                          label: S.of(context).ms_error,
                                           snackBarStyle:
                                               const SnackBarStyle(
                                             labelTextStyle: TextStyle(
@@ -200,7 +221,7 @@ class _AuthViewState extends State<AuthView> {
                                         await EasyLoading.dismiss();
                                         Future.delayed(const Duration(milliseconds: 100));
                                         logic.clear();
-                                        EasyLoading.showSuccess('Success!');
+                                        EasyLoading.showSuccess(S.of(context).ms_sucess);
                                         // ignore: use_build_context_synchronously
                                         AppRoute.route.pushReplacement(context, const BottomNavigation());
                                       }
@@ -245,7 +266,7 @@ class _AuthViewState extends State<AuthView> {
                                           ?.validate() ??
                                       false) {
                                     EasyLoading.show(
-                                        status: 'Logging in...');
+                                        status: S.of(context).login_process);
                                     await logic.loginController(
                                         type: "email");
 
@@ -256,7 +277,7 @@ class _AuthViewState extends State<AuthView> {
                                         // ignore: use_build_context_synchronously
                                         context,
                                         snackBarType: SnackBarType.fail,
-                                        label: 'Something went wrong!',
+                                        label: S.of(context).ms_error,
                                         snackBarStyle:
                                             const SnackBarStyle(
                                           labelTextStyle: TextStyle(
@@ -272,8 +293,7 @@ class _AuthViewState extends State<AuthView> {
                                       Future.delayed(const Duration(
                                           milliseconds: 100));
                                       logic.clear();
-                                      EasyLoading.showSuccess(
-                                          'Success!');
+                                      EasyLoading.showSuccess(S.of(context).ms_sucess);
                                       // ignore: use_build_context_synchronously
                                       AppRoute.route.pushReplacement(context, const BottomNavigation());
                                     }
@@ -335,9 +355,9 @@ class _AuthViewState extends State<AuthView> {
                   keyboardType: TextInputType.phone,
                   validator: _validatePhoneNumber,
                   controller: auth.number,
-                  decoration: const InputDecoration(
-                    hintText: 'Phone number',
-                    hintStyle: TextStyle(color: Colors.white, fontSize: 16),
+                  decoration: InputDecoration(
+                    hintText: S.of(context).phone_number,
+                    hintStyle: const TextStyle(color: Colors.white, fontSize: 16),
                     border: InputBorder.none,
                   ),
                   style: const TextStyle(color: Colors.white),
@@ -404,9 +424,9 @@ class _AuthViewState extends State<AuthView> {
                 child: TextFormField(
                   controller: auth.email,
                   validator: _validateEmail,
-                  decoration: const InputDecoration(
-                    hintText: 'Email',
-                    hintStyle: TextStyle(color: Colors.white, fontSize: 16),
+                  decoration: InputDecoration(
+                    hintText: S.of(context).email,
+                    hintStyle: const TextStyle(color: Colors.white, fontSize: 16),
                     border: InputBorder.none,
                   ),
                   style: const TextStyle(color: Colors.white),
@@ -431,9 +451,9 @@ class _AuthViewState extends State<AuthView> {
                   obscureText: auth.isToggle,
                   validator: _validatePassword,
                   controller: auth.password,
-                  decoration: const InputDecoration(
-                    hintText: 'Password',
-                    hintStyle: TextStyle(color: Colors.white, fontSize: 16),
+                  decoration: InputDecoration(
+                    hintText: S.of(context).password,
+                    hintStyle: const TextStyle(color: Colors.white, fontSize: 16),
                     border: InputBorder.none,
                   ),
                   style: const TextStyle(color: Colors.white),

@@ -235,9 +235,9 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
                   MainAxisAlignment.spaceBetween,
               children: [
                 TextWidget(
-                  controller.cinema == ""
+                  controller.selectedCinema == ""
                       ? S.of(context).all_cinema
-                      : controller.cinema,
+                      : controller.selectedCinema,
                   size: 16,
                 ),
                 const Icon(
@@ -251,7 +251,7 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
     );
   }
 
-  Future _buildBottomSheet(BuildContext context) {
+   Future _buildBottomSheet(BuildContext context) {
     return showModalBottomSheet(
       context: context,
       builder: (context) {
@@ -294,55 +294,41 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
                   height: 2,
                 ),
               ),
-              const SizedBox(
-                height: 15.0,
-              ),
+              const SizedBox(height: 25),
               Expanded(
                 child: ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
                   itemCount: filter.fb.length,
                   itemBuilder: (context, index) {
+                    String cinemaName = filter.fb[index].name ?? "Unknown";
+                    bool isSelected = controller.selectedCinema == cinemaName;
+
                     return Column(
                       children: [
-                        InkWell(
+                        GestureDetector(
                           onTap: () {
                             setState(() {
-                              controller.cinema = filter.fb[index].name.toString();
-                              filter.getDetailedData(filter
-                                  .fb[index].locationType
-                                  .toString());
+                              controller.selectedCinema = cinemaName;
                             });
                             Navigator.pop(context);
                           },
-                          child: Column(
-                            children: [
-                              const SizedBox(
-                                height: 10.0,
-                              ),
-                              Row(
-                                children: [
-                                  const Icon(Icons.location_on,
-                                      color: Colors.red),
-                                  const SizedBox(width: 8),
-                                  TextWidget(
-                                    filter.fb[index].name.toString(),
-                                    size: 16,
-                                    bold: true,
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 10.0,
-                              ),
-                              Divider(
-                                  color: Colors.white.withOpacity(0.3),
-                                  height: 0.5),
-                            ],
+                          child: Container(
+                            height: 50,
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Row(
+                              children: [
+                                const Icon(Icons.location_on, color: Colors.red),
+                                const SizedBox(width: 8),
+                                TextWidget(
+                                  cinemaName,
+                                  size: 16,
+                                  bold: true,
+                                  color: isSelected ? Colors.red : Colors.white,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                        const SizedBox(
-                          height: 15.0,
-                        ),
+                        Divider(color: Colors.white.withOpacity(0.3), height: 0.5),
                       ],
                     );
                   },

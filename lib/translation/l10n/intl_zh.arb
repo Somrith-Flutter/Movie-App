@@ -93,5 +93,16 @@
     "offer_s2": "门票 10% 折扣",
     "offer_s3": "门票买一送一！",
     "no_movie": "未找到电影，请尝试其他电影名称",
-    "search": "搜索"
+    "search": "搜索",
+    "phone_number": "电话号码",
+    "ms_login": "输入您的电子邮件或电话号码",
+    "password": "密码",
+    "ms_register": "输入您的电话号码以创建新帐户",
+    "ms_valid_pass": "请输入您的密码",
+    "ms_valid_email": "请输入您的电子邮箱",
+    "ms_valid_phone": "电话号码格式无效",
+    "ms_phone_number_required": "电话号码",
+    "ms_error": "出了些问题！",
+    "ms_sucess": "成功！",
+    "login_process": "在登录..."
 }

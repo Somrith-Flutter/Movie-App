@@ -25,6 +25,7 @@ class HomeController extends GetxController {
   String cinema = '';
   List<MoiveModel> moive = [];
   BaseStatusEnum response = BaseStatusEnum.initial;
+  String selectedCinema = "";
   
   final FBController fbController = Get.find();
    @override

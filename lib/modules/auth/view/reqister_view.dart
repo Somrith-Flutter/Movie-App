@@ -27,8 +27,7 @@ class _RegisterState extends State<Register> {
         context,
         snackBarType:
             SnackBarType.fail,
-        label:
-            'Phone number is invalid!',
+        label: S.of(context).ms_valid_phone,
         snackBarStyle:
             const SnackBarStyle(
           labelTextStyle: TextStyle(
@@ -69,13 +68,11 @@ class _RegisterState extends State<Register> {
                   S.of(context).register,
                   size: 24,
                   bold: true,
-                  font: 'KhmerFont',
                 ),
                 const Gap(20),
-                const TextWidget(
-                  'បញ្ចូលលេខទូរស័ព្ទរបស់អ្នកដើម្បីចូលទៅកាន់គណនីរបស់អ្នក',
+                TextWidget(
+                  S.of(context).ms_register,
                   size: 16,
-                  font: 'KhmerFont',
                 ),
                 const Gap(40),
                 Container(

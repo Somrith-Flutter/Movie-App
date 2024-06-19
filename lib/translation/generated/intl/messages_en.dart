@@ -90,15 +90,31 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Legend Membership"),
         "light": MessageLookupByLibrary.simpleMessage("Light"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "login_process": MessageLookupByLibrary.simpleMessage("Logging in..."),
         "logout": MessageLookupByLibrary.simpleMessage("Log out"),
         "male": MessageLookupByLibrary.simpleMessage("Male"),
         "member_benifit":
             MessageLookupByLibrary.simpleMessage("Member Benifits"),
         "more": MessageLookupByLibrary.simpleMessage("More"),
+        "ms_error":
+            MessageLookupByLibrary.simpleMessage("Something went wrong!"),
         "ms_footer": MessageLookupByLibrary.simpleMessage(
             "When to watch your favorite\nmovie at the nearby cinema?\nExplore now to see more cinema around you."),
+        "ms_login": MessageLookupByLibrary.simpleMessage(
+            "Enter your email or phone number"),
         "ms_notification": MessageLookupByLibrary.simpleMessage(
             "Login Order to see notification"),
+        "ms_phone_number_required":
+            MessageLookupByLibrary.simpleMessage("Phone number is required"),
+        "ms_register": MessageLookupByLibrary.simpleMessage(
+            "Enter your phone number to create new account"),
+        "ms_sucess": MessageLookupByLibrary.simpleMessage("Success!"),
+        "ms_valid_email":
+            MessageLookupByLibrary.simpleMessage("Please enter your email"),
+        "ms_valid_pass":
+            MessageLookupByLibrary.simpleMessage("Please enter your password"),
+        "ms_valid_phone":
+            MessageLookupByLibrary.simpleMessage("Invalid phone number format"),
         "msg_confirm_logout":
             MessageLookupByLibrary.simpleMessage("Do you want to logout?"),
         "my_cart": MessageLookupByLibrary.simpleMessage("My Cart"),
