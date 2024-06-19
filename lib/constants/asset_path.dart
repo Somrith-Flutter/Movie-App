@@ -127,8 +127,8 @@ class AssetPath{
 
   static const String movie1 = 'assets/images/movie1.jpg';
   static const String movie2 = 'assets/images/movie2.jpg';
-  static const String movie3 = 'assets/images/movie3.jpg';
-  static const String movie4 = 'assets/images/movie4.jpg';
+  static const String movie3 = 'assets/images/movie3.jpeg';
+  static const String movie4 = 'assets/images/movie4.jpeg';
   static const String movie5 = 'assets/images/movie5.jpg';
   static const String movie6 = 'assets/images/movie6.jpg';
   static const String movie7 = 'assets/images/movie7.jpg';
