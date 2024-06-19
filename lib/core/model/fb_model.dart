@@ -2,6 +2,7 @@ class FANDBModel {
   String? id;
   String? name;
   String? image;
+  String? detailImage;
   String? locationType;
   String? openingHour;
   String? numberHall;
@@ -11,6 +12,7 @@ class FANDBModel {
       {this.id,
       this.name,
       this.image,
+      this.detailImage,
       this.locationType,
       this.openingHour,
       this.numberHall,
@@ -19,6 +21,7 @@ class FANDBModel {
   FANDBModel.fromJson(Map<String, dynamic> json) {
     id = json['id'].toString();
     name = json['name'].toString();
+    detailImage = json['detail_image'].toString();
     image = json['image'].toString();
     locationType = json['location_type'].toString();
     openingHour = json['opening_hour'].toString();
@@ -31,6 +34,7 @@ class FANDBModel {
     data['id'] = id.toString();
     data['name'] = name.toString();
     data['image'] = image.toString();
+    data['detail_image'] = image.toString();
     data['location_type'] = locationType.toString();
     data['opening_hour'] = openingHour.toString();
     data['number_hall'] = numberHall.toString();

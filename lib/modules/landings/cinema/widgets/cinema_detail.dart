@@ -71,7 +71,7 @@ class _CinemaDetailState extends State<CinemaDetail> {
                   ),
                 ),
                 SliverToBoxAdapter(
-                  child: Image.asset(v.image.toString(),
+                  child: Image.asset(v.detailImage.toString(),
                       height: 250, fit: BoxFit.cover),
                 ),
                 SliverToBoxAdapter(
