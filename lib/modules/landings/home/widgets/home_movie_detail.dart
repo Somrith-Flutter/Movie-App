@@ -196,14 +196,17 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
               ),
             ),
             const Gap(15),
-            _buildNowShowing(context),
+            // ignore: unrelated_type_equality_checks
+            controller.fb.first.name == selectedCinema 
+              ? _buildSwitchingMovies(context) : controller.fb[2].name == selectedCinema
+                ? _buildSwitchingMoviesList(context) : _buildSwitchingMovies(context),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildNowShowing(BuildContext context) {
+  Widget _buildSwitchingMovies(BuildContext context) {
     return ListView(
       padding: EdgeInsets.zero,
       physics: const NeverScrollableScrollPhysics(),
@@ -215,6 +218,23 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
             ? movie1 : selectedDay == dateInfo.dates[1]
               ? movie2 : selectedDay == dateInfo.dates[2]
                 ? movie3 : movie4
+        ),
+      ],
+    );
+  }
+
+   Widget _buildSwitchingMoviesList(BuildContext context) {
+    return ListView(
+      padding: EdgeInsets.zero,
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      children: [
+        _buildTimeLine(context),
+        BuildTimeLineItems(
+          movies: selectedDay == dateInfo.dates[0]
+            ? movie5 : selectedDay == dateInfo.dates[1]
+              ? movie6 : selectedDay == dateInfo.dates[2]
+                ? movie7 : movie8
         ),
       ],
     );
