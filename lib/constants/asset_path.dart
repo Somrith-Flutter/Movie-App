@@ -4,6 +4,8 @@ class AssetPath{
   static const String flagChinese = 'assets/flages/flag_chinese.png';
   static const String noData = 'assets/images/no-data.png';
 
+  static const String logoApp = 'assets/images/app-logo.jpg';
+
   static const String cinema1 = 'assets/images/cinema1.jpeg';
   static const String cinema2 = 'assets/images/cinema2.jpeg';
   static const String cinema3 = 'assets/images/cinema3.jpeg';
