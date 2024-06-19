@@ -1209,6 +1209,16 @@ class S {
       args: [],
     );
   }
+
+  /// `No movie were found, Please try other movie title`
+  String get no_movie {
+    return Intl.message(
+      'No movie were found, Please try other movie title',
+      name: 'no_movie',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

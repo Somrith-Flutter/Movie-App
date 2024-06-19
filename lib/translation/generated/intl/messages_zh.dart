@@ -83,6 +83,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "ms_notification": MessageLookupByLibrary.simpleMessage("登录订单查看通知"),
         "msg_confirm_logout": MessageLookupByLibrary.simpleMessage("您确定要退出吗"),
         "news_activity": MessageLookupByLibrary.simpleMessage("新闻和活动"),
+        "no_movie": MessageLookupByLibrary.simpleMessage("未找到电影，请尝试其他电影名称"),
         "no_notification": MessageLookupByLibrary.simpleMessage("无通知"),
         "notification": MessageLookupByLibrary.simpleMessage("通知"),
         "now_showing": MessageLookupByLibrary.simpleMessage("正在上映"),

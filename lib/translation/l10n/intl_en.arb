@@ -114,5 +114,6 @@
     "offer_dis_t3": "Buy 1 get 1 Every Tuesday",
     "offer_s1": "10% discount on concession",
     "offer_s2": "10% discount on ticket",
-    "offer_s3": "Buy one get one tickets free!" 
+    "offer_s3": "Buy one get one tickets free!",
+    "no_movie": "No movie were found, Please try other movie title"
 }

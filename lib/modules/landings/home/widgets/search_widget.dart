@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
+import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/modules/landings/home/widgets/home_movie_detail.dart';
 import 'package:legend_cinema/modules/landings/home/widgets/movie_item.dart';
+import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,7 +19,7 @@ class SearchView extends StatefulWidget {
 class _SearchViewState extends State<SearchView> {
   List<Movies> displayList = [];
   bool isLoading = false;
-  bool hasSearched = false; // To track if a search has been performed
+  bool hasSearched = false;
 
   void updateList(String value) async {
     setState(() {
@@ -25,7 +27,7 @@ class _SearchViewState extends State<SearchView> {
       hasSearched = value.isNotEmpty;
     });
 
-    await Future.delayed(const Duration(seconds: 1)); // Simulate a network call
+    await Future.delayed(const Duration(seconds: 1));
 
     setState(() {
       if (value.isEmpty) {
@@ -45,8 +47,8 @@ class _SearchViewState extends State<SearchView> {
     return Scaffold(
       appBar: AppBar(
         leading: const BackWidget(),
-        title: const TextWidget(
-          'Search',
+        title: TextWidget(
+          S.of(context).search,
           size: 22,
           bold: true,
         ),
@@ -74,7 +76,7 @@ class _SearchViewState extends State<SearchView> {
       padding: const EdgeInsets.all(12.0),
       child: TextField(
         decoration: InputDecoration(
-          hintText: "Search Movie...",
+          hintText: S.of(context).search_cinema,
           hintStyle: TextStyle(color: Colors.white.withOpacity(0.8)),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.white.withOpacity(0.8)),
@@ -157,13 +159,13 @@ class _SearchViewState extends State<SearchView> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
-            child: Image.asset('assets/images/search.png'),
+            child: Image.asset(AssetPath.searchIcon),
           ),
           const SizedBox(height: 20),
           TextWidget(
             hasSearched
-                ? 'No movie were found, Please try other movie title'
-                : '"Search Movie"',
+                ? S.of(context).no_movie
+                : S.of(context).search_cinema,
             size: 22,
             bold: true,
             color: Colors.white,
