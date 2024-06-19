@@ -21,7 +21,9 @@ class AuthController extends GetxController implements GetxService {
   final List<String> genderOptions = ['Male', 'Female', 'Other'];
   String? selectedGender;
   UserModel? uu;
-
+  bool isPhoneTabSelected = true; 
+  bool isToggle = true;
+  bool isContinous = false;
   void setStatus(BaseStatusEnum status) {
     _status = status;
     update();

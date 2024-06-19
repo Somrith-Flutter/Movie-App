@@ -7,7 +7,6 @@ import 'package:legend_cinema/constants/asset_path.dart';
 import 'package:legend_cinema/core/bottom_navigation.dart';
 import 'package:legend_cinema/core/enum/base_status_enum.dart';
 import 'package:legend_cinema/modules/auth/controller/auth_controller.dart';
-import 'package:legend_cinema/modules/auth/repository/auth_repository.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
@@ -21,11 +20,8 @@ class AuthView extends StatefulWidget {
 }
 
 class _AuthViewState extends State<AuthView> {
-  bool isPhoneTabSelected = true;
-  final auth = Get.put(AuthController(repository: AuthRepository()));
+  final AuthController auth = Get.find();
   final _formKey = GlobalKey<FormState>();
-  bool _isToggle = true;
-  bool _isContinous = false;
   late PageController _pageController;
 
   String? _validatePhoneNumber(String? value) {
@@ -53,15 +49,15 @@ class _AuthViewState extends State<AuthView> {
 
   void _toggleTextVisibility() {
     setState(() {
-      _isToggle = !_isToggle;
+      auth.isToggle = !auth.isToggle;
     });
   }
 
   void _onTabTap(bool isPhoneSelected) {
     setState(() {
-      isPhoneTabSelected = isPhoneSelected;
+      auth.isPhoneTabSelected = isPhoneSelected;
       _pageController.animateToPage(
-        isPhoneTabSelected ? 0 : 1,
+        auth.isPhoneTabSelected ? 0 : 1,
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
@@ -93,240 +89,221 @@ class _AuthViewState extends State<AuthView> {
             ) : AppBar(
               automaticallyImplyLeading: false,
             ),
-            body: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Login',
-                      style: TextStyle(fontSize: 24),
-                    ),
-                    const SizedBox(height: 16),
-                    const Text(
-                      'Enter your email or phone number',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                    const SizedBox(height: 32),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: () => _onTabTap(false),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: isPhoneTabSelected
-                                    ? Colors.grey[800]
-                                    : Colors.red,
-                                borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(10),
-                                    bottomLeft: Radius.circular(10)),
-                              ),
-                              child: Center(
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 12),
-                                  child: TextWidget(
-                                    S.of(context).email,
-                                    size: 16,
-                                  ),
-                                ),
-                              ),
-                            ),
+            body: _buildBody(context, logic)
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildBody(BuildContext context, logic){
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Login',
+              style: TextStyle(fontSize: 24),
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              'Enter your email or phone number',
+              style: TextStyle(fontSize: 16),
+            ),
+            const SizedBox(height: 32),
+            Row(
+              children: [
+                
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () => _onTabTap(true),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: auth.isPhoneTabSelected
+                            ? Colors.red
+                            : Colors.grey[800],
+                        borderRadius: const BorderRadius.only(
+                            topRight: Radius.circular(10),
+                            bottomRight: Radius.circular(10)),
+                      ),
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          child: TextWidget(
+                            S.of(context).phone_number,
+                            size: 16,
                           ),
                         ),
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: () => _onTabTap(true),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: isPhoneTabSelected
-                                    ? Colors.red
-                                    : Colors.grey[800],
-                                borderRadius: const BorderRadius.only(
-                                    topRight: Radius.circular(10),
-                                    bottomRight: Radius.circular(10)),
-                              ),
-                              child: Center(
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 12),
-                                  child: TextWidget(
-                                    S.of(context).phone_number,
-                                    size: 16,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                    const SizedBox(height: 16),
-                    Expanded(
-                      child: PageView(
-                        controller: _pageController,
-                        onPageChanged: (index) {
-                          setState(() {
-                            isPhoneTabSelected = index == 0;
-                          });
-                        },
-                        scrollDirection: Axis.horizontal,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Expanded(
+              child: PageView(
+                controller: _pageController,
+                onPageChanged: (index) {
+                  setState(() {
+                    auth.isPhoneTabSelected = index == 0;
+                  });
+                },
+                scrollDirection: Axis.horizontal,
+                children: [
+                  Column(
+                    children: [
+                      buildPhoneNumberInput(),
+                      const Spacer(),
+                      Row(
                         children: [
-                          Column(
-                            children: [
-                              buildPhoneNumberInput(),
-                              const Spacer(),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: ElevatedButton(
-                                        onPressed: () async {
-                                          try {
-                                            if (_formKey.currentState
-                                                    ?.validate() ??
-                                                false) {
-                                              if (logic.password.text.isEmpty) {
-                                                _isContinous = true;
-                                                setState(() {});
-                                                return;
-                                              }
+                          Expanded(
+                            child: ElevatedButton(
+                                onPressed: () async {
+                                  try {
+                                    if (_formKey.currentState
+                                            ?.validate() ??
+                                        false) {
+                                      if (logic.password.text.isEmpty) {
+                                        auth.isContinous = true;
+                                        setState(() {});
+                                        return;
+                                      }
 
-                                              EasyLoading.show(
-                                                  status: 'Logging in...');
-                                              await logic.loginController(
-                                                  type: "phone");
-                                              if (logic.status ==
-                                                  BaseStatusEnum.failure) {
-                                                await EasyLoading.dismiss();
-                                                IconSnackBar.show(
-                                                  // ignore: use_build_context_synchronously
-                                                  context,
-                                                  snackBarType:
-                                                      SnackBarType.fail,
-                                                  label:
-                                                      'Something went wrong!',
-                                                  snackBarStyle:
-                                                      const SnackBarStyle(
-                                                    labelTextStyle: TextStyle(
-                                                        color: Colors.white),
-                                                  ),
-                                                );
-                                                return;
-                                              }
-
-                                              if (logic.status == BaseStatusEnum.success) {
-                                                await EasyLoading.dismiss();
-                                                Future.delayed(const Duration(milliseconds: 100));
-                                                logic.clear();
-                                                EasyLoading.showSuccess('Success!');
-                                                // ignore: use_build_context_synchronously
-                                                AppRoute.route.pushReplacement(context, const BottomNavigation());
-                                              }
-                                            }
-                                          } catch (_) {}
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 24, vertical: 12),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(24),
+                                      EasyLoading.show(
+                                          status: 'Logging in...');
+                                      await logic.loginController(
+                                          type: "phone");
+                                      if (logic.status ==
+                                          BaseStatusEnum.failure) {
+                                        await EasyLoading.dismiss();
+                                        IconSnackBar.show(
+                                          // ignore: use_build_context_synchronously
+                                          context,
+                                          snackBarType:
+                                              SnackBarType.fail,
+                                          label:
+                                              'Something went wrong!',
+                                          snackBarStyle:
+                                              const SnackBarStyle(
+                                            labelTextStyle: TextStyle(
+                                                color: Colors.white),
                                           ),
-                                        ),
-                                        child: _isContinous
-                                            ? TextWidget(
-                                                S.of(context).login,
-                                                size: 16,
-                                                color: Colors.white,
-                                              )
-                                            : TextWidget(
-                                                S.of(context).continues,
-                                                size: 16,
-                                                color: Colors.white,
-                                              )),
+                                        );
+                                        return;
+                                      }
+
+                                      if (logic.status == BaseStatusEnum.success) {
+                                        await EasyLoading.dismiss();
+                                        Future.delayed(const Duration(milliseconds: 100));
+                                        logic.clear();
+                                        EasyLoading.showSuccess('Success!');
+                                        // ignore: use_build_context_synchronously
+                                        AppRoute.route.pushReplacement(context, const BottomNavigation());
+                                      }
+                                    }
+                                  } catch (_) {}
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 24, vertical: 12),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(24),
                                   ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              buildEmailInput(),
-                              const Spacer(),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: ElevatedButton(
-                                      onPressed: () async {
-                                        try {
-                                          if (_formKey.currentState
-                                                  ?.validate() ??
-                                              false) {
-                                            EasyLoading.show(
-                                                status: 'Logging in...');
-                                            await logic.loginController(
-                                                type: "email");
-
-                                            if (logic.status ==
-                                                BaseStatusEnum.failure) {
-                                              await EasyLoading.dismiss();
-                                              IconSnackBar.show(
-                                                // ignore: use_build_context_synchronously
-                                                context,
-                                                snackBarType: SnackBarType.fail,
-                                                label: 'Something went wrong!',
-                                                snackBarStyle:
-                                                    const SnackBarStyle(
-                                                  labelTextStyle: TextStyle(
-                                                      color: Colors.white),
-                                                ),
-                                              );
-                                              return;
-                                            }
-
-                                            if (logic.status ==
-                                                BaseStatusEnum.success) {
-                                              await EasyLoading.dismiss();
-                                              Future.delayed(const Duration(
-                                                  milliseconds: 100));
-                                              logic.clear();
-                                              EasyLoading.showSuccess(
-                                                  'Success!');
-                                              // ignore: use_build_context_synchronously
-                                              AppRoute.route.pushReplacement(context, const BottomNavigation());
-                                            }
-                                          }
-                                        } catch (_) {}
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 24, vertical: 12),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(24),
-                                        ),
-                                      ),
-                                      child: TextWidget(
+                                ),
+                                child: auth.isContinous
+                                    ? TextWidget(
                                         S.of(context).login,
                                         size: 16,
                                         color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                                      )
+                                    : TextWidget(
+                                        S.of(context).continues,
+                                        size: 16,
+                                        color: Colors.white,
+                                      )),
                           ),
                         ],
                       ),
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      buildEmailInput(),
+                      const Spacer(),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: () async {
+                                try {
+                                  if (_formKey.currentState
+                                          ?.validate() ??
+                                      false) {
+                                    EasyLoading.show(
+                                        status: 'Logging in...');
+                                    await logic.loginController(
+                                        type: "email");
+
+                                    if (logic.status ==
+                                        BaseStatusEnum.failure) {
+                                      await EasyLoading.dismiss();
+                                      IconSnackBar.show(
+                                        // ignore: use_build_context_synchronously
+                                        context,
+                                        snackBarType: SnackBarType.fail,
+                                        label: 'Something went wrong!',
+                                        snackBarStyle:
+                                            const SnackBarStyle(
+                                          labelTextStyle: TextStyle(
+                                              color: Colors.white),
+                                        ),
+                                      );
+                                      return;
+                                    }
+
+                                    if (logic.status ==
+                                        BaseStatusEnum.success) {
+                                      await EasyLoading.dismiss();
+                                      Future.delayed(const Duration(
+                                          milliseconds: 100));
+                                      logic.clear();
+                                      EasyLoading.showSuccess(
+                                          'Success!');
+                                      // ignore: use_build_context_synchronously
+                                      AppRoute.route.pushReplacement(context, const BottomNavigation());
+                                    }
+                                  }
+                                } catch (_) {}
+                              },
+                              style: ElevatedButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 24, vertical: 12),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(24),
+                                ),
+                              ),
+                              child: TextWidget(
+                                S.of(context).login,
+                                size: 16,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
-          );
-        },
+          ],
+        ),
       ),
     );
   }
@@ -371,7 +348,7 @@ class _AuthViewState extends State<AuthView> {
         ),
         const SizedBox(height: 18),
         Visibility(
-          visible: _isContinous,
+          visible: auth.isContinous,
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
@@ -384,12 +361,12 @@ class _AuthViewState extends State<AuthView> {
                 const SizedBox(width: 8),
                 Expanded(
                   child: TextFormField(
-                    obscureText: _isToggle,
+                    obscureText: auth.isToggle,
                     validator: _validatePassword,
                     controller: auth.password,
-                    decoration: const InputDecoration(
-                      hintText: 'Password',
-                      hintStyle: TextStyle(color: Colors.white, fontSize: 16),
+                    decoration: InputDecoration(
+                      hintText: S.of(context).password,
+                      hintStyle: const TextStyle(color: Colors.white, fontSize: 16),
                       border: InputBorder.none,
                     ),
                     style: const TextStyle(color: Colors.white),
@@ -398,7 +375,7 @@ class _AuthViewState extends State<AuthView> {
                 GestureDetector(
                   onTap: _toggleTextVisibility,
                   child: Icon(
-                    _isToggle ? Icons.visibility_off : Icons.visibility,
+                    auth.isToggle ? Icons.visibility_off : Icons.visibility,
                     color: Colors.white,
                   ),
                 ),
@@ -451,7 +428,7 @@ class _AuthViewState extends State<AuthView> {
               const SizedBox(width: 8),
               Expanded(
                 child: TextFormField(
-                  obscureText: _isToggle,
+                  obscureText: auth.isToggle,
                   validator: _validatePassword,
                   controller: auth.password,
                   decoration: const InputDecoration(
@@ -465,7 +442,7 @@ class _AuthViewState extends State<AuthView> {
               GestureDetector(
                 onTap: _toggleTextVisibility,
                 child: Icon(
-                  _isToggle ? Icons.visibility_off : Icons.visibility,
+                  auth.isToggle ? Icons.visibility_off : Icons.visibility,
                   color: Colors.white,
                 ),
               ),
