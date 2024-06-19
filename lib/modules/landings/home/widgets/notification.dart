@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
+import 'package:legend_cinema/modules/landings/home/controller/home_controller.dart';
 import 'package:legend_cinema/modules/landings/more/controller/more_controller.dart';
 import 'package:legend_cinema/shared/v_globle.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
@@ -21,7 +22,7 @@ class NotificationView extends StatefulWidget {
 
 class _NotificationViewState extends State<NotificationView> {
   List<Map<String, dynamic>> _paymentDataList = [];
-
+  final HomeController contro = Get.find();
   @override
   void initState() {
     super.initState();
@@ -32,6 +33,7 @@ class _NotificationViewState extends State<NotificationView> {
     List<Map<String, dynamic>> data = await _getSavedPaymentData();
     setState(() {
       _paymentDataList = data;
+      contro.updateUnreadNotificationCount(_paymentDataList);
     });
   }
 
@@ -53,20 +55,30 @@ class _NotificationViewState extends State<NotificationView> {
       return [];
     }
   }
-
+  
   void _markAsRead(int index) {
-    setState(() {
-      _paymentDataList[_paymentDataList.length - 1 - index]['isRead'] = true;
-    });
-    _savePaymentData();
-  }
+  setState(() {
+    _paymentDataList[_paymentDataList.length - 1 - index]['isRead'] = true;
+    // Decrease unread count if the notification was unread
+    if (!_paymentDataList[_paymentDataList.length - 1 - index]['isRead']) {
+      contro.unreadNotificationCount  --;
+    }
+  });
+  _savePaymentData();
+}
 
-  void _deleteNotification(int index) {
-    setState(() {
-      _paymentDataList.removeAt(_paymentDataList.length - 1 - index);
-    });
-    _savePaymentData();
-  }
+void _deleteNotification(int index) {
+  setState(() {
+    _paymentDataList.removeAt(_paymentDataList.length - 1 - index);
+    // Decrease unread count if the notification was unread
+    if (!_paymentDataList[_paymentDataList.length - 1 - index]['isRead']) {
+      contro.unreadNotificationCount --;
+    }
+  });
+  _savePaymentData();
+}
+
+
 
   Future<void> _savePaymentData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

@@ -5,6 +5,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:legend_cinema/core/model/fb_from_service_model.dart';
 import 'package:legend_cinema/modules/landings/f_b/controller/f_b_controller.dart';
+import 'package:legend_cinema/modules/landings/more/controller/more_controller.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
@@ -282,6 +283,7 @@ class _FBPaymentState extends State<FBPayment> {
                   Get.back();
                   Get.back();
                   Get.back();
+                   Get.find<MoreController>().update();
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(16),

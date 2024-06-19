@@ -26,13 +26,18 @@ class HomeController extends GetxController {
   List<MoiveModel> moive = [];
   BaseStatusEnum response = BaseStatusEnum.initial;
   String selectedCinema = "";
-  
   final FBController fbController = Get.find();
    @override
   void onInit() {
     super.onInit();
     fbController.location;
   }
+  RxInt unreadNotificationCount = 0.obs;
+
+  void updateUnreadNotificationCount(List<Map<String, dynamic>> paymentDataList) {
+    unreadNotificationCount.value = paymentDataList.where((notification) => !notification['isRead']).length;
+  }
+
 
   Future<String> fetchMoiveController({String? location, String? id}) async {
     response = BaseStatusEnum.inprogress;

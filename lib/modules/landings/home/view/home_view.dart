@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,6 +24,7 @@ import 'package:legend_cinema/shared/v_globle.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/dot_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -45,7 +47,7 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
     Future.delayed(const Duration(milliseconds: 100), () {
       accessToken.$.isNotEmpty ? user.refreshMeController() : user.fetchUserController();
     });
-
+    _loadPaymentData();
     controller.getPromotion();
     controller.selectedDay = controller.dateInfo.dates.first;
     controller.selectedMonth = controller.dateInfo.dates.first;
@@ -54,7 +56,6 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
       vsync: this,
       duration: const Duration(seconds: 1), 
     );
-
     _animation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
     _controller.forward();
 
@@ -72,6 +73,34 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
         );
       }
     });
+  }
+  List<Map<String, dynamic>> _paymentDataList = [];
+
+  Future<void> _loadPaymentData() async {
+    List<Map<String, dynamic>> data = await _getSavedPaymentData();
+    setState(() {
+      _paymentDataList = data;
+      controller.updateUnreadNotificationCount(_paymentDataList);
+    });
+  }
+
+  Future<List<Map<String, dynamic>>> _getSavedPaymentData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? paymentDataString = prefs.getString('paymentDataList');
+
+    if (paymentDataString != null) {
+      List<Map<String, dynamic>> paymentDataList = List<Map<String, dynamic>>.from(jsonDecode(paymentDataString));
+      for (var paymentData in paymentDataList) {
+        paymentData['totalPrice'] = double.parse(paymentData['totalPrice'].toString());
+        // Add read status if not present
+        if (paymentData['isRead'] == null) {
+          paymentData['isRead'] = false;
+        }
+      }
+      return paymentDataList;
+    } else {
+      return [];
+    }
   }
 
   @override
@@ -114,9 +143,32 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
             onPressed: () => AppRoute().push(context, const SearchView()),
           ),
           IconButton(
-            icon: const Icon(Icons.notifications),
+            icon: Obx(() => 
+              Stack(
+                children: [
+                  const Icon(Icons.notifications),
+                  if (controller.unreadNotificationCount.value > 0)
+                    Positioned(
+                      bottom: 12,
+                      left: 9,
+                      child: SizedBox(
+                        height: 14,
+                        child: CircleAvatar(
+                          radius: 10,
+                          backgroundColor: Colors.red,
+                          child: Text(
+                            controller.unreadNotificationCount.value.toString(),
+                            style: const TextStyle(color: Colors.white, fontSize: 12),
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ),
             onPressed: () => AppRoute().push(context, const NotificationView()),
           ),
+
         ],
       ),
       backgroundColor: Colors.black,
