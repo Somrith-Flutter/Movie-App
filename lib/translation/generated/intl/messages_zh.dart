@@ -109,6 +109,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "register": MessageLookupByLibrary.simpleMessage("报名"),
         "release": MessageLookupByLibrary.simpleMessage("发布: "),
         "save": MessageLookupByLibrary.simpleMessage("节省"),
+        "search": MessageLookupByLibrary.simpleMessage("搜索"),
         "search_cinema": MessageLookupByLibrary.simpleMessage("搜索电影院"),
         "see_all": MessageLookupByLibrary.simpleMessage("查看全部"),
         "set_new_profile": MessageLookupByLibrary.simpleMessage("设置新的个人资料图片"),
