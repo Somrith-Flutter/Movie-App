@@ -57,26 +57,34 @@ class _NotificationViewState extends State<NotificationView> {
   }
   
   void _markAsRead(int index) {
-  setState(() {
-    _paymentDataList[_paymentDataList.length - 1 - index]['isRead'] = true;
-    // Decrease unread count if the notification was unread
-    if (!_paymentDataList[_paymentDataList.length - 1 - index]['isRead']) {
-      contro.unreadNotificationCount  --;
-    }
-  });
-  _savePaymentData();
-}
+    setState(() {
+      _paymentDataList[_paymentDataList.length - 1 - index]['isRead'] = true;
+      if (!_paymentDataList[_paymentDataList.length - 1 - index]['isRead']) {
+        contro.unreadNotificationCount  --;
+      }
+    });
+    _savePaymentData();
+    contro.updateUnreadNotificationCount(_paymentDataList);
+  }
 
-void _deleteNotification(int index) {
-  setState(() {
-    _paymentDataList.removeAt(_paymentDataList.length - 1 - index);
-    // Decrease unread count if the notification was unread
-    if (!_paymentDataList[_paymentDataList.length - 1 - index]['isRead']) {
-      contro.unreadNotificationCount --;
-    }
-  });
-  _savePaymentData();
-}
+  void _deleteNotification(int index) {
+    setState(() {
+      // Remove notification at the given index
+      _paymentDataList.removeAt(index);
+
+      // Decrease unreadNotificationCount if the item was unread
+      if (index < _paymentDataList.length && !(_paymentDataList[index]['isRead'])) {
+        contro.unreadNotificationCount--;
+      }
+    });
+
+    // Save updated payment data to SharedPreferences
+    _savePaymentData();
+
+    // Update the unread notification count after deletion
+    contro.updateUnreadNotificationCount(_paymentDataList);
+  }
+
 
 
 
@@ -224,7 +232,7 @@ void _deleteNotification(int index) {
               itemBuilder: (context) => [
                 const PopupMenuItem(
                   value: 0,
-                  child: Text('delete'),
+                  child: Text('Delete'),
                 ),
               ],
               onSelected: (value) {
