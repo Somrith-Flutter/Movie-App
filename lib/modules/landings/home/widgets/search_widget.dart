@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:legend_cinema/config/routes/app_route.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
+import 'package:legend_cinema/modules/landings/home/widgets/home_movie_detail.dart';
 import 'package:legend_cinema/modules/landings/home/widgets/movie_item.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
@@ -130,7 +132,9 @@ class _SearchViewState extends State<SearchView> {
           child: Column(
             children: [
               GestureDetector(
-                
+                onTap: (){
+                  AppRoute.route.push(context, HomeMovieDetail(list: displayList[index],));
+                },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
