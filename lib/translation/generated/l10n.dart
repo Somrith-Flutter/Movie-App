@@ -1399,6 +1399,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Please enable the notification first to see the notification!`
+  String get enable_notification {
+    return Intl.message(
+      'Please enable the notification first to see the notification!',
+      name: 'enable_notification',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

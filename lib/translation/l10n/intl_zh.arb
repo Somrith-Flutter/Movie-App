@@ -114,5 +114,6 @@
     "scan_to_pay": "使用任何烘焙应用程序扫描付款",
     "member_point": "会员积分",
     "food_b": "食品与饮品",
-    "no_data": "没有找到数据!"
+    "no_data": "没有找到数据!",
+    "enable_notification": "请先启用通知才能查看通知！"
 }

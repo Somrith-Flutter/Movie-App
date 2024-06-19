@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:legend_cinema/config/themes/app_color.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
+import 'package:legend_cinema/modules/landings/more/controller/more_controller.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class NotificationWidget extends StatefulWidget {
   const NotificationWidget({super.key});
@@ -15,25 +16,7 @@ class NotificationWidget extends StatefulWidget {
 }
 
 class _NotificationWidgetState extends State<NotificationWidget> {
-  bool isOpen = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _loadNotificationState();
-  }
-
-  Future<void> _loadNotificationState() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      isOpen = prefs.getBool('isOpen') ?? false; 
-    });
-  }
-
-  Future<void> _saveNotificationState(bool value) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('isOpen', value);
-  }
+  final MoreController moreController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -72,11 +55,10 @@ class _NotificationWidgetState extends State<NotificationWidget> {
             TextWidget(S.of(context).notification),
           ],
         ),
-        value: isOpen,
+        value: moreController.isOpen.value,
         onChanged: (con) {
           setState(() {
-            isOpen = !isOpen;
-            _saveNotificationState(isOpen);
+            moreController.saveNotificationState(con);
           });
         },
       ),

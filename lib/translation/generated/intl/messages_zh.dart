@@ -58,6 +58,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "dis_movie": MessageLookupByLibrary.simpleMessage("关于电影的描述"),
         "duration": MessageLookupByLibrary.simpleMessage("期间: "),
         "email": MessageLookupByLibrary.simpleMessage("电子邮件"),
+        "enable_notification":
+            MessageLookupByLibrary.simpleMessage("请先启用通知才能查看通知！"),
         "english": MessageLookupByLibrary.simpleMessage("英语"),
         "explore_more": MessageLookupByLibrary.simpleMessage("探索更多"),
         "fb": MessageLookupByLibrary.simpleMessage("餐饮"),

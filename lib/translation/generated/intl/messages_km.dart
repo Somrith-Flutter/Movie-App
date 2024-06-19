@@ -73,6 +73,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ការពិពណ៌នាអំពីភាពយន្ត"),
         "duration": MessageLookupByLibrary.simpleMessage("រយៈពេល៖ "),
         "email": MessageLookupByLibrary.simpleMessage("អុីម៉ែល"),
+        "enable_notification": MessageLookupByLibrary.simpleMessage(
+            "សូមបើកការជូនដំណឹងជាមុន ដើម្បីឃើញការជូនដំណឹង!"),
         "english": MessageLookupByLibrary.simpleMessage("អង់គ្លេស"),
         "explore_more": MessageLookupByLibrary.simpleMessage("ស្វែងយល់បន្ថែម"),
         "favorite": MessageLookupByLibrary.simpleMessage("ចូលចិត្ត"),

@@ -133,5 +133,6 @@
     "scan_to_pay": "Scan to pay with any baking app",
     "member_point": "Member points",
     "food_b": "Food & Beverage",
-    "no_data": "No Data Found!"
+    "no_data": "No Data Found!",
+    "enable_notification": "Please enable the notification first to see the notification!"
 }

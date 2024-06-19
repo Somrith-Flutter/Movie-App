@@ -69,6 +69,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Description about the Movie"),
         "duration": MessageLookupByLibrary.simpleMessage("Duration: "),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "enable_notification": MessageLookupByLibrary.simpleMessage(
+            "Please enable the notification first to see the notification!"),
         "english": MessageLookupByLibrary.simpleMessage("English"),
         "explore_more": MessageLookupByLibrary.simpleMessage("Explore More"),
         "favorite": MessageLookupByLibrary.simpleMessage("Favorite"),

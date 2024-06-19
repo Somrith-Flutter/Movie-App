@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
 import 'package:legend_cinema/constants/asset_path.dart';
+import 'package:legend_cinema/modules/landings/more/controller/more_controller.dart';
 import 'package:legend_cinema/shared/v_globle.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
+import 'package:get/get.dart';
 
 class NotificationView extends StatelessWidget {
   const NotificationView({super.key});
@@ -23,7 +25,7 @@ class NotificationView extends StatelessWidget {
             bold: true,
           ),
           flexibleSpace: AppConstant.appbarTheme,
-           bottom: TabBar(
+          bottom: TabBar(
             tabs: [
               Tab(text: S.of(context).announcement),
               Tab(text: S.of(context).order),
@@ -39,65 +41,91 @@ class NotificationView extends StatelessWidget {
     );
   }
 
-  Widget _buildBody(BuildContext context){
+  Widget _buildBody(BuildContext context) {
     return TabBarView(
       children: [
-        _buildAnnouncemnetTab(context),
+        _buildAnnouncementTab(context),
         _buildOrdersTab(context),
       ],
     );
   }
 
-   Widget _buildAnnouncemnetTab(BuildContext context){
+  Widget _buildAnnouncementTab(BuildContext context) {
+    final MoreController moreController = Get.find();
+
     return Column(
       children: [
         const Gap(100),
         SizedBox(
           height: 300,
           width: 300,
-          child: Image.asset(AssetPath.purchase, fit: BoxFit.contain,)
+          child: Image.asset(AssetPath.purchase, fit: BoxFit.contain),
         ),
         const Gap(10),
-        if(accessToken.$.isEmpty)...[
+        if (accessToken.$.isEmpty) ...[
           TextWidget(
             S.of(context).ms_notification,
             size: 20,
             color: Colors.grey,
           ),
         ],
-        if(accessToken.$.isNotEmpty)...[
-          TextWidget(
-            S.of(context).no_notification,
-            size: 20,
-            color: Colors.grey,
-          ),
+        if (accessToken.$.isNotEmpty) ...[
+          if (moreController.isOpen.value)
+            Center(
+              child: TextWidget(
+                S.of(context).no_notification,
+                size: 20,
+                color: Colors.grey,
+              ),
+            )
+          else
+            Center(
+              child: TextWidget(
+                S.of(context).enable_notification,
+                size: 20,
+                color: Colors.grey,
+              ),
+            ),
         ]
       ],
     );
   }
 
-  Widget _buildOrdersTab(BuildContext context){
+  Widget _buildOrdersTab(BuildContext context) {
+    final MoreController moreController = Get.find();
+
     return Column(
       children: [
         const Gap(100),
         SizedBox(
           height: 300,
           width: 300,
-          child: Image.asset(AssetPath.purchase, fit: BoxFit.contain,)
+          child: Image.asset(AssetPath.purchase, fit: BoxFit.contain),
         ),
-        if(accessToken.$.isEmpty)...[
+        if (accessToken.$.isEmpty) ...[
           TextWidget(
             S.of(context).ms_notification,
             size: 20,
             color: Colors.grey,
           ),
         ],
-        if(accessToken.$.isNotEmpty)...[
-          TextWidget(
-            S.of(context).no_notification,
-            size: 20,
-            color: Colors.grey,
-          ),
+        if (accessToken.$.isNotEmpty) ...[
+          if (moreController.isOpen.value)
+            Center(
+              child: TextWidget(
+                S.of(context).no_notification,
+                size: 20,
+                color: Colors.grey,
+              ),
+            )
+          else
+            Center(
+              child: TextWidget(
+                S.of(context).enable_notification,
+                size: 20,
+                color: Colors.grey,
+              ),
+            ),
         ]
       ],
     );

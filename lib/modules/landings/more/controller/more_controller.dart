@@ -14,6 +14,7 @@ class MoreController extends GetxController {
   var locale = Rx<Locale>(const Locale('km', 'KH'));
   final int developerCode = 2024;
   var isDeveloperModeEnabled = false.obs;
+  RxBool isOpen = false.obs; 
 
   @override
   void onInit() {
@@ -21,6 +22,20 @@ class MoreController extends GetxController {
     loadSavedLocale();
     fetchNewsAndActivities();
     fetchAboutus();
+     _loadNotificationState();
+  }
+
+  // Load the notification state from shared preferences
+  Future<void> _loadNotificationState() async {
+    final prefs = await SharedPreferences.getInstance();
+    isOpen.value = prefs.getBool('isOpen') ?? false;
+  }
+
+  // Save the notification state to shared preferences
+  Future<void> saveNotificationState(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isOpen', value);
+    isOpen.value = value;
   }
 
   var currentLocale = const Locale(AppConstant.en, AppConstant.us).obs;
