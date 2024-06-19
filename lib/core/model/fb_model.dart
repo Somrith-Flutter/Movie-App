@@ -3,6 +3,7 @@ class FANDBModel {
   String? name;
   String? image;
   String? detailImage;
+  String? mapImage;
   String? locationType;
   String? openingHour;
   String? numberHall;
@@ -13,6 +14,7 @@ class FANDBModel {
       this.name,
       this.image,
       this.detailImage,
+      this.mapImage,
       this.locationType,
       this.openingHour,
       this.numberHall,
@@ -22,6 +24,7 @@ class FANDBModel {
     id = json['id'].toString();
     name = json['name'].toString();
     detailImage = json['detail_image'].toString();
+    mapImage = json['map_image'].toString();
     image = json['image'].toString();
     locationType = json['location_type'].toString();
     openingHour = json['opening_hour'].toString();
@@ -35,6 +38,7 @@ class FANDBModel {
     data['name'] = name.toString();
     data['image'] = image.toString();
     data['detail_image'] = image.toString();
+    data['map_image'] = mapImage.toString();
     data['location_type'] = locationType.toString();
     data['opening_hour'] = openingHour.toString();
     data['number_hall'] = numberHall.toString();
