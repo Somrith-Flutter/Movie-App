@@ -1,4 +1,6 @@
 import 'dart:ui';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -155,10 +157,17 @@ class _FBCartDetailState extends State<FBCartDetail> {
                                                       height: 100,
                                                       decoration: BoxDecoration(
                                                         borderRadius: BorderRadius.circular(5),
-                                                        image: DecorationImage(
-                                                          image: NetworkImage(
-                                                              cacheImage()),
+                                                      ),
+                                                      child: ClipRRect(
+                                                        borderRadius: BorderRadius.circular(5),
+                                                        child: CachedNetworkImage(
+                                                          width: double.maxFinite,
+                                                          height: double.maxFinite,
                                                           fit: BoxFit.cover,
+                                                          imageUrl: cacheImage(),
+                                                          placeholder: (context, url) => const Center(
+                                                            child: CupertinoActivityIndicator(),
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
