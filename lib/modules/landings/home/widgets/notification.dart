@@ -297,7 +297,7 @@ class _NotificationViewState extends State<NotificationView> {
                                   ' ${itemData['title']}',
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
-                                  size: 16,
+                                  size: 14,
                                 ),
                               ],
                             ),
