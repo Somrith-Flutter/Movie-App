@@ -1459,6 +1459,116 @@ class S {
       args: [],
     );
   }
+
+  /// `Pay`
+  String get pay {
+    return Intl.message(
+      'Pay',
+      name: 'pay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Payment success`
+  String get payment_success {
+    return Intl.message(
+      'Payment success',
+      name: 'payment_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `loading...`
+  String get loading {
+    return Intl.message(
+      'loading...',
+      name: 'loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enjoy the movie with our food and drink!`
+  String get ms_noti_pay {
+    return Intl.message(
+      'Enjoy the movie with our food and drink!',
+      name: 'ms_noti_pay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Thanks you!`
+  String get thanks_you {
+    return Intl.message(
+      'Thanks you!',
+      name: 'thanks_you',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Upcoming Tickets`
+  String get no_upcoming_ticket {
+    return Intl.message(
+      'No Upcoming Tickets',
+      name: 'no_upcoming_ticket',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Ticket History`
+  String get no_ticket_history {
+    return Intl.message(
+      'No Ticket History',
+      name: 'no_ticket_history',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `just now`
+  String get just_now {
+    return Intl.message(
+      'just now',
+      name: 'just_now',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `mins ago`
+  String get minutes_ago {
+    return Intl.message(
+      'mins ago',
+      name: 'minutes_ago',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `hours ago`
+  String get hours_ago {
+    return Intl.message(
+      'hours ago',
+      name: 'hours_ago',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `days ago`
+  String get days_ago {
+    return Intl.message(
+      'days ago',
+      name: 'days_ago',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

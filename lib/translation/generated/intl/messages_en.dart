@@ -61,6 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "contact_us": MessageLookupByLibrary.simpleMessage("Contact us"),
         "continues": MessageLookupByLibrary.simpleMessage("Continue"),
         "dark": MessageLookupByLibrary.simpleMessage("Dark"),
+        "days_ago": MessageLookupByLibrary.simpleMessage("days ago"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "delivery": MessageLookupByLibrary.simpleMessage("Delivery"),
         "details": MessageLookupByLibrary.simpleMessage("Details"),
@@ -90,6 +91,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "help": MessageLookupByLibrary.simpleMessage("Help"),
         "history": MessageLookupByLibrary.simpleMessage("History"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "hours_ago": MessageLookupByLibrary.simpleMessage("hours ago"),
+        "just_now": MessageLookupByLibrary.simpleMessage("just now"),
         "khmer": MessageLookupByLibrary.simpleMessage("Khmer"),
         "language": MessageLookupByLibrary.simpleMessage("Languages"),
         "learn_more": MessageLookupByLibrary.simpleMessage("Learn More"),
@@ -97,6 +100,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lengend_membership":
             MessageLookupByLibrary.simpleMessage("Legend Membership"),
         "light": MessageLookupByLibrary.simpleMessage("Light"),
+        "loading": MessageLookupByLibrary.simpleMessage("loading..."),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "login_process": MessageLookupByLibrary.simpleMessage("Logging in..."),
         "logout": MessageLookupByLibrary.simpleMessage("Log out"),
@@ -104,6 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "member_benifit":
             MessageLookupByLibrary.simpleMessage("Member Benifits"),
         "member_point": MessageLookupByLibrary.simpleMessage("Member points"),
+        "minutes_ago": MessageLookupByLibrary.simpleMessage("mins ago"),
         "more": MessageLookupByLibrary.simpleMessage("More"),
         "ms_create_account": MessageLookupByLibrary.simpleMessage(
             "You\'ve created this account with "),
@@ -115,6 +120,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "When to watch your favorite\nmovie at the nearby cinema?\nExplore now to see more cinema around you."),
         "ms_login": MessageLookupByLibrary.simpleMessage(
             "Enter your email or phone number"),
+        "ms_noti_pay": MessageLookupByLibrary.simpleMessage(
+            "Enjoy the movie with our food and drink!"),
         "ms_notification": MessageLookupByLibrary.simpleMessage(
             "Login Order to see notification"),
         "ms_phone_number_required":
@@ -141,6 +148,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "No movie were found, Please try other movie title"),
         "no_notification":
             MessageLookupByLibrary.simpleMessage("No notification"),
+        "no_ticket_history":
+            MessageLookupByLibrary.simpleMessage("No Ticket History"),
+        "no_upcoming_ticket":
+            MessageLookupByLibrary.simpleMessage("No Upcoming Tickets"),
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
         "now_showing": MessageLookupByLibrary.simpleMessage("Now Showing"),
         "number_of_hall":
@@ -164,8 +175,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "order_summary": MessageLookupByLibrary.simpleMessage("Order Summary"),
         "other": MessageLookupByLibrary.simpleMessage("Other"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "pay": MessageLookupByLibrary.simpleMessage("Pay"),
         "payment_method":
             MessageLookupByLibrary.simpleMessage("Payment Method"),
+        "payment_success":
+            MessageLookupByLibrary.simpleMessage("Payment success"),
         "personal_info":
             MessageLookupByLibrary.simpleMessage("Personal Information"),
         "phone_number": MessageLookupByLibrary.simpleMessage("Phone Number"),
@@ -198,6 +212,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "system": MessageLookupByLibrary.simpleMessage("System"),
         "term_condition":
             MessageLookupByLibrary.simpleMessage("Term & Conditions"),
+        "thanks_you": MessageLookupByLibrary.simpleMessage("Thanks you!"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "today": MessageLookupByLibrary.simpleMessage("Today"),
         "total": MessageLookupByLibrary.simpleMessage("Total "),

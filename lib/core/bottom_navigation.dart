@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:legend_cinema/modules/landings/cinema/view/cinema_page.dart';
-import 'package:legend_cinema/modules/landings/f_b/view/f_b_page.dart';
-import 'package:legend_cinema/modules/landings/home/view/home_page.dart';
-import 'package:legend_cinema/modules/landings/more/view/more_page.dart';
-import 'package:legend_cinema/modules/landings/offers/view/offers_page.dart';
+import 'package:legend_cinema/modules/cinema/view/cinema_page.dart';
+import 'package:legend_cinema/modules/f_b/view/f_b_page.dart';
+import 'package:legend_cinema/modules/home/view/home_page.dart';
+import 'package:legend_cinema/modules/more/view/more_page.dart';
+import 'package:legend_cinema/modules/offers/view/offers_page.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 
 // ignore: library_private_types_in_public_api
