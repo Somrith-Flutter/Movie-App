@@ -441,15 +441,14 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
                   ),
                   child: Stack(
                     children: [
-                      const Positioned(
-                        top: 5,
-                        left: 5,
-                        child: Icon(Icons.card_giftcard)
+                      Positioned(
+                        top: - 16,
+                        child: SizedBox(child: Image.asset(AssetPath.t, fit: BoxFit.fill, height: 70,))
                       ),
                       Positioned(
-                        top: 5,
-                        right: 5,
-                        child: TextWidget(S.of(context).buy_ticket, bold: true,)
+                        top: 8,
+                        right: 8,
+                        child: TextWidget(S.of(context).buy_ticket, bold: true, size: 12,)
                       ),
                     ],
                   ),
