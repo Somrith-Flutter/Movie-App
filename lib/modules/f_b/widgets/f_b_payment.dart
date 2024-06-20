@@ -336,6 +336,7 @@ class _FBPaymentState extends State<FBPayment> {
       'totalPrice': widget.totalPrice,
       'totalItem': widget.totalItems,
       'items': itemsData,
+      'timestamp': DateTime.now().toIso8601String(),
     };
 
     paymentDataList.add(paymentData);

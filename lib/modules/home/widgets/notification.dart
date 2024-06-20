@@ -141,6 +141,7 @@ class _NotificationViewState extends State<NotificationView> {
       var paymentData = reversedList[index];
       final List<Map<String, dynamic>> itemsData = List<Map<String, dynamic>>.from(paymentData['items']);
       bool isRead = paymentData['isRead'];
+      String formattedTime = _formatTimestamp(paymentData['timestamp']); // Format timestamp
 
       return Dismissible(
         key: Key(paymentData.hashCode.toString()),
@@ -191,139 +192,148 @@ class _NotificationViewState extends State<NotificationView> {
               border: Border.all(color: Colors.red.withOpacity(0.5)),
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Stack(
               children: [
-                if(itemsData.length > 1)...[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      TextWidget(
-                        '${S.of(context).total + S.of(context).price} :',
-                        size: 20,
-                        color: Colors.blue,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if(itemsData.length > 1)...[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          TextWidget(
+                            '${S.of(context).total + S.of(context).price} :',
+                            size: 20,
+                            color: Colors.blue,
+                          ),
+                          TextWidget(
+                            '  \$${paymentData['totalPrice']}',
+                            size: 20,
+                          ),
+                          const Gap(15),
+                          TextWidget(
+                            '${S.of(context).quantity} :',
+                            size: 20,
+                            color: Colors.blue,
+                          ),
+                          TextWidget(
+                            '  ${paymentData['totalItem']}',
+                            size: 20,
+                          ),
+                        ],
                       ),
-                      TextWidget(
-                        '  \$${paymentData['totalPrice']}',
-                        size: 20,
-                      ),
-                      const Gap(15),
-                      TextWidget(
-                        '${S.of(context).quantity} :',
-                        size: 20,
-                        color: Colors.blue,
-                      ),
-                      TextWidget(
-                        '  ${paymentData['totalItem']}',
-                        size: 20,
-                      ),
+                      Divider(color: Colors.white.withOpacity(0.5), height: 2,)
                     ],
-                  ),
-                  Divider(color: Colors.white.withOpacity(0.5), height: 2,)
-                ],
+                    
+                    ...itemsData.map((itemData) {
+                      String cacheImage({String? img}) {
+                        if (AppConstant.baseIosIP == AppConstant.domainKey) {
+                          img = itemData['image_url'];
+                        }
+                        if (AppConstant.baseAndroidIP == AppConstant.domainKey) {
+                          img = "${AppConstant.domainKey}/${itemData['image_url']}";
+                        }
+                        return img ?? '';
+                      }
                 
-                ...itemsData.map((itemData) {
-                  String cacheImage({String? img}) {
-                    if (AppConstant.baseIosIP == AppConstant.domainKey) {
-                      img = itemData['image_url'];
-                    }
-                    if (AppConstant.baseAndroidIP == AppConstant.domainKey) {
-                      img = "${AppConstant.domainKey}/${itemData['image_url']}";
-                    }
-                    return img ?? '';
-                  }
-
-                  return Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: 100,
-                        height: 100,
-                        padding: const EdgeInsets.all(5),
-                        margin: const EdgeInsets.only(right: 10),
-                        decoration: BoxDecoration(
-                          color: Colors.grey.withOpacity(0.5),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: CachedNetworkImage(
-                          height: 100,
-                          width: 100,
-                          imageUrl: cacheImage(),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            if(itemsData.length == 1)...[
-                              Row(
-                                children: [
-                                  TextWidget(
-                                    S.of(context).total,
-                                    size: 18,
-                                    color: Colors.blue,
-                                  ),
-                                  TextWidget(
-                                    '  \$${paymentData['totalPrice']}',
-                                    size: 16,
+                      return Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: 100,
+                            height: 100,
+                            padding: const EdgeInsets.all(5),
+                            margin: const EdgeInsets.only(right: 10),
+                            decoration: BoxDecoration(
+                              color: Colors.grey.withOpacity(0.5),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: CachedNetworkImage(
+                              height: 100,
+                              width: 100,
+                              imageUrl: cacheImage(),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                if(itemsData.length == 1)...[
+                                  Row(
+                                    children: [
+                                      TextWidget(
+                                        S.of(context).total,
+                                        size: 18,
+                                        color: Colors.blue,
+                                      ),
+                                      TextWidget(
+                                        '  \$${paymentData['totalPrice']}',
+                                        size: 16,
+                                      ),
+                                    ],
+                                  )
+                                ],
+                                if(itemsData.length == 1)...[
+                                  Row(
+                                    children: [
+                                      TextWidget(
+                                        '${S.of(context).quantity} :',
+                                        size: 18,
+                                        color: Colors.blue,
+                                      ),
+                                      TextWidget(
+                                        '  ${paymentData['totalItem']}',
+                                        size: 16,
+                                      ),
+                                    ],
                                   ),
                                 ],
-                              )
-                            ],
-                            if(itemsData.length == 1)...[
-                              Row(
-                                children: [
-                                  TextWidget(
-                                    '${S.of(context).quantity} :',
-                                    size: 18,
-                                    color: Colors.blue,
-                                  ),
-                                  TextWidget(
-                                    '  ${paymentData['totalItem']}',
-                                    size: 16,
-                                  ),
-                                ],
-                              ),
-                            ],
-                            Row(
-                              children: [
-                                TextWidget(
-                                  '${S.of(context).fb}:',
-                                  size: 18,
-                                  color: Colors.blue.withOpacity(0.9),
+                                Row(
+                                  children: [
+                                    TextWidget(
+                                      '${S.of(context).fb}:',
+                                      size: 18,
+                                      color: Colors.blue.withOpacity(0.9),
+                                    ),
+                                    TextWidget(
+                                      ' ${itemData['title']}',
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      size: 14,
+                                    ),
+                                  ],
                                 ),
-                                TextWidget(
-                                  ' ${itemData['title']}',
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  size: 14,
+                                Row(
+                                  children: [
+                                    TextWidget(
+                                      '${S.of(context).price}:',
+                                      size: 18,
+                                      color: Colors.red,
+                                    ),
+                                    TextWidget(
+                                      '  \$${itemData['price']}',
+                                      size: 16,
+                                    ),
+                                  ],
                                 ),
+                                if(itemsData.length > 1)...[
+                                  const Gap(40),
+                                  Divider(color: Colors.white.withOpacity(0.5), height: 2,)
+                                ]
                               ],
                             ),
-                            Row(
-                              children: [
-                                TextWidget(
-                                  '${S.of(context).price}:',
-                                  size: 18,
-                                  color: Colors.red,
-                                ),
-                                TextWidget(
-                                  '  \$${itemData['price']}',
-                                  size: 16,
-                                ),
-                              ],
-                            ),
-                            if(itemsData.length > 1)...[
-                              const Gap(40),
-                              Divider(color: Colors.white.withOpacity(0.5), height: 2,)
-                            ]
-                          ],
-                        ),
-                      ),
-                    ],
-                  );
-                }),
+                          ),
+                        ],
+                      );
+                    }),
+                  ],
+                ),
+                Positioned(
+                  right: 5,
+                  top: 5,
+                  child: TextWidget(formattedTime),
+                )
               ],
             ),
           ),
@@ -332,8 +342,6 @@ class _NotificationViewState extends State<NotificationView> {
     },
   );
 }
-
-
 
   Widget _buildOrdersTab(BuildContext context) {
     final MoreController moreController = Get.find();
@@ -414,5 +422,20 @@ class _NotificationViewState extends State<NotificationView> {
         ]
       ],
     );
+  }
+
+  String _formatTimestamp(String timestamp) {
+    DateTime dateTime = DateTime.parse(timestamp);
+    Duration difference = DateTime.now().difference(dateTime);
+
+    if (difference.inSeconds < 60) {
+      return S.of(context).just_now;
+    } else if (difference.inMinutes < 60) {
+      return '${difference.inMinutes} ${S.of(context).minutes_ago}';
+    } else if (difference.inHours < 24) {
+      return '${difference.inHours} ${S.of(context).hours_ago}';
+    } else {
+      return '${difference.inDays} ${S.of(context).days_ago}';
+    }
   }
 }

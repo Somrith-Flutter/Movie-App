@@ -63,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ទំនាក់ទំនងមកពួកយើង"),
         "continues": MessageLookupByLibrary.simpleMessage("បន្ត"),
         "dark": MessageLookupByLibrary.simpleMessage("ងងឹត"),
+        "days_ago": MessageLookupByLibrary.simpleMessage("ថ្ងៃមុន"),
         "delete": MessageLookupByLibrary.simpleMessage("លុប"),
         "delivery":
             MessageLookupByLibrary.simpleMessage("សំរាប់​ការ​ដឹកជញ្ជូន"),
@@ -94,6 +95,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "help": MessageLookupByLibrary.simpleMessage("ជំនួយ"),
         "history": MessageLookupByLibrary.simpleMessage("ប្រវត្តការទិញ"),
         "home": MessageLookupByLibrary.simpleMessage("ទំព័រដើម"),
+        "hours_ago": MessageLookupByLibrary.simpleMessage("ម៉ោងមុន"),
+        "just_now": MessageLookupByLibrary.simpleMessage("ឥឡូវនេះ"),
         "khmer": MessageLookupByLibrary.simpleMessage("ខ្មែរ"),
         "language": MessageLookupByLibrary.simpleMessage("ភាសា"),
         "learn_more": MessageLookupByLibrary.simpleMessage("ស្វែងយល់បន្ថែម"),
@@ -110,6 +113,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "member_benifit":
             MessageLookupByLibrary.simpleMessage("អត្ថប្រយោជន៍សមាជិក"),
         "member_point": MessageLookupByLibrary.simpleMessage("ពិន្ទុសមាជិក"),
+        "minutes_ago": MessageLookupByLibrary.simpleMessage("នាទីមុន"),
         "more": MessageLookupByLibrary.simpleMessage("ផ្សេងៗទៀត"),
         "ms_create_account":
             MessageLookupByLibrary.simpleMessage("អ្នកបានបង្កើតគណនីនេះជាមួយ "),

@@ -50,6 +50,7 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   gap: ^3.0.1
   palette_generator: ^0.3.3+3
+  timeago: ^3.6.1
 
 dev_dependencies:
 

@@ -146,5 +146,9 @@
     "ms_noti_pay": "Enjoy the movie with our food and drink!",
     "thanks_you": "Thanks you!",
     "no_upcoming_ticket": "No Upcoming Tickets",
-    "no_ticket_history": "No Ticket History"
+    "no_ticket_history": "No Ticket History",
+    "just_now": "just now",
+    "minutes_ago": "mins ago",
+    "hours_ago": "hours ago",
+    "days_ago": "days ago"
 }

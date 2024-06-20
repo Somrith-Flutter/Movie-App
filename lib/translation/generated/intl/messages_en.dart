@@ -61,6 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "contact_us": MessageLookupByLibrary.simpleMessage("Contact us"),
         "continues": MessageLookupByLibrary.simpleMessage("Continue"),
         "dark": MessageLookupByLibrary.simpleMessage("Dark"),
+        "days_ago": MessageLookupByLibrary.simpleMessage("days ago"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "delivery": MessageLookupByLibrary.simpleMessage("Delivery"),
         "details": MessageLookupByLibrary.simpleMessage("Details"),
@@ -90,6 +91,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "help": MessageLookupByLibrary.simpleMessage("Help"),
         "history": MessageLookupByLibrary.simpleMessage("History"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "hours_ago": MessageLookupByLibrary.simpleMessage("hours ago"),
+        "just_now": MessageLookupByLibrary.simpleMessage("just now"),
         "khmer": MessageLookupByLibrary.simpleMessage("Khmer"),
         "language": MessageLookupByLibrary.simpleMessage("Languages"),
         "learn_more": MessageLookupByLibrary.simpleMessage("Learn More"),
@@ -105,6 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "member_benifit":
             MessageLookupByLibrary.simpleMessage("Member Benifits"),
         "member_point": MessageLookupByLibrary.simpleMessage("Member points"),
+        "minutes_ago": MessageLookupByLibrary.simpleMessage("mins ago"),
         "more": MessageLookupByLibrary.simpleMessage("More"),
         "ms_create_account": MessageLookupByLibrary.simpleMessage(
             "You\'ve created this account with "),

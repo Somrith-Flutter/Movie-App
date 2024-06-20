@@ -1529,6 +1529,46 @@ class S {
       args: [],
     );
   }
+
+  /// `just now`
+  String get just_now {
+    return Intl.message(
+      'just now',
+      name: 'just_now',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `mins ago`
+  String get minutes_ago {
+    return Intl.message(
+      'mins ago',
+      name: 'minutes_ago',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `hours ago`
+  String get hours_ago {
+    return Intl.message(
+      'hours ago',
+      name: 'hours_ago',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `days ago`
+  String get days_ago {
+    return Intl.message(
+      'days ago',
+      name: 'days_ago',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

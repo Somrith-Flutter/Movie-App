@@ -127,5 +127,9 @@
     "ms_noti_pay": "一边享用美食和饮料，一边欣赏电影！",
     "thanks_you": "感谢您",
     "no_upcoming_ticket": "没有即将推出的门票",
-    "no_ticket_history": "没有票务历史记录"
+    "no_ticket_history": "没有票务历史记录",
+    "just_now": "现在",
+    "minutes_ago": "几分钟前",
+    "hours_ago": "小时前",
+    "days_ago": "几天前"
 }
