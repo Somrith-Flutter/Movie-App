@@ -177,6 +177,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "phone_number": MessageLookupByLibrary.simpleMessage("លេខទំនាក់ទំនង"),
         "premium_benifit":
             MessageLookupByLibrary.simpleMessage("អត្ថប្រយោជន៍ពិសេស"),
+        "price": MessageLookupByLibrary.simpleMessage("តម្លៃ"),
         "privacy_policy":
             MessageLookupByLibrary.simpleMessage("គោលការណ៍ភាពឯកជន"),
         "product": MessageLookupByLibrary.simpleMessage("ផលិផល"),
@@ -203,7 +204,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "term_condition": MessageLookupByLibrary.simpleMessage("លក្ខខណ្ឌ"),
         "theme": MessageLookupByLibrary.simpleMessage("ទម្រង់កម្មវិធី"),
         "today": MessageLookupByLibrary.simpleMessage("ថ្ងៃនេះ"),
-        "total": MessageLookupByLibrary.simpleMessage("សរុប :"),
+        "total": MessageLookupByLibrary.simpleMessage("សរុប "),
         "txt_member_benifit": MessageLookupByLibrary.simpleMessage(
             "ទទួលបានអត្ថប្រយោជន៍ជាច្រើនពីកាតសមាជិករបស់យើង។ ទទួលយកអីឡូវនេះ នៅទីតាំងក្បែរលោកអ្នក"),
         "upcoming": MessageLookupByLibrary.simpleMessage("នាពេលខាងមុខ"),

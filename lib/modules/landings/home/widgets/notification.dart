@@ -71,21 +71,15 @@ class _NotificationViewState extends State<NotificationView> {
 
   void _deleteNotification(int index) {
     setState(() {
-      // Remove notification at the given index
-      _paymentDataList.removeAt(index);
-
-      // Decrease unreadNotificationCount if the item was unread
-      if (index < _paymentDataList.length && !(_paymentDataList[index]['isRead'])) {
+      _paymentDataList.removeAt(_paymentDataList.length - 1 - index);
+      if (!_paymentDataList[_paymentDataList.length - 1]['isRead']) {
         contro.unreadNotificationCount--;
       }
     });
-
-    // Save updated payment data to SharedPreferences
     _savePaymentData();
-
-    // Update the unread notification count after deletion
     contro.updateUnreadNotificationCount(_paymentDataList);
   }
+
 
   Future<void> _savePaymentData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -200,6 +194,24 @@ class _NotificationViewState extends State<NotificationView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                if(itemsData.length > 1)...[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextWidget(
+                        '${S.of(context).total + S.of(context).price} :',
+                        size: 20,
+                        color: Colors.blue,
+                      ),
+                      TextWidget(
+                        '  \$${paymentData['totalPrice']}',
+                        size: 20,
+                      ),
+                    ],
+                  ),
+                  Divider(color: Colors.white.withOpacity(0.5), height: 2,)
+                ],
+                
                 ...itemsData.map((itemData) {
                   String cacheImage({String? img}) {
                     if (AppConstant.baseIosIP == AppConstant.domainKey) {
@@ -234,20 +246,46 @@ class _NotificationViewState extends State<NotificationView> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            if(itemsData.length == 1)...[
+                              Row(
+                                children: [
+                                  TextWidget(
+                                    S.of(context).total,
+                                    size: 20,
+                                    color: Colors.blue,
+                                  ),
+                                  TextWidget(
+                                    '  \$${paymentData['totalPrice']}',
+                                    size: 20,
+                                  ),
+                                ],
+                              )
+                            ],
                             TextWidget(
-                              'Total Price: \$${paymentData['totalPrice']}',
-                              size: 20,
-                              color: Colors.blue,
+                              '${S.of(context).food_b}:',
+                              size: 18,
+                              color: Colors.blue.withOpacity(0.9),
                             ),
                             TextWidget(
-                              'Title: ${itemData['title']}',
+                              '     ${itemData['title']}',
                               size: 16,
                             ),
-                            TextWidget(
-                              'Price: \$${itemData['price']}',
-                              size: 16,
+                            Row(
+                              children: [
+                                TextWidget(
+                                  '${S.of(context).price}:',
+                                  size: 18,
+                                  color: Colors.red,
+                                ),
+                                TextWidget(
+                                  '  \$${itemData['price']}',
+                                  size: 16,
+                                ),
+                              ],
                             ),
-                            const SizedBox(height: 10),
+                            if(itemsData.length > 1)...[
+                              Divider(color: Colors.white.withOpacity(0.5), height: 2,)
+                            ]
                           ],
                         ),
                       ),

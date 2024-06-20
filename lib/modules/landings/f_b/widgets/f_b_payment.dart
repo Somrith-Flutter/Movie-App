@@ -283,7 +283,8 @@ class _FBPaymentState extends State<FBPayment> {
                   Get.back();
                   Get.back();
                   Get.back();
-                   Get.find<MoreController>().update();
+                  Get.find<MoreController>().update();
+                  Get.snackbar('Enjoy the movie with our food and drink!', 'Thanks you!');
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(16),

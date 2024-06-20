@@ -45,7 +45,7 @@
     "summary": "概括",
     "logout": "登出",
     "order_summary": "订单摘要",
-    "total": "全部的 :",
+    "total": "全部的 ",
     "checkout": "查看",
     "gust_info": "阵风信息",
     "payment_method": "付款方式",
@@ -118,5 +118,6 @@
     "enable_notification": "请先启用通知才能查看通知！",
     "confirm_delete": "确认删除",
     "ms_delete": "您确定要删除此通知吗？",
-    "delete": "删除"
+    "delete": "删除",
+    "price": "价格"
 }

@@ -171,6 +171,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "phone_number": MessageLookupByLibrary.simpleMessage("Phone Number"),
         "premium_benifit":
             MessageLookupByLibrary.simpleMessage("Premium Benifits"),
+        "price": MessageLookupByLibrary.simpleMessage("Price"),
         "privacy_policy":
             MessageLookupByLibrary.simpleMessage("Privacy Policy"),
         "product": MessageLookupByLibrary.simpleMessage("Product"),
@@ -198,7 +199,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Term & Conditions"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "today": MessageLookupByLibrary.simpleMessage("Today"),
-        "total": MessageLookupByLibrary.simpleMessage("Total :"),
+        "total": MessageLookupByLibrary.simpleMessage("Total "),
         "txt_member_benifit": MessageLookupByLibrary.simpleMessage(
             "Getting many benifit from our membership card. Take one now at your nearby Lengend Cinema!"),
         "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),

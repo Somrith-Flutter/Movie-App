@@ -76,7 +76,7 @@
     "explore_more": "Explore More",
     "summary": "Summary",
     "order_summary": "Order Summary",
-    "total": "Total :",
+    "total": "Total ",
     "checkout": "Check Out",
     "gust_info": "Gust Information",
     "payment_method": "Payment Method",
@@ -137,5 +137,6 @@
     "enable_notification": "Please enable the notification first to see the notification!",
     "confirm_delete": "Confirm Delete",
     "ms_delete": "Are you sure you want to delete this notification?",
-    "delete": "Delete"
+    "delete": "Delete",
+    "price": "Price"
 }

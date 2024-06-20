@@ -820,10 +820,10 @@ class S {
     );
   }
 
-  /// `Total :`
+  /// `Total `
   String get total {
     return Intl.message(
-      'Total :',
+      'Total ',
       name: 'total',
       desc: '',
       args: [],
@@ -1435,6 +1435,16 @@ class S {
     return Intl.message(
       'Delete',
       name: 'delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Price`
+  String get price {
+    return Intl.message(
+      'Price',
+      name: 'price',
       desc: '',
       args: [],
     );

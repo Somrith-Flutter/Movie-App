@@ -126,6 +126,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "personal_info": MessageLookupByLibrary.simpleMessage("个人信息"),
         "phone_number": MessageLookupByLibrary.simpleMessage("电话号码"),
         "premium_benifit": MessageLookupByLibrary.simpleMessage("高级福利"),
+        "price": MessageLookupByLibrary.simpleMessage("价格"),
         "privacy_policy": MessageLookupByLibrary.simpleMessage("隐私和政策"),
         "profile": MessageLookupByLibrary.simpleMessage("轮廓"),
         "promotion": MessageLookupByLibrary.simpleMessage("促销活动"),
@@ -142,7 +143,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "summary": MessageLookupByLibrary.simpleMessage("概括"),
         "term_condition": MessageLookupByLibrary.simpleMessage("条款和条件"),
         "today": MessageLookupByLibrary.simpleMessage("今天"),
-        "total": MessageLookupByLibrary.simpleMessage("全部的 :"),
+        "total": MessageLookupByLibrary.simpleMessage("全部的 "),
         "txt_member_benifit": MessageLookupByLibrary.simpleMessage(
             "从我们的会员卡中获得很多好处。立即前往附近的 Lengend 电影院观看一场吧！"),
         "upcoming": MessageLookupByLibrary.simpleMessage("即将推出"),
