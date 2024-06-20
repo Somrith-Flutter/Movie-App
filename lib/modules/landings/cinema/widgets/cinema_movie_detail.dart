@@ -51,6 +51,27 @@ class _CinemaMovieDetailState extends State<CinemaMovieDetail> {
 
   @override
   Widget build(BuildContext context) {
+    String cacheImage({String? img}) {
+      if (AppConstant.baseIosIP == AppConstant.domainKey ){
+        img = newMoive?.imageUrl;
+      }
+      if (AppConstant.baseAndroidIP == AppConstant.domainKey){
+        img = "${AppConstant.domainKey}/${newMoive?.imageUrl}";
+      }
+      return img ?? '';
+    }
+
+     String cacheImageDetails({String? img}) {
+      for (var v in widget.data){
+        if (AppConstant.baseIosIP == AppConstant.domainKey ){
+          img = v.imageUrl;
+        }
+        if (AppConstant.baseAndroidIP == AppConstant.domainKey){
+          img = "${AppConstant.domainKey}/${v.imageUrl}";
+        }
+      }
+      return img ?? '';
+    }
     return Scaffold(
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -61,9 +82,9 @@ class _CinemaMovieDetailState extends State<CinemaMovieDetail> {
               Stack(
                 children: [
                   CachedNetworkImage(
-                    imageUrl: "${AppConstant.domainKey}/${newMoive?.imageUrl}",
+                    imageUrl: cacheImage(),
                     fit: BoxFit.cover,
-                    height: 250,
+                    height: 420,
                     width: double.infinity,
                   ),
                   Positioned(
@@ -97,8 +118,7 @@ class _CinemaMovieDetailState extends State<CinemaMovieDetail> {
                                   color: Colors.grey.withOpacity(0.5)),
                               child: GestureDetector(
                                   onTap: () async {
-                                    await shareNetworkImage(
-                                        "${AppConstant.domainKey}/${newMoive?.imageUrl}");
+                                    await shareNetworkImage(cacheImage());
                                     setState(() {});
                                   },
                                   child: const Icon(Icons.ios_share_outlined))),
@@ -164,7 +184,7 @@ class _CinemaMovieDetailState extends State<CinemaMovieDetail> {
                 Stack(
                   children: [
                     CachedNetworkImage(
-                      imageUrl: "${AppConstant.domainKey}/${v.imageUrl}",
+                      imageUrl: cacheImageDetails(),
                       fit: BoxFit.cover,
                       height: 250,
                       width: double.infinity,
@@ -200,8 +220,7 @@ class _CinemaMovieDetailState extends State<CinemaMovieDetail> {
                                     color: Colors.grey.withOpacity(0.5)),
                                 child: GestureDetector(
                                     onTap: () async {
-                                      await shareNetworkImage(
-                                          "${AppConstant.domainKey}/${v.imageUrl}");
+                                      await shareNetworkImage(cacheImageDetails());
                                     },
                                     child:
                                         const Icon(Icons.ios_share_outlined)))
@@ -518,6 +537,15 @@ class _CinemaMovieDetailState extends State<CinemaMovieDetail> {
         itemBuilder: (BuildContext context, int index) {
           debugPrint("${_movie.moive.length}");
           final data = _movie.moive[index];
+          String cacheImage({String? img}) {
+            if (AppConstant.baseIosIP == AppConstant.domainKey ){
+              img = data.imageUrl;
+            }
+            if (AppConstant.baseAndroidIP == AppConstant.domainKey){
+              img = "${AppConstant.domainKey}/${data.imageUrl}";
+            }
+            return img ?? '';
+          }
           return GestureDetector(
             onTap: () {
               setState(() {
@@ -536,8 +564,7 @@ class _CinemaMovieDetailState extends State<CinemaMovieDetail> {
                   ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: CachedNetworkImage(
-                        imageUrl:
-                            "${AppConstant.domainKey}/${data.imageUrl.toString()}",
+                        imageUrl: cacheImage(),
                         fit: BoxFit.cover,
                         height: 300,
                         errorWidget: (context, url, error) => const Center(

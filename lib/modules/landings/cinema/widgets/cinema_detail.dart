@@ -219,7 +219,15 @@ class _CinemaDetailState extends State<CinemaDetail> {
         itemCount: _movie.moive.length,
         itemBuilder: (BuildContext context, int index) {
           final data = _movie.moive[index];
-
+          String cacheImage({String? img}) {
+            if (AppConstant.baseIosIP == AppConstant.domainKey ){
+              img = data.imageUrl;
+            }
+            if (AppConstant.baseAndroidIP == AppConstant.domainKey){
+              img = "${AppConstant.domainKey}/${data.imageUrl.toString()}";
+            }
+            return img ?? '';
+          }
           fetchImageWithRetry(
               "${AppConstant.domainKey}/${data.imageUrl.toString()}");
 
@@ -239,8 +247,7 @@ class _CinemaDetailState extends State<CinemaDetail> {
                   ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: CachedNetworkImage(
-                        imageUrl:
-                            "${AppConstant.domainKey}/${data.imageUrl.toString()}",
+                        imageUrl: cacheImage(),
                         fit: BoxFit.cover,
                         height: 300,
                         errorWidget: (context, url, error) => const Center(

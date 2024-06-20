@@ -65,7 +65,7 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
                 Image.asset(
                   currentMovie?.image ?? widget.list.image!,
                   fit: BoxFit.cover,
-                  height: 250,
+                  height: 420,
                   width: double.infinity,
                 ),
                 Padding(
