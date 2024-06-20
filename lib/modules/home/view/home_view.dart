@@ -149,12 +149,13 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
                   const Icon(Icons.notifications),
                   if (controller.unreadNotificationCount.value > 0)
                     Positioned(
-                      bottom: 12,
-                      left: 9,
+                      bottom: 5,
+                      right: 0,
                       child: SizedBox(
-                        height: 14,
+                        height: 22,
+                        width: 13,
                         child: CircleAvatar(
-                          radius: 10,
+                          radius: 5,
                           backgroundColor: Colors.red,
                           child: Text(
                             controller.unreadNotificationCount.value.toString(),

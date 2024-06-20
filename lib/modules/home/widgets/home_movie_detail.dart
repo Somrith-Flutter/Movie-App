@@ -73,7 +73,21 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const BackWidget(color: Colors.red,),
+                      GestureDetector(
+                        onTap: (){
+                          Get.back();
+                        },
+                        child: Container(
+                            margin: const EdgeInsets.all(7),
+                            width: 45,
+                            height: 45,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.white,width: 1),
+                                shape: BoxShape.circle
+                            ),
+                            child: const  Icon(Icons.arrow_back ,color: Colors.white,)
+                        ),
+                      ),
                       GestureDetector(
                         onTap: () async {
                           await shareAssetImage(widget.list.image!);
