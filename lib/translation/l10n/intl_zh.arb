@@ -119,5 +119,6 @@
     "confirm_delete": "确认删除",
     "ms_delete": "您确定要删除此通知吗？",
     "delete": "删除",
-    "price": "价格"
+    "price": "价格",
+    "quantity": "数量"
 }
