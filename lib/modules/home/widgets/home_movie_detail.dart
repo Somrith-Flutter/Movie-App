@@ -8,7 +8,6 @@ import 'package:legend_cinema/modules/home/widgets/movie_item.dart';
 import 'package:legend_cinema/modules/home/widgets/time_line_item.dart';
 import 'package:legend_cinema/translation/generated/l10n.dart';
 import 'package:legend_cinema/utils/helpers/date_helper.dart';
-import 'package:legend_cinema/widgets/back_widget.dart';
 import 'package:legend_cinema/widgets/text_widget.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';

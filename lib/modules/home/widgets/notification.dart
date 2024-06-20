@@ -329,11 +329,20 @@ class _NotificationViewState extends State<NotificationView> {
                     }),
                   ],
                 ),
-                Positioned(
-                  right: 5,
-                  top: 2,
-                  child: TextWidget(formattedTime),
-                )
+                if(itemsData.length == 1)...[
+                  Positioned(
+                    right: 5,
+                    top: 2,
+                    child: TextWidget(formattedTime),
+                  )
+                ],
+                if(itemsData.length > 1)...[
+                  Positioned(
+                    bottom: 10,
+                    right: 2,
+                    child: TextWidget(formattedTime),
+                  )
+                ],
               ],
             ),
           ),
