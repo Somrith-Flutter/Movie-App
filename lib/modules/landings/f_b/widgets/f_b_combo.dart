@@ -158,14 +158,18 @@ class _FAndBComboState extends State<FAndBCombo> {
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                TextWidget(S.of(context).summary,
-                                    size: 16, bold: true),
-                                MyAnimatedFlipCounter(
-                                  duration: const Duration(milliseconds: 500),
-                                  value: double.parse(
-                                      cartController.formattedTotalPrice),
-                                  textStyle: const TextStyle(fontSize: 18),
-                                  prefix: '\$',
+                                TextWidget(S.of(context).summary, size: 16, bold: true),
+                                Builder(
+                                  builder: (context) {
+                                    double value = double.parse(cartController.formattedTotalPrice);
+                                    debugPrint("Parsed value for animation: $value");
+                                    return MyAnimatedFlipCounter(
+                                      duration: const Duration(milliseconds: 500),
+                                      value: value,
+                                      textStyle: const TextStyle(fontSize: 18),
+                                      prefix: '\$',
+                                    );
+                                  },
                                 ),
                               ],
                             ),

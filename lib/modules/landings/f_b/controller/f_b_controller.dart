@@ -50,12 +50,15 @@ class FBController extends GetxController implements GetxService {
       cartItems.values.fold(0, (sum, item) => sum + item.toInt());
 
   double get totalPrice => cartItems.entries.fold(0.0, (sum, entry) {
-        final price = entry.key.price ?? 0.0;
-        final quantity = entry.value;
-        return sum + (price * quantity);
-      });
+    final price = entry.key.price ?? 0.0;
+    final quantity = entry.value;
+    final itemTotal = price * quantity;
+    debugPrint('Item Price: $price, Quantity: $quantity, Item Total: $itemTotal');
+    return sum + itemTotal;
+  });
 
-  String get formattedTotalPrice => totalPrice.format();
+  String get formattedTotalPrice => totalPrice.decimalized;
+
   var location = <LocationModel>[].obs;
   var isLoading = true.obs;
   String errorMessage = '';

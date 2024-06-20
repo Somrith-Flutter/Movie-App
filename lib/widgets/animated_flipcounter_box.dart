@@ -28,7 +28,7 @@ class MyAnimatedFlipCounter extends StatelessWidget {
     this.prefix,
     this.infix,
     this.suffix,
-    this.fractionDigits = 2, 
+    this.fractionDigits = 2,
     this.wholeDigits = 1,
     this.hideLeadingZeroes = false,
     this.thousandSeparator,
@@ -60,7 +60,7 @@ class MyAnimatedFlipCounter extends StatelessWidget {
     final integerWidgets = <Widget>[];
     for (int i = 0; i < digits.length - fractionDigits; i++) {
       final digit = _SingleDigitFlipCounter(
-        key: ValueKey(digits.length - i),
+        key: ValueKey('int-$i'),
         value: digits[i].toDouble(),
         duration: duration,
         curve: curve,
@@ -91,6 +91,20 @@ class MyAnimatedFlipCounter extends StatelessWidget {
       }
     }
 
+    final fractionWidgets = <Widget>[];
+    for (int i = digits.length - fractionDigits; i < digits.length; i++) {
+      final digit = _SingleDigitFlipCounter(
+        key: ValueKey('frac-$i'),
+        value: digits[i].toDouble(),
+        duration: duration,
+        curve: curve,
+        size: prototypeDigit.size,
+        color: color,
+        padding: padding,
+      );
+      fractionWidgets.add(digit);
+    }
+
     return DefaultTextStyle.merge(
       style: style,
       child: Row(
@@ -112,16 +126,7 @@ class MyAnimatedFlipCounter extends StatelessWidget {
           if (infix != null) Text(infix!),
           ...integerWidgets,
           if (fractionDigits != 0) Text(decimalSeparator),
-          for (int i = digits.length - fractionDigits; i < digits.length; i++)
-            _SingleDigitFlipCounter(
-              key: ValueKey('decimal$i'),
-              value: digits[i].toDouble(),
-              duration: duration,
-              curve: curve,
-              size: prototypeDigit.size,
-              color: color,
-              padding: padding,
-            ),
+          ...fractionWidgets,
           if (suffix != null) Text(suffix!),
         ],
       ),

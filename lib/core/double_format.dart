@@ -1,25 +1,20 @@
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:legend_cinema/constants/app_constant.dart';
 
 extension DoubleExtension on double {
-  String format([String pattern = AppConstant.noneDecimalFormat]) {
+  String format([String pattern = AppConstant.decimalFormat]) {
     try {
-      return NumberFormat(pattern, 'en').format(this);
+      final formattedValue = NumberFormat(pattern, 'en').format(this);
+      debugPrint('Formatted Value: $formattedValue');
+      return formattedValue;
     } catch (e) {
-      return NumberFormat(AppConstant.noneDecimalFormat, 'en').format(this);
+      final fallbackValue = NumberFormat(AppConstant.decimalFormat, 'en').format(this);
+      debugPrint('Fallback Formatted Value: $fallbackValue');
+      return fallbackValue;
     }
   }
 
-  // String get decimalized {
-  //   if (kIsWeb) return toString();
-  //   return toString().replaceAll(RegExp(r"([.]*0)(?!.*\d)"), "");
-  // }
-
-  /// It will eliminate number after decimal point if its value equal to zero.
-  ///
-  /// Otherwise, it will format the number with 2 decimal points.
-  ///
-  /// eg. 12.0 => 12, 33.1 => 33.10
   String get decimalized {
     final splits = toStringAsFixed(2).split('.');
     if (double.parse(splits[1]) == .0) {
