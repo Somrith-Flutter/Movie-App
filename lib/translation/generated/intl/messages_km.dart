@@ -101,6 +101,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lengend_membership":
             MessageLookupByLibrary.simpleMessage("សមាជិកភាព លេជេន"),
         "light": MessageLookupByLibrary.simpleMessage("ភ្លឺ"),
+        "loading": MessageLookupByLibrary.simpleMessage("កំពុង​​ដំណើរការ...."),
         "login": MessageLookupByLibrary.simpleMessage("ចូល"),
         "login_process":
             MessageLookupByLibrary.simpleMessage("កំពុង​​ដំណើរការ..."),
@@ -120,6 +121,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "ពេលណាត្រូវមើលភាពយន្តដែលអ្នកចូលចិត្តនៅរោងកុនក្បែរនោះ?\nស្វែងរកឥឡូវនេះ ដើម្បីមើលភាពយន្តជាច្រើនទៀតនៅជុំវិញអ្នក។"),
         "ms_login": MessageLookupByLibrary.simpleMessage(
             "បញ្ចូលអ៊ីមែល ឬលេខទូរស័ព្ទរបស់អ្នក។"),
+        "ms_noti_pay": MessageLookupByLibrary.simpleMessage(
+            "រីករាយទស្សនាភាពយន្តជាមួយអាហារ និងភេសជ្ជៈរបស់យើង!"),
         "ms_notification": MessageLookupByLibrary.simpleMessage(
             "ចូលទៅក្នុងកម្មវិធីរួចធ្វើការកម៉ងដើម្បីទទួលបានសារជូនដំណឹង"),
         "ms_phone_number_required":
@@ -147,6 +150,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "រកមិនឃើញភាពយន្តទេ សូមសាកល្បងចំណងជើងភាពយន្តផ្សេងទៀត។"),
         "no_notification":
             MessageLookupByLibrary.simpleMessage("មិនមានសារជូនដំណឹងទេ"),
+        "no_ticket_history":
+            MessageLookupByLibrary.simpleMessage("មិនមានប្រវត្តិសំបុត្រ"),
+        "no_upcoming_ticket":
+            MessageLookupByLibrary.simpleMessage("មិនមានសំបុត្រនាពេលខាងមុខទេ។"),
         "notification": MessageLookupByLibrary.simpleMessage("សារជូនដំណឹង"),
         "now_showing": MessageLookupByLibrary.simpleMessage("កំពុងចាក់បញ្ចាំង"),
         "number_of_hall": MessageLookupByLibrary.simpleMessage("លេខរៀងសាល"),
@@ -170,8 +177,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("សេចក្តីសង្ខេបនៃការបញ្ជាទិញ"),
         "other": MessageLookupByLibrary.simpleMessage("ផ្សេងៗទៀត"),
         "password": MessageLookupByLibrary.simpleMessage("លេខសម្ងាត់"),
+        "pay": MessageLookupByLibrary.simpleMessage("ទូទាត់"),
         "payment_method":
             MessageLookupByLibrary.simpleMessage("វិធីសាស្រ្តទូទាត់"),
+        "payment_success":
+            MessageLookupByLibrary.simpleMessage("ជោគជ័យនៃការទូទាត់"),
         "personal_info":
             MessageLookupByLibrary.simpleMessage("ព័ឥមានផ្ទាល់ខ្លួន"),
         "phone_number": MessageLookupByLibrary.simpleMessage("លេខទំនាក់ទំនង"),
@@ -203,6 +213,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "summary": MessageLookupByLibrary.simpleMessage("សង្ខេប"),
         "system": MessageLookupByLibrary.simpleMessage("ប្រព័ន្ធ"),
         "term_condition": MessageLookupByLibrary.simpleMessage("លក្ខខណ្ឌ"),
+        "thanks_you": MessageLookupByLibrary.simpleMessage("សូមអរគុណ!"),
         "theme": MessageLookupByLibrary.simpleMessage("ទម្រង់កម្មវិធី"),
         "today": MessageLookupByLibrary.simpleMessage("ថ្ងៃនេះ"),
         "total": MessageLookupByLibrary.simpleMessage("សរុប "),

@@ -274,10 +274,10 @@ class _FBPaymentState extends State<FBPayment> {
               ),
               GestureDetector(
                 onTap: () async {
-                  EasyLoading.show(status: 'loading...');
+                  EasyLoading.show(status: S.of(context).loading);
                   await Future.delayed(const Duration(seconds: 1));
                   EasyLoading.dismiss(); 
-                  EasyLoading.showSuccess('Payment success!');
+                  EasyLoading.showSuccess(S.of(context).payment_success);
                   setState(() {
                     cartController.cartItems.clear();
                   });
@@ -286,7 +286,7 @@ class _FBPaymentState extends State<FBPayment> {
                   Get.back();
                   Get.back();
                   Get.find<MoreController>().update();
-                  Get.snackbar('Enjoy the movie with our food and drink!', 'Thanks you!');
+                  Get.snackbar(S.of(context).ms_noti_pay, S.of(context).thanks_you);
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(16),
@@ -301,7 +301,7 @@ class _FBPaymentState extends State<FBPayment> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         TextWidget(
-                          "Pay. \$${widget.totalPrice.toStringAsFixed(2)}",
+                          "${S.of(context).pay} \$${widget.totalPrice.toStringAsFixed(2)}",
                           size: 16.0,
                           bold: true,
                         ),

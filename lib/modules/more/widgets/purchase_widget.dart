@@ -38,13 +38,13 @@ class PurchaseWidget extends StatelessWidget {
   Widget _buildBody(BuildContext context){
     return TabBarView(
       children: [
-        _buildUpcomingTab(),
-        _buildHistoryTab(),
+        _buildUpcomingTab(context),
+        _buildHistoryTab(context),
       ],
     );
   }
 
-  Widget _buildUpcomingTab(){
+  Widget _buildUpcomingTab(BuildContext context){
     return Column(
       children: [
         const Gap(100),
@@ -54,8 +54,8 @@ class PurchaseWidget extends StatelessWidget {
           child: Image.asset(AssetPath.purchase, fit: BoxFit.contain,)
         ),
         const Gap(10),
-        const TextWidget(
-          'No Upcoming Tickets',
+        TextWidget(
+          S.of(context).no_upcoming_ticket,
           size: 20,
           color: Colors.grey,
         ),
@@ -63,7 +63,7 @@ class PurchaseWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildHistoryTab(){
+  Widget _buildHistoryTab(BuildContext context){
     return Column(
       children: [
         const Gap(100),
@@ -72,8 +72,8 @@ class PurchaseWidget extends StatelessWidget {
           width: 300,
           child: Image.asset(AssetPath.purchase, fit: BoxFit.contain,)
         ),
-        const TextWidget(
-          'No Ticket History',
+        TextWidget(
+          S.of(context).no_ticket_history,
           size: 20,
           color: Colors.grey,
         ),

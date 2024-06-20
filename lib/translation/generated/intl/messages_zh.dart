@@ -80,6 +80,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "legend_member": MessageLookupByLibrary.simpleMessage("Legend 传奇会员"),
         "lengend_membership":
             MessageLookupByLibrary.simpleMessage("Legend 会员资格"),
+        "loading": MessageLookupByLibrary.simpleMessage("加载中...."),
         "login": MessageLookupByLibrary.simpleMessage("登录"),
         "login_process": MessageLookupByLibrary.simpleMessage("在登录..."),
         "logout": MessageLookupByLibrary.simpleMessage("登出"),
@@ -93,6 +94,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "ms_footer": MessageLookupByLibrary.simpleMessage(
             "何时去附近的电影院观看您最喜爱\n的电影? 立即探索,看看您周围有更多电影院."),
         "ms_login": MessageLookupByLibrary.simpleMessage("输入您的电子邮件或电话号码"),
+        "ms_noti_pay":
+            MessageLookupByLibrary.simpleMessage("一边享用美食和饮料，一边欣赏电影！"),
         "ms_notification": MessageLookupByLibrary.simpleMessage("登录订单查看通知"),
         "ms_phone_number_required":
             MessageLookupByLibrary.simpleMessage("电话号码"),
@@ -107,6 +110,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "no_data": MessageLookupByLibrary.simpleMessage("没有找到数据!"),
         "no_movie": MessageLookupByLibrary.simpleMessage("未找到电影，请尝试其他电影名称"),
         "no_notification": MessageLookupByLibrary.simpleMessage("无通知"),
+        "no_ticket_history": MessageLookupByLibrary.simpleMessage("没有票务历史记录"),
+        "no_upcoming_ticket": MessageLookupByLibrary.simpleMessage("没有即将推出的门票"),
         "notification": MessageLookupByLibrary.simpleMessage("通知"),
         "now_showing": MessageLookupByLibrary.simpleMessage("正在上映"),
         "number_of_hall": MessageLookupByLibrary.simpleMessage("大厅数量"),
@@ -122,7 +127,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "order_summary": MessageLookupByLibrary.simpleMessage("订单摘要"),
         "other": MessageLookupByLibrary.simpleMessage("其他"),
         "password": MessageLookupByLibrary.simpleMessage("密码"),
+        "pay": MessageLookupByLibrary.simpleMessage("支付"),
         "payment_method": MessageLookupByLibrary.simpleMessage("付款方式"),
+        "payment_success": MessageLookupByLibrary.simpleMessage("付款成功"),
         "personal_info": MessageLookupByLibrary.simpleMessage("个人信息"),
         "phone_number": MessageLookupByLibrary.simpleMessage("电话号码"),
         "premium_benifit": MessageLookupByLibrary.simpleMessage("高级福利"),
@@ -143,6 +150,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "set_new_profile": MessageLookupByLibrary.simpleMessage("设置新的个人资料图片"),
         "summary": MessageLookupByLibrary.simpleMessage("概括"),
         "term_condition": MessageLookupByLibrary.simpleMessage("条款和条件"),
+        "thanks_you": MessageLookupByLibrary.simpleMessage("感谢您"),
         "today": MessageLookupByLibrary.simpleMessage("今天"),
         "total": MessageLookupByLibrary.simpleMessage("全部的 "),
         "txt_member_benifit": MessageLookupByLibrary.simpleMessage(
