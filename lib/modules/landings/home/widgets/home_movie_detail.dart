@@ -290,7 +290,7 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
                             ),
                           ),
                           Positioned(
-                            top: 35,
+                            bottom: 35,
                             left: 25,
                             child: TextWidget(
                               date.split('/')[0],
@@ -300,7 +300,7 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
                           ),
                           Positioned(
                             top: 55,
-                            left: 15,
+                            left: 25,
                             child: TextWidget(
                               month,
                               size: 12,
