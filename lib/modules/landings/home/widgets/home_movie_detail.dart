@@ -206,15 +206,50 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
   }
 
   Widget _buildSwitchingMovies(BuildContext context) {
-    List<Movies> movies = selectedCinema == controller.fb.first.name
-      ? (selectedDay == dateInfo.dates[0]
-        ? movie1 : selectedDay == dateInfo.dates[1]
-          ? movie2 : selectedDay == dateInfo.dates[2]
-            ? movie3 : movie4)
-      : (selectedDay == dateInfo.dates[0]
-        ? movie5 : selectedDay == dateInfo.dates[1]
-          ? movie6 : selectedDay == dateInfo.dates[2]
-            ? movie7 : movie8);
+    List<Movies> allMovies = [];
+    int selectedIndex = dateInfo.dates.indexOf(selectedDay);
+    for (int i = selectedIndex; i < dateInfo.dates.length; i++) {
+      List<Movies> moviesToAdd = [];
+      if (selectedCinema == controller.fb.first.name) {
+        switch (i) {
+          case 0:
+            moviesToAdd = [...movie1];
+            break;
+          case 1:
+            moviesToAdd = [...movie2, ...movie1];
+            break;
+          case 2:
+            moviesToAdd = [...movie3, ...movie2, ...movie1];
+            break;
+          case 3:
+            moviesToAdd = [...movie4, ...movie3, ...movie2, ...movie1];
+            break;
+          default:
+            moviesToAdd = [];
+        }
+      } else {
+        switch (i) {
+          case 0:
+            moviesToAdd = [...movie5];
+            break;
+          case 1:
+            moviesToAdd = [...movie6, ...movie5];
+            break;
+          case 2:
+            moviesToAdd = [...movie7, ...movie6, ...movie5];
+            break;
+          case 3:
+            moviesToAdd = [...movie8, ...movie7, ...movie6, ...movie5];
+            break;
+          default:
+            moviesToAdd = [];
+        }
+      }
+      allMovies.addAll(moviesToAdd);
+      if (i == selectedIndex) {
+        break;
+      }
+    }
 
     return ListView(
       padding: EdgeInsets.zero,
@@ -223,7 +258,7 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
       children: [
         _buildTimeLine(context),
         BuildTimeLineItems(
-          movies: movies,
+          movies: allMovies,
           isdetails: true,
           switcer: (Movies movie) {
             setState(() {
@@ -252,20 +287,11 @@ class _HomeMovieDetailState extends State<HomeMovieDetail> {
                   final month = dateInfo.months[index];
                   return Expanded(
                     child: GestureDetector(
-                      onTap: () {
+                       onTap: () {
                         setState(() {
                           selectedDay = date;
-                          currentMovie = (selectedCinema == controller.fb.first.name
-                            ? (selectedDay == dateInfo.dates[0]
-                              ? movie1 : selectedDay == dateInfo.dates[1]
-                                ? movie2 : selectedDay == dateInfo.dates[2]
-                                  ? movie3 : movie4)[0] 
-                            : (selectedDay == dateInfo.dates[0]
-                              ? movie5 : selectedDay == dateInfo.dates[1]
-                                ? movie6 : selectedDay == dateInfo.dates[2]
-                                  ? movie7 : movie8)[0]); 
                         });
-                      },
+                       },
                       child: Stack(
                         children: [
                           Container(
