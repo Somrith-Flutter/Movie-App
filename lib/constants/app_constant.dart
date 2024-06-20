@@ -82,6 +82,6 @@ class AppConstant{
   // [baseAndroidUrl] run based on ip Emulator.
 
   // ios = baseIosIP;      android = baseAndroidIP;
-  static const String domainKey = baseAndroidIP;
+  static const String domainKey = baseIosIP;
   // [domainKey] local ip, Switch this one to accept data income from db.
 }
