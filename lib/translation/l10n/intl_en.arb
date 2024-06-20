@@ -138,5 +138,6 @@
     "confirm_delete": "Confirm Delete",
     "ms_delete": "Are you sure you want to delete this notification?",
     "delete": "Delete",
-    "price": "Price"
+    "price": "Price",
+    "quantity": "Quantity"
 }

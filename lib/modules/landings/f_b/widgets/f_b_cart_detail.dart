@@ -17,8 +17,9 @@ import 'package:legend_cinema/widgets/text_widget.dart';
 class FBCartDetail extends StatefulWidget {
   final List<FBFromServiceModel> selectedItems;
   final String selectedCinema;
+  final String? totalItems;
   const FBCartDetail(
-      {super.key, required this.selectedItems, required this.selectedCinema});
+      {super.key, required this.selectedItems, required this.selectedCinema, this.totalItems});
 
   @override
   State<FBCartDetail> createState() => _FBCartDetailState();
@@ -342,6 +343,7 @@ class _FBCartDetailState extends State<FBCartDetail> {
                           FBPayment(
                             totalPrice: totalPrice,
                             items: widget.selectedItems,
+                            totalItems: widget.totalItems,
                           ));
                     },
                     child: Padding(

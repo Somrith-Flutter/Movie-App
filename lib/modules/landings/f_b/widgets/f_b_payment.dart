@@ -17,8 +17,10 @@ class FBPayment extends StatefulWidget {
     super.key, 
     required this.totalPrice,
     this.items,
+    this.totalItems,
   });
   double totalPrice;
+  String? totalItems;
   final List<FBFromServiceModel>? items;
 
   @override
@@ -332,6 +334,7 @@ class _FBPaymentState extends State<FBPayment> {
 
     Map<String, dynamic> paymentData = {
       'totalPrice': widget.totalPrice,
+      'totalItem': widget.totalItems,
       'items': itemsData,
     };
 

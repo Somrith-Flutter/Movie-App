@@ -178,6 +178,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "promotion": MessageLookupByLibrary.simpleMessage("Promotions"),
         "purchase": MessageLookupByLibrary.simpleMessage("Purchase"),
+        "quantity": MessageLookupByLibrary.simpleMessage("Quantity"),
         "re_enter_password":
             MessageLookupByLibrary.simpleMessage("Re-Enter Password"),
         "register": MessageLookupByLibrary.simpleMessage("Signup"),

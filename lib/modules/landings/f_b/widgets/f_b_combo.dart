@@ -182,6 +182,7 @@ class _FAndBComboState extends State<FAndBCombo> {
                                 FBCartDetail(
                                   selectedItems: camboSelected,
                                   selectedCinema: widget.location,
+                                  totalItems: controller.totalItems.toString(),
                                 ));
                           },
                           style: ElevatedButton.styleFrom(

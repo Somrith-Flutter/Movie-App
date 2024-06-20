@@ -131,6 +131,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "profile": MessageLookupByLibrary.simpleMessage("轮廓"),
         "promotion": MessageLookupByLibrary.simpleMessage("促销活动"),
         "purchase": MessageLookupByLibrary.simpleMessage("购买"),
+        "quantity": MessageLookupByLibrary.simpleMessage("数量"),
         "re_enter_password": MessageLookupByLibrary.simpleMessage("重新输入密码"),
         "register": MessageLookupByLibrary.simpleMessage("报名"),
         "release": MessageLookupByLibrary.simpleMessage("发布: "),

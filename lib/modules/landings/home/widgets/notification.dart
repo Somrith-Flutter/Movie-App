@@ -196,7 +196,7 @@ class _NotificationViewState extends State<NotificationView> {
               children: [
                 if(itemsData.length > 1)...[
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       TextWidget(
                         '${S.of(context).total + S.of(context).price} :',
@@ -205,6 +205,16 @@ class _NotificationViewState extends State<NotificationView> {
                       ),
                       TextWidget(
                         '  \$${paymentData['totalPrice']}',
+                        size: 20,
+                      ),
+                      const Gap(15),
+                      TextWidget(
+                        '${S.of(context).quantity} :',
+                        size: 20,
+                        color: Colors.blue,
+                      ),
+                      TextWidget(
+                        '  ${paymentData['totalItem']}',
                         size: 20,
                       ),
                     ],
@@ -251,24 +261,45 @@ class _NotificationViewState extends State<NotificationView> {
                                 children: [
                                   TextWidget(
                                     S.of(context).total,
-                                    size: 20,
+                                    size: 18,
                                     color: Colors.blue,
                                   ),
                                   TextWidget(
                                     '  \$${paymentData['totalPrice']}',
-                                    size: 20,
+                                    size: 16,
                                   ),
                                 ],
                               )
                             ],
-                            TextWidget(
-                              '${S.of(context).food_b}:',
-                              size: 18,
-                              color: Colors.blue.withOpacity(0.9),
-                            ),
-                            TextWidget(
-                              '     ${itemData['title']}',
-                              size: 16,
+                            if(itemsData.length == 1)...[
+                              Row(
+                                children: [
+                                  TextWidget(
+                                    '${S.of(context).quantity} :',
+                                    size: 18,
+                                    color: Colors.blue,
+                                  ),
+                                  TextWidget(
+                                    '  ${paymentData['totalItem']}',
+                                    size: 16,
+                                  ),
+                                ],
+                              ),
+                            ],
+                            Row(
+                              children: [
+                                TextWidget(
+                                  '${S.of(context).fb}:',
+                                  size: 18,
+                                  color: Colors.blue.withOpacity(0.9),
+                                ),
+                                TextWidget(
+                                  ' ${itemData['title']}',
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  size: 16,
+                                ),
+                              ],
                             ),
                             Row(
                               children: [
@@ -284,6 +315,7 @@ class _NotificationViewState extends State<NotificationView> {
                               ],
                             ),
                             if(itemsData.length > 1)...[
+                              const Gap(40),
                               Divider(color: Colors.white.withOpacity(0.5), height: 2,)
                             ]
                           ],

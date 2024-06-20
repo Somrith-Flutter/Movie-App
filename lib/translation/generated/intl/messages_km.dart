@@ -184,6 +184,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "profile": MessageLookupByLibrary.simpleMessage("រូបតំណាង"),
         "promotion": MessageLookupByLibrary.simpleMessage("ការផ្សព្វផ្សាយ"),
         "purchase": MessageLookupByLibrary.simpleMessage("ការទិញ"),
+        "quantity": MessageLookupByLibrary.simpleMessage("បរិមាណ"),
         "re_enter_password":
             MessageLookupByLibrary.simpleMessage("បញ្ចូល​លេខសំងាត់​ម្តង​ទៀត"),
         "register": MessageLookupByLibrary.simpleMessage("ចុះឈ្មោះ"),
