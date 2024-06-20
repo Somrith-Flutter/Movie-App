@@ -145,7 +145,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(100),
                           child: CachedNetworkImage(
-                            imageUrl: cacheImage(),
+                            imageUrl: "${AppConstant.domainKey}/${user.uu?.imageProfile}",
                             fit: BoxFit.cover,
                             height: double.maxFinite,
                             width: double.maxFinite,

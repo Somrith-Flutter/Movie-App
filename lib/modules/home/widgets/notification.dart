@@ -71,15 +71,20 @@ class _NotificationViewState extends State<NotificationView> {
 
   void _deleteNotification(int index) {
     setState(() {
-      _paymentDataList.removeAt(_paymentDataList.length - 1 - index);
-      if (!_paymentDataList[_paymentDataList.length - 1]['isRead']) {
-        contro.unreadNotificationCount--;
+      if (_paymentDataList.isNotEmpty && index >= 0 && index < _paymentDataList.length) {
+        int deleteIndex = _paymentDataList.length - 1 - index;
+        if (deleteIndex >= 0 && deleteIndex < _paymentDataList.length) {
+          bool isRead = _paymentDataList[deleteIndex]['isRead'];
+          _paymentDataList.removeAt(deleteIndex);
+          if (!isRead) {
+            contro.unreadNotificationCount--;
+          }
+        }
       }
+      _savePaymentData();
+      contro.updateUnreadNotificationCount(_paymentDataList);
     });
-    _savePaymentData();
-    contro.updateUnreadNotificationCount(_paymentDataList);
   }
-
 
   Future<void> _savePaymentData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
