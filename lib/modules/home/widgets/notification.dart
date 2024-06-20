@@ -331,7 +331,7 @@ class _NotificationViewState extends State<NotificationView> {
                 ),
                 Positioned(
                   right: 5,
-                  top: 5,
+                  top: 2,
                   child: TextWidget(formattedTime),
                 )
               ],
