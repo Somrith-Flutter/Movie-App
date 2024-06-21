@@ -523,7 +523,7 @@ class _RegisterFormState extends State<RegisterForm> {
     return IconSnackBar.show(
       context,
       snackBarType: SnackBarType.fail,
-      label: 'Internal Server Error',
+      label: 'Password at least 6 digits!',
       snackBarStyle: const SnackBarStyle(
         labelTextStyle: TextStyle(color: Colors.white),
       ),
