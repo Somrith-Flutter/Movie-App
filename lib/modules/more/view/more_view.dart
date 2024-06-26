@@ -25,7 +25,6 @@ class MoreView extends StatefulWidget {
 }
 
 class _MoreViewState extends State<MoreView> {
-
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -58,84 +57,75 @@ class _MoreViewState extends State<MoreView> {
     );
   }
 
-  Widget _buildSignupButton(){
+  Widget _buildSignupButton() {
     return GestureDetector(
       onTap: () => AppRoute().push(context, const Register()),
       child: Stack(
         children: [
           Container(
             height: 45,
-            width: 190,
+            width: 170,
             decoration: BoxDecoration(
-              color: Colors.red.shade900,
-              borderRadius: const BorderRadius.all(Radius.circular(40))
-            ),
+                color: Colors.red.shade900,
+                borderRadius: const BorderRadius.all(Radius.circular(40))),
           ),
           Positioned(
-            left: 10,
-            bottom: -14,
-            child: SizedBox(
-              height: 80,
-              width: 80,
-              child: Image.asset(AssetPath.signupicon)
-            )
-          ),
+              left: -1,
+              bottom: -14,
+              child: SizedBox(
+                  height: 80,
+                  width: 80,
+                  child: Image.asset(AssetPath.signupicon))),
           Positioned(
-            right: 50,
-            bottom: 14,
-            child: TextWidget(
-              S.of(context).register,
-              bold: true,
-            )
-          )
+              right: 50,
+              bottom: 14,
+              child: TextWidget(
+                S.of(context).register,
+                bold: true,
+              ))
         ],
       ),
     );
   }
 
-  Widget _buildLoginButton(){
+  Widget _buildLoginButton() {
     return GestureDetector(
       onTap: () => AppRoute().push(context, const AuthPage()),
       child: Stack(
         children: [
           Container(
             height: 45,
-            width: 190,
+            width: 170,
             decoration: BoxDecoration(
-              color: Colors.red.shade900,
-              borderRadius: const BorderRadius.all(Radius.circular(40))
-            ),
+                color: Colors.red.shade900,
+                borderRadius: const BorderRadius.all(Radius.circular(40))),
           ),
           Positioned(
-            left: 25,
-            top: -14,
-            child: SizedBox(
-              height: 70,
-              width: 70,
-              child: Image.asset(AssetPath.loginicon)
-            )
-          ),
+              left: 10,
+              top: -14,
+              child: SizedBox(
+                  height: 70,
+                  width: 70,
+                  child: Image.asset(AssetPath.loginicon))),
           Positioned(
-            right: 55,
-            bottom: 14,
-            child: TextWidget(
-              S.of(context).login,
-              bold: true,
-            )
-          )
+              right: 55,
+              bottom: 14,
+              child: TextWidget(
+                S.of(context).login,
+                bold: true,
+              ))
         ],
       ),
     );
   }
 
-  Widget _buildWishCard(){
+  Widget _buildWishCard() {
     return Stack(
       children: [
         Container(
           decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(15)),
-            border: Border.all(color: Colors.white.withOpacity(0.2))
-          ),
+              borderRadius: const BorderRadius.all(Radius.circular(15)),
+              border: Border.all(color: Colors.white.withOpacity(0.2))),
           child: Card(
             child: Padding(
               padding: const EdgeInsets.all(18),
@@ -144,68 +134,68 @@ class _MoreViewState extends State<MoreView> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Align(
-                    alignment: Alignment.topLeft,
-                    child: TextWidget(
-                      S.of(context).lengend_membership, 
-                      size: 20, 
-                      bold: true,
-                    )
-                  ),
-                    const Gap(12),
+                      alignment: Alignment.topLeft,
+                      child: TextWidget(
+                        S.of(context).lengend_membership,
+                        size: 20,
+                        bold: true,
+                      )),
+                  const Gap(12),
                   TextWidget(
-                    S.of(context).dis_legend_membership, 
+                    S.of(context).dis_legend_membership,
                     size: 13,
                     color: Colors.white.withOpacity(0.7),
                   ),
                   const Gap(40),
-                  if(accessToken.$.isNotEmpty)...[
+                  if (accessToken.$.isNotEmpty) ...[
                     Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () => AppRoute().push(context, const ActivateCard()), 
-                          child: Container(
-                            height: 35,
-                            width: 110,
-                            decoration: BoxDecoration(
-                              color: Colors.red.shade900,
-                              borderRadius: BorderRadius.circular(20)
-                            ),
-                            child: Center(
-                              child: TextWidget(
+                      alignment: Alignment.bottomLeft,
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () =>
+                                AppRoute().push(context, const ActivateCard()),
+                            child: Container(
+                              height: 35,
+                              width: 110,
+                              decoration: BoxDecoration(
+                                  color: Colors.red.shade900,
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: Center(
+                                  child: TextWidget(
                                 S.of(context).activate,
                                 bold: true,
                                 size: 14,
                               )),
-                          ),
-                        ),
-                        const Gap(10),
-                        GestureDetector(
-                          onTap: () => AppRoute().push(context, const LearnMoreWidget()), 
-                          child: Container(
-                            height: 35,
-                            width: 130,
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.white),
-                              borderRadius: BorderRadius.circular(20)
                             ),
-                            child: Center(
-                              child: TextWidget(
-                                S.of(context).learn_more ,
+                          ),
+                          const Gap(10),
+                          GestureDetector(
+                            onTap: () => AppRoute()
+                                .push(context, const LearnMoreWidget()),
+                            child: Container(
+                              height: 35,
+                              width: 130,
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.white),
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: Center(
+                                  child: TextWidget(
+                                S.of(context).learn_more,
                                 bold: true,
                                 size: 14,
                               )),
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  ]else...[
+                  ] else ...[
                     Align(
                       alignment: Alignment.bottomLeft,
                       child: ElevatedButton(
-                        onPressed: () => AppRoute().push(context, const LearnMoreWidget()), 
+                        onPressed: () =>
+                            AppRoute().push(context, const LearnMoreWidget()),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.red.shade900,
                         ),
@@ -224,22 +214,22 @@ class _MoreViewState extends State<MoreView> {
           ),
         ),
         Positioned(
-          bottom: -27,
-          right: 8,
-          child: Container(
-            height: 180,
-            width: 150,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(bottomRight: Radius.circular(15)),
-              image: DecorationImage(image: AssetImage(AssetPath.cardGift))
-            ),
-          )
-        ),
+            bottom: -27,
+            right: 8,
+            child: Container(
+              height: 180,
+              width: 150,
+              decoration: const BoxDecoration(
+                  borderRadius:
+                      BorderRadius.only(bottomRight: Radius.circular(15)),
+                  image:
+                      DecorationImage(image: AssetImage(AssetPath.cardGift))),
+            )),
       ],
     );
   }
 
-  Widget _buildCustomListTile(){
+  Widget _buildCustomListTile() {
     final MoreController languageController = Get.find();
     return Obx(() {
       String title;
@@ -259,21 +249,20 @@ class _MoreViewState extends State<MoreView> {
           break;
       }
       return MyListTile(
-        data: items(context, title, icon),
-        onTap: (index) async{
-          if (index >= 0 && index < items(context, title, icon).length) {
-            var selectedItem = items(context, title, icon)[index];
-            if(selectedItem.isRoute == true){
-              if (selectedItem.route != null) {
-                AppRoute().push(context, selectedItem.route!);
-              } else {}
+          data: items(context, title, icon),
+          onTap: (index) async {
+            if (index >= 0 && index < items(context, title, icon).length) {
+              var selectedItem = items(context, title, icon)[index];
+              if (selectedItem.isRoute == true) {
+                if (selectedItem.route != null) {
+                  AppRoute().push(context, selectedItem.route!);
+                } else {}
+              }
+              if (selectedItem.isRoute == false) {
+                _showLogoutDialog(context);
+              }
             }
-            if(selectedItem.isRoute == false){
-              _showLogoutDialog(context);
-            }
-          }
-        }
-      );
+          });
     });
   }
 
